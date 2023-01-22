@@ -1,3 +1,13 @@
+import { PostHeader } from '../components/PostHeader'
+
+export const meta = {
+	title: 'How to write a blog in mdx',
+	date: new Date('1-22-2023'),
+	tags: ['code', 'blog']
+}
+
+<PostHeader {...meta} />
+
 # Post
 
 ## Intro
@@ -8,7 +18,3 @@ This is my post
 
 lorem ipsum dolor
 
-export const meta = {
-	publish: new Date('22/01/2023'),
-	tags: ['code']
-}
