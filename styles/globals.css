@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.author {
+	padding-bottom: 0.25rem;
+	color: var(--lt-color-gray-600);
+}
+
+.author a {
+	font-size: small;
+	color: var(--lt-color-gray-500);
+	transition: 150ms;
+}
+
+.author a:hover {
+	color: rgb(167 139 250 / 1);
+}
