@@ -2,10 +2,15 @@ import { PostHeader } from '../components/PostHeader'
 
 export const meta = {
 	title: 'How to write a blog in mdx',
-	date: new Date('1-22-2023'),
+	date: (new Date('1-22-2023')).toISOString(),
 	tags: ['code', 'blog'],
-	image: 'reboot-splash.jpg',
-	Author: () => <div>Foto de <a href="https://unsplash.com/@max_duz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Max Duzij</a> en <a href="https://unsplash.com/es/fotos/qAjJk-un3BI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></div>
+	image: {
+		src: 'reboot-splash.jpg',
+		author: 'Max Duzij',
+		authorUrl: 'https://unsplash.com/@max_duz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+		source: 'Unsplash',
+		sourceUrl: 'https://unsplash.com/es/fotos/qAjJk-un3BI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
+	}
 }
 
 <PostHeader {...meta} />
