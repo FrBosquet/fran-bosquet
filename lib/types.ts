@@ -3,7 +3,7 @@ export type Post = {
 	slug: string
 	date: string
 	tags: string[]
-	image?: {
+	image: {
 		src: string,
 		author: string,
 		authorUrl: string,
