@@ -21,5 +21,5 @@ export const getPosts = async (): Promise<Post[]> => {
 	}))
 	
 
-	return posts
+	return posts.sort((a, b) => new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1)
 }
