@@ -19,10 +19,10 @@ export default function Home({ posts }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section>
+      <section className='flex flex-col gap-4'>
 
         {posts.map(post => {
-          return <Link href={`/${post.slug}`} key={post.title} className="w-full p-2 sm:p-3 gap-2 bg-gray-600 flex hover:bg-gray-900 transition-all rounded-lg">
+          return <Link href={`/${post.slug}`} key={post.title} className="w-full p-2 sm:p-3 gap-2 bg-gray-600 flex hover:bg-gray-700 transition-all rounded-lg shadow-md">
             <div className='aspect-square w-20 relative rounded-md overflow-hidden'>
               <Image alt={`imagen de ${post.image.author}`} src={`/images/${post.image.src}`} fill/>
             </div>
@@ -32,7 +32,7 @@ export default function Home({ posts }: Props) {
                 <div className='gap-2 flex-1 hidden sm:flex'>
                   {post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
                 </div>
-                <span className='text-gray-800'>
+                <span className='text-gray-900'>
                   {dateFormatter.format(new Date(post.date))}
                 </span>
               </div>

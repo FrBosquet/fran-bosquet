@@ -7,7 +7,7 @@ export type Post = {
 		src: string,
 		author: string,
 		authorUrl: string,
-		source: string,
-		sourceUrl: string
+		source?: string,
+		sourceUrl?: string
 	}
 }
