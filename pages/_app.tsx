@@ -15,7 +15,7 @@ const poppins = Poppins({
 export default function App({ Component, pageProps }: AppProps) {
   return <MDXProvider components={mdxComponents}>
     <main className={`${poppins.variable} font-sans`}>
-      <section className="bg-gradient-to-b from-gray-800 to-gray-700 min-h-screen text-gray-200">
+      <section className="bg-fixed bg-gradient-to-b from-gray-800 to-gray-700 min-h-screen text-gray-200">
         <header className='p-4 flex items-center gap-2 container mx-auto'>
           <Link href="/">
             <h1 className='text-2xl'>Fran<span className='text-violet-400'>Bosquet</span></h1>

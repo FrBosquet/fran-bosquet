@@ -9,7 +9,7 @@ const img = (props: any) => <div className="flex flex-col items-center my-4">
 		<img className="w-auto mb-1" alt={props.alt} src={props.src}/>
 		<p className="font-thin">{props.alt}</p>
 </div>
-const blockquote = (props: HTMLAttributes<HTMLParagraphElement>) => <blockquote className="p-3 bg-gray-800 rounded-lg mb-4">{props.children}</blockquote>
+const blockquote = (props: HTMLAttributes<HTMLParagraphElement>) => <blockquote className="p-3 bg-gray-800 rounded-lg mb-4 shadow-md">{props.children}</blockquote>
 const li = (props: HTMLAttributes<HTMLDataListElement>) => <li className="ml-4 list-item list-disc">{props.children}</li>
 const a = (props: HTMLAttributes<HTMLAnchorElement>) => <a {...props} target="_blank" className="text-orange-400 visited:text-violet-300">{props.children}</a>
 const em = (props: HTMLAttributes<HTMLElement>) => <em {...props}  className="font-thin">{props.children}</em>
