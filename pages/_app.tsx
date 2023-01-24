@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return <MDXProvider components={mdxComponents}>
     <main className={`${poppins.variable} font-sans`}>
       <section className="bg-gradient-to-b from-gray-800 to-gray-700 min-h-screen text-gray-200">
-        <header className='p-4 flex items-center gap-2'>
+        <header className='p-4 flex items-center gap-2 container mx-auto'>
           <Link href="/">
             <h1 className='text-2xl'>Fran<span className='text-violet-400'>Bosquet</span></h1>
           </Link>
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <a href="https://instagram.com/frbosquet" target="_blank" rel="noreferrer"><InstagramIcon className="w-5 hover:text-violet-400 transition-all" /></a>
           </menu>
         </header>
-        <article className='container mx-auto px-4'>
+        <article className='container mx-auto px-4 max-w-2xl'>
           <Component {...pageProps} />
         </article>
       </section>
