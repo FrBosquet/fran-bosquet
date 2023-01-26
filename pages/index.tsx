@@ -23,11 +23,11 @@ export default function Home({ posts }: Props) {
 
         {posts.map(post => {
           return <Link href={`/${post.slug}`} key={post.title} className="w-full p-2 sm:p-3 gap-2 bg-gray-600 flex hover:bg-gray-700 transition-all rounded-lg shadow-md">
-            <div className='aspect-square w-20 relative rounded-md overflow-hidden'>
+            <div className='aspect-square w-28 relative rounded-md overflow-hidden'>
               <Image alt={`imagen de ${post.image.author}`} src={`/images/${post.image.src}`} fill/>
             </div>
-            <div className='flex justify-between flex-col flex-1 h-20'>
-              <h2 className='text-2xl text-orange-400'>{post.title}</h2>
+            <div className='flex justify-between flex-col flex-1 h-28'>
+              <h2 className='text-2xl text-orange-400 flex-1'>{post.title}</h2>
               <div className='flex justify-between '>
                 <div className='gap-2 flex-1 hidden sm:flex'>
                   {post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
