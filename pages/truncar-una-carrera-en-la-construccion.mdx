@@ -1,0 +1,112 @@
+import { PostHeader } from '../components/PostHeader'
+
+export const meta = {
+	title: '¿Por qué truncar una carrera en la construcción?',
+	date: (new Date('4-24-2017')).toISOString(),
+	tags: ['personal'],
+	image: {
+		src: 'pilotadora.jpg',
+		author: 'Fran Bosquet',
+		authorUrl: 'www.franbosquet.com'
+	}
+}
+
+<PostHeader {...meta} />
+
+> ### Anotación de 2023
+> 
+> Me encanta leer esta entrada a día de hoy. Muchas veces me encuentro muy frustrado trabajando como programador y este texto me recuerda por qué hago esto y no cualquier otra cosa. Nos quejamos de vicio.
+
+Después de la paliza de novelar mas de diez años de mi vida en un formato mas o menos legible, me gustaría estructurar de una forma mas compacta mi visión sobre el sector de la construcción. La visión que me hizo querer abandonar mi "prometedora" carrera como Arquitecto Técnico. Arrancamos.
+
+![Mi primera cimentación, con pilotadora para CPI7](/images/pilotadora.jpg)
+
+> ### Anotación de 2023
+> 
+> A día de hoy, ni idea de qué es CPI7 o por qué es mejor que CPI8 o CPI6
+
+# El trabajo en la construcción
+
+Cómo contaba en la última parte de mi relato, en octubre de 2014 comencé a trabajar en la construcción. Si bien ya había trabajado anteriormente, esta era la primera vez que lo hacía con un contrato y jornada completa. Y como Ayudante de Jefe de Obra. El nombre del puesto es bastante descriptivo: Consiste en ayudar al Jefe de Obra. ¿Pero en qué consiste el trabajo de un jefe de obra?
+
+## Labor documental, burocrática y administrativa
+
+Construir un edificio conlleva una labor documental muy extensa. Las comunicaciones se deben registrar en actas, en caso de reuniones. La ofertas de proveedores, en comparativos de obra. Las consultas, por email. Y un largo etc. Por otro lado, hay una gran cantidad tramites burocráticos aparejados al día a día: Contratos de suministro de agua, saneamiento, electricidad, permisos de ocupación de vía, de instalación de grúa, de trabajos nocturnos, etc. Todos estos tramites conllevan una labor administrativa muy potente. Antaño existía la figura del administrativo de obra. Sin embargo, con la crisis, las estructuras de equipo se han optimizado y esta labor recae actual y generalmente en los técnicos de obra: El Jefe de obra, y el jefe de producción (o Ayudante de Jefe de obra, se usan ambos términos).
+
+## Proveedores, clientes y organismos de control
+
+El trato con proveedores conlleva el de acordar la contratación de trabajos o suministros, y controlar los mismos. Los factores que decantan una contratación son varios: Experiencias previas, reputación, solvencia, estado financiero y legal...
+
+Por otro lado, los clientes son la promotora que te contrata la construcción de un edificio para venderlo ellos al cliente final. Se acuerda un precio y unas calidades en base a un proyecto, y debes ceñirte al mismo para ejecutar la construcción. Esto se debe a qué, salvo en errores garrafales del proyecto, rara vez te pagaran un euro mas de lo contratado. Aunque tu ejecutes mas unidades que las acordadas.
+
+Finalmente, los organismo de control son empresas contratadas por tu cliente que controlan la ejecución. Son fundamentalmente dos: Seguridad y control técnico. A lo largo del proceso te van realizando auditorias "sorpresa" (vienen sin avisar, o avisando con poco margen) y emiten informes referentes a como se está realizando la obra. Esencialmente, controlan que cumplas la ley y las prescripciones técnicas acordadas en proyecto. Temas como aislamiento acústico, impermeabilidad, resistencia de estructuras, resbaladicidad de pavimentos, etc.
+
+![Nuestro gruista, bajandole rollos de tela al aplicador de la lamina asfaltica](/images/impermeabilizacion.jpg)
+
+### Y si los mezclas todos...
+
+Debido al pésimo estado del sector, las relaciones con estos tres entes se resumen en una lucha por cobrar mas que lo que pagas. El dinero y el tiempo son el aspecto fundamental del proceso. Por esta razón, las relaciones no siempre son honestas. No son pocas las ocasiones en las que un proveedor te engaña para que le adjudiques la obra. Una vez en ejecución, salen todas las trabas, y ya no tienes tiempo para reemplazarlos. Lo mismo ocurre con tu cliente, que deja partes del proyecto mal o poco definidas durante la contratación. Luego quiere que le pongas elementos que se comen tu beneficio sin piedad. Los entes de control no tienen interés en engañarte, ellos cobran igualmente. Pero en ocasiones demuestran "demasiada pasión por lo suyo", interpretando la ley o el proyecto de forma muy restrictiva hacía tus intereses.
+
+Obviamente, en todos lados cuecen habas. Las constructoras también utilizan sus triquiñuelas. A lo largo de mi carrera, muy a menudo me vi en la necesidad de dar pasos con los que no me sentía moralmente cómodo. La triste realidad es que en este maldito sector no queda espacio para ser honesto ni razonable.
+
+## Central
+
+Arpada, la empresa para la que trabajaba, se integra dentro de un grupo mas grande llamado Urtinsa. El grupo consta de una oficina central en Alcorcón donde reside el cuerpo administrativo, consistente en decenas de oficinistas. En obra, debíamos coordinarnos con ellos, puesto que toda la operativa de la empresa está informatizada. Cada paso queda registrado y controlado, y requiere del visto bueno de un jefe de departamento.
+
+Por ejemplo, los comparativos se deben subir a la plataforma online de la compañía. De este modo, toda la jerarquía por encima tuyo tiene acceso, en tiempo real, a las ofertas. Para que una empresa pueda ofertar, debe pasar una evaluación de proveedores, que realiza el departamento de documentación. Para ser adjudicatarios, deben aportar todos los documentos que estipula la ley al departamento de control de accesos.
+
+Antes de acceder a la obra, todo trabajador debe ser verificado con un código qr. Se coteja la validez y vigencia de sus documentos en la base de datos, y se autoriza (o no) el acceso por parte del departamento de control de acceso. Si un trabajador ha de ser amonestado, se introduce el parte en el sistema y el departamento de seguridad y salud se hace cargo. Por otro lado, para pagar a los proveedores, el equipo de obra emite un acta de medición. Estos han de hacer llegar el acta junto con su factura a la central de Arpada, para que el departamento financiero emita el confirming.
+
+![Estructura bidireccional de hormigón en mi primera obra](/images/estructura.jpg)
+
+### ¿Qué tiene de malo?
+
+En resumen: TODO pasa por central. Esto está muy bien, porque te permite hacer las cosas correctamente de una forma sencilla. El problema en Almería es que los proveedores jamas habian trabajado con nuestro sistema. Y, por alguna razón, la comunicación con nuestra central era terrible. Por este motivo, al final un gran numero de horas a la semana se me iban en agilizar las comunicaciones entre mi gente y mis subcontratas. Un autentico suplicio.
+
+## Postventa
+
+Una vez entregado el edificio a tu cliente, la cosa está lejos de terminar. Por ley, tienes unos periodos de garantía por los cuales has de subsanar cualquier desperfecto en cuestiones de acabados, instalaciones y estructura. En el organigrama de la empresa existe un departamento muy potente dedicado a esta labor. En Almería empezamos con una obra en Septiembre de 2014 que se entregó en Mayo de 2016, para empezar con la siguiente en Junio del mismo año. Dado que solo contábamos con una obra en periodo de postventa, se decidió integrarme a mi como agente satélite del departamento de postventa. Todo ello mientras seguía mi labor como ayudante/jefe de producción en el segundo proyecto.
+
+![Mi primer edificio, cerca de ser terminado](/images/27alboran.jpg)
+
+A nivel personal, la experiencia fue catastrófica: Nadie me había preparado para trabajar de cara el público. Un público hostil que se había hipotecado para varias décadas. Muy frecuentemente asesorados por familiares y amigos, y con la sospecha permanente de que los estaba engañando.
+
+Para mas INRI, las reparaciones corrían a cargo de las subcontratas que habían dejado el desperfecto (como es lógico). Sin embargo, no todas estaban por la labor. Intentar que vinieran a hacerse cargo de su responsabilidad me costó mas de una noche de insomnio. En algún caso, tuve que tirar de billetera y abonar trabajos, lo que me costó discusiones con el propio departamento de postventa, que me pedía que apretara mas la pinza sobre mis proveedores.
+
+Al final todo se resume en una serie de vecinos rabiosos, una promotora cabreada contigo, unas subcontratas escondiendo las orejas y tu en medio. Con la sensación de que ninguno de los problemas es culpa de tu labor en obra y la impotencia de tener que solucionarlos pero no saber como. Espero, francamente, que aquella fuera la peor experiencia laboral de mi vida.
+
+# El por qué del punto y final a mi carrera
+
+Bueno, creo que en el ultimo párrafo de la anterior sección queda claro cual fue la gota que colmó el vaso. Empecé con el tema de postventa en Junio de 2016 y en unos seis meses mi mente ya no daba para mas. Finalmente, aprovechando que mi contrato había expirado, expliqué todo esto a la empresa y las dos partes estuvimos de acuerdo en que no debía continuar.
+
+Si embargo, se pueden sacar mas lecturas de todo lo que he escrito en este post. Para empezar, mi pasión por esta ingeniería, o cualquier otra, es lo que yo llamo "arreglar problemas". Se plantea un escollo, lo analizas, buscas, utilizas tus herramientas y diseñas una solución. El placer que me aporta este proceso es enorme. La formación de un técnico consiste básicamente en mostrarte y enseñarte a utilizar esas herramientas: La ley, la normativa, los catálogos, los bancos de detalles, el software de CAD y de modelado, de planificación, etc.
+
+Sin embargo, si releéis todo lo anterior, os percatareis de la amarga realidad: La labor de un técnico en obra es otra. Comunicación, documentación, revisión, control financiero, gestión, etc. Todas esas palabras acabadas en "ón" ocupaban el 99% de mi tiempo. Una vez o dos al mes me veía en la feliz situación de tener que estudiar un encuentro de estructura, en cruce de instalaciones, programar una tabla de excel con macros para controlar una determinada ejecución, levantar en 3D una infografía para explicar un detalle de obra... El resto del tiempo lo pasaba comprobando albaranes, revisando facturas, haciendo mediciones, gestionando documentación, haciendo cola en la administración pública o peleándome por teléfono con un propietario enfadado.
+
+![Oficinas de Arpada en Alcorconado](/images/arpada.png)
+
+## Arpada
+
+Arpada es una empresa genial para empezar una carrera en la construcción. Y no es peloteo, ya no tengo por qué. Ademas, dudo que nadie de la empresa llegue a leer esto. Es una empresa genial porque apuesta por una plantilla joven. La comunicación vertical bidireccional existe (Aleluyah!). La gente tolera tus errores e intenta ayudarte. El control sobre el proceso constructivo te permite sentir que no estas solo en la obra, lo cual es un gran alivio. La flexibilidad en cuanto a vacaciones ha sido infinita durante los dos años y medio que he estado allí. He llegado a pedirme un día libre ¡En el mismo día! La relación con los compañeros, ademas, siempre ha sido cordial. Y sobre el sueldo, jamas se ha retrasado una nomina. Exquisito.
+
+Por supuesto, tiene sus contras. El primer aumento de sueldo fue escueto y tardío. El segundo ni se llegó a producir. Entiendo una gestión conservadora, sobre todo después de la crisis de 2007. Pero cuando tienes a mano los resultados de las obras, cuesta no fantasear con que ganando un 5% menos la empresa en el final de la obra, tu ganarías un 30% mas cada mes. Ademas, en determinadas situaciones se coloca una presión excesiva sobre el equipo de obra, cuando una simple llamada de arriba agilizaría muchas cosas. En particular, en nuestro equipo satélite (el único equipo fuera de Madrid), nos sentimos muy desatendidos muchas veces. Por último, creo que entrar a las 8 de la mañana y salir a las 7 de la tarde no se puede conciliar con ningún tipo de vida. No al menos con una satisfactoria.
+
+### ¿Entonces bien o mal?
+
+Mas allá de estos "flaws", insisto, mi impresión de la empresa es fantástica. Comparado con lo que me han contado que hay por ahí, esto empresa fue un lujo. Me alegro de haber caído en una constructora tan sería y profesional y estaré eternamente agradecido por la oportunidad que me dieron. Como resumen diré que si un día decidí truncar mi carrera en el sector, fue por el sector, no por la empresa.
+
+# Recapitulando
+
+Un día reflexionando vi a nuestro jefe de grupo, como profesional. Vi a una persona que seguía haciendo llamadas horas después de finalizar su jornada. Que no apagaba el teléfono de lunes a domingo. Que tenía que recorrer miles de km en tren/avión/coche cada semana.
+
+Vi a mi jefe de obra. Con dos críos y llevándose el ordenador al pueblo en sábado para terminar el trabajo. Asediado a llamadas constantemente. Con la cabeza hinchada de tanto recibir a comerciales. Harto de pelear con subcontratas. Agobiado cada mes por el resultado de la obra.
+
+Con ese futuro a 10/15 años vista frente a mis ojos, dándome una perspectiva que aborrecía, me vi a mí. Viviendo una vida que no quería ni había pedido. Con una carrera laboral deprimente. Racionando cada una de las 5 horas diarias que no trabajaba ni dormía. Con depresión crónica los domingos. Con mi pareja desde hace tres años viviendo en Madrid. Un sueldo de risa. Rodeado de gente que no disfruta de lo que hace. Y la frasecita de Confucio cada día en la cabeza:
+
+> _Elige un trabajo que te guste y no tendrás que trabajar ni un día de tu vida._
+
+Así que un día exploté y elegí convertir mi hobby en mi trabajo, para así no volver a trabajar en toda mi vida. Fue en septiembre de 2015, cuando dí el primer paso. No sabía cuanto tiempo me tomaría, pero lo dí. Un año y medio después de aquello, el 3 de Marzo de este 2017, dejé de trabajar en la obra. Cual fue ese paso, y el siguiente, a qué me dedico ahora mismo y de que pienso comer de aquí a que me jubile, lo explicaré en la siguiente entrada.
+
+> ### Anotación de 2023
+> 
+> Maestro del suspense
