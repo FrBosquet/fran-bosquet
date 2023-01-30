@@ -1,0 +1,201 @@
+import { PostHeader } from '../components/PostHeader'
+import { YoutubeEmbed } from '../components/YoutubeEmbed'
+
+export const meta = {
+	title: 'Dell XPS 15: Mi portatil para IronHack',
+	date: (new Date('6-08-2017')).toISOString(),
+	tags: ['personal'],
+	image: {
+		src: 'xps-15.jpg',
+		author: 'Fran Bosquet',
+		authorUrl: 'www.franbosquet.com'
+	}
+}
+
+<PostHeader {...meta} />
+
+> ### Anotación de 2023
+>
+> Estoy recuperando del antiguo blog para que no se pierdan en el olvido, trayendolas a este nuevo. Esto requiere cierto trabajo (traducir texto enriquecido a markdown y traer las fotos) y algunas entradas no tienen ningun interes a día de hoy así que no las voy a portar. Y con ello se perderan para siempre en cuanto deje de pagar el wordpress.
+>
+> Con esta en partícular he dudado mucho, ya que una review de un portatil de hace (en el momento de escribir estas lineas) seis años no es que sea muy util ya. Pero me gusta mucho lo escribí y le tengo muchísimo cariño a ese ordenador, así que me he tomado la molestia de recuperarla.
+
+Tal y cómo revelé en la última entrada, a finales del año pasado me confirmaron que estaba dentro del Bootcamp de IronHack para junio de 2017. El que empieza la semana que viene, concretamente. Aquello implicaba que necesitaba un portátil pero, ¿Qué portátil? Con esta entrada me gustaría explicar por qué el XPS15 es el portátil adecuado para mi y por qué, quizás, también lo sea para ti.
+
+# La opción que me gustaba
+
+Entrar en el bootcamp implica muchas decisiones que tomar y temas que organizar. Entre otras cosas, la adquisición de un portátil. Yo soy (era) muy de windows y llevaba un tiempo muy tentado con la Surface Pro. Tengo una tablet Samsung Note de 12" con Android desde hace un par de años y me ha dado muchas alegrías. Particularmente por el lápiz digitalizador, con el que me encanta dibujar. Así que pensaba en la Surface como un remplazo mas potente y con Windows. Con el bootcamp ya tenía la escusa que había ido buscando para comprarla hacía tiempo. Pero como no tenía muy claro que fuese el aparato adecuado, me decidí a recabar opiniones de antiguos campistas y profesores. Y la cosa no fue como a mi me hubiese gustado.
+
+![Microsoft Surface Pro 4](/images/surface-pro-4.jpg)
+
+# La opción racional
+
+Ya en la entrevista de admisiones me dejaron claro que Windows no es el Sistema Operativo mas indicado para estos menesteres. Todo se mueve en clave OSX y los alumnos con Windows tienen muchas dificultades para seguir el curso. Me gusta ser un outsider, pero jugándome tanto prefiero dejar los experimentos para la gaseosa. Ademas, pensando en frio 12" son muy pocas para trabajar con varias aplicaciones a la vez, como a mi me gusta. Así que durante un tiempo estuve convencido de que iba a tirar por un MacBook Pro de 13". Son portátiles muy caros, pero el MacBook a secas me parecía un aparato de chiste y el Air no me terminaba de entrar. En principio 13" me parecía una cifra razonable, todo el mundo la recomienda. Hasta que me pasé en diciembre por una Apple store.
+
+![Apple MacBook Pro 2017 13" con touchbar](/images/mbp-2016.jpg)
+
+La impresión que me dio fue muy regular. Para empezar, al no tener bordes la pantalla me pareció minúsculo. Sé que no lo es, hay mucha gente que los usa para trabajar a diario. Pero mi setup para el día a día incluye dos pantallas: 29" (21:9) y 24" (16:9). No me veía programando en esa cosa tan chica durante horas. El teclado es cosa polémica en este modelo, pero el touchpad en teoría es muy superior al de cualquier portátil windows. *A mi me dieron mal feeling los dos*. Y estamos hablando de un portátil de 1900€, ojo. La alternativa de 15" escalaba por encima de los 2400€, cifra que ni me planteaba. Las opciones de años anteriores no me convencían, principalmente por que no me gusta pagar mucho dinero por hardware y diseño anticuados.
+
+> ### Anotación de 2023
+>
+> No entiendo muy bien a quien quería engañar aquí, los touchpad de Apple son la única cosa que salvaría de estos cacharros. Por lo demas, me alegro de no haber comprado uno: Desde 2017 he tenido de empresa un MBP 15" de 2015, un MBP 13" de 2018, un MBP 13" de 2019, todos con i5 y 16GB. y precisamente mañana me dan un MBP M1 14" de 2021. Los he odiado todos :( Lamentablemente no he encontrado aun la manera de tener un Linux que haga todo lo que hace un Windows 11. Hasta ese día, para mis cosas sigo fiel a W11 con WSL2 para trastear.
+>
+> Si eres super fan de Apple o los MacBook ¡Por mi perfecto! Cada uno tiene sus gustos. 
+
+## Apple
+
+Ademas de todo esto, nunca me han gustado los ordenadores de Apple por la pésima relación precio/hardware. Está muy bonito eso de vender una experiencia y tal. Y a la hora de la verdad, el rendimiento no es malo. Pero yo soy muy freak de estas cosas, me gusta saber lo que estoy montando. Y si tu hardware cuesta en un portatil windows 1000€, tu calidad de construcción, tu servicio postventa y tu software no pueden justificar una diferencia de 600€. Al menos no para mi. Entiendo que haya quien quiera la experiencia Apple, necesite OSX o directamente no obtenga lo mismo de la alternativa Windows o Linux.
+
+Por otro lado, no me gustan los ecosistemas cerrados. Y OSX compite on iOS por ser el guantanamo de los sistemas operativos. Por muy bien que funcionen, siempre me van a dar tirria los productos de esa marca.
+
+Así que en ese punto descarté los portátiles Apple por precio, especificaciones y sensaciones.
+
+# Buscando portátil alternativo
+
+Ante este panorama, tocaba buscar alternativas. Entre Windows (descartado por IronHack) y OSX (Descartado por mi) solo quedaba apostar por Linux. Llevaba poco tiempo utilizando ese sistema operativo. Esencialmente empecé en septiembre de 2016 a trastear máquinas virtuales por exigencias de la carrera. Y no era mi mayor fuerte, pero me quedé sin alternativas. Así que tocaba buscar la distribución que me tocase la patata y el portátil que pudiese correrla.
+
+Los aspectos que mas valoraba en ese momento eran peso, dimensiones y batería. A partir de ahí, el mejor procesador/ram/ssd que se pudiese meter dentro. Vivimos una época dorada para los portátiles. Gracias a la mal llamada era post-pc, se han roto muchas barreras en cuanto a peso, dimensiones y autonomía. Pero, ademas, el rendimiento sobre el papel de los portátiles los convierte en máquinas muy capaces, a años luz de las tablets que les hacen la competencia a nivel doméstico.
+
+Manejé varios candidatos. Visto lo visto con el MBP13, descarté las 13" y miré de 14" para arriba. El otro factor primordial era tanto el peso como el tamaño. Después de muchos años cargando con un 15,6" para la carrera, con 3Kg de peso a la espalda, tenía claro que necesitaba un ultrabook. O algo parecido. También quería una buena autonomía. Y, a poder ser, en formato 2 en 1 con lapiz digitalizador para dibujar. Finalmente, quería que pudiese reemplazar a mi sobremesa: i5 4690K, 16GBDDR3 2133Mhz y GTX970 de 4GB. No era un ordenador para jugar, pero me gustaría llevarme alguna alegría con el.
+
+Sobre el sistema operativo, tras probar y requeteprobar un monton de ellos, me he quedado con Ubuntu Gnome. Gnome es mi entorno de escritorio favorito (en general, no solo en Linux) y Ubuntu es bastante compatible con casi todo, así que para mí no hay rival.
+
+## Candidatos
+
+Con las specs que diseñé, simplemente no existía mi ordenador perfecto. El portátil ligero, no era potente. Si era potente, se pasaba de 2000€. En el que era fino, la autonomía daba risa. El tema del lapiz digitalizador lo descarté rápido, tan solo algunos modelos de Lenovo cumplían la premisa y sacrificaban demasiado a mucho precio. Sin embargo encontré un candidato casi perfecto, el Gigabyte Aero 14:
+
+![Portatil Gigabyte Aero 14](/images/aero-14.png)
+
+Procesador Intel de última generación, gráfica nVidia GTX1060, 16GB de RAM DDR4 batería de 94Wh (normalmente no pasan de 60Wh), medidas muy comedidas, pantalla QHD de 14", un SSD SATA de 256Gb y menos de 2kg de peso. Incluso la estética colorida me gustaba. El problema es que Gigabyte y su filial Aorus tienen una política de distribución y comunicación desastrosa, me estuvieron mareando con la fecha y el precio. Tras dos meses dandome largas sobre la fecha de salida del modelo 2017, los mandé a pastar. Así que quedaba solo un candidato: EL LAPTOP.
+
+## Dell XPS
+
+XPS son las siglas de Xtreme Performance System. Es una linea de ordenadores clásica de Dell. De hecho, el primero data de 1993, cuando Dell creo la linea para competir con los sistemas del alto rendimiento de Gateway. A partir de 2005, con el auge del gaming, se convirtió en una linea de ordenadores para jugar. En 2013 Dell compra Alienware y XPS se convierte en una linea de ordenadores de altas prestaciones con un toque de diseño, supongo que para competir con Apple.
+
+![Portatil Dell XPS15](/images/xps-15.jpg)
+
+En la actualidad existen dos ordenares en esta linea (Quitando el 2 en 1 y el AIO): EL XPS15 y el XPS13. Las principales caracteristicas son hardware puntero, peso y tamaño comedido, pantallas sin marcos y gran autonomía. Son ordenadores muy reputados en el mundo empresarial y de trabajo audiovisual. El de 13 pulgadas me suponía el mismo conflicto que el Mac Book Pro por su tamaño, así que lo descarté. Solo quedaba el XPS15. Y oye, tampoco pintaba mal: Un i7 de séptima generación, 16GB Ram DDR4, batería de 97Wh, una pantalla 4k de 15,6", tamaño de ordenador de 14" gracias a la pantalla sin marco y justo 2kg de peso. Respecto al Aero 14 perdía la GTX1060 por una GTX1050. El rendimiento es mucho menor, pero recordemos que este ordenador no era para jugar.
+
+El XPS15 también era un poco mas grande y un pelin mas pesado. Pero a cambio gané algo mas de batería, 1,6" mas de pantalla, el doble de capacidad de SSD y ademas PCIe en vez de SATA (entre 3 y 4 veces más rápido). El precio de tarifa era 2150€ frente a uno 1850€ estimados para la salida del Aero 14. Pero para hacerlo mejor, comprándolo directamente a Dell tenía derecho a un descuento de estudiante, por lo que al final me salia practicamente igual que el Gigabyte. No había mas dudas: El XPS15 iba a ser mi compañero de viaje.
+
+# Mi XPS
+
+Con respecto al Gigabyte también perdía algo de estética dado el diseño exterior anodino del XPS15. Es un sándwich de aluminio y plástico negro. No es feo, y da sensación de gran robustez y calidad, pero a mi me deja un poco frío. En cualquier caso y gracias al cielo, existe dBrand: Una empresa canadiense que hace vinilos para dispositivos tecnológicos. No son baratos, pero permiten darle un toque muy diferenciador y exclusivo a los dispositivos. A mi me enamoró el acabado en bambu, así que una vez adquirido mi XPS, lo primero que hice fue vinilarlo entero. Este fue el resultado:
+
+![XPS15 con vinilo DBrand en Bambú. A juego con el suelo de casa.](/images/xps-15-2.jpg)
+
+Que habrá quien le guste mas y a quien le guste menos. Pero a mi me encanta y soy yo el que va a pasar (y de hecho ya paso) horas con el. Pasemos a analizar algunas cuestiones que yo considero importantes:
+
+## ¿Cómo es físicamente el XPS15?
+
+La primera vez que lo cogí me lleve un pequeño chasco: Me pareció grande y pesado... Hasta que lo puse al lado de mi viejo HP de 15". Gracias a la pantalla sin marcos es todo lo pequeño que puede ser un 15,6", 235x257mm. Es muy estrecho, apenas 18mm. Y una vez tienes un ordenador de 3kg en la otra mano, queda claro que este XPS es un peso pluma. No sé si lo llamaría ultrabook, pero desde luego es el pc que asume menos compromisos a la hora de ofrecerte una pantalla de 15,6". De hecho creo que es el 15,5" mas compacto del mercado, pero tendría que confirmar ese dato.
+
+## Pantalla del XPS15
+
+Sobre el papel, es una pantalla fantástica. Teóricamente, cubre el 100% del espectro AdobeRGB, lo que es garantía de colores vibrantes y fieles. Adolece de dos pequeños problemas: Ni Windows ni Linux están todavía 100% adaptados a 4k. El segundo problema es el acabado reflectante, que con luz a la espalda se hace algo molesto, como se observa en la foto:
+
+![Pantalla reflectante XPS15](/images/xps-15-3.jpg)
+
+Quitando esos dos detalles, el panel se ve de lujo. En los juegos (que lo bajo a 1920x1080) escala sin problema y parece su resolución nativa. Tiene algo de ghosting y quizá un poco de fuga de luz, pero hay que ser muy quisquilloso para que resulte molesto. Y mas cuando tienes unos pixeles asi de chiquiticos. Mira que ricura:
+
+![Pixeles del XPS15](/images/xps-15-4.jpg)
+
+Después de dos meses de uso, estoy muy contento con la pantalla. El nivel de brillo es brutal, puedes usarla con el brillo al mínimo en prácticamente cualquier situación, con el consiguiente ahorro de energía. Ademas, no cansa apenas la vista y me he metido autenticas maratones sin tener dolor de ojos o cabeza.  Por último, decir que es también táctil y que funciona bien tanto en W10 como en Linux, pero lo cierto es que en este formato no se le saca rendimiento y apenas lo uso.
+
+## Teclado y touchpad del XPS15
+
+El teclado es muy cómodo de usar. Quizás algo mas de recorrido de tecla le vendría bien, pero en el uso continuado es confortable y no cansa los dedos. Carece de teclado numérico, pero es que con el tamaño del portátil directamente no cabe. La pulsación produce un agradable y sonoro "click". Consta de retroiluminación graduable en dos niveles, se ve perfectamente de noche. En mi caso, añadí como extra un lector de huellas que funciona MUY bien con Windows Hello, pero que no tiene drivers en Linux. Una pena. Las teclas de función tienen funciones alternativas (mute, control de volumen, control de reproducción, brillo) que podemos utilizar con la tecla Fn. También podemos alternar dejarlas por defecto con Fn+Esc, en cuyo caso tendremos que pulsar Fn para acceder a las funciones clásicas de estas teclas: F1 ayuda, F2 renombrar, etc...
+
+![Teclado del XPS15](/images/xps-15-5.jpg)
+
+El touchpad, incluso con el vinilo, es muy respondón y funciona de maravilla. Es muy cómodo cruzar la pantalla con el y de hecho no echo de menos para nada el ratón, habiendo sido toda la vida anti-touchpads. Permite multitouch y gestos, tanto en W10 como en Linux, y todos los reconoce bien: Slides con varios dedos, toques con varios dedos, click derecho con dos, click central con tres. No falla nunca. Particularmente, tras configurar los gestos en Ubuntu con libinput, es una maldita pasada lo rápido que te mueves entre menus, escritorios, lanzadores... Estoy totalmente enamorado de esto. No tengo nada mas que decir, un 10 aquí.
+
+Para terminar esta sección, la superficie  interior del portátil (Apoyamuñecas y demás) esta fabricado en fibra de carbono con un acabado gomoso al tacto. Muy agradable al tacto y muy bonito en mi opinión.
+
+## Conexiones del XPS15
+
+En cuanto a conexiones, es bastante estándar. Pongo un par de fotos que se verá mejor:
+
+![Conexiones lado izquierdo XPS15](/images/xps-15-6.jpg)
+
+En el lado izquierdo tenemos el conector de corriente, un USB3.0 tipo A, un conector HDMI 2.0 completo, un puerto USB tipo C con Thunderbolt 3 (Aunque no sirve para cargarlo) y un conector minijack de audio. Por detenernos aquí en algo, decir que el transformador del cargador es una monada. Tiene una forma redondeada para que el cable se enrolle alrededor de el y poder guardarlo sin que se líe. Ademas, en la conexión del cable (la parte que se introduce en el portátil) existe un led blanco que informa si le está llegando corriente. Muy útil para saber si está enchufado o no.
+
+## No todo es de color de rosa
+
+Por poner una pega, el puerto de auriculares es un poco extraño. A veces no saca sonido por los auriculares si has encendido el equipo con ellos enchufados. Y al introducirlo en el equipo, en lugar de cambiar automáticamente te muestra una interfaz de ¿Maxxon Audio? o algo así, para seleccionar que tipo de auricular has conectado. Es muy incomodo y da problemas, tanto en W10 como en Linux. Punto muy negativo para Dell aquí, que podía haber optado por una salida normal y corriente.
+
+![Conexiones lado derecho XPS15](/images/xps-15-7.jpg)
+
+En el lado derecho tenemos el Kensington lock de rigor, el indicador de batería, otro USB 3.0 tipo A y un lector de tarjetas SD. El indicador de batería consta de un botoncito que, al pulsarlo, enciende de 1 a 5 leds (los de la foto) en función de la carga de la batería. Puedes hacer esta operación con el portátil apagado, por lo que es muy cómodo comprobar el nivel de la batería. Y queda muy bonito. Puntazo para Dell.
+
+Sobre el lector de tarjetas. Lo he usado un par de veces y es bastante rápido, para lo que se suele ver en este tipo de dispositivos. Por ponerle una contra, la tarjeta sobresale una vez introducida. Por tanto, no es recomendable transportar el equipo con ella puesta.
+
+### Audio del XPS15
+
+Como he comentado, los auriculares no están bien resueltos, con ese puerto semi-dependiente del sistema operativo. Por otro lado, los altavoces suenan regular. No esperaba mucho mas de un portátil de este grosor, pero no hubiese estado de mas algo mas de calidad. En cualquier caso, cumplen con la papeleta.
+
+Otra pega es que con el equipo enchufado a la corriente se percibe un poco de coil-whine: Un zumbido eléctrico intermitente. Es un problema endémico del diseño de estos equipos y en completo silencio puede resultar algo molesto. Escuchando música, con auriculares puestos o en zonas con algo de rumor de fondo es inapreciable. Yo he aprendido a convivir con ello, pero entendería que a alguien le echar para atrás.
+
+## Gaming en el XPS
+
+Como dije anteriormente, no he comprado este equipo para jugar, aunque de vez en cuando echo alguna partida. Para tomar referencias, mi juego de cabecera es Project Cars. A 1920x1080 en detalle medio se mantiene a entre 60 y 100fps sin problemas. Otro juego mas o menos potente que he probado es Ziggurat, y hace unos 60fps a 1080p con detalles en medio, aunque se puede jugar en alto sin problemas. Cities Skylines con la configuración por defecto, a 1080p, funciona totalmente fluido. En general, a 1080p el reescalado funciona fenomenal, no parece que esté reescalando y se ve siempre muy bien, aun con los detalles en medio.
+
+El resto de juegos que he probado son indies, juegos antiguos o poco exigentes y van perfectamente. Sin embargo hay juegos que no te dejan ajustar la resolución (Como Steamworld Heist) y que te fuerzan a jugar a 4K, con el consiguiente gasto de energía y aumento de temperatura. A este respecto, el portátil es moderadamente ruidoso cuando disipa calor de CPU+GPU, debido a los dos ventiladores. Con unos auriculares de botón ni lo notas, pero si juegas sin ellos el ruido puede llegar a ser molesto. Respecto a un ordenador gaming (Por ejemplo el MSI GT62Vr que probé hace poco) es inaudible, pero si no estas acostumbrado puede llegar a mosquear. El incremento de temperatura es palpable en el teclado, pero tampoco resulta molesto (al menos a mi).
+
+Por lo demás, uso asiduamente Unity y 3d Studio Max para desarrollo de videojuegos y los mueve tan bien como mi sobremesa. Todo correcto.
+
+### Entonces ¿Sirve el XPS15 para jugar?
+
+Como resumen, estamos hablando de un portátil con una GTX1050, la gráfica de acceso de nVidia. Como tal, no es una maquina para jugar. Pero para momentos puntuales bien sirve para echar una partida y cumple sobradamente. Como comentario final, existe una versión con un panel FullHD, mate, no táctil y con menos rango de color que rebaja casi 200€ el precio del portátil. Si te interesa para jugar, es una opción mas recomendable porque esta gráfica no vale para 4k, y a veces los juegos no lo ponen facil para forzar el reescalado. En cualquier caso, insisto, si lo que quieres es jugar exclusivamente, hay muchos portátiles mucho mas capaces por menos precio. Para mas información existen muchas y buenas reviews en YouTube, con benchmarks y comparativos. Para muestra un botón:
+
+<YoutubeEmbed embedId="c4ub90ckkj4" title="Gaming en el XPS 15"/>
+
+## Rendimiento y batería del XPS15
+
+Aquí viene lo importante. En cuanto al uso general, es un maldito avión. Lo mueve todo muy rápido, sin lags ni retardos. Tanto Windows 10 como Ubuntu Gnome cargan en menos de 15 segundos (Pasando por Grub). La combinación del i7 7700HQ, los 16GB de RAM y el SSD PCIe Toshiba permiten al equipo moverse con muchisima soltura en cualquier situación. En Windows por supuesto. En Linux al principio tuve algunos problemas debido a la compatibilidad de los componentes tan nuevos. Pero hace poco instale Ubuntu Gnome 17.04, con una imagen de kernel reciente y ahora va todo como la seda. Quiero subrayar esto: Ahora mismo es muy compatible con Linux, ningún problema para hacerlo funcionar. La gráfica integrada es una Intel HD630 que mueve perfectamente el sistema cuando no estas jugando y permite ahorrar energía.
+
+En cuanto a esto, en Windows 10 a veces te estima hasta 12 horas de batería. Lo cierto es que en uso real programando, con wifi, brillo al 10%, escuchando música y un servidor corriendo he llegado a completar una jornada de 9 de la mañana a 5 de la tarde sin cargarlo. Es muy bestia lo que dan de sí los 97Wh y está todo muy bien optimizado. En Linux es algo menos eficiente y en uso real me ha llegado a dar unas 6-7 horas, pero aun así es una autonomía bestial. Muy contento en este sentido.
+
+En cuanto a conexiones, el WiFi no me ha dado ningun problema y la cobertura es muy buena, no sabría dar mas datos. El bluetooth funciona bien y... creo que eso es todo.
+
+## Dell
+
+El trato con Dell fue espectacular. Me puse en contacto con ellos y me contestaron por chat al instante. Me hicieron una rebaja del 10% por ser estudiante y me lo mandaron por UPS, que siempre se agradece. Si es cierto que son algo lentos en hacértelo llegar, unos 20 días. Pero es que el portátil se ensambla en china bajo pedido, así que es comprensible.
+
+Por otro lado, la asistencia de Dell es, segun dicen, de las mejores. Te mandan un técnico a tu casa si tiene cualquier problema. Aun no lo he probado y con suerte no tendré que hacerlo, pero es bueno saber que existe esa posibilidad.
+
+Por si alguno tiene curiosidad, el PVP ahora mismo es de 2149€. A mi se me quedo en 1917€ con descuento de estudiante mas el añadido del lector de huellas.
+
+Por último, decir que nos ha gustado tanto que mi novia se compró otro XPS15 al mes de recibir yo el mio. En su caso opto por el panel FullHD mate no táctil. Con el mismo descuento de estudiante se le quedo en unos 1600€, que está genial.
+
+# Conclusiones
+
+No puedo estar mas contento. Si lo perdiera, mañana me compraría otro igual. Es un todo terreno capaz de dar rendimiento y autonomía dependiendo de la necesidad. Para trabajar es un equipo comodisimo, fácil de transportar y agradable para escribir o navegar durante horas. Para jugar es un equipo de clase media-baja pero cumple perfectamente si lo tuyo es echar unas partidas esporadicas. La pantalla es lider en su categoría y ya te lo confirmo yo: Se ve de miedo.  Funciona bien tanto en Windows como en Linux y no me ha dado muchos problemas a nivel de Bios para instalar los dos sistemas en arranque dual. El precio es alto, pero creo que merece la pena por la máquina tan especial que es.
+
+En definitiva si has llegado hasta aquí es que te lo estas pensando muy seriamente. Compralo si:
+
+- Necesitas un portátil de linea profesional para trabajar con imagen, audio, montaje de vídeo o programación.
+- Quieres un 15,6" pequeño y ligero.
+- Te interesa la máxima autonomía en un portatil de este tamaño y potencia.
+- Te preocupa tener una máquina muy fiable con una gran garantia.
+- Necesitas correr Windows 10, una distribución de Linux, o ambos.
+
+Pero mejor descartalo si:
+
+- Quieres un ordenador para jugar.
+- Necesitas un ordenador para ofimática. Hay opciones igual de buenas por la mitad de dinero.
+- Tienes un presupuesto ajustado.
+- Quieres un ordenador para lucirlo en el starbucks.
+- Necesitas un MacBook.
+
+En su momento me hubiese gustado tener a alguien con quien comentar mis dudas sobre este aparato. Así que si aun no lo tienes claro y quieres preguntarme cualquier cosa, me pongo a tu disposición.
+
+> ### Anotación de 2023
+>
+> Lo cierto es que el ordenador me salio buenísimo. Lo usé durante un año y medio y llego un momento que dejé de usarlo puesto que tenía el MacBook del trabajo (obligatorio usar el equipo que me daban para algunos proyectos) y el sobremesa para casa. Así que lo acabé vendiendo a mi padre y lo sigue usando a día de hoy. Y le va como un tiro.
+
+# El viaje sigue
+
+En otro orden de cosas, creo que esta es la última entrada que escribo antes de entrar en IronHack el lunes que viene. Por poneros un poco al día, he asistido a algunos eventos desde el JsDayEs: La presentación de StackOverflow en español, el meetup de VideoGameArmy y un HackShow. Ya he conocido a siete de los que van a ser mis compañeros este verano y las impresiones son muy buenas. Esta noche hemos quedado la mayoría para terminar de conocernos y tomar unas cervezas y el sábado voy a ir al meetup de OpenSourceWeekends.
+
+¡El viaje ya ha empezado y va viento en popa!
