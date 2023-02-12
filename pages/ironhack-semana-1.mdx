@@ -1,0 +1,117 @@
+import { PostHeader } from '../components/PostHeader'
+import { YoutubeEmbed } from '../components/YoutubeEmbed'
+
+export const meta = {
+	title: 'Ironhack, semana 1: Aterrizando',
+	date: (new Date('6-19-2017')).toISOString(),
+	tags: ['personal'],
+	image: {
+		src: 'manana-cualquiera.jpg',
+		author: 'Fran Bosquet',
+		authorUrl: 'www.franbosquet.com'
+	}
+}
+
+<PostHeader {...meta} />
+
+Cuando estas haciendo las entrevistas para la admisión ya te avisan: Esto no es un paseo por el parque, ni siquiera un trimestre en la universidad. El programa es duro y es prácticamente imposible compatibilizar IronHack con cualquier otra cosa. En mi caso no es que me lo tomara como un eslogan, pero si es cierto que no he sido consciente del nivel brutal del curso hasta que he estado dentro y me está costando sacar ratos para estudiar los exámenenes de la carrera. Así me ha ido en mi primera semana:
+
+![Entrada matadero, donde tenemos el campus](/images/matadero.jpg)
+
+# Día 1: Presentaciones
+
+El primer día nos citaron en horario normal, 9 de la mañana. El plan sin embargo divergía de lo que está siendo nuestra rutina diaria. Nos recibieron con una presentación del curso. Bueno, mas bien una presentación de IronHack: Filosofía, metodología, rutina... Cosas que repasamos con asiduidad al informarnos del curso hace meses, pero que conviene refrescar una vez dentro. Pusimos caras y nombres al equipo: Alvaro Lopez ([@coteloalvaro](@coteloalvaro)), Campus Manager y presentador en este caso. Marc Pomar ([@boyander](@boyander)), nuestro profesor. Victor "Papu" Arza ([@papu_arza](@papu_arza)), Miguel Moracho ([@xenockWorld](@xenockWorld)) y Andrei Fernandez, nuestros TAs. Antonella Briatore, Claudia Losada, Pablo Onieva, Lluis Arevalo... cada uno con su función y cometido. Fué agradable conocer en persona a gente que conoces de Slack o Twitter. Pero mas agradable fué constatar el ambiente tan familiar: Todos se ofrecen desde el minuto cero a ayudarte en un proceso que, según advierten, no va a ser fácil.
+
+![Gradas de IronHack, donde se celebran los eventos](/images/gradas.jpg)
+
+Tras la charla de introducción, tocó dinámica de grupo. Nos mezclaron con los alumnos del otro bootcamp, UX, y nos dividieron en tres grupos para que charlaramos sobre que hacíamos allí, que queríamos de esta experiencia, de donde venimos, etc. Me gusta porque con estas pequeñas actividades consiguen integrarte, no solo en tu clase, si no en  todo IronHack, compañeros, profesores, organización. Una vez finalizada la dinámica nos invitaron a café y repostería y aprovechamos para conocer a los compañeros con los que aun no habíamos coincidido. Lo bueno de contar con un mes de *prework* es que si bien no los conoces en persona, en chat has hablado con todos y fue muy fácil romper el hielo.
+
+## Una día cualquiera en IronHack
+
+A las 11 sonó la bocina y se acabó el cachondeo: Todos a clase. A pesar de ser el primer día, nos introdujeron en la dinámica de de la misma sin miramientos: Dos unidades de aprendizaje, un *pair programming*, dos unidades mas antes de comer y un daily exercise después. Me explico: Las unidades didácticas son módulos de alrededor de una hora en los que Marc explica un tema concreto. Como en general la gente está muy pegada, esta semana ha tocado pegarse con el stack web más básico: HTML, JS y CSS. Empezamos la clase del día con una introducción a javascript, condicionales y bucles. Las clases son muy dinámicas y los alumnos intervenimos constantemente. Ademas, hacemos pequeños ejercicios en [codepen](codepen.io) o [repl.it](https://replit.com/), por lo que no se hace aburrido. En circunstancias normales, se da el pair programming (PP en adelante) tras las dos primeras horas, pero aquel día por cuestiones de tiempo seguimos dando clase. *HTML, layouts, displays*, bloques, y selectores básicos de CSS. Bajo un sol de justicia, salimos a comer de menú y por la tarde empezó la guerra...
+
+![Aula de IronHack, con mi XPS de camuflaje](/images/aula.jpg)
+
+El Pair Programming consiste en programar por parejas: Un solo ordenador, una persona programando (*driver*) y otro dando ordenes (*navigator*). El que da ordenes debe pedir al que programa que implemente determinadas funcionalidades y este decide cómo hacerlo. El primer día me toco con Sam, un chico despierto pero con ninguna experiencia programando. Empecé yo como *navigator* y me costó no dictarle las sentencias, dado que eran ejercicios relativamente fáciles cuando llevas tiempo programando. Pero es lo bonito del PP: No vale con que uno sepa programar, debéis ayudaros los dos y sacarlo como equipo. Gracias al *pair* estoy aprendiendo muchas cosas que no puedes aprender programando en casa: A enseñar, a dirigir, a trabajar conjuntamente, a consensuar soluciones, etc. Es una pasada cuando la cosa empieza a funcionar y vas limpiando iteraciones del problema. En general, todas las dinámicas de evaluación en IronHack me están pareciendo, a falta de una palabra mejor, adictivas.
+
+> Gracias al Pair estoy aprendiendo muchas cosas que no puedes aprender programando en casa: A enseñar, a dirigir, a trabajar conjuntamente, a consensuar soluciones, etc
+
+El PP tiene un tiempo limitado y lo normal es no terminarlo. Lo normal es no terminar ninguno de los ejercicios que proponen, están diseñados en ese sentido. Una vez suena la bocina, toca *git commit, push y pull y request*, y desde ahí lo corrigen los profesores asistentes (TAs, en adelante). En tus ratos libres puedes terminar el ejercicio y hacer un push. IH está diseñado para que no pares de currar ni un segundo.
+
+> ### Anotación de 2023
+>
+> En general en este momento estaba totalmente entuasiasmado con todo. A lo largo del curso me fuí cansando de la metodología y de mucha gente, y eso se nota en las entradas del blog. Leyendo las entradas ahora todo parece muy flower power.
+
+### El daily exercise (DA)
+
+Tras el PP tocó el DA. Los daily exercises son ejercicios individuales en los que debes poner en práctica lo que has aprendido a lo largo del día. Esta semana ha tocado completa de maquetación, HTML y CSS. Para mi el DE es la parte mas divertida, puesto que me puedo poner a programar mientras echo una mano a algún compañero o resuelvo alguna duda con los TAs. Aunque tengo tan resobao el stack básico de la web que esta semana no me han surgido demasiadas.
+
+En este primer día empezamos con un pequeño ejercicio en el que debíamos replicar en HTML + CSS una pagina de recetas. Parece una chorrada, pero me parece alucinante el resultado que sacaron compañeros que hace dos semanas no sabían lo que era una hoja de estilos. Mi página para este ejercicio se puede consultar en mi github o [aquí](https://frbosquet.github.io/lab-css-recipes-clone/starter-code/apple-pie-starter-code/).
+
+# Dia 2: Dulce rutina
+
+El primer día te vas de allí con pena: No quieres que acabe. Así que a partir del segundo día empecé a plantarme allí mas temprano. Este martes llegué como a las 8:30 y repasé el *self guided* del dia anterior. Los *self-guideds* (SGs) son ejercicios adicionales que no son obligatorios pero si recomendados. Para el lunes había repaso de GitHub. Estoy cogiendo mucha soltura y me empiezo a sentir muy cómodo con el control de versiones.
+
+> ### Anotación de 2023
+>
+> En 2017 hacía muchas afirmaciones muy valientes del estilo *estoy cogiendo mucha soltura en github*, *el pair programming me hace mejor programador* o *no necesito OOO porque la programación funcional es superior*. A día de hoy soy *senior developer* (o al menos me pagan como tal) y al menos ya soy consciente de lo muy ignorante que aun soy acerca de tantas cosas, imaginate en aquel entonces.
+
+![Entrada IronHack en matadero](/images/fachada.jpg)
+
+A las 9:00 empezamos la clase: Funciones y Arrays en JS y, tras ello, el PP correspondiente. Me parece brutal que en dos días la gente tenga que tener claro el concepto de función y utilizarlo con soltura y confianza. Pero es la magia de IronHack y, aunque mis ojos no lo crean, funciona: La gente a base de presión acaba pillando conceptos sobre los que edificar sus habilidades. No tengo ni idea de cuanto me tomó a mí comprender las funciones o arrays cuando aprendí esto en ActionScript, pero desde luego no fué en un una mañana. El PP de este día fue muy bien, de nuevo con Sam y avanzando a buen ritmo. Las dos unidades de antes de la comida, modelo de cajas y posicionamiento en CSS3.
+
+Este segundo día comimos allí. Hay una cocina con dos grandes mesas, neveras, microondas, vajilla. La mayoría llevamos comida preparada de casa, aunque hay muchos que piden a un sitio de comida casera que lleva la comida caliente hasta IronHack. Aun no lo he probado, pero tiene una pinta estupenda. Mañana puede ser el día.
+
+Daily
+
+El DE del martes consistió en clonar una antigua *landing page* de Instagram. Una vuelta de tuerca al ejercicio del día anterior. Muy divertido e instructivo de realizar. Mi solución, [aquí](https://frbosquet.github.io/lab-css-instagram-clone/starter-code/).
+
+# Día 3: Mas madera
+
+El tercer día seguimos con la misma y dulce dinámica: Objetos en JS, PP y selectores avanzados y animaciones en CSS. El PP de este día fue divertido: Había que implementar una especie de Cluedo en JS. Cada dos días nos reubican, por lo que cambie a Sam por Salvatore. Sacamos el ejercicio sin problema. En cuanto al DE, una replica de una *landing page* antigua de Spotify, cosa sería. Dado que no soy amigo de los floats, me vine arriba y me estudié la spec de *flexbox*. Hacía tiempo que quería ponerme con ello y, de hecho, estoy apuntado y tengo pendiente hacer el [curso de Wes Bos al respecto](https://flexbox.io/). Con flexbox he descubierto un aliado invaluable en CSS a la hora de centrar elementos. El resultado de mi ejercicio, [aquí](https://frbosquet.github.io/lab-css-spotify-clone/starter-code/).
+
+# Día 4: La gran crisis
+
+Este día llegué particularmente temprano y estuve mirando el SG del dia anterior: CodeWars. Es una web en la que te proponen ejercicios o Katas de programación y vas subiendo de ranking según tu desempeño. Lo mejor es que compites con tus compañeros de IronHack en Barcelona, Paris y Miami. Me encanta, pero de momento no he tenido demasiado tiempo para dedicarle.
+
+![En este mundillo nos encanta la madera, somos como termitas](/images/madera.jpg)
+
+Una vez en clase, teníamos esto en el menú: Colecciones avanzadas en JS y como manipularlas con *lodash*. Para el PP, ejercicios con *lodash*. Dado que *lodash* es una librería externa de la que no soy muy amigo, en el PP Salvo y yo nos quedamos muy atrás y apenas entregamos la mitad del ejercicio, que quedó pendiente. El resto de las clases de la mañana, introducción al diseño web responsive (O como hacer que tu web se vea diferente en función del dispositivo) y a **SASS** (CSS sintácticamente impresionante, literal). Ambos conceptos ya los había trabajado en **freeCodeCamp** y me encantan, por lo que ningún problema por aquí...
+
+## Pero...
+
+Tras la comida tocaba el DE: Replicar una *landing page* de Product Hunt, en *responsive* usando **SASS**. Así que me instalé el **SASS** autocompiler para Atom, pero este no encontraba SASS. Intenté instalarlo con NPM pero no lo tenía instalado (Formatee poco antes de empezar el bootcamp) así que fui a por nodejs, pero necesitaba antes **NVM** (*node version manager*) para instalarlo. Pille **NVM** pero este no era capaz de usar **Curl** para descargar la lista de versiones. Mi versión de **Curl** estaba jodida por un maldito ejercicio de la universidad. Tras pedir ayuda a Marc y a los TAs y no ser capaz ninguno de arreglarlo, se me ocurrió la feliz idea de desinstalar **Curl** y llevarme por delante todas sus dependencias. En el proceso debí de hacerle algo muy jodido a mi buen Ubuntu Gnome, porque el pobre, tras reiniciar, era incapaz de pasar de Grub.
+
+> Si algo puede salir mal, así será -Y mas si trabajas con Linux-
+
+Tras toda la tarde tratando de arreglar mi sistema operativo, con una frustración de narices y mucho trabajo acumulado, desistí y me fui a casa sobre las 9 de la noche, con el objetivo de recuperar mi sistema operativo antes de dormir. O no dormir. Básicamente, y por alguna razón, mi placa no reconoció los pendrives de arranque hasta que eliminé manualmente la partición de Linux con el gestor de idems de Windows 10. Tras una épica pelea con software y hardware, a las 00:30 logré realizar una instalación limpia de **Ubuntu Gnome** para poder trabajar al día siguiente. Fue un gran mazazo, pero también una gran lección: Si algo puede salir mal, así será -Y mas si trabajas con **Linux**-. Así que desde entonces tengo una partición adicional con Ubuntu 17 en mi disco duro y una máquina virtual en mi partición de Windows, por si me vuelvo a cargar **Gnome**. Todas ellas con **Atom**, **Git**, **Node** y **NPM** listos para trastear.
+
+# Día 5: Redención
+
+Tras el gran disgusto del día anterior, me planté a las 8:00 en IronHack. Fui el primero, literalmente. A las 8:15 ya tenía todo el software necesario y me puse a codificar la página de Product Hunt como loco, primero montando la estructura completa en **HTML** y luego dándole zapatilla a la maquetación. La verdad es que avancé muchísimo en esa hora y estoy particularmente orgulloso de como me repuse de la tarde del jueves.
+
+![Una mañana cualquiera en IH](/images/manana-cualquiera.jpg)
+
+Como siempre, a las 9:00 comenzaron las clases con un tema complejo: Prototipado y programación orientada a objetos. De verdad, me parece alucinante que gente que esto le sonaba a chino hace unos días esté haciendo ejercicios con ello. Es muy grande lo que consigue IronHack. En el PP me tocó de compañero Mikel, uno de los alumnos que va mas fuerte en programación y un tío con el que me lo paso genial. Teníamos que aplicar lo aprendido sobre prototipos y **POO** a una guerra entre vikingos y sajones, empleando metodología **TDD** (*Test Driven Development*) utilizando **Jasmine**. Nunca había hecho **TDD** y me pareció una pasada, una forma muy eficiente de trabajar. Fuimos los únicos que lo terminamos en la hora que teníamos para hacerlo, así que muy contentos.
+
+![Comida del primer Viernes](/images/comida-viernes.jpg)
+
+Las dos clases restantes de la mañana: Manipulación del DOM con JS. Básico pero fundamental. Salimos a comer a un restaurante pseudo-portugues de la zona, con un menú muy bueno y económico, y seguimos con el DE. Este último día ya teníamos que modificar el DOM en función de la interacción del usuario. Una vez mas, algo que tengo muy trillado por mi experiencia previa con FCC, pero una autentica pasada que en solo una semana los alumnos de IronHack puedan pelearse con lago tan "complejo" (para el nivel de partida).
+
+## Feedback
+
+Por la tarde nos pidieron feedback individualmente a cada uno acerca de como habíamos vivido esta primera semana. En IronHack están muy preocupados por como percibe el alumno el producto y ademas muy abiertos a sugerencias. Antonella me preguntó si habría algo que cambiaría (Dije que NO), si me estaba costando mucho y si había alguna empresa que me interesase o algún ponente que me gustaría ver. En ese momento no caí, pero me gustaría que trajeran a Eduardo Sada de Kairos ([@aeroalquimia](https://twitter.com/aeroalquimia)) para que nos dé la misma *master class* de debugging con *DevTools* que dio en las JSdaysEs. Quizás lo proponga en algún momento.
+
+![Merchandising](/images/merchandising.jpg)
+
+Tras terminar mi ejercicio le pegué otro tiento al DE del jueves y dí de mano a las 19:00: Teníamos fiesta con antiguos alumnos y los compañeros de UX. En IronHack nunca falta la cerveza y pasamos un rato muy agradable conociendo gente, pasando tiempo con los TAs fuera de la clase y desestresando con los compañeros. Sobre los antiguos alumnos, los que conocimos han encontrado trabajo o están en disposición de aceptar uno, lo cual es un gran incentivo para seguir fuerte con el curso.
+
+![Mahou maestra, cerveza peligrosa donde las haya](/images/maestra.jpeg)
+
+El resumen de la semana es que IronHack es una pasada: El ambiente es ideal, el método es efectivo, las clases amenas y te levantas por la mañana con ganas de ir a clase. Nada más y nada menos que lo que esperaba del mismo.
+
+# El fin de semana
+
+En una semana tengo los exámenes parciales de la UI1, así que el viernes me vine pronto para levantarme el sábado a estudiar. Los compañeros prolongaron la fiesta fuera de Ironhack. Durante el sábado terminé los dos ejercicios que me quedaron pendientes el Jueves ([El responsive aquí](https://frbosquet.github.io/lab-css-responsive-cloning/starter-code/)) y deje la semana terminada de IH terminada. El resto del día lo dediqué a estudiar el examen de bases de datos. Este domingo he estado estudiando el examen de estadística, evadiendo la mente de IH para cogerlo mañana con mas ganas. Lo cierto es que me ha costado no pensar en ello porque me muero de ganas por seguir el lunes. Si hubiese decidido irme de vacaciones este verano en lugar de esto, me lo hubiese pasado peor.
+
+A ver que tal se da la segunda semana. En cualquier caso, el domingo que viene daré reporte. Un saludo

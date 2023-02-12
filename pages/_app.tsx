@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <a href="https://instagram.com/frbosquet" target="_blank" rel="noreferrer"><InstagramIcon className="w-5 hover:text-violet-400 transition-all" /></a>
           </menu>
         </header>
-        <article className='container mx-auto px-4 max-w-2xl'>
+        <article className='container mx-auto px-4 pb-4 max-w-2xl'>
           <Component {...pageProps} />
         </article>
       </section>
