@@ -20,7 +20,7 @@ export const PostLink = ({ post }: Props) => {
 				<div className='gap-2 flex-1 hidden sm:flex'>
 					{post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
 				</div>
-				<span className='text-gray-900'>
+				<span className='text-violet-100'>
 					{dateFormatter.format(new Date(post.date))}
 				</span>
 			</div>

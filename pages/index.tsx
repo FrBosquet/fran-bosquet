@@ -16,7 +16,7 @@ export default function Home({ posts }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section className='flex flex-col gap-4'>
+      <section className='flex flex-col gap-4 py-6'>
         {posts.map(post => {
           return <PostLink post={post} key={post.slug} />
         })}
