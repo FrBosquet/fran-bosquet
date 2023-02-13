@@ -1,9 +1,9 @@
 import { MDXProvider } from '@mdx-js/react';
 import { Poppins } from '@next/font/google';
+import { GithubIcon, InstagramIcon, TwitterIcon } from 'components/icons';
+import { mdxComponents } from 'components/mdxComponents';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
-import { GithubIcon, InstagramIcon, TwitterIcon } from '../components/icons';
-import { mdxComponents } from '../components/mdxComponents';
 import '../styles/globals.css';
 
 const poppins = Poppins({

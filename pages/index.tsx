@@ -1,7 +1,7 @@
+import { PostLink } from 'components/PostLink'
+import { getPosts } from 'lib/getPosts'
+import { Post } from 'lib/types'
 import Head from 'next/head'
-import { PostLink } from '../components/PostLink'
-import { getPosts } from '../lib/getPosts'
-import { Post } from '../lib/types'
 
 type Props = {
   posts: Post[]

@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const PostLink = ({ post }: Props) => {
-	return <Link href={`/${post.slug}`
+	return <Link href={`/posts/${post.slug}`
 	} className="w-full p-2 sm:p-3 gap-4 bg-gray-600 flex hover:translate-x-2 transition-all rounded-lg shadow-md" >
 		<div className='aspect-square w-28 relative rounded-md overflow-hidden'>
 			<Image alt={`imagen de ${post.image.author}`} src={`/images/${post.image.src}`} fill style={{ objectFit: 'cover' }} />
