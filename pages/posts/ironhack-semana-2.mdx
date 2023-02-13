@@ -1,0 +1,227 @@
+import { PostHeader } from 'components/PostHeader'
+import { YoutubeEmbed } from 'components/YoutubeEmbed'
+
+export const meta = {
+	title: 'Ironhack, semana 2: Trabajo duro',
+	date: (new Date('6-25-2017')).toISOString(),
+	tags: ['personal'],
+	image: {
+		src: 'pong.png',
+		author: 'Fran Bosquet',
+		authorUrl: 'www.franbosquet.com'
+	}
+}
+
+<PostHeader {...meta} />
+
+Estamos a domingo y toca escribir como ha ido la semana en Ironhack. El nivel ha seguido subiendo y, como he comentado en alguna ocasión, este fin de semana he tenido exámenes de la UI1 para el grado en Ingeniería Informática. Ha sido una semana dura en la que he tenido que sacar tiempo de donde no había para estudiar. Procedemos:
+
+# Dia 1: Popurrí
+
+Este primer día de la semana tuvo un poquito de todo. Empezamos dando debugging con las **Chrome Dev Tools**. Precisamente el viernes anterior le había comentado a Raul Vega (antiguo profesor) que me extrañaba muy mucho que no estudiásemos esta herramienta desde el día uno, lo considero fundamental. Mis deseos fueron escuchados (bueno, mas bien estaba en el temario) y Marc ([@boyander](https://twitter.com/boyander), Lead Teacher) nos dio una clase introductoria, explicando como usar la herramienta. Lamentablemente mis compañeros no han terminado de cogerle el gusto y siguen debugeando con console.log´s y mirando fijamente el código en **Atom**. Aunque despacio, poco a poco se les va metiendo en la cabeza lo importante que es el debugger.
+
+A continuación seguimos con una clase de asincronía y paralelismo en JS. Ahora mismo, que estamos en el lado del cliente, no es una materia crítica. Sin embargo es muy útil para hacer timeouts e intervals, dos funciones de JS capitales para controlar el flujo de tiempo. Y de paso ir pillandole el rollo a la asincronía para cuando empecemos a hacer llamadas a servidor.
+
+> ### Anotación de 2023
+>
+> Claro, porque en cliente no usamos la asincronía. Valiente ignorante estaba yo hecho
+
+En el *Pair Programming*, volví a trabajar con Mikel. Mikel y yo tenemos un sentido del humor parecido y nos lo pasamos bien juntos, por lo que me gusta mucho trabajar con el. Nos tocó hacer un *10SecondsMathGame* por consola, con **TDD** utilizando **Jasmine**. No hicimos nada estiloso, pero completamos la funcionalidad en un tiempo razonable que es lo importante.
+
+> ### Anotación de 2023
+>
+> De hecho, entre 2018 y 2020 pude trabajar con Mikel en la misma startup
+
+## Bootstrap: El demonio
+
+![Clase de BootsTrap en IronHack](/images/bootstrap.jpg)
+
+Tras el PP, Marc impartió las dos últimas *Learning Units* del día: **Bootstrap**. Ya he dado bootstrap en **freeCodeCamp** y en el grado, y no me gusta. Me parece muy ortopédico, sabiendo hacer las cosas en CSS, estar buscando la clase que hace lo que tu quieres. Entiendo su utilidad, pero qué pereza. Y si no querías bootstrap, toma dos tazas: El *daily exercise* de este día, replicar una plantilla de **CMS** con dicho framework. Para colmo, tras la comida empleamos un buen rato en terminar el PP y no empezamos este **DE** hasta las 5 de la tarde. Y para mayor colmo, teníamos charla a las 19:00.
+
+> ### Anotación de 2023
+>
+> Releyendo el blog ahora me doy cuenta de lo muy ignorante y dogmático que era en esa epoca. Pero en esto no me equivocaba: Bootstrap es una mierda.
+
+## Arquitecturas y buenas prácticas CSS
+
+Como he dicho, a las 19:00 teníamos charla con Ignacio Villanueva ([@Ignaciodenuevo](https://twitter.com/Ignaciodenuevo)), del que he hablado en alguna ocasión. Ignació es muy bueno dirigiendo a sus invitados en WeCodeSign, pero creo que le falta algo mas de practica dando ponencias. La charla que dio dos semanas antes en OSWeekends sobre CSS Grid estuvo genial, pero esta careció de ritmo y se hizo algo aburrida. Pienso que si le diese un tono mas distendido y relajado, con algo mas de humor, la charla calaría mas. Espero que, si llega a leer esto (lo dudo) entienda esto como la crítica constructiva que es.
+
+> ### Anotación de 2023
+>
+> De hecho que si que lo leyó y me escribió por twitter para pedirme explicaciones.
+
+![Buenas prácticas y arquitectura CSS, por Ignacio Villanueva](/images/ivnueva.jpg)
+
+Tras la charla volví a meter mi cabeza en el DE un rato mas hasta acabarlo. No es mi trabajo mas inspirado, pero aquí queda. Y con eso terminé mi lunes, sobre las 9 de la noche.
+
+Total de horas estudiadas para el grado: 0; Días restantes: 5.
+
+# Día 2: jQuery
+
+A partir del martes tomé la determinación de llegar muy temprano para aprovechar el día. Matadero abre a las 7;45, así que esa hora me planto allí. Conseguí estudiar unos 45 minutos de estadística hasta que a las 8:30 empezó a llegar la gente. Con gente alrededor se me hace imposible concentrarme, asi que en ese momento me puse a hacer katas en codewars para ir subiendo de ranking.
+
+Las cuatro LU de este día versaban sobre JQuery. No soy el mayor fan, creo que todo lo que hace se puede hacer con *vanilla* igual de bien.  Y, hasta donde sé, la industria ha pasado ya de largo de este framework. Pero seamos francos: Es cómodo hasta la extenuación. En el PP me tocó con una compañera llamada Claudia y tuvimos que usar jQuery para programar la lógica e interacción de una aplicación para encargar pizzas. No nos dio tiempo a terminarlo, pero avanzamos bastante.
+
+## Interrupciones
+
+Una cosa que me está empezando a molestar bastante, y la razón por la que no avanzamos mas en el PP de este día, son las interrupciones. La filosofía de IronHack es consultar a los compañeros antes que a los TA. Y me parece genial. Fomenta innumerables conductas positivas como el compañerismo, trabajo en equipo, etc. El problema es que hay compañeros que prefieren preguntarte a ti antes que a google. O peor, que te preguntan antes siquiera de repasar la LU. ¿Cual es el objetivo?¿Que te haga yo el ejercicio? Me parece que tienen la actitud equivocada. Y lo peor es que yo pierdo el foco en lo que estoy haciendo y luego me cuesta recuperar la productividad.
+
+> ### Anotación de 2023
+>
+> Este fue el comienzo de mi caída. Algo que no quedó reflejado en el blog fué que tuve MUCHOS problemas con compañeros a raiz de lo en serio que me tomaba yo todo y lo mucho que me molestaban las interrupciones y perdidas de tiempo.
+>
+> En general, sigo pensando que la actitud correcta es la de intentar buscarte las habichuelas lo más posible y no intentar que otro venga a desatascarte al primer obstaculo.
+>
+> Pero trabajando me he encontrado con muchas situaciones en las que no sabía ni como empezar a buscarme las habichuelas y creo que muchos de estos compañeros que me sacaban de quicio no sabian ni como empezar a googlear el problema.
+>
+> También es cierto que muchos de ellos, tras explicarselo, seguian viniendo sin intentar resolverlo por ellos mismos. Este tipo de parrafos en el blog vienen de aquella frustración.
+>
+> Si estas en la tesitura de hacer un bootcamp y te ves en mi misma situación, te diría que en realidad esté tipo de consultas son uno oportunidad dorada para practicar softskills como la comunicación, knowledge transfer, formación, pair programing. Llamalo X. Pero realmente aquí no medí bien el valor de tratar con "juniors" (juniors desde mi punto de vista de aquel entonces).
+
+## Superheroes: El juego de parejas
+
+Tras la comida, como siempre, vino el DE. Este día tocó algo divertido, un juego de parejas con cartas de superheroes. Me lo pasé bomba desarrollandolo y aprendí un par de cosas sobre jQuery. A pesar de las cuasiconstantes interrupciones de la tarde, pude sacar el ejercicio en el día y fué mi ejercicio mas inspirado hasta la fecha.
+
+![Mi Memory Game con superheroes de Marvel sin copyright](/images/memory-game.png)
+
+Una de las cosas que mas me gustan de IronHack es que casi a diario se organiza algun sarao. A las 7 de la tarde tuvimos charla de nuevo. Esta vez GraphQL con Mikel Garcia ([@gartzia6](https://twitter.com/gartzia6)), de Billin, ex IronHacker. Tambien estuvieron por allí la **CPO**, Marta Fonda ([@MartaFonda](https://twitter.com/MartaFonda)), también antigua alumna, y el **CTO**, aunque de este no me quedé con el nombre (error!). GraphQL ha venido a revolucionar el mundo de las peticiones de datos y a dejar REST como un recuerdo del pasado. La charla fue:
+
+> ### Anotación de 2023
+>
+> El CTO era Ludo Bermejo ([@ludobermejo](https://twitter.com/ludobermejo)) si no recuerdo mal.
+>
+> Sobre GraphQL... digamos que al final no ha revolucionado nada y REST sigue vivito y coleando. Profesionalmente no lo he tocado, pero en proyectos personales lo he usado mucho (Apollo y Prisma) y nunca me ha aportado nada que no me diese REST. Encima es mucho mas verboso e incomodo de escribir.
+
+- Amena
+
+- Practica
+
+- De un nivel asumible por cualquiera que sepa lo que es una petición a un servidor
+
+Tras la charla terminé mi ejercicio y para casa. Llegué a las 22:30.
+
+Horas estudiadas: 0:45m; Días restantes: 4;
+
+# Día 3: Pilas, colas, buddys
+
+El Miércoles empezó como el martes: 7:45 y a estudiar. En el hilo que llevo en forocoches contando mi experiencia un chico comentó que mi historia le había inspirado mucho y había decido apuntarse a IronHack. Es agradable ser ejemplo para otras personas, pero me preocupa que alguien se tome este viaje como una guía: Cada uno hace el suyo y lo que me funciona a mi no necesariamente lo tiene que hacer para todo el mundo.
+
+![Así me saluda el sol cada día al salir de casa](/images/amanecer.jpg)
+
+Tras los 45 minutos de estudio de rigor, me puse a corregir bugs de mi DE del día anterior. Como mi novia trabaja en QA le sacó bastante los colores a mi aplicación la noche anterior. Así que arreglé errores, le dí un polish y la dejé para subir a producción. El resultado, [aquí](https://frbosquet.github.io/lab-javascript-memory-game/starter-code/memory.html).
+
+> Conceptos avanzados de JS. *Closures* y *scopes*. Son conceptos que se aprenden mejor con la práctica y quizás la clase fue algo árida, sobre todo porque es una de las facetas mas trickys del lenguaje.
+
+En las LU de hoy, clase avanzada de **Git**, **Github** y **Github pages**. Nunca viene mal repasar, e introdujimos el concepto de ramas a nuestros repositorios. Mas features para trabajar con control de versiones y sacarle todo el partido a esta maravillosa herramienta. Las tres LU restantes: Conceptos avanzados de JS. Closures y scopes. Son conceptos que se aprenden mejor con la práctica y quizás la clase fue algo árida, sobre todo porque es una de las facetas mas trickys del lenguaje. Pero ahí queda la unidad para repasar en el futuro, que falta hará. En el PP, una batería de test con **Jasmine** acerca de los conceptos estudiados en las LU.
+
+## Los buddys
+
+En IronHack existe un sistema de *Buddys* en el que los alumnos se les asignan dos antiguos idem para hablar de su experiencia, pedir consejo, ayuda e incluso orientación profesional. O para tomar unas birras. Yo solicité entrar en el programa y me ha tocado *Carlos Burguilllo* (Al que conocía por ser finalista en el último HackShow) y *Mikel Gartzia*, que os sonará por la charla del día anterior. El mismo miércoles me puse en contacto con ellos y charlamos por slack. Hemos quedado para vernos esta semana y estoy entusiasmado con esto. Este tipo de detalles son los que marcan la diferencia de IronHack con la educación tradicional.
+
+En otro orden de cosas, hace una semana nos pidieron los datos para ir un día a visitar las oficinas de una empresa y dar clase allí. Este Miércoles se le escapó a Marc qué empresa era. Se suponía que era un secreto. Uno que empieza por G...
+
+> ### Anotación de 2023
+>
+> Eran las oficinas de google obviamente. Aquí nos montamos una película guapa pensando que iban a contratarnos a alguno en Google.
+
+## Pilas y colas
+
+Para el Daily de este día, tocó implementar pilas y colas en JS, y representarlas mediante jQuery. Con la inestimable ayuda de un test en **Jasmine** para guiar el desarrollo. No termino de entender la necesidad de pilas y colas, dada la versatilidad del *Array* de JS respecto a la estructura equivalente en otros lenguajes, pero el ejercicio estuvo bien y pude terminarlo en un tiempo asumible (Resultado [aquí](https://frbosquet.github.io/lab-javascript-advanced-algorithms/starter-code/DataStructures.html)). Para poder terminarlo tuve que empezar a negar asistencia a los compañeros que me venían con dudas sin haber repasado la unidad. No puedo permitir que me hagan perder el tiempo, yo también estoy aquí para aprender. Entregué el ejercicio sobre las 18:20 y poco después de las 19:00 ya estaba en casa estudiando.
+
+> ### Anotación de 2023
+>
+> La necesidad de las pilas y colas en JS es, primero, entender minimament de estructuras de datos, que son la base para desarrollar algoritmos. Y segundo, rendimiento.
+>
+> Sobre la negativa a asistir a compañeros, pues totalmente tarado en este punto, y solo era la semana 2. Entre otras cosas, me hubiese encantado que en IH contasen conmigo para dar clase o asistir en una, como muchos otros exalumnos mas y menos dotados técnicamente que yo. Pero con esta actitud me cerré muchísimas puertas y lo peor es que no me dí ni cuenta.
+
+Horas estudiadas: Casi 4; Días para el examen: 3:
+
+# Día 4, ¡Videojuegos!
+
+![Hay días que llego tan pronto que tengo que esperar que me abran matadero.](/images/matadero-puerta.jpg)
+
+En Ironhack la tercera semana de bootcamp está dedicada a realizar el primer proyecto personal: Un videojuego de temática libre para el navegador. En ese sentido, a partir de este día todo giró alrededor de dicha temática, y está siendo genial. Las cuatro LU consistieron en Marc programando una replica del juego [2048](http://gabrielecirulli.github.io/2048/) en JS y jQuery. Trató de transmitirnos la importancia de separar la lógica de la representación y de mantener un enfoque de desarrollo incremental, de lo mas sencillo a lo mas complejo.
+
+En el PP me tocó con **Teresa**. Está empezando a programar y se pierde un poco en algunas cosas, pero actitud no le falta y es una alegría de persona. Programamos (De nuevo con **TDD**, esta vez pasando test con **Mocha** en lugar de **Jasmine**) la lógica de un agente que recorre un laberinto. Una vez terminado, solo había que dejarlo en manos de un algoritmo preprogramado y ver si, con la funcionalidad implementada, este era capaz de escapar del laberinto. Lo fué.
+
+## Nuestro primer videojuego, el primero de la historia
+
+En el Daily Exercise llegó lo bueno: Replicar el **Pong** de **Nolan Bushnell**. Palabras mayores. El objetivo era que los alumnos pusieran en practica todo lo aprendido durante la semana acerca de:
+
+> ### Anotación de 2023
+>
+> Técnicamente no es el primer videojuego, quizas sí el primero comercial.
+>
+> Por otro lado, en este punto de mi vida yo ya había implementado en flash y unity versiones de arkanoid o lunar lander o diseños propios como BLQ o Clay. Todos ellos juegos más complejos que pong. Así que no sé a cuanto de qué puse ese  *Palabras mayores*
+
+- Implementación iterativa de funcionalidades
+
+- Separación de lógica y vistas
+
+- Implementación de mecánicas y reglas de un juego en tiempo real.
+
+Me lo pasé bomba con este ejercicio. Tomé un enfoque muy estructurado para mi sistema de ficheros y mantuve la separación entre modelo y vistas de manera estricta. Logré mantener un ritmo de desarrollo muy alto. Para completar este ejercicio teníamos hasta el sábado por la noche, dado que el viernes era día especial (lo cuento mas adelante), por lo que el jueves me propuse implementar el "motor gráfico": La lógica y gestión del **DOM** para mantener la pelota rebotando entre las cuatro paredes. Mi objetivo era mantener totalmente controlado donde se dibujaba mi pelota, con un código lo mas limpio y sencillo posible, y lo logré. Una vez terminado, recogí y me fui antes de las 18:00. Llegué a casa antes de las 19:00 y pude estudiar un buen rato.
+
+Horas estudiadas: Unas 4; Días para los exámenes: 2.
+
+## Ironhack es una estafa
+
+Como dije, tengo un hilo en **forocoches** donde he ido pidiendo consejo y relatando mis decisiones desde el primer día que empecé a plantearme hacer este bootcamp. Normalmente el ambiente es bueno y la gente está siendo muy cariñosa y apoyándome en el viaje. Algunos se están planteando seguir mis pasos, como dije antes, e incluso a uno de ellos ya lo he conocido en persona (¡Un saludo Darío!). Ademas, allí me contactaron en primer lugar Juan Macias y Carlos Dueñas, a la postre compañeros de bootcamp.
+
+Pero esta semana el ambiente se enrareció de mala manera. Un individuo se planto en el hilo y me acusó de ser comercial de IronEstafa (sic), porque le estaba vendiendo a la gente que pagando 7000€ iban a conseguir el trabajo de sus sueños. Cuando le pedí explicaciones, me dijo que conocía IronHack de cerca y que sabía de lo que hablaba. Cuando insistí en que me narrara la experiencia mala que había tenido, se hizo el silencio.
+
+> Me parece que hay mucho resentido que se ha tirado 4, 5, 6 o mas años en la universidad para entrar en una cárnica, y le come por dentro que alguien sin background técnico, en dos meses, se meta a desarrollar en una startup ganando mas que el cuando empezó
+
+Intento no darle bola a este tipo de payasos. Pero el episodio me tocó la moral. Si buscas "IronHack estafa" en google te encontraras gente hablando pestes, pero nunca entran en lo concreto. Me parece que hay mucho resentido que:
+
+- No quiere invertir en su educación.
+
+- No tiene tiempo para hacerlo.
+
+- Se ha tirado 4, 5, 6 o mas años en la universidad para entrar en una cárnica y le come por dentro que alguien sin background técnico, en dos meses, se meta a desarrollar en una startup ganando mas que el cuando empezó.
+
+- Gente con una actitud de mierda que no pudo entrar en IronHack. Porque hay que tener una actitud de mierda y unas motivaciones horribles para que no te acepten en el bootcamp.
+
+Cualquiera que pueda conseguir un aval puede pedir un crédito, jugárselo todo a esta carta y hacer el bootcamp. Tengo compañeros con un horizonte vital de un mes tras acabar el bootcamp. Gente jodida económicamente y que ha confiado en esto. Yo mismo no tengo holgura económica propia mas allá de noviembre. Ironhack no es un atajo, no es elitista. Es una apuesta realista habida cuenta de que la colocación real y demostrable (con nombres, apellidos y empresas), a tres meses, es del 90% en Madrid y Barcelona ¿Es caro? Mas caro es invertir 2 años en una FP, 4 en un grado o 100.000€ en un **MBA** y no veo a nadie acusándome de comercial cuando digo que esas tres me parecen muy buenas opciones, dependiendo de las circunstancias del estudiante.
+
+> ### Anotación de 2023
+>
+> Llevo 5 años ejerciendo en el sector y a día de hoy mantengo esta opinión: Hay mucho resentido con los bootcamps por puro prejuicio y de verdad que no lo entiendo.
+
+# Mas madera a mi fuego
+
+El viernes tuve un capítulo similar en facebook: Un informático, amigo de mi novia, me comentó en una foto de IronHack. Que le habían dado malas referencias y que conocía una empresa en la que no contrataban gente de IronHack. Que solo se fiaba de la universidad pública, que si había dinero de por medio no era de fiar. Ahí ya reventé. Le inste públicamente a que me diera el nombre de la empresa que no contrataba IronHackers. Y esas malas referencias, que cuales eran y de quien. Silencio sepulcral. Ante una actitud tan cobarde, no tuve otra que borrarlo de facebook ipsofacto.
+
+Como veis, el modelo es cansino y repetitivo: *"Lo conozco...., me han hablado...., se con seguridad..., que IronHack no funciona..., que no es real..., que la gente no sale preparada"*. Ahora, cuando les pides información contrastada te salen por peteneras, alegan cualquier tipo de confidencialidad o directamente se hace el silencio. Yo soy el primero que soy crítico con según que cosas de IronHack (no demasiadas, porque está cubriendo todas mis expectativas), pero mi opinión es informada y la realidad es la que es. Yo la he visto, la veo cada día. Y el que quiera demostrar lo contrarío debería venir con pruebas y no con el fruto fresco de su bilis y resentimiento. En adelante ignoraré a estos personajes en pro de mi propia salud mental y porque no merecen otra cosa.
+
+> ### Anotación de 2023
+>
+> Este chaval era, y supongo que es, un imbecil redomado. Opinión de todos sus compañeros (y amigos) sin excepción. Y yo otro porque me dejaba afectar por este tipo de personas y mentalmente me pasó factura todo.
+
+# Día 5: Presentación de proyecto para la semana 3
+
+El viernes seguimos con la dinámica de videojuegos. Marc nos mostró como programar el juego de la serpiente. No sé como fue porque me centré en terminar mi pong. A final de mañana ya tenía la mecánica básica y por la tarde estuve añadiendo algún efecto, capturando condiciones de fin de juego, mejorando la interacción y aprendiendo a añadir sonido con ion.sound (muy comodo BTW). Particularmente, estoy muy contento de como conseguí dar un efecto pixelado de una pantalla de fosforo verde, poniendo una rejilla por delante de todo el HTML con una textura transparente. Este proyecto supera a mi anterior *best work* y estoy muy contento del acabado tan pulido que conseguí. El resultado [aquí](https://frbosquet.github.io/lab-javascript-ping-pong/starter-code/).
+
+![Mi pong, con autentico sabor ochentero de pantalla de fosforo](/images/pong.png)
+
+Como ya he comentado, durante la tercera semana tenemos que desarrollar el primero de los tres proyectos que realizaremos a lo largo del bootcamp. A las 17:00 nos dieron la presentación del mismo:
+
+- Debemos hacer un videojuego de temática libre.
+
+- Debe ser para dos jugadores, simultáneos o por turnos.
+
+- Sin usar canvas, **HTML**, **CSS**, **JS** con **jQuery** e **ion.sound** si nos apetece. Recomendable implementar **TDD**.
+
+- A desarrollar en cuatro días y medio, de lunes a viernes por la mañana, incluyendo preparse una presentación de seis minutos con slides. La presentación, el viernes 30 a partir de las 16:30.
+
+- El Lunes debemos presentar nuestra idea y que nos la acepten los tres *TA* y **Marc**.
+
+En mi caso he decidido hacer una réplica simplificada de *Hotline Miami* para dos jugadores. Quizás me pase de ambicioso, pero tengo clara la mecánica y creo que puede salir algo muy chulo. Esta mañana he estado plasmando en papel mis ideas y esquematizando el diseño, y he creado una lista de tareas en trello. La semana que viene os cuento como me ha ido.
+
+<YoutubeEmbed embedId="2n_BinoS1Ug" title="Hotline Miami gameplay"/>
+
+# El Weekend
+
+El viernes me marché antes de las 6 y estuve estudiando hasta las 21:00. El sábado tuve los tan temidos exámenes, y la verdad, es que la cosa salió bastante bien para el drama que me había montado. Creo que apruebo las tres asignaturas. Por la tarde al cine a ver WonderWoman (el horror de DC no cesa). Y hoy domingo, en IronHack escribiendo este post y planificando el desarrollo de mi juego. Al medio día he vuelto a MadGrill a confirmar la excelente impresión que me llevé cuando fui tras el JSDayEs el mes pasado ¡Que hamburguesas!
+
+Muchas gracias por la gran acogida que está teniendo este blog. La semana que viene ¡Mas!
