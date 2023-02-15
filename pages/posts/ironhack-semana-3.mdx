@@ -1,0 +1,293 @@
+import { PostHeader } from 'components/PostHeader'
+import { YoutubeEmbed } from 'components/YoutubeEmbed'
+
+export const meta = {
+	title: 'Ironhack, semana 3: IronGunZ, el videojuego',
+	date: (new Date('7-02-2017')).toISOString(),
+	tags: ['personal', 'ironhack'],
+	image: {
+		src: 'irongunzsplash.png',
+		author: 'Fran Bosquet',
+		authorUrl: 'www.franbosquet.com'
+	}
+}
+
+<PostHeader {...meta} />
+
+Como dije al final de la última entrada, la tercera semana del bootcamp está dedicada al desarrollo de un proyecto personal en forma de videojuego. En mi caso, he desarrollado IronGunz, un juego de acción en vista cenital para dos jugadores basado en Hotline Miami. Esta ha sido mi primera semana de dedicación completa a IronHack, sin exámenes de por medio. Pero no por ello ha sido menos dura que las anteriores. Arrancamos:
+
+# Día 1: Un arranque prometedor
+
+El domingo previo a este lunes ya pasé unas cuantas horas en IronHack planificando mi juego: Haciendo diagramas y esquemas de lo que quería conseguir. El objetivo era clonar la estética y la mecánica de disparo de Hotline Miami. Y, sobre todo, la sensación de control de este juego, una de las mas placenteras que he probado. No en vano, es uno de mis juegos favoritos de todos los tiempos:
+
+<YoutubeEmbed id="https://youtu.be/KIZYjrx4LbM" title="Hotline Miami"/>
+
+*By the way*, estamos en plenas rebajas de **Steam** hasta el 5 de Julio, así que si te ha picado la curiosidad, tienes Hotline Miami y HM2: Wrong Number con un 75% de descuento y te los puedes llevar ambos por menos de 5€. ¡A por ellos!
+
+> ### Anotación de 2023
+>
+> La oferta, por lo que sea, ya ha caducado. En cualquier caso, son juegazos increibles. Yo los volví a comprar en Switch unos años despues. Tengo una [reseña del segundo en Steam](https://steamcommunity.com/id/frbosquet/recommended/274170/) (de una epoca en la que me dió por escribir ahí) 
+
+## Planificación
+
+Que me lio. El lunes me planté allí bien temprano, como a mi me gusta. Dediqué la primera hora a planificar mis tareas para la semana. He sido muy ambicioso con este proyecto y, desde el primer momento, me plantee hacerlo todo por mi mismo: Sin frameworks ni librerías JS, gráficos pintados a mano con **GIMP** y música en **Fruity Loops**. Quería hacer algo muy personal y muy potente. Me encanta el desarrollo de videojuegos, así que la motivación me estaba rebosando por la orejas y quería petarlo bien fuerte.
+
+![Diagrama de clases para la lógica de IronGunZ](/images/uml.png)
+
+> ### Anotación de 2023
+>
+> Esto de los diagramas de clases me lo enseñarón en mi primer cursillo de programación para desempleados y yo me pensaba que era muy pro. Pero nada mas lejos de la realidad, jamas he usado nada ni parecido para diseñar una arquitectura de datos.
+
+El resultado de esta hora fué un diagrama de clases en **Gliffy**. Uno de mis principales planteamientos para el juego es que debía ejecutarse independientemente del renderizado: El modelo de datos contiene toda la información y cálcula cada frame, y la vista lee esa información y la representa. De este modo no tengo que consultar propiedades "volatiles" en el DOM para determinar el estado de mi juego. El problema es que planífiqué mi modelo de datos, pero dejé a la improvisación la vista, por lo que a la postre fuy tomando decisiones al vuelo mientras inplementaba y en ocasiones estas no fueron optimas.
+
+Por otro lado, hice un tablero de trello en el que anoté todas las tareas que pensaba que iba a tener que realizar. ¿Problema? Que apenas le he hecho caso en toda la semana. Ademas, las tareas que me planifiqué no tenían mucho que ver con lo que luego he tenido que realizar. En cualquier caso, creo que planificar el desarrollo fué un ejercicio muy valioso y que me ayudó a coger perspectiva antes de entrar a codificar. Pero aun no hemos llegado a eso, !seguimos en la franja de las 8 a las 9 del lunes!
+
+## Las katas
+
+Las semanas de proyecto tenemos una rutina muy marcada: A las 9 de la mañana katas, el resto del día proyecto. Las katas son simplemente ejercicios de programación en CodeWars planteados a modo de entrenamiento para entrevistas de trabajo. Proponen un ejercicio concreto, te dan una hora y media y van anotando quien acaba y en cuanto tiempo. No puedo evitar que, con estas cosas, me salga la vena competitiva, así que he disfrutado mucho con estos ejercicios: Entregandolos cuanto antes y utilizando el menor numero de lineas. Un ejemplo:
+
+![Dos códigos distintos que hacen lo mismo](/images/kata.png)
+
+(Obviamente esta no es una kata de IronHack, no voy a destripar el curso a los futuros alumnos que sé que me leen). En la captura anterior, ambos códigos cumplen la misma función, pero obviamente el mio (el de abajo) es mas compacto y conciso (e ilegible, si no estas acostrumbrado a JS).
+
+> ### Anotación de 2023
+>
+> Otra chorrada como un castillo: empeñarse en resolver las katas con one-liners. Conciso es un buen adjetivo para el código. Compacto, en la mayoría de los casos, no.
+
+A pesar de ser la primera, creo que la del lunes fué la kata mas compleja de la semana y me costó un buen rato sacarla. Ademas, me tomó bastantes lineas y un código bastante feo. Pero la saqué en tiempo que es lo importante, tan solo 5 alumnos lo hicimos. Tras la kata, tocaba ponerse a trabajar.
+
+## IronGunZ: El concepto
+
+La idea original del juego era sencilla:
+
+- Dos jugadores manejan a dos personajes armados.
+
+- Estos dos personajes siempre se están apuntando, por lo que conforme uno u otro se mueve, van rotando para encararse.
+
+- En el escenario hay cajas y columnas tras las que se pueden esconder. Tras las cajas puedes ocultarte y disparar, pero el otro jugador puede destruirlas con sus disparos.
+
+- La munición es limitada, cuando se acaba los jugadores pueden golpearse.
+
+- Gana (obviamente) el que mata al otro.
+
+Desde ahí el concepto ha mutado mucho. Algunas cosas no las he implementado, y hay caracteristicas de la versión actual que no están en esa lista. Pero en esencia, puedo decir que el resultado encaja en el concepto que estaba manejando hace una semana.
+
+## Lunes: Esqueleto del modelo
+
+Tras la kata, cogí mis diagramas UML de clases y empecé a codificar mi modelo de datos. Gracias a que lo tenía bien pensado, pude desarrollar un monton de lineas de código muy limpias con un gran ritmo. Para despues de comer yá tenia mis clases básicas con una funcionalidad suficiente para crear un escenario y recorrerlo:
+
+- Una primitiva para todos los objetos del escenario que se pueden posicionar.
+- Una clase para el tablero de juego, que gestiona el escenario
+- Una para los elementos de decoración del escenario, de la que heredan las cajas y las columnas.
+- Una clase para los personajes que manejan los jugadores
+- Una última para las balas.
+
+## Primeras vistas
+
+Como ya tenía algo tangible, decidí empezar a representar en el DOM. Tuve la gran suerte de que mi compañera Sara (@fierydancing117) se sentó a mi lado y me enseño la genial [Piskel](https://www.piskelapp.com/). Piskel es un editor online de sprites, muy sencillo, potente y gratuito. Gracias a el he podido dibujar mis gráficos utilizando la tablet y el ordenador indistintamente, guardandolos en la nube, animando gifs, etc. sin perder mucho tiempo. Si lo hubiese hecho con GIMP el resultado habría sido mucho, mucho peor ¡Gracias Sara!
+
+![Piskel app, editor de sprites online](/images/piskel.png)
+
+Para el final del día, ya podía generar aleatoriamente un escenario, llenarlo de cajas y columnas y representarlo en el navegador. Una buena decisión de diseño fue crear un fichero de configuración en el que fui declarando variables globales. De este modo, podía cambiar en una linea cosas como cuantas cajas y columnas generar o que tamaño tenía el tablero.
+
+![Fichero de configuración con variables globales disponibles en todo el programa](/images/configjs.png)
+
+> ### Anotación de 2023
+>
+> Si bien en general no se puede negar que era un poco flipado y pedante en aquel entonces, alguna idea buena tenía. Lo del fichero de configuración es un buen ejemplo
+
+Y con esto terminé el Lunes. Eran ya las 21:00 y estaba cansado. En mi planificación quería tener a los personajes ya moviendose por el escenario para el final del primer día, pero pensé que iba bien de tiempo y lo dejé estar. Error!
+
+# Día 2: Empiezan las prisas
+
+El segundo día llegue a primera hora y estuve trabajando en los gráficos del juego, creando al primer soldadito para intentar meterlo en el juego a lo largo del día. Mi objetivo era tener a dos de ellos moviéndose y encarándose para el final del día. En mi planificación original, para el martes noche debía tener un prototipo jugable, pero visto el ritmo del lunes rabajé esa pretensión y fijé el punto limite para mi **MVP** en el miércoles noche.
+
+## Kata time
+
+La kata del martes se me dió algo mejor y pude entregarla de los primeros (no sé si el segundo o el tercero). Anidé dos bucles for, que no es la solución mas elegante, pero quedo funcional y sin artificios. Así que guay por mi. Este día el ejercicio fue completado por casi toda la clase.
+
+## Refactoring infinito
+
+Cuando empecé a trabajar en IronGunZ decidí limpiar un poco el código del día anterior. Todo el dibujado lo he hecho creando elementos en javascript y colgándolo de un DIV con el id "App". No en vano, de cachondeo he bautizado a esta metodología **Refract**: React + Fran, jeje. El caso es que empecé a encapsular mis métodos para la creación de vistas, la cosa se fué yendo de madre y me dieron las 13:00 sin haber avanzado nada en mi lógica. Esto me dio un bajón anímico porque veía que no me cundían las horas, y en IronHack es importantísimo mantener el espíritu alto. Sobre todo en semana de proyectos. Un mal bajón puede destruirte.
+
+> ### Anotación de 2023
+>
+> A estas alturas, aun no tenía demasiada idea acerca de qué iba React realmente.
+
+![DOM.js mi generador de elementos HTML](/images/domjs.png)
+
+## IronPizzas
+
+IronHack es como una familia (no nos gusta la palabra secta) y como tal, cuida a sus miembros con detalles que se agradecen mucho. El martes nos invitaron a comer con, nada mas y nada menos, que ¡28 familiares del telepizza! Se que no son pizzas especialmente buenas, pero deben llevar glutamato monosódico a tope porque a mi me encantan.
+
+> ### Anotación de 2023
+>
+> Es una secta. Al menos durante el tiempo que estas allí.
+>
+> Por otro lado, bastante ridículo este parrado overreacting por unas telepizzas, parezco de un pueblo remoto del monte
+
+![Brutales IronPizzas en IronHack](/images/telepizza.jpg)
+
+El objetivo era juntarnos con el bootcamp de UX y socializar un poco con ellos. Por una barbacoa del telepi lo que sea, así que eso hicimos. Intenté moderar la ingesta porque la tarde se podía hacer muy cuesta arriba. Otros compañeros enfocaron el problema de manera alternativa y casi explotan :D
+
+## Inputs y dibujado
+
+Por la tarde intente recuperar el ritmo. Con todo el trabajo de la mañana ya tenía encapsuladas en funciones las instrucciones para dibujar cosas en mi DOM: Crear DIVs con posicionamiento absoluto, usar *transforms* para situarlos y organizar todo por capas encapsulando en mas DIVs. Pese al bajón que me dio, el trabajo del martes por la mañana ha sido crucial para poder gestionar mi dibujado de una forma muy cómoda y sencilla.
+
+El segundo problema del día fue diseñar mi interacción con el teclado. Tras darle un par de vueltas, decidí crear un objeto dentro de mi clase principal denominado *keyboard*. Con dos listener, capturaba la pulsación y la salida de todas las teclas, cambiando la *key* del objeto llamada como el *keycode* de la pulsación a true o false según el evento. De este modo, tenía una captura de estado del teclado en todo momento. Esta fue otra tarea que me tomo mucho tiempo pero que a la postre a resultado crucial para pode manejar el input de forma cómoda.
+
+> ### Anotación de 2023
+>
+> Este es otro buen ejemplo de buena idea qué se me ocurrio. Es una reimplementacion de un *isKeyDown* que tenemos en muchos engines de videojuegos. Mi juego funcionaba mucho mejor que los demas porque ellos desacomplaron las interacciones del jugador con el renderizado.
+
+## Final del día
+
+Para el final del martes tenía un personaje que no rotaba ni se chocaba con el escenario. Pero podía moverlo con las teclas, y después del día desastroso ya me daba con un canto en los dientes. Me fui para casa a descansar con la esperanza de que el miercoles se diese mejor.
+
+# Día 3: Redención
+
+El tercer día no empezó mejor que el anterior. A primera hora estuve trabajando en la banda sonora con **Fruity Loops** y conseguí una tonadilla synthwave muy resultona. Pero luego la cosa se jodió un poco. Me lié sobremanera en la kata, empeñándome en un planteamiento erróneo y la terminé sobre la bocina. A parte de perder una hora y media y no empezar a trabajar en IronGunZ hasta casi las 11, el animo ya empezaba por los suelos.
+
+Pero lo bueno de eso es que de ahí solo podía ir hacia arriba. Y así hizo. Mi primer objetivo fué dibujar el segundo jugador. Así que encapsule toda la lógica de control y toda la de dibujado, (sin mezclar, por supuesto), cree un array de jugadores y repliqué toda mi funcionalidad para poder tener las caracteristicas del martes noche por duplicado.
+
+Lo segundo, implementar el sistema de colisiones con el escenario, de modo que el jugador no pudiese salirse del mismo ni atravesar cajas y columnas. El algoritmo no es muy bueno, pero estaba en racha y una vez fue funcional lo dejé estar. A día de hoy, sigue pendiente de refactorizar.
+
+![IronHacker in the mirror](/images/reflejo.jpg)
+
+A continuación, el algoritmo de encaramiento de los jugadores. Trigonometría básica. Y con la gestión de modificación del DOM implementada, representado en el escenario sin problemas. Es importantísimo crear tus herramientas básicas al principio, de modo que cuando entras en racha empieces a desarrollar a un ritmo muy alto sin pararte a crear funcionalidades auxiliares. En este sentido, miro a la mañana del martes y veo que no fue ni mucho menos una mañana perdida. Por el contrario fue, quizás, una de las mas productivas de la semana.
+
+## La tarde
+
+Ya tenía escenario, jugadores, colisiones. Llegaba lo importante: ¡Que volasen las balas! No tardé demasiado en implementar la creación de las mismas y el vuelo vino solo, dado que heredaban de la clase *posicionable* que mencioné antes, solo tenía que hacer un *update* y moverlas en cada frame.
+
+Para colisionar con el escenario, reutilicé parte de las funciones a las que hacia llamada para colisionar al jugador. Como las balas van mucho mas rápido, cree una comprobación por pasos en la que se comprueban las 10 posiciones intermedias entre la posición de origen y fin en un solo frame. De este modo, logré capturar el punto de impacto con una precisión de unos pocos pixeles. Para colisionar con los jugadores, simplemente comprobé la distancia entre bala y jugador, frame a frame, desencadenando una acción cuando esta bajaba por debajo de un limite.
+
+Logré que las balas se destruyesen cuando tocaban el escenario. Sin embargo el efecto quedaba un poco soso, por lo que implementé la clase efecto. Esta permite crear un div, que contiene un gif, que se autodestruye en un numero de frames determinado. Cree gifs para impacto en superficie, pero tambien para sangre y para el fogonazo del arma, dándole mucha mas gracia y dinamismo a la representación. Lo genial del asunto es que, utilizando la misma interfaz, puedo implementar en cuestion de minutos otros efectos como el casquillo saltando del arma, cadáveres, un cargador que cae al suelo... Es totalmente escalable, robusto y autocontenido.
+
+## Primer pitch
+
+Con el objetivo de que presentásemos el proyecto el viernes por la tarde, el miércoles tuvimos que salir delante de nuestros compañeros a explicar nuestro juego en 30 segundos. Fue un buen ejercicio para refrescar habilidades de oratoria, que no practicaba desde mi master en 2014. También estuvo bien ver en que estaban trabajando mis compañeros.
+
+## Arquitectura de callback(estado)
+
+Como dije, mi modelo y mi vista viven vidas paralelas. Mi vista tiene una función render que se alimenta de un estado, que no es mas que un objeto en el que se describe la posición de los jugadores, de las balas y de los efectos. Esta función se pasa como *callback* a la función *update* del juego. Cada vez que se calcula un frame, se llama al callback pasandole el estado actual y este se encarga de pintar en el DOM. El sistema es capaz de crear las balas o efectos en el DOM si no existen, y eliminarlos cuando dejan de hacerlo. Estoy muy contento de como he logrado gestionar la comunicación entre una y otra parte de la aplicación.
+
+> ### Anotación de 2023
+>
+> Este solución tambien me parece muy interesante y de hecho es analoga a como se maneja a grosso modo cualquier motor de videojuegos comercial.
+
+Al final del día implementé el sistema de daños. Las balas, al colisionar con un jugador, generan un efecto de sangre y añaden parte de su velocidad al jugador, haciendo el efecto de que los hacen retroceder y aumentando la kinestesia del juego. Ademas, restan su potencia a la vida del jugador, pudiendo determinar cuando uno u otro ha muerto.
+
+A estas alturas ya me habían dado las 21:30, así que mas contento que unas castañuelas por haber alcanzado un *sweet-spot* en el desarrollo, me marché a casa a descansar.
+
+# Día 4: Dándole cariño al juego
+
+A primera hora, antes de la kata, terminé de pulir la canción y la deje masterizada para usarla mas tarde, cuando implementase los sonidos. También cree una variación sin percusión para el menú. La kata se dio fenomenal. La terminé en 5 minutos y usando una sola linea de código, como los mayores. Si algún compañero me está leyendo, consejo: **Usad la consola**. Puedes probar cualquier comando al vuelo y desde cualquier página ¿Funcionará `Array.call(null, 100).fill("").map((a,b)=>"id: " + b + "\n").join("-")`? Pues puedes comprobarlo sin tener que abrir un jsfiddle, replit, ni probando en codewars. Es instantáneo, es versátil, es lo mas rápido (se evalúa en local) y es gratis. Por dios, **USAD LA CONSOLA**.
+
+> _Mi renderizador toma la información de un estado. Mi clase game tiene que pasar un estado. La información de un frame va en ese estado. El estado va en un objeto. Puedo almacenar un objeto en un array.**Puedo almacenar mi estado**_.
+
+Bueno, que me ofusco. Durante el viaje de ida desde casa hasta ironhack le di vueltas a un concepto. Mi renderizador toma la información de un estado. Mi clase game tiene que pasar un estado. La información de un frame va en ese estado. El estado va en un objeto. Puedo almacenar un objeto en un array. Puedo almacenar mi estado. Esto parecerá una chorrada, pero para mi fue toda una epifanía. Si puedo almacenar mi estado, puedo recuperarlo después. Si puedo recuperar varios estados, puedo simular el efecto mas alucinante de todos los efectos:
+
+# REWIND
+
+El miércoles por la noche podía golpear a los jugadores con las balas, pero no tenía nada acerca de como hacerlos morir. Así que mi gran revelación fue que **no tenían por qué morir**. Simplemente podía reproducir los frames guardados hacia atrás y devolver la aplicación al punto de inicio.
+
+Me puse a implementarlo y en media hora ya era funcional. Como decía, gracias a unas buenas herramientas de base fui capaz de desarrollar una funcionalidad de dificultad demencial (cuando comenté a los TAs lo que queria hacer se rieron de mi osadia :D ) en unos pocos minutos.
+
+> ### Anotación de 2023
+>
+> Esto es bastante cierto. Alguno me tenia por un flipado y lo cierto es que ni siquiera me trataba con respeto. Lo de los TAs en IronHack era un tema bastante críticable a mi entender, no se como seguirá ahora. Me explico:
+>
+> A esta gente, nada mas terminar el bootcamp, los mantenian ahí ya no como alumno sino como profesor asistente. Se daban de alta de autonomos y cobraban algo así como 2000 euros brutos creo recordar. El caso es que el hecho de verse en el mismo ambiente en el que ellos eran clientes una semana antes quizas les impedía ver que habian pasado a prestar un servicio caro de cojones.
+>
+> Y claro, pagar 6500 (creo que ya va por 7500) euros para que tus dudas las resuelva un imbecil, maleducado o directamente ignorante que encima se da infulas pues no es agradable. No lo digo por todos los TAs que yo tuve, pero ví casos de una pobreza profesional bastante lamentable.
+
+Aquí ya estaba yo muy arriba y me daba igual ocho que ochenta. Implementé un sistema de personajes y armas, en el que cada uno tiene unas caracteristicas distintivas y condicionan el estilo de juego. Varian la precisión, el daño, la cadencia de fuego, la envergadura del jugador, la vida... En un futuro me gustaría cambiar también la velocidad de movimiento y añadir habilidades especiales a cada jugador.
+
+![Tiroteo en IronGunz, notese el aspecto 16bits y el ambiente cyberpunk](/images/irongunz.png)
+
+## Audio
+
+También empecé a trabajar en un sistema propio para los efectos de sonido y música. Primero cogí efectos de sonido para disparos, golpes, rebobinado, etc. y los pasé por audacity para normalizar y ecualizar. Fue ciertamente un reto conseguir comunicar a mi renderizador que se había producido, por ejemplo, un disparo y que este reprodujese el sonido pertinente en ese frame. Pero una vez mas mi sistema de estados demostró su versatilidad y lo solventé incluyendo un array de sonidos a reproducir con cada frame.
+
+## Segundo speech
+
+En este día, y sobre la base del discurso del día anterior, nos pidieron que montásemos una presentación en slides.com para contar como había sido el desarrollo del juego. Cual había sido el mayor reto, como lo enfocarías de empezar de nuevo, cual era la característica mas interesante... En esta ocasión el discurso habría de ampliarse hasta un minuto y medio. Sobre esta presentación debíamos construir la presentación definitiva para el día siguiente. En este momento, puliendo cosas aquí y allí, me fastidió perder el foco para ponerme con esto. Pero fue realmente útil de cara a la presentación final del viernes. Así que hazme caso: Fíate siempre de IronHack, saben lo que hacen.
+
+Como el juego ya era funcional, lo estuve testando con varios compañeros, los TAs y algún antiguo IronHacker que pasaba por allí. La aceptación fue buenísima: No solo había conseguido implementar mi concepto en HTML5 sin canvas, algo que me hubiese parecido casi imposible hace meses, es que encima ¡Era divertido! Así que sentí que me había ganado una cerveza. Nos fuimos unos cuantos a tomar una en la tapería manchega, un bar cercano que no está nada mal. Después estuve hasta casi las diez trabajando un poco mas el sistema de música y en los gráficos, para diferenciar los tipos de armas y sus disparos.
+
+# Dia 5: Colapso
+
+Llegó el viernes, día de presentación. La hora limite para entregar el juego eran las 13:00 de la tarde, y aunque mi producto ya era funcional no dejaba de ser un prototipo. No podía, por ejemplo, cambiar al personaje sin cambiar el código. Y yo quería entregar una beta, no una alpha. Así que me puse a primera hora a trabajar la presentación y los menús.
+
+Rápidamente me dí cuenta de que aquello era mas complejo de lo que había calculado y que se me estaba yendo la mañana. Lo peor es que no había diferenciado la rama y en mi estado actual, hasta que no terminase el menú que me diese acceso al juego, no tendría nada que enseñar. Me dio un pequeño ataque de ansiedad y me bloquee. Y se bloqueo Atom (consejo, no tengáis abierto dos instancias del mismo archivo, se vuelve loco).
+
+Pero lo mas grande IronHack es el compañerismo y camaradería que se crea y, gracias a mi compañera Mónica Calderaro, logré tranquilizarme, sacar al harcoder que llevo dentro y hacer funcional mi proyecto. Deje de usar **Refract** y empecé a codificar a pelo el HTML haciendo *getDocumentById* para asignar los *listeners* a los botones. Logré hacer una intro muy resultona y sincronizada con la música. Logré hacer un selector de personajes. Logre implementar una UI in-game, que aun lo tenía pendiente, logre que cada arma sonara y se viera diferente. Y lo mas importante, logré que mi presentación + menu dieran paso a mi juego. Ya estaba. **A las 12:30 IronGunz Beta 1.0 ya era real**.Ensucié muchísimo mi código durante este día, pero siempre habrá tiempo refactorizar. Mergee mi rama develop con master, active GitHub pages y me puse a refinar mis slides para la presentación.
+
+> ### Anotación de 2023
+>
+> Nunca llegó ese momento de refactorizar
+
+# IronGunz
+
+Respecto al concepto original, se han quedado por el camino:
+
+- Las cajas destruibles y el sistema de coberturas.
+
+- El combate cuerpo a cuerpo.
+
+- La munición limitada.
+
+Pero hemos ganado:
+
+- El efecto fast-backwards, o de rebobinado.
+
+- Varios personajes y armas.
+
+Creo que los valores de producción alcanzados, en este contexto, son altísimos. Y a tomar por saco la falsa modestia. Y que me llamen soberbio. Pero estoy orgullosísimo de lo que he logrado esta semana. He trabajado durísimo, no he perdido la motivación y he llevado mi proyecto muy por encima de mis propias expectativas.
+
+El juego está disponible para jugarlo online en GitHub Pages:[IronGunz](https://frbosquet.github.io/project-iron-gunz/)
+
+Así mismo, el código está disponible para verlo o forkearlo en la propia github: [project-iron-gunz](https://github.com/FrBosquet/project-iron-gunz)
+
+La banda sonora está disponible en soundcloud, [Neuro](https://soundcloud.com/eineag/eag-neuro) y [Psycho](https://soundcloud.com/eineag/eag-irongunz-theme). EAG es mi pseudonimo músical.
+
+Me gustaría continuar con el desarrollo del juego y lo mantendré como side project. Tengo miles de ideas para implementar. En cualquier caso, cuando tengamos alguna discusión, ya tenemos claro quien lleva la razón: Al mejor de 5 en IronGunz :D
+
+> ### Anotación de 2023
+>
+> Como digo, nunca se refactorizo ni se continuó este proyecto. Si que estuve trabajando unas semanas en la infraestructura para hacerlo online con websockets, pero se quedó en eso, experimentos.
+
+## La presentación
+
+![Día de las presentaciones del primer proyecto en IronHack](/images/presentacionjuego.jpg)
+
+A las una nos fuimos a comer a un japones con Lluis Arevalo (@LluisArevalo, desarrollador en IronHack), Miguel Moracho (@XenoxkWorld, Nuestro TA de huelva), Pablo G. Onieva (@PabloGOnieva, Growth Hacker en Ironhack) y mis compañeros Mikel, Mónica y Sara. Volvimos sobre las 16:30 y le dimos una última vuelta antes de empezar. A las 14:55 nos dieron el orden de exposición y sobre las 15:00 comenzamos. Mi turno llegó sobre las 16:30. Por suerte, mi chica llego a tiempo de verme y eso me hizo crecerme aun mas. La exposición fue razonablemente bien, con algún problemilla propio del directo, pero muy contento por el resultado.
+
+![Recibiendo aplausos con mi peor pose](/images/posehorrible.jpg)
+
+Terminamos algo después y los profesores se retiraron a deliberar. Tuve ocasión de saludar a mi buddy Mikel Garcia (@Gartzia6), y revisar mi código con el. Me dio unos cuantos tips (bueno, mas bien un rapapolvo :D ) sobre mi forma de programar y estoy deseando poner en practica sus consejos a partir de mañana lunes. Tras esto, procedieron a anunciar los 5 proyectos que competirán por redes sociales para ser votados como el ganador de esta edición.
+
+![Seleccionados para competir por el premio al mejor juego](/images/ganadoresjuego.png)
+
+Pues sí: Allí estaba yo. Creo que el puntito competitivo es sano y, personalmente, lo disfruto mucho. Estoy muy contento de haberme colocado entre los cinco mejores primeros proyectos de este bootcamp. Estoy ademas muy orgulloso de mis compañeros. Hay gente entre esos cinco que no habían programado ni el reproductor de vídeo hasta hace dos meses, y a base de puro trabajo han sacado proyectos interesantísimos. Otros compañeros también se han partido la espalda y creo que todos deben estar muy orgulosos de lo que han hecho esta semana. Ha sido puro IronHack.
+
+Tras esto, IronBeers de rigor, networking, cervecitas con los compañeros, etc. Un viernes cualquiera en Matadero.
+
+# El weekend
+
+El sábado quedé con varios compañeros para comer y pasar un rato al margen de IronHack. Nuestra compi Ana nos invito a su casa y Mónica nos hizo una deliciosa comida venezolana Al final se apuntaron los TAs y pasamos un rato genial echando unas risas y tomando unas cervezas.
+
+![IronHackers de sabadeo](/images/casaana.png)
+
+Hoy de domingo, día en pareja y de descanso para coger fuerzas. Mañana empezamos Node y ahí ya no tengo ninguna ventaja competitiva mas que mi experiencia programando. Lo que si que tengo son muchísimas ganas de seguir creciendo en esta aventura.
+
+¡Gracias por seguirme!
+
+> ### Anotación de 2023
+>
+> Está fue sin ninguna duda mi mejor semana. Técnicamente iba bastante bien para implementar la idea que tenía y pude disfrutar mucho prácticamente desde el primer momento.
+>
+> El juego salió muy divertido y me lo celebraron mucho tanto dentro como fuera de Ironhack. Ganó el premio al mejor de esta promoción (aunque al final fue un concurso de popularidad que supongo que gané porque tenía mucha presencia en redes sociales con el blog, forocoches y twitter) y se estuvo mostrando como ejemplo de primer proyecto durante algunas promociones. Semanas despues, cuando iba como antiguo alumno, la gente me preguntaba por el juego y salian muy buenas conversaciones de aquello.
+> 
+> Recuerdo con mucho cariño esa semana, me lo pasé genial trabajando en este proyecto. 
