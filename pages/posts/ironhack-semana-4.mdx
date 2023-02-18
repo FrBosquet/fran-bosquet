@@ -1,0 +1,120 @@
+import { PostHeader } from 'components/PostHeader'
+import { YoutubeEmbed } from 'components/YoutubeEmbed'
+
+export const meta = {
+	title: 'IronHack semana 4: Descenso a los infiernos',
+	date: (new Date('7-11-2017')).toISOString(),
+	tags: ['personal', 'ironhack'],
+	image: {
+		src: 'k-mitch-hodge.jpg',
+		author: 'K. Mitch Hodge',
+		authorUrl: 'https://unsplash.com/@kmitchhodge?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+		source: 'Unsplash',
+		sourceUrl: 'https://unsplash.com/es/fotos/IqSaG9zv2e0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
+	}
+} 
+
+<PostHeader {...meta} />
+
+Como cada semana, llega el reporte operacional de vuestro amigo Fran Bosquet desde IronHack. Esta semana hemos empezado con la parte de back. Aguas que nunca he surcado. Ademas, la fatiga está haciendo mella y el día no tiene horas suficientes para todo lo que quiero/debo hacer. Comenzamos!
+
+# Día 1: Hola node, encantado, me han hablado mucho de ti
+
+Lo primero a comentar es que la comunidad de Madrid ha tenido a bien reformar la linea 5 durante este verano. Eso quiere decir que desde este lunes 3 de Julio hasta el 3 de septiembre, toda la linea va a permanecer cerrada. Esto ha trastocado mi bien diseñada ruta y ahora tengo que cojer un autobus y hacer un trasbordo a la linea 6 de metro en Manuel Becerra. Por tanto, ahora tardo mas en ir y mas en volver. Es un verdadero fastidio, porque no me sobra el tiempo precisamente. Pero no me queda otra que aguantarme y bailar.
+
+Volviendo a lo que nos interesa, en el primer dia de la semana me planté en IronHack con mi horario habitual, sobre las 8 de la mañana. Lo primero que hice fue escribí a Jimmy Flores ([@SoyJimmy](https://twitter.com/SoyJimmy)), de IronHack Barcelona. Nuestro Growdt Hacker, Pablo Onieva ([@PabloGOnieva](https://twitter.com/PabloGOnieva)), me recomendó que le escribiera en relación a este blog, dado que Jimmy es un fenómeno en esto del SEO. El blog está funcionando por encima de mis espectativas, pero nunca vienen mal un par de consejos. El resto de la hora hasta las 9 que empiezan las clases empecé a retocar IronGunz, aplicando los consejos que Mikel Garcia ([@Gartzia6](https://twitter.com/Gartzia6)) y Raul Vega ([@Raulvv](https://twitter.com/Raulvv)) me dieron el viernes anterior. Mi github es mi escaparate y quiero que mi código esté presentable, así que nunca viene mal hacer caso a los mayores y adecentar el código que tienes a la vista.
+
+## Review
+
+A primera hora tuvimos la review de las tres primeras semanas de clase. Consiste en realizar una retrospectiva entre todos acerca de como ha ido el curso hasta el momento actual. Es una herrramienta para detectar comportamientos que sobran o se echan en falta. Nos sentamos en las gradas y cada uno dijo lo que estimó oportuno. En mi caso propuse algo menos de OffTopic en clase. Me encantan las curiosidades como a cualquiera. Y si te gusta la informática, nuesto profe Marc ([@boyander](https://twitter.com/boyander)) es una mina para parar y escucharle hablar durante horas. Pero el día no tiene, literalmente, tantas horas y hay veces que me agobio escuchando una anécdota cuando tenemos el horario tan apretado..
+
+> ### Anotación de 2023
+>
+> El valor real del bootcamp viene dado por los contactos prímero y por la experiencia en si. Yo estaba totalmente obsesionado con el apartado normativo y realmente no tiene un peso especifico grande. Si volviese a pasar por allí, le daría mucho mas importancia a las conexiones personales que a exprimir cada minuto de clase. Por suerte pude sacar mucho valor del bootcamp a pesar de plantearlo de aquella manera.
+
+Una vez terminada la review, sobre las 10:00, empezó la clase. En esta cuarta semana empezamos con la parte back-end de javascript y aquí ya no me siento tan cómodo. Simplemente porque Node es nuevo para mi. En general cualquier cosa que se ejecute en servidor me pilla lejos: Apenas he hecho algo de PHP y de forma muy esporádica. Dimos tres LU sobre Node y ES6, incluyendo la historia de uno y otro. Con ES6 si he hecho alguna cosa y me encanta. De hecho, lo uso demasiado y ya me han tirado de las orejas por meter una arrow function en sitios poco recomendables. Respecto a Node, no tiene mas misterio que un interprete de javascript en terminal. Con superpoderes, ya que Node tiene acceso al sistema de archivos y funciones de red.
+
+> ### Anotación de 2023
+>
+> Aquí demuestro una ignorancia bastante preocupante: Yo aprendi a programar primero en AS2, pero donde realmente interioricé conceptos fue en Java, un lenguaje de servidor.
+
+## Node en práctica
+
+En el Pair Programming me tocó con Mónica ([@monicacrey](https://twitter.com/monicacrey)) y estuvimos haciendo algoritmia básica con ES6. Entre las cosas que conocía pero no había utilizado se encontraba la decosntrucción de matrices y el **spread operator**, así que aproveché para meter las dos en mi saco de skills. Después de comer recibimos una última clase: Asincronía en JS. Básicamente, intervalos y cuentas atrás. Ayanando el terreno para las inminentes promesas. Tras esto, el DE, en linea con el PP: Un ascensor que debe recoger y despachar pasajeros de forma asíncrona. Es jodido empezar a visualizar el código con varias lineas temporales, pero muy gratificante cuando empiezan a salir las cosas.
+
+A las 19:00 nos volvieron a visitar la gente de Billin y el gran Adrian de la Rosa ([@adridelarosa](https://twitter.com/adridelarosa)) nos dio unos tips acerca de como sacarle partido a ES6 para escribir código más elegante y funcional. Tras esto: Beer time. Mis compis Mónica, Mikel y yo nos enganchamos con la gente de Billin: Marta Fonda ([@MartaFonda](https://twitter.com/MartaFonda)), mi buddy Mikel García y el propio Adrián, Tomas Ruiz ([@tomastrg](https://twitter.com/tomastrg), antiguo ironhacker y fullStack en el corte ingles), Tucker ([@Tucker](https://twitter.com/Tucker)) y Raul Vega para tomar unas cañas y descomprimir un poco. Tras esto, me fui para casa acompañado por Tomas, un tío muy majo que me dio un par de buenos tips para seguir creciendo en este mundillo.
+
+# Dia 2: A homongous database
+
+Pasé mala noche y apenas pegué ojo, por lo que este martes dormí un poco mas y no llegué hasta las 9. En la clase de hoy empezamos con bases de datos. La primera LU fué sobre modelos de bases de datos (relacionales y no relacionales). Pero en seguida nos subimos al carro de **Mongo DB** para no bajarnos jamas. Instalamos mongo y empezamos a trastear con el cliente. A priori parece sencillo, sobre todo habiendo peleado un par de veces con SQL.
+
+A las 13:00 nos fuimos a comer con algo de prisa: A las 16:00 visita de **Altran**. Vinieron David y Rodrigo (Lamentablemente no me quede con mas referencias, pero creo que jefe de equipo y desarrollador, ambos en el departamento financiero). Nos estuvieron explicando las bondades del trabajo en consultora. Por unas razones u otras, no es el trabajo soñado de nadie en el bootcamp, pero fueron conscientes de la fama que arrastran las consultoras grandes y con que facilidad se les aplica el termino cárnica, e intentaron vendernos una carrera dinámica y flexible. Francamente, me llama mucho más trabajar en proyectos propios y en equipos mas pequeños, pero ahí están y no puedo negar que la oferta de carrera es atractiva.
+
+Seguimos por la tarde con la última LU del día, (mas Mongo), y empezamos con el DE. Una aplicación de consulta de DB en terminal con MongoDB. Al principio fue bien, pero cuando empiezas a intentar filtrar arrays dentro de un subdocumento la cosa se pone muy tricky y empiezas a echar de menos una base de datos relacional de toda la vida. Tenía muchas ganas de tocar NoSQL, pero con este ejercicio me quedé un poco frustrado: Conectar y consultar documentos es muy sencillo, pero navegar por el interior de los mismos se hace muy complejo. Pero por otro lado, una vez recibido el documento, puedes usar javascript para filtrar la información. Una vez tomamos ese aproach el ejercicio se resolvió de forma mucho mas sencilla. Como resumen, Mongo es una DB con un lenguaje de query con muchas posibilidades, pero creo que intentar dominarlas el primer día no fue el enfoque adecuado.
+
+## Javascript fatiguitas
+
+Falta de descanso o quizás demasiado código. Pero este fue, quizás, el primer día en el que sentí que tenía más ganas de estar en casa jugando videojuegos que en IronHack. Aviso a futuros IronHackers: Gestionad las energías. Es muy importante no quemarse con el código y tratar de tener horas de descanso real. Y sueño de calidad. Si hay que aparcar ese side project, apárcalo. No es necesario que tu blog opte al premio planeta. Y si te gusta salir de fiesta, ya habrá tiempo después del bootcamp para beberte el agua de los floreros.
+
+A las 19:00 tuvimos charla con Alvaro Lopez-Cotelo ([@coteloalvaro](https://twitter.com/coteloalvaro)), nuestro campus manager, acerca de como potenciar nuestro juego en LinkedIn. Tengo mucho que toquetear ahí, así que tome unos cuantos tips y de vez en cuando trabajo un rato intentando mejorar mi perfil. Finalmente, me quedé hasta las 9 intentando limpiar iteraciones del DE, peleando con mongo. Me quedé en el paso 16 de 18, así que ni tan mal.
+
+# Día 3. Express server.
+
+Llegué sobre las 8:20 de la mañana. Lo primero que hice fue trabajar un rato en mi linked in y a escribir en este blog, para que no se me acumule el trabajo para el domingo y que se me haga una bola. Lo de escribir el blog se está convirtiendo en una tarea de varias horas los domingos. Y los domingos deberían ser para descansar la cabeza, no para rememorar lo saturada que está de experiencias. Por lo que estoy intentando escribir a diario para hacer mas llevadero el proceso. Dicho esto, estoy escribiendo esta entrada el lunes por la mañana con mis fans furiosos mordiéndome por twitter, ¿Eh, Gerardo Parra? :D
+
+Este día tocó clase de Express.js. Durante este último año he intentado no pegarme demasiado al backend y llegar con la mente muy abierta al bootcamp. Mientras me he machacado con el frontend, particularmente con el vanilla stack y con React, dado que este último está muy demandado y en el bootcamp damos su contrapartida, Angular. El caso es que el plan ha salido a la perfección: Sabía que existía Express, y que era la E del MEAN stack, pero no tenía ni idea de para que servía. Esencialmente, Express es un framework para construir servidores web en javascript corriendo sobre Node. Y hace honor a su nombre: En un pis pas estas escuchando en un puerto y enrutando llamadas. Me gusta Express. MUCHO.
+
+> ### Anotación de 2023
+>
+> No me gustaba tanto como yo creía, me costo muchísimo interiorizar conceptos super básicos de enrutado.
+
+## EJS, renderizando en el servidor
+
+Para construir las paginas que nos habría de servir express, aprendimos a utilizar EJS, un lenguaje de plantillas que podríamos asimilar a HTML con JS interpretado en el servidor. Jade (ahora Pug) es mas popular, pero EJS es mas parecido a lo que ya hemos utilizado en el bootcamp. Personalmente se me asemeja al JSP de Java o (en otra escala) el JSX de React, así que ningún problema con esto. La mañana estuvo dedicada enteramente a las Learning Units. Al mediodía compramos empanadillas bolivianas para comer. Nos las trajo nuestro TA Andrei Fernandez y están buenísimas. Y encima salen muy económicas. Repetiremos seguro.
+
+Después de comer empezamos con el PP. La dinámica normal es empezarlo por la mañana y dedicar la tarde al DE. Pero debíamos dar las 4 LU de Express antes, por lo que la tarde se prometía apretada entre PP y DE. Me tocó con mi compañero Jordi Manchon. Jordi es uno de los alumnos que mas está creciendo y fue un placer dirigirlo como Navigator (a pesar de que su Mac esta en las últimas). Pudimos terminar el ejercicio sobre enrutamiento creando una aplicación de chistes de Chuck Norris. Como lo de esta semana son aplicaciones de servidor, ya no tiene mucho sentido que pase el Github Pages. Pero los repositorios están todos en mi GitHub para el que quiera consultar el trabajo que hace un IronHacker durante el bootcamp.
+
+## Daily fallido
+
+Terminamos el PP sobre las 6 e intentamos ponernos con el DE. Consistió en una aplicación de búsqueda sobre la base de datos de spotify, utilizando el paquete npm spotify-web-search. El problema es que spotify cambió las condiciones de su API hace unas semanas y este paquete ya no funciona, por lo que no pudimos ni empezarlo. Pero como ni por esas voy a poder descansar, mi buddy Mikel me propuso que le echase un vistazo a la prueba técnica que tiene Billin en github y que intentase completarla. React, GraphQL y Jest, mas contenedor de estados a elegir (Redux, of course). Así que me entretuve con esto un rato hasta las 20:00. A esta hora fuimos mis compañeros Tere, Mónica, Alex, Jorge y nuestro TA Miguel a tomar unas cervezas y a charlar un poco lejos del bootcamp. Finalmente llegué a casa sobre las 11:30 y acabé yéndome a dormir una hora y media después mientras me duchaba y pasaba un rato con mi pareja ¡Cualquiera me aguantaba el jueves!
+
+# Dia 4: Mongoose
+
+Me planté en Ironhack a las 8:30 y estuve escribiendo un poco sobre el día anterior. En el dia de hoy teniamos mongoose, un framework para modelado de clases de datos sobre mongodb. Personalmente, prefiero utilizar cuantos menos framework mejor, pero en este caso la comodidad y la semántica que aporta mongoose son inestimables y me ayudaron a cogerle cariño a mongo.
+
+El PP no empezó hasta después de comer. A Jordi y a mi se nos dio bastante bien y nos lo ventilamos en un ratete. Después nos pusimos con el DE. Express con mongoose. Sobre las 20:00 me quedé bloqueado intentando resolver una ruta POST. Aun no me había hecho click un concepto crucial en Express: TODO es un middleware, y estos se ejecutan en cascada. A las 20:30 decidí irme a casa a coger fuerzas para el fin de semana.
+
+# Día 5: Fiesta de inauguración
+
+El viernes me levanté temprano y pude llegar IronHack a las 8:00, a pesar del trasbordo demencial autobus-metro. Logré recomponer mi DE del día anterior y completar todas las iteraciones. En este último día de la semana dimos autentificación en Express sin Passport. Simplemente para entender sus entresijos, porque en el día de mañana usaremos Passport. Sin embargo fue un día raro dado que teníamos la mente puesta en la fiesta de inauguración que se celebraba por la noche. Hicimos el pair programming pero el DE ni lo miramos.
+
+Por la tarde Marc nos dio una master class sobre *promesas*, *thenables*,*async* y *await*. Todo muy chulo. Y a las 18:00 nos "echaron" a la calle para preparar la fiesta. Me fui para casa a descansar un rato y arreglarme y a las 21:30 me planté en IronHack. La fiesta fue un fiestón, a lo grande: DJ, comida, copas, mojitos, CEOs, IronHackers.... Networking del bueno oye. A las 2:00 para casa a descansar.
+
+# El Weekend
+
+El sábado me desperté tarde, sobre las 11 y me puse con el desafío de código que me pasaron el Miércoles. Empecé con la parte de React y me trabajé un poco el CSS, porque con el cansancio y la resaca del día anterior no tenía mucha gana de empezar con **GraphQL** y preferí cosas que me fueran familiares. Al medio día me fui a comer con mi hermana, que estaba en Madrid de visita, y por la tarde fui al **KConnect 2017**, de KeepCoding. No me gustó demasiado el evento, entendí que en un evento sobre la élite de la programación se hablaría algo mas de programación y no solo de networking. Quizás la cosa viró a partir de la segunda hora. Nunca lo sabré porque en el primer descanso recogimos y nos fuimos de allí. Me fui con mis compañeros Sara, Mónica, Jordi y Mikel a mi antiguo barrio, el del Pilar, a tomar unas pizzas y con eso terminamos la noche.
+
+El domingo lo dediqué enteramente al desafío de código. Empecé a entender muy por encima qué es y para que sirve **GraphQL**, y logré hacer alguna query. Me pelee con **React** y **Redux** y logré hacer una **Single Page Aplication**, aunque no logré implementar un contenedor de estados ni un CRUD, como pedía el ejercicio. Tampoco llegué a utilizar **jest** para realizar test. Pero en el computo global, y después de 11 horas en IronHack non stop, estoy muy orgulloso de lo que logré con tecnologías que o no domino o no conozco. Aun.
+
+El problema de todo esto es que invertí todo un domingo en un side project. Como dije, Iron Hack no da cabida a este tipo de cosas. Y mi soberbia, el creer que "Yo si puedo" me está pasando factura.
+
+> ### Anotación de 2023
+>
+> El problema principal es que estaba totálmente acojonado con no encontrar trabajo y Billin era el mejor sitio en el que podias entrar desde mi punto de vista: Marta Fonda, Mikel Gartzia, Adri de la Rosa, Javi Jimenez... eran mis referentes por entonces y no quise desaprovechar la oportunidad.
+>
+> A mi no me funciono la estrategia de intentar abarcarlo todo: Acabé super quemado, super frustrado, cogí mala fama y quemé puentes. Pero con una buena gestión de la energía y menos presión autoimpuesta por supuesto que puedes aprovechar el fin de semana y programar mientras haces un ironhack.
+
+# Día 7 + 1: Colapso
+
+> ### Anotación de 2023
+>
+> Por si no queda claro, esta entrada se publicó un martes, cuando normalmente las liberaba en domingo. El blog estaba funcionando muy bien y tenía a los parroquianos los domingos preguntandome que que pasaba con la entrada, por eso añadí este apendice.
+
+Mucho se habla de cuando el código te hace "click", pero poco de cuanto tu mente hace "crack". Y te vienen todos los síndromes, depresiones y pánicos escénicos. Mi día para eso fué ayer, justo en el ecuador del bootcamp. Tuvimos las LU de autenticación con Passport. Durante la mañana tuvimos apenas una hora para el Pair Programming y por la tarde no nos dejaron empezar el DE hasta las 5, entre interrupciones, clases y master classes. Pedí algo de feedback sobre el ejercicio que hice el domingo y resulta que lo que hice fue una basura. Para mas Inri, a las 18:30 prácticamente nos obligaron a asistir a una charla de una hora sobre **Clean Code & SOLID**. Total, me dieron las 20:00 y el DE prácticamente sin empezar, este post sin publicar, una contractura en la espalda que me está matando de dolor, la mente bloqueada y un arranque de depresión. Ayer me plantee muchas cosas y pocas buenas.
+
+Hoy me he propuesto recomponerme. Para empezar publicar este post, esté como esté. Así que ya me perdonáis la ausencia de fotos y la cantidad de faltas de ortografía. Segundo, acabar el daily de ayer como sea y recuperar la confianza en mi cabeza. Mi cabeza programa y programa bien, pero no reconoce esta arquitectura. Solo hay que enseñarle. Y para terminar, recobrar el animo y seguir con la aventura.
+
+Al fin y al cabo, esto es IronHack. El primer día nos avisaron: Vais a frustraros, vais a llorar, y vais a aprender a manejar la frustración. Y contrariamente a lo que yo me pensaba, yo también voy a pasar por ese proceso. Pues a por ello.
+
+Un saludo y gracias por seguir ahí.
+
