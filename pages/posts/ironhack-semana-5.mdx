@@ -1,0 +1,135 @@
+import { PostHeader } from 'components/PostHeader'
+import { YoutubeEmbed } from 'components/YoutubeEmbed'
+
+export const meta = {
+	title: 'IronHack semana 5: Refactor',
+	date: (new Date('7-16-2017')).toISOString(),
+	tags: ['personal', 'ironhack'],
+	image: {
+		src: 'hardware.jpg',
+		author: 'Fran Bosquet',
+		authorUrl: 'www.franbosquet.com'
+	}
+} 
+
+<PostHeader {...meta} />
+
+Feliz domingo a todos! Volvemos con el relato sobre mis andanzas en IronHack. Voy a intentar terminar esta entrada hoy para volver a ceñirme a la periodicidad previa a la hecatombe de la semana pasada. Después del primer proyecto todo se ha torcido un poco, no de forma real, sino mi percepción personal de cómo van las cosas. En esta entrada explicaré como he ido saliendo de los infiernos en los que me metí la última vez que os puse al día. Arrancamos.
+
+# Este blog
+
+Hasta el momento me he ceñido a un esquema muy concreto a la hora de escribir en este blog. Una publicación semanal con cinco reseñas diarias, mas un extra para el fin de semana. Es un formato que me gusta y se adapta perfectamente a la idea de narrar la experiencia en una especie de diario. Pero escribirlo es un auténtico suplicio y un sumidero de horas. Y no quiero abandonar este reto antes de tiempo, así que el primer refactor del día es para el formato del blog.
+
+![Salir de IronHack a la hora del cierre, actividad poco recomendable](/images/noche.jpg)
+
+Hasta ahora, he probado de dos formas. Al principio tomaba apuntes a mano y luego juntaba todas las notas de la semana y escribía el hilo. ¿Resultado? Unas seis horas de media por domingo y un hastío hacia el blog muy importante. Hace un par de semanas cambié el formato. Me comprometí conmigo mismo a escribir un poco cada día, para solo tener que dar formato el domingo. Y me fué aún peor: Tardaba mas en recomponer lo escrito que en reescribir, por lo que la semana pasada no tuve la entrada lista hasta el martes.
+
+Lo peor del asunto es que no estoy disfrutando escribiendo el blog. Y eso solo augura que en cualquier momento lo voy a dejar, lo cual sería (a nivel personal) una catástrofe. Por este motivo, he decidió estructurar el blog en temas. Temas que me parezcan relevantes cada semana y sobre los que pueda escribir sin una estructura rígida. De este modo, me gustaría hacer de la escritura una actividad más orgánica con la que me pueda sentir a gusto. Hoy llevo cuatro párrafos y estoy bien, gracias.
+
+## Mis opiniones
+
+Durante las últimas dos semanas me he encontrado con gente incomoda a propósito del contenido que publico aquí. Por un lado, me gusta llevar con honestidad este blog, porque uno de los objetivos es narrar IronHack desde dentro para los alumnos que vienen. Tanto lo bueno como lo malo. Que lo hay, y mucho. Pero por otro lado, no soy una persona que disfrute de la polémica ni la confrontación, y me pienso muy mucho mis opiniones antes de dejarlas por escrito.
+
+Por eso me ha sorprendido muy poco gratamente cuando compañeros y gente mencionada me han venido a echar en cara párrafos concretos acerca de mis **OPINIONES** sobre determinados comportamientos, eventos o manifestaciones. Creo que cada uno es muy libre de comportarse como quiera dentro del marco de unas normas. Y yo soy muy libre de criticar esos comportamientos en privado cuando lo he considerado conveniente. O en mi blog. Mencionando el pecado pero no el pecador, puesto que mi intención no es hacer escarnio ni mofa de nadie.
+
+![En IronHack se nos da mejor el software que el hardware](/images/hardware.jpg)
+
+Particularmente, un compañero me decía esta semana que las empresas podrían considerar negativamente mi actitud respecto al trabajo en equipo por un determinado párrafo que escribí. Un poco mosqueado por la enésima crítica a esa parte concreta, me he dirigido a ese parte de la segunda semana a ver qué escribí concretamente, y qué conclusión tan negativa puede extraerse de ello. Resultó ser este:
+
+> *La filosofía de IronHack es consultar a los compañeros antes que a los TA. Y me parece genial. Fomenta innumerables conductas positivas como el compañerismo, trabajo en equipo, etc. El problema es que hay compañeros que prefieren preguntarte a ti antes que a google. O peor, que te preguntan antes siquiera de repasar la LU. ¿Cual es el objetivo?¿Que te haga yo el ejercicio? Me parece que tienen la actitud equivocada. Y lo peor es que yo pierdo el foco en lo que estoy haciendo y luego me cuesta recuperar la productividad.*
+
+### Carta abierta a las empresas
+
+Una vez leído y releído el párrafo, quisiera manifestar:
+
+*Estimada empresa X:*
+
+*Considero el comportamiento descrito en el anterior párrafo como totalmente impropio de personas que dentro de dos meses van a tener que desempeñar trabajo real. Creo que hay gente que por desconocimiento o desgana están haciendo un pésimo aprovechamiento de un curso que, en total, dura apenas 9 semanas, perdiendo su tiempo y el de sus compañeros. Ademas, soy una persona que gusta de cuidar su productividad, característica que creo que ni en la peor de las cárnicas se podría considerar negativa. Si estas preocupaciones, que entiendo legitimas, entran en conflicto con vuestra cultura empresarial. E incluso os hacen pensar que no se trabajar en equipo con personas trabajadoras, comprometidas y dedicadas, me puedo imaginar que tipo de empresa sois y no quiero trabajar con vosotros. Por este motivo, agradecería que no os pusieseis en contacto con mi persona.*
+
+*Sin más, aprovecho para enviar un afable saludo.*
+
+El que se quiera dar por aludido, por favor, que no venga a pedirme cuentas. Creo que mi opinión está más que clara. El tiempo os demostrará que tengo razón cuando os digo que os estáis equivocando a la hora de afrontar un curso de estas caracteristicas.
+
+> ### Anotación de 2023
+>
+> Aquí a lo mejor ya iba full kamikaze, pero que es que no le veía ningún sentido a lo que estaban haciendo: Si no querian aprender a aprender, simplemente lo de programar no era para ellos. Desde mi punto de vista estaba clarísimo, pero entiendo que hubiese compañeros que estuvieran acojonados, en modo supervivencia e intentando sacar ejercicios por puro instinto. Me arrepiento de no haber sido un poco mas comprensivo y haber intentado ayudar mas, sobre todo a aquellos que me parecian buenas personas. (El que se me vino a quejar, por ejemplo, era una persona horrible y por eso escribí esta carta tan cruda).
+>
+> En Taxfix, la gestión del foco y del tiempo ajeno es un tema de primer orden e intentamos respetar lo máximo posible el tiempo de los demas. Así que algo de razón tenía yo en que este tema era importante.
+
+# IronHack at its worst
+
+Desde el principio he mencionado que para hacer IronHack, hay que creer en IronHack. No importa que te de la impresión de que el método no esté funcionando. Que te tires tres días sin enterarte de nada y pienses que estás tirando el curso. Debes aferrarte a los resultados, a los cientos de alumnos que han pasado por allí antes que tu y asumir que el método, al final, funciona.
+
+Aun así, es inevitable que te asalten las dudas. A mi me han venido esta semana. Hasta el momento me había mantenido muy fuerte en la parte de fron-end con el vanilla stack. Pero como también he mencionado en ocasiones, no quise entrar en el back-end antes de IronHack. Cometí el error de no entrar en back-end antes de entrar en IronHack. Confié demasiado en mi capacidad de adaptación y me ha costado un potosí entender el funcionamiento básico de Express.js y Passport. En este sentido, mi historial de entregas, hasta hace poco impoluto, se ha llenado de manchas, entre en una psicosis y el martes exploté con un TA.
+
+> ### Anotación de 2023
+>
+> Esto me parece totalmente demencial, porque yo aprendí a programar en Java montando pequeñas apps corriendo Tomcat, con vistas en JS y CSS. Tambien había hecho alguna cosa en PHP en la carrera. No sé por qué me sentía tan ajeno al backend en aquel momento. Supongo que ahora lo veo con mas perspectiva y conocimiento y en aquel momento lo que haciemos en node y lo que yo había hecho anteriormente me parecian huevos y castañas.
+
+## El problema
+
+Entiendo que es complicadisimo explicar Passport, Ajax, APIs en una semana. Sobre todo con alumnos que no han tenido tiempo de asimilar las lecciones sobre Express y Node de la semana pasada. O que aún no tienen claro lo que dieron las tres primeras semanas. Hay quien no entiende aún la diferencia entre un cliente y un servidor. Y cuando estas programando en Express, creo que es algo capital. Pero considero estas dudas legítimas porque este bootcamp es todo un Ironman en un sentido intelectual.
+
+Yo soy el primero al que le ha costado la misma vida adaptar su esquema mental a la cascada de middlewares que supone express. El problema es, que en mi caso, considero que la mejor herramienta para aprender es hacer cosas, no ver al profesor hacer cosas. De ahí que hasta el momento haya estado totalmente en comunión con IronHack. Por eso mi frustración de esta semana emanaba del hecho de que ha habido días en los que hasta las 17:00 no nos han dado luz verde para empezar con los ejercicios. ¿Hasta entonces? Clase, clase y más clase.
+
+## Breakdown
+
+Como he mencionado, el martes no pude contener mas mi enfado con la situación y acabé abroncando a uno de los TAs. Antes de que la cosa fuese a mayores, IronHack activó los mecanismos de contención y varias personas del equipo hablaron conmigo para aclarar la situación. Me explicaron su postura respecto al tema: Consideran que dar más horas de clase es lo mejor de cara a aquellos alumnos que prefieren esta metodología.
+
+Yo insistí en mi opinión: No creo que lo que no se entiende en una hora de clase se pueda entender en tres. Pero si que las cosas se entienden mejor cuando tu mismo te peleas con ellas. Sin embargo, llegamos a un acuerdo: Me dieron su venia (a mi y a varios compañeros que comparten mi opinión) para abandonar la clase en cualquier momento y ponerme a trabajar en los ejercicios diarios, comprometiéndose a avisar si en algún momento se imparte alguna materia que el equipo docente considere interesante para mi.
+
+Sigo convencido de que la metodología no es la mejor. De hecho, creo que se contradice con la propia filosofía de IronHack. Pero agradezco infinitamente que se hayan preocupado por mi opinión y hayan buscado una solución de consenso. Aun habiendo encontrado el primer punto de ruptura, sigo confiando en el bootcamp y, visto en perspectiva, sé que muchas de las cosas que he visto tan negras esta semana emanan de mi propia frustración. Así que seguimos fuertes y muy confiantes. ¡IronHack a tope!
+
+# Contenidos
+
+Al margen de mi problema con la didáctica, los contenidos han sido interesantísimos esta semana. Hemos aprendido a utilizar passport. Es un coñazo: Si. Es muy útil, también. La capacidad de logear con cualquier servicio y ahorrarte el proceso de registro es genial. Y a pesar de la complejidad, es relativamente sencillo de implementar (Una vez empieza a hacer click en tu cabeza todo la locura middleware de express). A parte, tuvimos una interesante charla sobre buenas prácticas en programación por parte de Juan Gomez ([@JuanGomez_inf](https://twitter.com/JuanGomez_inf)).
+
+> ### Anotación de 2023
+>
+> Curiosamente, muchos de los perfiles de twitter que enlacé en aquel momento (buscando cazar leads y hacer comunidad) ya no existen.
+
+![Charla de CLEAN CODE y SOLID el lunes, por parte de Juan Gomez](/images/clean_code.jpg)
+
+El martes empezamos a trabajar con APIs. Yo ya había hecho mis cositas en freeCodeCamp, pero me vino bien refrescar conceptos. Además, aprendimos no solo a recabar información de una API, sino a escribir nuestras propias APIs con express. Y eso, amigo, si que fue una revelación. También aprendimos (O casi) a usar Chart.js, que para representar datos es muy útil y sencillo de utilizar. Por hacer una crítica al día de hoy, solo aprendimos a hacer peticiones AJAX con jQuery, lo cual me parece salir un poco cojo del curso. Pero bueno, el que tenga interés ya averiguara cómo hacerlo con otros frameworks o con JS.
+
+## Entendiendo express
+
+El miércoles aprendimos a insertar mapas con la API de google maps y a subir archivos al servidor con express. Lo primero es sorprendentemente sencillo y permite añadir innumerables caracteristicas relacionadas con la localización a una aplicación. Lo segundo es otro infierno de middlewares, pero terriblemente útil. Es una sensación fantástica empezar a hacer estas cosas que hace una semana parecían brujería. Además, con el tema de subir archivos fue cuando POR FIN entendí qué demonios hacía express. Ahora sí y de verdad, me empieza a gustar.
+
+El jueves tuvimos una mañana de live coding viendo a Marc programar una aplicación, utilizando todo lo aprendido durante la semana. Por tarde tuvimos un par de ejercicios en la misma línea: Una aplicación de geolocalización de playas y autenticación con Facebook. También tuvimos una charla por parte del gran Lluis Arevalo ([@LluisArevalo](https://twitter.com/LluisArevalo)) acerca de quien es quien entre clientes y servidores. No me fue particularmente provechosa, pero me alegro de que algunos compañeros aclarasen conceptos que les resultaban extraños.
+
+## Segundo proyecto, esta vez por parejas
+
+Finalmente, el viernes hicimos un CodeAlong. Básicamente un live coding en el que teníamos que seguir lo que Marc iba haciendo en el proyector. No fue tan provechoso como nos hubiese gustado a todos puesto que con frecuencia nos atascábamos y había que ir mesa por mesa limando el código, pero estuvo muy bien de cara a plantear el proyecto de la semana que viene.
+
+![Buscando momentos ZEN](/images/zen.jpg)
+
+Al igual que en la tercera semana debes desarrollar un proyecto con todo lo aprendido en las dos primeras, en la sexta debes hacer lo propio con lo aprendido en la cuarta y quinta. En esta ocasión, por parejas. Tras la comida realizamos el sorteo y me tocó con [@ferrodri](https://twitter.com/ferrodri). Ferrodri es uno de los alumnos más jóvenes del bootcamp y, si bien al principio lo mirábamos con recelo puesto que es muy espontáneo y revoltoso, últimamente he detectado en él una persona terriblemente inteligente y muy trabajadora. Cualquiera pensará que, como compañero, lo estoy adulando. No es el caso. Me alegré mucho cuando me toco puesto que creo que podemos realizar un muy buen proyecto juntos.
+
+Como el no tenía una idea definida, acordamos tirar hacia delante con la mía. Vamos a realizar un generador aleatorio de poesía, on line, colaborativo y con sintetizador de voz. Va a estar basado en mi *Reagaetton Generator 1.0* que puedes ver en replit:
+
+[Regaeton Generator](https://replit.com/FranciscoBosquet](https://twitter.com/FranciscoBosquet)/RegaetonGeneretor)
+
+Espero que salga algo muy guapo y con lo que podamos echar unas risas. Y, de paso, dominar de una vez por todas la arquitectura de express y empezar a considerarme a mí mismo un poquito *back-end*.
+
+# IronBeers
+
+Como cada viernes, a partir de cierta hora se sacan las mahous maestras y el ambiente se transforma. Vinieron a vernos la gente de Billin: Marta Fonda ([@MartaFonda](https://twitter.com/MartaFonda)) y mi ya celebre buddy Mikel García ([@Gartzia6](https://twitter.com/Gartzia6)). Pude hablar con Marta sobre su experiencia como una de las primeras IronHackers y sobre un tema que me interesa particularmente: Como compaginó su bootcamp con escribir su blog, uno de los mas celebres entre los ironhackers. Y uno de los pocos que están completos. Ya conocía a Marta de la fiesta del viernes anterior, pero fue un lujo poder compartir una cerveza tranquilamente con una persona cuyos pasos te interesa tanto seguir.
+
+Por otro lado, también charlé un rato con tranquilidad con Mikel. Desde que empezamos con la movida esta de los buddys siempre nos hemos visto en circunstancias menos tranquilas o hemos tenido charlas rápidas por slack. Estuvimos hablando sobre su experiencia como IronHacker. También de como habíamos llegado cada uno a IronHack. Y de como se me había dado a mi esta semana (mal). Me animó mucho que le diera un poco de perspectiva a la situación, creo que un ex-IronHacker era la persona perfecta para quitarme los fantasmas de esta semana.
+
+## Side projects si, side projects no...
+
+También charlamos de el desafió de código de Billin: React, GraphQL, Jest, Redux... que intenté el domingo anterior con regulares resultados. Me animó a darle otra vuelta y se comprometió a darme feedback personalmente. Así que esta semana intentaré por todos los medios sacar un rato cada día para dedicarle al tema. Ya lo se, nada de side-projects. ¿Pero qué sería la vida sin un poco de picante?
+
+Por lo demás, IronBeers con los compañeros. Son muchas horas entre estas cuatro paredes y estoy forjando amistades que ahora mismo no cambio por nada ¡Grandes, IronHackers!
+
+# El weekend
+
+La semana pasada me destruí mentalmente por no parar de programar ni sábado ni, especialmente, domingo, Eso me ha pasado una factura muy fuerte durante esta semana y se me han pasado cosas muy negativas por la cabeza. Por eso mismo, decidí hacerme a mi mismo un detox y desde el viernes no he tocado un ordenador. Me he dedicado a descansar, leer, ver series y dar un paseo por la sierra bajo el justiciero sol de Madrid esta mañana. Estamos a domingo, son las 20:00h y tengo esta entrada prácticamente terminada. Pilas totalmente cargados. Desafíos motivantes para los próximos cinco dia. Creo que ya he tocado mi fondo en IronHack, de aquí hacía delante voy para arriba y esta semana se va a dar bien. Os deseo lo mismo a los demás.
+
+# PD: About me
+
+Releyendo las entradas puedo entender que se entienda mi actitud como soberbia o, incluso, de desprecio a mis compañeros. Nada mas lejos de la realidad. Como dice algún compañero, yo al igual que todos he venido a hacer mi bootcamp. Yo soy un chaval que, con mas o menos intensidad, lleva programando casi 15 años y también tengo derecho a que IronHack tenga en cuenta mi situación. Como me prometieron al hacer la entrevista personal.
+
+Por eso, considero que tengo tanto derecho a criticar como ellos de criticarme a mi. Tantos las actitudes que considero negativas de compañeros como la inacción de IronHack ante estas. Creo firmemente que haciendo las cosas de otro modo, todos aprovecharíamos mas el tiempo, no solo yo. **Y saldríamos mejor preparados del bootcamp. Cosa que entiendo que debería ser la principal, única y exclusiva preocupación de cada persona que entra en ese aula.** Si alguien se siente ofendido, o mal consigo mismo al leerme, debe entender que no es mi intención. Mi intención es que todos obtengamos lo mejor de este cortisimo e irrepetible periodo. PAZ.
