@@ -1,0 +1,109 @@
+import { PostHeader } from 'components/PostHeader'
+import { YoutubeEmbed } from 'components/YoutubeEmbed'
+
+export const meta = {
+	title: 'IronHack semana 6: Poetry Generator',
+	date: (new Date('7-23-2017')).toISOString(),
+	tags: ['personal', 'ironhack'],
+	image: {
+		src: 'takos.jpg',
+		author: 'Fran Bosquet',
+		authorUrl: 'www.franbosquet.com'
+	}
+} 
+
+<PostHeader {...meta} />
+
+¡Feliz domingo a todos! Como cada día del señor, vuelvo a mi blog para relatar como ha ido mi semana en IronHack. En esta hemos construido nuestro segundo proyecto, esta vez por parejas. Nuestro Poetry Generator no ha sido el mejor proyecto, pero lo que hemos aprendido (y lo que nos hemos reido haciendolo) no tiene precio ¡Arrancamos!
+
+# Poetry generator
+
+Como conté hace siete dias, durante la sexta semana de IronHack se forman grupos de dos alumnos para desarrollar un proyecto conjunto. La temática es libre, pero debe utilizarse lo aprendido en las semanas 4 y 5. Es decir: Una aplicación con *node*, *mongo* y *express*. Para llevar a cabo tamaña empresa, el destino me quiso reunir con el gran Fer Rodri. El no tiene un perfil técnico y tampoco contaba con una idea, así que tomé las riendas del grupo desde un primer momento.
+
+La experiencia de dirigir un equipo, aunque sea uno pequeño, me ha gustado bastante. Dado que Fer cuenta con bastante menos bagaje técnico (básicamente, por experiencia), decidí enfocarlo así:
+
+- Planificar las tareas que quería hacer hoy y mañana.
+
+- Asignar a Fer las tareas de mañana.
+
+- Dejarme sorprender.
+
+Y así ha sido. El lunes se encontró con algún problema a la hora de implementar la autenticación con passport. Así que le dí hasta el martes al medio día, momento en el que le asigné otras tareas. Cuando me puse a ver su código, me encontré con que la funcionalidad estaba implementada. Solo restaba arreglar un par de cosas aquí y allí para dejarlo funcionando.
+
+## El resto de la semana
+
+Con esa mecánica, fui encomendado tareas a Fer e integrando lo que me iba dando, mientras yo implementaba otras funcionalidades. En ocasiones recurrimos al pair programming. Básicamente, cuando la tarea a realizar requería tocar muchos archivos y corríamos el peligro de tocar el mismo código los dos, con los consecuentes problemas a la hora de hacer el git merge. Dicha circunstancia, unida a que técnicamente la idea la tenía muy clara y que el proyecto era relativamente sencillo propició que para el jueves a media tarde tuviésemos nuestro MVP y el viernes a primera hora una versión desplegada en Heroku sin ningún bug (que yo sepa).
+
+> A nivel personal, ha sido una semana fantástica. Me he encontrado cada vez mas cómodo con *express* y he adquirido bastante soltura a la hora de autenticar y manejar sesiones con *passport*
+
+A nivel personal, ha sido una semana fantástica. Me he encontrado cada vez mas cómodo con express y he adquirido bastante soltura a la hora de autenticar y manejar sesiones con passport. Toda la frustración de las dos últimas semanas la he limpiado a base de practicar y cogerle el truco a este ecosistema. Por otro lado, tomamos la decisión en un principio de implementar las vistas con *Jade*, en detrimento de *EJS*. Este último lenguaje de marcado para plantillas es el que hemos aprendido en clase, por lo que esta semana nos ha servido para complementarlo con una segunda opción. Una ademas bastante más interesante, en mi opinión.
+
+## Generador de poesia
+
+Pero vamos al lío. Nuestro proyecto se titula Poetry Generator. Generador de poesía, en la lengua de Shakespeare. Como su nombre indica, el objetivo era crear una aplicación capaz de componer versos de poesía en base al contenido almacenado en una base de datos. Se basa en un minúsculo proyecto que desarrolle a principio de curso por diversión (este) que a su vez se basaba en un experimento que hice con Java en 2013 (ese no está disponible online). La idea es proponer una estructura de poesía tipo *verbo-sujeto-adjetivo-...* e ir sustituyendo cada uno de ellos por una palabra que encaje en la estructura. Para definir dichas estructuras diseñamos **PQL**, o *poetry query languaje*:
+
+![PQL en toda su gloría](/images/pql.png)
+
+PQL permite definir el número de veces que se repite una expresión, si es una expresión a recuperar de la base de datos o una frase literal y si esta ha de rimar. Con este lenguaje de estructuras listo, tan solo hubimos de llenar la base de datos con pequeñas expresiones pre-escritas para empezar a darle vida al invento. Además, diseñamos un algoritmo capaz de detectar qué expresiones rimaban entre sí. Si bien este no es perfecto, en ocasiones el programa sorprende con alguna rima más o menos elaborada.
+
+La infraestructura de base de datos la solventamos con *mongoose*, creando modelos para palabras y estructuras. Además, implementamos perfiles de usuario, para que este pueda agregar sus propias palabras y guardar las frases que más le gusten. Si bien no llega a tener un perfil social, la aplicación permite compartir los versos favoritos del usuario en Twitter y otros usuarios pueden verlos sin tener que registrarse o acceder a través de Facebook.
+
+## La guinda del pastel
+
+Pero desde luego, lo mejor de la aplicación es el sistema de TTS, o de texto-a-voz. Atacando con el verso generado por el algoritmo a la API de google translate, obtuvimos un stream de audio. Utilizando los módulos de node, almacenamos este stream como un fichero .mp3 en nuestro servidor. Luego simplemente los servimos como un fichero de audio con el tag de idem de HTML5. De este modo, no solo generamos un verso aleatorio, ¡Sino que lo reproducimos como audio en el cliente!
+
+Si, vale. Lo reproducimos con la voz de gps de google. Y los versos rara vez riman. Y el contenido es absurdo. Pero los logros técnicos alcanzados desarrollando Poetry Generator no dejan de maravillarme a mi mismo. Realmente me apunte a este curso porque no veía la manera de hacer todo esto por mi mismo. Hemos:
+
+- Obtenido un stream de audio, lo hemos almacenado en nuestro servidor y lo hemos servido a un cliente.
+
+- Generado versos coherentes de forma aleatoria.
+
+- Consumido información de una API externa y hemos implementado nuestra propia API.
+
+- Creado una aplicación que interactúa con las redes sociales y que ofrece persistencia al usuario.
+
+No es magia negra, pero dominar todos estos elementos nos va a permitir generar la aplicación que nos dé la gana en el futuro. Estoy contentísimo por lo que hemos logrado y la solvencia con la que lo hemos hecho. La aplicación está colgada en heroku. Puedes jugar un rato con ella ~~aquí~~.
+
+> ### Anotación de 2023
+>
+> Lamentablemente, con el cambio de política de heroku tuve que dar de baja todas las apps que tenía colgadas allí, incluyendo poetry generator. A lo largo de los años he creado otras apps chorras de diversa temática que se basan en el mismo principio de combinar diversas chorradas para formar una frase absurda.
+>
+> En Taxfix, por ejemplo, durante una epoca tenian la odiosa manía de pedirnos un fun fact a cada uno cada vez que teniamos que presentarnos a un nuevo compañero que acabara de fichar por el equipo. Así que desarrollé [fun-fact-fix](https://codesandbox.io/s/fun-fact-fix-bed2t), un generador de fun facts basado en anecdotas que nos pasaban en el equipo.
+>
+> Tambien hice algo parecido con anecdotas de mi grupo de amigos del pueblo, con [Barbaridades de Fondon](https://codesandbox.io/s/fon-fact-67gpk). Muy loco todo.
+
+## Presentación
+
+Al igual que en la tercera semana, el viernes hubimos de exponer nuestro trabajo ante nuestros compañeros. Estuvimos practicando el miércoles y el jueves y el viernes por la tarde procedimos. El resto de los compañeros propusieron proyectos mucho mas serios que el nuestro y quizás el concepto se nos quedó un poco pequeño como para competir con proyectos tan geniales como **cuatroceros** o **community-plan**. Ademas, por algún tipo de problema técnico, el TTS decidió empezar a fallar en la presentación. Y para mas INRI, los profesores nos trolearon y llenaron la base de datos con el nombre de mi compañero y el mío, por lo que siempre salíamos en los versos. En cualquier caso, fue una presentación muy entretenida.
+
+> ### Anotación de 2023
+>
+> Realmente el TTS fallando y el troleo eran la misma película: Los profesores vieron que nos habiamos dejado un fichero **.env** con las credenciales de la base de datos al descubierto y decidieron echarse unas risas: Como yo tenía una restricción de que no podía haber dos cadenas de texto iguales en la base de datos, hicieron un script para insertar la misma cadena de texto miles de veces añadiendo un caracter en blanco cada vez. El problema es que la API de TTS tenía un limite de caracteres, así que empezó a fallar silenciosamente. Ademas, lo hicieron durante la presentación y no pudimos arreglarlo.
+>
+> En su momento me molestó muchísimo porque básicamente nos jodieron la presentación. La voz sintetizada era el 50% del proyecto y la rompieron para hacer la gracia. Una gente a la que les pagaba por enseñar.
+>
+> Marc Pomar tuvo el detalle de disculparse por que lo cierto es que el detalle fue muy feo. Pero bueno, al menos aprendí a no comitear credenciales.
+
+Así que no quedamos ni finalistas. Pero mi intención esta semana era quitarme el muy mal sabor de boca de las dos últimas. Objetivo conseguido. Hemos cumplido totalmente con el objetivo, hemos trabajado en equipo de manera impecable y hemos cumplido con la planificación incluso recortando tiempo. Asi que animo arriba de nuevo ¡Y listo para afrontar las últimas tres semanas de bootcamp!
+
+## Por lo demás, ¿que tal por IronHack?
+
+No ha sido una semana con mucho movimiento. No hemos tenido ninguna charla y nos hemos centrado totalmente en el proyecto. El lunes nos invitaron a palomitas por la tarde para ver el primer capítulo de Juego de Tronos, invitación que acepté a pesar de que prefiero esperar al final de la temporada para verme la sería del tirón. Durante toda la semana, como todas las de proyecto, hemos ido haciendo Katas a primera hora para practicar entrevistas técnicas. Salvo la del miércoles, que no pudo completarla nadie, se me ha dado bastante bien. El jueves pasamos un rato muy entretenido tratando de reducir la solución de la kata a la mínima expresión.
+
+![Kata Task Force, reduciendo un algoritmo a la mínima expresión](/images/katas.png)
+
+El miércoles nos prometieron perritos calientes para comer, pero hubo un fallo en el pedido y nos quedamos sin. Sin embargo, nos compensaron con las ya míticas telepizzas de ironhack, así que ni tan mal. La semana pasada comenté que quería dedicarle tiempo al desafío de código de Billin, pero prácticamente no ha podido ser hasta hoy domingo. Sin embargo, hoy se ha dado muy bien el día y he podido, por fin, implementar Redux en mi aplicación. Y lo que es mejor: ¡ENTENDERLO!
+
+![Hallelujah!](/images/alelujah.gif)
+
+Con este subidón de React, estoy listo para cambiar radicalmente de tercio y empezar mañana con lo que me echen. Y nos van a echar mandanga de la buena. La A de MEAN. ¡Angular 2! ¿Será tan bueno como me venden mis amigos de Almería Gerardo Parra ([@gerardoparrajc](https://twitter.com/gerardoparrajc)) y Alvaro Quiros ([@aloDev](https://twitter.com/aloDev))? Se lo contaremos, como siempre, en su blog favorito!
+
+## El weekend
+
+El finde ha sido tranquilo. El viernes, tras las exposiciones, tocaron las IronBeers de rigor y tras ello nos fuimos a cenar por Legazpi con la inestimable compañía de mis buenos IronHackers, buddys, algún TA adicto al sandungueo y antiguos alumnos en general. Una noche genial, de esas en las que acabas cuadrando fechas para hacer una casa rural. Ayer fui con mi chica a un cumpleaños en Segovia ¡Muchas ganas de volver por esa tierra maravillosa con tiempo para disfrutarla! Hoy hemos estado unos cuantos compañeros trabajando aquí en IronHack. Y de paso, hemos aprovechado para comer en un restaurante mexicano genial, Takos al pastor, en la plaza mayor ¡Recomendadísimo!
+
+![IronHackers en Takos al pastor](/images/takos.jpg)
+
+Y poco más que contar de esta semana. El fin de semana que viene tengo un viaje relámpago a Huelva, así que es muy posible que no publique entrada, no al menos el día habitual. En cualquier caso seguiré informando sobre esta aventura. Ya solo quedan tres semanas y esto ya huele a fin de fiesta.
+
+¡Muchas gracias por seguir ahí! ¡Un saludo!
