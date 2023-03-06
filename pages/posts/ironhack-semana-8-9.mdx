@@ -1,0 +1,182 @@
+import { PostHeader } from 'components/PostHeader'
+import { YoutubeEmbed } from 'components/YoutubeEmbed'
+
+export const meta = {
+	title: 'Ironhack, semanas 8 y 9: Want-It y hackshow',
+	date: (new Date('8-24-2017')).toISOString(),
+	tags: ['personal', 'ironhack'],
+	image: {
+		src: 'final.jpg',
+		author: 'Fran Bosquet',
+		authorUrl: 'www.franbosquet.com'
+	}
+} 
+
+<PostHeader {...meta} />
+
+¡Buenos días a todos! No estaba muerto ni estaba de parranda. El pasado viernes 11 de agosto se celebró el hackshow de mi promoción y con ello pusimos punto y seguido a esta increíble experiencia. Dado que no hice resumen de la octava semana, intentaré condensar en esta entrada como han sido los últimos 12 días de bootcamp, donde he desarrollado mi aplicación Want-It. ¡Arrancamos!
+
+# Octava semana en IronHack
+
+El lunes de la octava semana dimos nuestra última clase en IronHack. Según la planificación, debía ser una *guided programming* (Profesor y alumnos programando al unisono). Pero como os comenté, nuestro Lead Teacher **Marc Pomar** ([@boyander](https://twitter.com/boyander)) se fue de vacaciones el viernes anterior. Por tanto, una de las lecciones más complicadas del curso quedó en manos de los TAs. Debíamos construir un gestor de tareas tipo Trello utilizando el MEAN stack. La verdad es que fue un pequeño desastre, no hubo manera de acabar la aplicación ni sacar nada en claro. Y no nos animo demasiado de cara a comenzar nuestro proyecto final. Entiendo que Marc es insustituible, pero quizás en IronHack deberían tener algo mas de previsión para los bootcamp que caen en verano, que se queda la cosa un poco muerta.
+
+![Cada un programa como puede...](/images/eneryeti.jpg)
+
+Por contra, a lo largo de los últimos 12 días contamos con refuerzos que han sido muy importantes. El segundo día de proyecto trajeron a un señor con el que no hablé en ningún momento y que no tenía ni idea de MEAN, por lo que empezó regular la cosa según me contaron. Pero a final de semana nos trajeron a la gran **Marta Fonda** ([@MartaFonda](https://twitter.com/MartaFonda)) para echar una mano. Y durante la semana final contamos con el gran **Kiko Verdú** ([@Kikobeats](https://twitter.com/Kikobeats)), que no solo es un desarrollador buenísimo que nos arreglo mas de una papeleta, sino que ademas es un tío genial y nos lo pasamos de muerte con el y su beat boxing de competición. Ambos son buenos ejemplos de los pedazo de profesionales que salen de IronHack.
+
+## Project review
+
+Después de comer, y una vez disipado el mosqueo por el sinsentido de clase de la mañana, empezaron las revisiones de ideas. En las ultimas dos semanas de bootcamp, los alumnos deben trabajar en un proyecto final utilizando todo lo aprendido. Durante esa tarde los TAs debían escuchar la idea de cada alumno individualmente y dar luz verde, proponer modificaciones o vetar la idea según su criterio. Mi idea fue recibida con cierto escepticismo. Partí de una base muy sencilla, quizás demasiado. A los TAs les pareció “poca cosa”, pero confiaron en que supiese complicarla lo suficiente como para darle valor. En un par de párrafos os explico qué quise hacer y qué ha salido.
+
+## Primera entrevista
+
+Como os comenté, el martes por la mañana de esta octava semana me cité con el CEO de una startup de Madrid. La experiencia fué muy positiva: Mantuvimos una charla de una hora acerca de qué hacen, qué hago yo y que objetivos tenemos. Me entendí bien con el y me gustó la visión del proyecto, el ambiente de trabajo y la empresa en general. En general fué una charla muy agradable. Quedamos a expensas de como vaya la *Hiring Week* en septiembre. A titulo personal, tenía algo de curiosidad/nerviosismo acerca de como desenvolverme en las entrevistas de este nuevo sector. Pero si todas van como esta, por mi encantado.
+
+## IronGunz ¡Mejor juego de este bootcamp!
+
+Durante esta semana se pusieron por Twitter las votaciones para elegir el mejor juego de esta promoción. Si recordais, el juego se realiza como primer proyecto de bootcamp en la tercera semana. Realmente fue un concurso de *"A ver quien tiene mas amigos en las redes sociales"*, pero me hizo ilusión ganar el concurso y la mención por Twitter y LinkedIn. ¡Enhorabuena a Jordi, Sara y Tere! Fueron los otros tres competidores. Si queréis revisitar IronGunz, buscad un amigo y dirigios a [aquí](https://frbosquet.github.io/project-iron-gunz/).
+
+# Proyecto final de IronHack: Want-It
+
+Durante las últimas semanas estuve dándole vueltas a muchas ideas pero ninguna me cuajaba. Pensé en una “API de APIs”, un chat vitaminado, y otras ideas aun más difusas que no terminaba de ver. Finalmente opté por una lista de deseos. Llevaba años pensando en una aplicación de este estilo y rescaté la idea ahora que tenía los medios para realizarla. Como decía, no es ni de lejos la idea más original del mundo. De hecho existen muchas listas de deseos disponibles en internet ¿qué podía aportar mi aplicación a este mundillo?
+
+## Problema que trata de resolver Want-It
+
+- Las listas de deseos que ya existen adolecen del problema de que o bien no se mantienen actualizadas o bien no se usan.
+
+- Este problema surge del hecho de que una vez añadido un producto a una lista de deseos, el usuario no realiza más interacción con el.
+
+- A raiz de lo anterior, el usuario no utiliza la lista de deseos con asiduidad.
+
+- En consecuencia, termina por abandonarla.
+
+Ok, es un verdadero drama del siglo XXI y un problema del primer mundo. Pero habiendo disponible tanta aplicación inteligente, es terrible que llegue un cumpleaños y no tengamos ni idea de qué regalar. A mi me pasa mucho. Así que plantee mi aplicación a partir de la necesidad de generar interacción y, por tanto, enganche en torno a meros deseos materiales.
+
+## Planteamientos de Want-It
+
+La primera idea y principal parte de los deseos comunes: Quería conectar a usuarios que desean los mismos productos. A priori parece sencillo, pero no es un reto baladí: ¿Como hacer que los usuarios utilicen la misma nomenclatura? Obviamente debía indexar los productos y hacer que el usuario seleccione de una lista. Sin embargo, eso solo era el principio del reto. Podría escribir una lista yo mismo, pero sería un trabajo inabarcable y esta quedaría muy limitada en cualquier caso. En segundo lugar, podría intentar acceder a alguna API que me diese una lista de productos, pero no encontré nada que se ciñese a mis necesidades ¿Como enfocarlo pues?
+
+![Mi lista de deseos en amazon, sin actualizar desde hace un año ¡Ni siquiera quiero esas cosas ya!](/images/amazon.png)
+
+### Una lista generada por los usuarios
+
+La solución pasó, en este caso, por dejar en manos de los usuarios la generación de esa lista. Aplicando ciertas restricciones. Por ejemplo, un deseo consta de una marca, un producto y una edición del mismo. Así, cuando el usuario intenta seleccionar una marca, solo podrá crearla si esta no se encuentra ya en la base de datos. Y en ese caso, se le sugieren resultados de la wikipedia para que su descripción de la marca sea lo más acertada posible. El sistema está implementado en la primera versión y permite crear marcas, productos y ediciones dentro del flujo de creación de un deseo, produciendo una experiencia de uso muy sencilla y lineal.
+
+![Selector dinámico de marcas y productos en Want-it](/images/wantit.png)
+
+En un estadio más avanzado de la aplicación, los usuarios deberían poder sugerir y votar modificaciones. De modo que ellos mismos corrijan a sus iguales si estos no han introducido el nombre o el país de una determinada marca. O si han introducido contenido malintencionado, pudiendo la mayoría vetar contenido. E igual con los nombres, números de referencia o características de los productos. Soñando despierto, esta base de datos “autogenerada” se podría ofrecer por medio de una API pública o de pago.
+
+### Material visual en Want-It
+
+Otro de los planteamientos fundamentales de Want-It pasa por las publicaciones o posts. Estos constan de una foto y un comentario acerca de un deseo, independientemente del estado de este. Así, puedes publicar fotos de cosas que quieres, de cosas que tienes o de cosas que tuviste. Estas publicaciones pueden recibir comentarios de otros usuarios para generar una comunicación. Básicamente, lo que buscaba era replicar la interacción de instagram, pero etiquetando productos en lugar de personas. En este sentido, busqué dar un aspecto de polaroid a las fotos para dar ese feeling a la aplicación.
+
+![Publicaciones tipo polaroid en Want-it](/images/wantit-polaroid.png)
+
+A parte de eso, las publicaciones nutren de fotos la base de datos. De modo que los productos muestran sus miniaturas y fotos en base a los aportes de todos los usuarios. Una vez más, la base de datos crece por si misma. En este sentido, el sistema de arbitraje que he comentado anteriormente resulta aun más crucial aquí, para que los graciosos no llenen la aplicación de contenido de mal gusto. O peor, ilegal. Así que no me quiero dormir mucho en los laureles a la hora de implementar esta característica.
+
+### No a Heroku
+
+Como he explicado las imágenes son cruciales para la aplicación. Son el eje que vertebra la interacción entre los usuarios. Por tanto, el hosting de las fotos es una característica fundamental de mi *backend*. En el anterior proyecto realizamos el despliegue en *heroku*. El servicio está muy bien y puedes montar de manera facil y rápida cualquier aplicación que te funcione en local. Pero tiene dos problemas fundamentales.
+
+![Detalle de publicación en Want-it](/images/wantit-dell.png)
+
+El primero es que tras un periodo de inactividad, el servidor se desconecta. Cuando se vuelve a hacer una petición, heroku lo vuelve a arrancar. La consecuencia es que si la aplicación no se usa, cuando vuelves a visitarla tarda un periodo molestamente largo en responder, entre que arranca y responde a la petición. El segundo problema es que cualquier contenido subido desde la aplicación se borra cada cierto tiempo. Así que si un usuario subió una foto ayer, no estará disponible hoy. Esto, dependiendo de la aplicación, no es admisible. En mi caso desde luego qué no. Así que busqué alternativas a Heroku.
+
+### Si a Amazon EC2
+
+Amazon EC2 (siglas de *Elastic Cloud*) es uno de los muchos servicios que engloba Amazon Web Services. A grandes rasgos, EC2 te proporciona una maquina virtual con una IP pública para que montes lo que te dé la real de la gana. Los precios son económicos. En concreto el servidor micro (1Ghz, 1GB de RAM y 2GB de almacenamiento) sale por 7€ al mes. Pero para nuevos clientes, puedes tenerlo gratis durante un año. Así que decidí desplegar allí y ha ido todo como la seda.
+
+Para el tráfico que tiene, el servidor es rápido, tanto como Heroku. Y no me ha dado ningún problema a la hora de almacenar imágenes. Como extra, en lugar de usar un servicio externo para albergar la base de datos, como te obliga a hacer Heroku, he podido almacenar en la propia maquina virtual mi instancia de MongoDB. De ese modo, me ahorro que el servidor tenga que hacer peticiones externas a la hora de manejar la base de datos, incrementando la velocidad general de la aplicación.
+
+## Prueba Want-It
+
+En resumen, Want-It permite expresar qué cosas quieres, tienes o has querido en algún momento. Permite conectar con gente que comparte tus gustos y ver qué cosas quieren tus amigos en caso de que tengas que hacerles un regalo. En el estado actual la funcionalidad es completa pero sin florituras, sobre todo a nivel de comunicación entre usuarios y gestión de deseos. El diseño no está adaptado a móviles, por lo que en estos la experiencia es horrible, Ademas, me temo que soy el único usuario activo :D . En cualquier caso, si continúo desarrollándola (cosa que me encantaría) me gustaría pulir todos estos fallos y añadir miles de caracteristicas que tengo en mente que no me dio tiempo a implementar o que se me han ocurrido durante las vacaciones. Puedes probar Want-It haciendo click en su logo:
+
+![Logo tailwind](/images/wantit-logo.png)
+
+> ### Anotación de 2023
+>
+> wantit ya murio, pero su sucesor espiritual [wanthat](https://wanthat.io) está mas vivo que nunca.
+
+Personalmente, Want-It como aplicación no me parece una *gran cosa* a día de hoy. La idea la tenía desde hacia tiempo, pero el planteamiento final lo hice deprisa y corriendo y no salió algo demasiado disruptivo. Pero creo que los cimientos son buenos y me encanta la plataforma que tengo para hacerla crecer hacía donde me dé la gana. Es una sensación maravillosa, en serio. Tengo mi propia aplicación, cualquier funcionalidad que me apetezca, solo tengo que implementarla. A los futuros alumnos: Empezad a pensar en vuestra idea ya, no esperéis ni a empezar el bootcamp para darle vueltas.
+
+# El Hackshow
+
+Tras dos duras semanas de desarrollo, el viernes 11 de agosto por la mañana cada alumno (u equipo) presentó su proyecto al resto de la clase. Para aclarar, dado que el tema es algo confuso, esta exposición no es el HackShow. El HackShow es el evento de puertas abiertas que se celebra por la tarde. La verdad es que durante las dos últimas semanas no estuve muy pendiente de lo que hacían unos y otros y no fui consciente del nivelazo. Se presentaron ideas muy buenas y ejecuciones geniales. Aplicaciones super pulidas y originales. Por un lado fué una pasada. Por otro, yo expuse de los últimos y lo hice con un bajón importante porque no veía Want-It a la altura de las circunstancias.
+
+Mis apps favoritas
+
+Entre las aplicaciones que más me gustaron están la de **Alejandro de la Fuente**, que planteó una especie de gramola digital integrada con spotify, orientada a hacer peticiones con el móvil al hilo musical de bares. Una pasada. También me encantó la de **Victor Rodriguez** ([@Victor_Kudoku](https://twitter.com/Victor_Kudoku)) y **Mario Martin**, que utilizaron reconocimiento facial con la API de azure para sugerir listas de reproducción de spotify en función del estado de animo. Otra pasada, que podéis consultar aquí. Y aunque no soy el mayor fan de las aplicaciones de ejercicio, **Ana Milojevic** ([@anaamilo](https://twitter.com/anaamilo)) diseñó una maravilla de UI para su aplicación. Lástima que no la subió a Heroku y no se puede ver.
+
+![Exposición de Emotion por Victor y Mario](/images/emotion.png)
+
+También me gustaría mencionar la idea de **Claudia Duarte** ([@claudia_dz](https://twitter.com/claudia_dz)) y **Salvatore Costanzo**, un buscador de restaurantes por platos, y no por tipo. Es decir, si quieres una hamburguesa con queso, buscas hamburguesa con queso, no hamburgueserías. Un gran ejemplo del tipo de pensamiento lateral que hace avanzar este mundillo. También me gustaría mencionar a **Daniele Germani** y **Fernando Palma** ([@Palma_21](https://twitter.com/Palma_21)) , que me hicieron la competencia en el mundo de los regalos con una aplicación de cajas sorpresa que ademas era un e-commerce inteligente. Muchas ideas y muy buenas ejecuciones, lástima que solo optasen 5 para presentar en sociedad.
+
+![Ana durante su exposición](/images/ana.png)
+
+## Mikescanner
+
+Pero el auténtico pelotazo era **Mikescanner**. **Mikel Rumayor** me comentó su idea a las pocas semanas de empezar el bootcamp, y llevaba dándole vueltas aun más tiempo. Una aplicación para reunir personas mediante vuelos, independientemente del destino. Una idea brutal. Y lo mejor, que no existe en el mercado. Es tan celoso de su algoritmo que ni siquiera lo tiene subido a GitHub. Mikel ha sido uno de mis mejores amigos durante el bootcamp y es una persona a la que aprecio muchísimo. Quizás por eso no sea totalmente objetivo. Pero creo que su proyecto es la vaina más loca que se ha presentado en IronHack, al menos de entre todas las que yo he visto de varias promociones. Podéis probar su demo aquí.
+
+![Mikel presentando Mikescanner](/images/mikescanner.png)
+
+> ### Anotación de 2023
+>
+> Obviamente todos los enlaces estan caidos, así que no me he molestado en crear los enlaces.
+
+Después de unas 5 horas de exposiciones, se nos pidió que votásemos a nuestros compañeros de 1 a 6 estrellas. La nota de estas votaciones suponía el 60% de la puntuación. El 40% restante, a la decisión del staff de IronHack. Antes de irnos a comer, sobre las 14:30 nos dieron su veredicto: Sorprendentemente, Want-It se coló entre los cinco mejores proyectos de este bootcamp. Sigo pensando que había mas de cuatro proyectos que en el computo global de idea+ejecución me superaban. Pero la gente tuvo a bien meterme en el HackShow. No quedaba otra, ¡Iba a tener que exponer otra vez antes de irme de vacaciones!
+
+> No quedaba otra, ¡Iba a tener que exponer otra vez antes de irme de vacaciones!
+
+Me acompañaron en esa aventura **Mario y Victor**, **Ana**, **Mikel** y **Teresa Torrijos**. Después de las votaciones nos fuimos a comer todos juntos y a las 5 volvimos los finalistas para preparar el HackShow.
+
+## Exposiciones de la tarde
+
+Para preparar la exposición de la tarde debíamos recortar toda la parte técnica de la exposición, incidir en lo conceptual y alargar la demo. Sobre las 18:00 empezó el evento y me tocó exponer el segundo. Primero lo hizo Tere con su aplicación de paisajes. El público no fié tan abundante como en otros HackShows a los que he asistido, pero la fecha no acompañaba. Mi exposición no fué mal, pero el público no estaba muy entregado y me puse ciertamente nervioso, así que aceleré el ritmo y me sobró bastante tiempo. Tanto Victor y Mario como Ana hicieron muy buenas exposiciones. Finalmente Mikel se saco la ***** utilizando todos los trucos del manual de las exposiciones: Interactuar con el público, lanzar preguntas al aire, algo de humor, una demo muy bien preparada... Lo clavó.
+
+![Participantes del hackshow Ago'2017](/images/hackshow.png)
+
+Tras las exposiciones se volvieron a repetir las votaciones, esta vez por parte de todo aquel que asistió al evento. Tras ello el staff nos reunió a los 6 participantes, felicitaron a todo el bootcamp por el gran desempeño, despidieron el curso y anunciaron al ganador: ¡Mikescanner! Al ganador del hackshow se le obsequia con un hacha chulísima, nos echamos un monton de fotos y comenzaron nuestras últimas IronBeers como alumnos. La fiesta se prolongó hasta las 23:00, yo me retiré un poco antes. Fué un día muy intenso y feliz. Una guinda perfecta a esta gran tarta que ha sido IronHack, a falta de la HiringWeek.
+
+# ¿Hay vida después de un bootcamp?
+
+Pues en mi caso una mudanza, puesto que mi novia y yo nos hemos alquilado nuestro primer pisito de "casados". El martes después del HackShow cogí el coche y bajé a mi tierra a pasar unos días en el pueblo. Ha sido tremendo estar con familia y amigos después de dos meses de cuasi reclusión. Coges mucha perspectiva sobre lo que ha sido esta experiencia. El domingo volví a Madrid y el lunes nos mandaron nuestra primera asignación en nuestra búsqueda de empleo. Durante tres meses nos enviaran tareas semanalmente para mejorar nuestro perfil en las redes y aumentar nuestra empleabilidad. El primero se trata de un portafolio. Voy a intentar sacarlo en React para practicar con el. Al momento de escribir estas lineas estamos a Jueves y aun no he empezado ¡Maldita mudanza!
+
+## Hiring Week
+
+En el fondo, el motivo de realizar el bootcamp no era otro que ganarme la vida programando. En este sentido, el éxito o fracaso de la aventura se verá en la HiringWeek. Esta se celebrará del 11 al 15 de septiembre. Consiste en varias rondas de entrevistas con varias empresas interesadas en contratar IronHackers. Si bien el tema se lleva con secretismo, parece que la de este año va a ser una HiringWeek muy potente, así que estamos tranquilos. Cuando termine contaré que tal se ha dado, tanto a mi como a compañeros. Al final esta es la gran pregunta que trataba de resolver con este blog: **¿Puedes conseguir trabajo haciendo este bootcamp?**
+
+Todo pinta a que sí, pero te daré la respuesta contrastada en 20 dias.
+
+## Retrospectiva
+
+Echando la vista atras, IronHack ha sido una experiencia increíble. A nivel personal, he hecho un monton de amigos, tanto compañeros, staff, como antiguos IronHackers. He asimilado como cotidiano algo tan anhelado para mi como era hablar naturalmente de código. He programado a diario como actividad principal de mi día a día. Me he sentido en mi salsa por primera vez en... en... toda mi vida. Sospechaba que yo era programador, ahora lo tengo clarísimo.
+
+> ¿Lo volvería a hacer? Si. Mil veces si. La mejor decisión que he tomado en mi vida. Estoy donde quiero estar gracias a mi trabajo y a mi arrojo. La satisfacción es plena.
+
+He aprendido como una bestia. A un ritmo que ni por mi cuenta ni en la universidad he alcanzado jamas. Hablo con profesionales del sector y me siento cómodo. Creo que puedo aportar cosas a este mundillo y muero de ganas de hacerlo. Ha sido una experiencia totalmente reveladora: En mi anterior sector me sentía como un farsante, aquí me siento uno mas y creo que puedo ser importante allí donde termine trabajando.
+
+> ### Anotación de 2023
+>
+> Y todo lo que vino despues... Ironhack fue probablemente la decisión de más impacto que he tomado en mi vida.
+
+## ¡Un poco de auto-crítica por favor!
+
+A otro nivel, quizá me he tomado el bootcamp demasiado en serio. He llevado la competitividad demasiado lejos y me he ganado alguna mala cara. En ocasiones he sido muy crítico con IronHack con cosas que, una vez fuera, no me parecen nada importante. He afeado la conducta a algún compañero por conductas que a toro pasado no me parecen tan graves. Es un reto vivir bajo esa presión y conoces facetas de ti mismo que no sabias que tenias que trabajar. Me quedo con ese aprendizaje para mejorar como persona y profesional.
+
+En definitiva, ¿Lo volvería a hacer? Si. Mil veces si. La mejor decisión que he tomado en mi vida. Estoy donde quiero estar gracias a mi trabajo y a mi arrojo. La satisfacción es plena. Por todo ello, quisiera dar las gracias desde aquí a todo el staff de IronHack Madrid, a todos mis compañeros de bootcamp, a mi familia y sobre todo a mi pareja y la paciencia que me ha demostrado durante estos dos meses. Todos y cada uno de ellos han hecho posible esta aventura. Por ello os doy las GRACIAS.
+
+# Y se acabó
+
+Y con esta entrada termino esta serie sobre el día a día en IronHack. Sé que ha llegado muy tarde, pero necesitaba estas semanas para descansar y recomponer mis ideas. En ocasiones pensé en abandonar el blog, pero mi compromiso conmigo mismo me lo ha impedido hacerlo. Prometí un blog completo sobre las 9 semanas, y aquí queda para la posteridad. Espero que si estas pensando en hacer un bootcamp te sea útil de cara a decidirte. En cualquier otro caso, espero que hayas disfrutado leyendo mis aventuras.
+
+Queda pendiente escribir una entrada sobre la HirinWeek. A partir de ahí, me gustaría seguir con el blog, aunque no sé con qué enfoque. En cualquier caso, quisiera agradecer a todos los que habéis seguido este cuaderno de vitácora, los que me habéis apoyado, los que habéis confiado en mi para resolver dudas, los que me habéis defendido en forocoches cuando alguno ha querido pagar su frustración conmigo. Muchas gracias a todos. Gracias por estar al otro lado.
+
+Nos seguimos viendo por el camino.
+
+![Se despide Iron Fran!](/images/final.png)
+
+> Anotación de 2023
+>
+> Muy épico este final
+
