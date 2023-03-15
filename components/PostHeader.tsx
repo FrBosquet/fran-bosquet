@@ -12,7 +12,7 @@ export const PostHeader = ({ title, date, tags, image }: Props) => {
 			<title>{title}</title>
 		</Head>
 		<header className="border-b-2 border-gray-500 pb-2 mb-4">
-			<h1 className="text-5xl bg-gradient-to-r from-orange-500 to-orange-200 text-transparent  py-2 bg-clip-text">{title}</h1>
+			<h1 className="text-4xl md:text-5xl bg-gradient-to-r from-orange-500 to-orange-200 text-transparent  py-2 bg-clip-text">{title}</h1>
 			<span className="text-sm text-violet-300">{dateFormatter.format(new Date(date))}</span>
 			<div className="py-2 flex gap-2">
 				{tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
