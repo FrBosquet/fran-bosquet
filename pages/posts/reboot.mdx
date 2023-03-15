@@ -4,7 +4,7 @@ import { YoutubeEmbed } from 'components/YoutubeEmbed'
 export const meta = {
 	title: 'Reboot: Muevete rápido o muere en el intento. Blog con next y mdx',
 	date: (new Date('1-26-2023')).toISOString(),
-	tags: ['blog', 'codigo', 'next', 'mdx'],
+	tags: ['blog', 'código', 'next', 'mdx'],
 	image: {
 		src: 'reboot.jpg',
 		author: 'Retrosuply',
@@ -20,7 +20,7 @@ Entre primeros de 2017 y finales de 2018 estuve escribiendo el blog [franbosquet
 
 Después del bootcamp y conforme fui desarrollando mi carrera profesional (y con ella mis habilidades en desarrollo) llegó un momento en el que me vi con capacidad para desmontar aquel tinglado y recrear el blog desde cero usando mi propio código. Así que en Junio de 2018 me puse a trabajar en ello.
 
-Por aquel entonces era muy obsesivo con construir yo todo desde cero. No usaba lodash ni *Ramda*, escribía *SQL* a pelo sin *ORMs*, usaba *GraphQL* para la más mínima tontería, no usaba librerías de componentes ni frameworks *CSS*. Incluso tenía cierta obcecación con que el código de verdad se desplegaba en un contenedor de [Digitalocean](http://digitalocean.com) o [bitnami](http://bitnami.com), nada de [Herokus](http://heroku.com) o Zeit (hoy [Vercel](http://vercel.com)). A consecuencia, cada pequeño side project me tomaba cantidades absurdas de tiempo y nunca lograba terminar ninguno, siempre me abrumaba o me aburría antes.
+Por aquel entonces era muy obsesivo con construir yo todo desde cero. No usaba lodash ni *Ramda*, escribía *SQL* a pelo sin *ORMs*, usaba *GraphQL* para la más mínima tontería, no usaba librerías de componentes ni frameworks *CSS*. Incluso tenía cierta obcecación con que el código de verdad se desplegaba en un contenedor de [Digitalocean](http://digitalocean.com) o [bitnami](http://bitnami.com), nada de [Herokus](http://heroku.com) o **Zeit** (hoy [Vercel](http://vercel.com)). A consecuencia, cada pequeño side project me tomaba cantidades absurdas de tiempo y nunca lograba terminar ninguno, siempre me abrumaba o me aburría antes.
 
 Sin embargo, con algo de disciplina, logré impulsar el proyecto de re-implementar el blog y lo fuí documentando en el viejo blog. Con cada entrega iba mostrando los avances y estaba quedando una serie muy interesante, que le devolvió mucha vida al blog después de su periodo de gloria durante **IronHack**. Iba a ritmo de tortuga porque entre otras lindezas estaba:
 
@@ -29,10 +29,125 @@ Sin embargo, con algo de disciplina, logré impulsar el proyecto de re-implement
 - Implementando un *CMS* in-house con *GraphQL*
 - Lo más loco, implementando mi propio formato de texto enriquecido. Porque, por qué usar un estándar que funciona como es *markdown* si puedes diseñar uno peor y parsearlo en *React*?
 
-Pero a finales de 2018 se me juntaron muchas cosas: Una ruptura, una mudanza, al poco tiempo un cambio de trabajo. Con todo ello, un cambio total en mi estilo de vida y mis prioridades. Y el blog murió ahí. De hecho, dejé la serie en el capítulo uno de dos sobre los *HOCs* en react, espero que ningún pobre diablo quedara esperando mi explicación sobre aquello, ya que los *HOCs* están más que superados a día de hoy.
+Pero a finales de 2018 se me juntaron muchas cosas: Una ruptura, una mudanza, al poco tiempo un cambio de trabajo. Con todo ello, un cambio total en mi estilo de vida y mis prioridades. Y el blog murió ahí. De hecho, dejé la serie en el capítulo uno de dos sobre los [*HOCs*](https://es.reactjs.org/docs/higher-order-components.html) en react, espero que ningún pobre diablo quedara esperando mi explicación sobre aquello, ya que estos están más que superados a día de hoy.
 
 Desde entonces he pensado muchas veces en retomar el proyecto pero nunca he encontrado el tiempo o las ganas. Hace un mes terminé un proyecto bastante grande ([cristinadevaux.com](http://cristinadevaux.com)) y, a pesar de que tengo otras cosas entre manos, me apetece invertir algo de tiempo en revivir este blog. Siempre he disfrutado mucho escribiendo, en [franbosquet.com](http://franbosquet.com) o en otros blog que tuve anteriormente. Y echo de menos poder escribir una entradita de vez en cuando y contar mis batallitas. Darle visibilidad a alguno de mis trasteos. Y para todo ello twitter se me queda corto.
 
-Retomar el que tenía en wordpress descartado, terminar aquel que empecé en 2018 también. Totalmente vetustos y anticuados, pasados de moda y tecnológicamente superadisimos. Por no hablar de la cantidad de curro de terminar (y desplegar) el monstruo que ingenié en el 18. Así que quiero volver a embarcarme en el desafío de montarlo desde cero. Otra vez.
+Retomar el que tenía en **wordpress** descartado, terminar aquel que empecé en 2018 también. Vetustos y anticuados, pasados de moda y tecnológicamente muy superados. Sobre el que empecé en 2018, la idea no estaba nada madura: Cosas como donde hospedarlo, el formato de los posts, donde guardar las imágenes, el indice de los posts, etc. Un montón de cosas que estaban en el aire mientras invertía muchísimas horas en un sistema de iconos, una innecesaria infraestructura en graphql o un sustituto de markdown escrito desde cero. En resumen, de aquello no hay nada aprovechable, así que quiero volver a embarcarme en el desafío de montarlo desde cero. Otra vez.
 
-Respecto al último intento, esta vez cuento con dos importantes ventajas: Mis conocimientos técnicos son mucho mayores que en aquel entonces. Y, lo más importante, cuando desarrollé [wanthat.io](http://wanthat.io) aprendí a ser más resolutivo y ya no tengo ninguna aversión a usar herramientas de terceros. A ver cuanto duramos esta vez.
+Pero respecto a aquel último intento, esta vez cuento con dos importantes ventajas: Mis conocimientos técnicos son mucho mayores que en aquel entonces debido a la experiencia. Y, lo más importante, he aprendido a abrazar las herramientas de terceros en pos de ser mucho mas resolutivo. Cuando desarrollé [wanthat.io](http://wanthat.io) descubrí que hay mucha mayor satisfacción en entregar algo que en pulirlo al milímetro. Vamos a ver cuanto duramos esta vez.
+
+# Premisa
+
+Como decía la idea es montar un blog lo mas sencillo posible en la mínima cantidad de tiempo. Voy a ceñirme a las herramientas con las que estoy siendo más rápido últimamente para intentar darle matarile a esto lo antes qué pueda.
+
+Desde hace un tiempo me he aficionado a probar librerías y servicios defierentes en cada proyecto. La idea es conocer más herramientas y así poder tomar decisiones mejor informadas. En los últimos años he desplegado webs en [Vercel](https://vercel.com/), [Supabase](https://supabase.com/) y [Firebase](https://firebase.google.com/), pero en mi último proyecto me animé a probar [Railway](https://railway.app/). A finales de 2022 dejé de usar styled components y empecé a usar [Chakra](https://chakra-ui.com/) casi exclusivamente. Y desde hace un par de meses ya solo uso [Tailwind](https://tailwindcss.com/) para definir estilos.
+
+En este momento tengo muchas ganas de probar librerías como [Daisy UI](https://daisyui.com/), paquetes como [tRPC](https://trpc.io/), frameworks como [Astro](https://astro.build/) o servicios como [planetscale](https://planetscale.com/). Pero el caso es que es importante tener una aplicación funcional cuantos antes, para no aburrirse y abandonar, así que he decidido ceñirme a herramientas con las que ya tengo cierta maestría ahora mismo. A saber:
+
+## Hosting
+
+Dudo mucho que haya nada más rápido que **Vercel** para desplegar una aplicación next ahora mismo. La integración con github es automática y funciona fenomenal. Para mi es la opción por defecto desde hace tiempo, así que vamos con ello.
+
+## Framework
+
+Me sorprende lo poco pragmático que era en 2018: Está muy bien conocer como funciona **webpack** o el *bundler* de turno, pero mi obsesión en aquella época con construir todo desde cero era enfermiza. Si echas un vistazo a las últimas publicaciones del viejo blog, cuando quise reconstruirlo, estaba reinventando todas y cada una de las ruedas: No solo partiendo de en webpack pelado, sino el sistema de diseño, el de iconos, el formato para guardar contenidos con su parser a React… Un autentico sinsentido.
+
+![Este meme siempre me ha hecho mucha gracia. Osea, soy yo 100%](/images/overengineer_blog.webp)
+
+> <strong style={{ color: "red" }}>!</strong> Sobre los últimos post que menciono aquí, he considerado que no tienen demasiado interes a día de hoy y por tanto no los he portado desde wordpress a esta nueva web. Básicamente diseñaba un blog desde cero implementado todo partiendo de un webpack pelado, incluyendo sistema de componentes, de iconos, formato de texto enriquecido, intercambio cliente-servidor con apollo graphql. Una locura que obviamente se quedo en nada.
+
+Con un poco de reflexión fui asimilando que es mas satisfactorio terminar proyectos que desarrollar cada mínimo detalle de implementación de los mismos. Aprendí a tolerar la caja negra que era **Create React App** y a partir de ahí a valorar cosas como tener enrutado basado en archivos nada mas arrancar el proyecto, o SSR, o CSS modules, que me daban frameworks como **Next**. **Vite** por ejemplo me parece una revolución: La fácil y rápido que puedes echar cosas a andar. Y así con todo: **Tanstack**, **Lodash**, **Tailwind**, **Astro** o **Qwik**, incluso **Solid** o **Svelte**. Antes despreciaba por pura ignorancia, ahora soy consciente de lo lejos y rápido que puedes moverte con la herramienta adecuada.
+
+![Next JS](/images/nextjs.png)
+
+A día de hoy mi elección por defecto es **Next 12**. Me encuentro muy cómodo con el y su arquitectura hace muy sencillo servir paginas estáticas generadas, lo cual es perfecto para montar un blog. Si necesitas renderizar en el servidor en tiempo de petición, puedes hacerlo de la forma mas sencilla posible con sus hooks. Next 13 me resulto muy prometedor en su presentación, pero lo he probado y no me ha resultado tan cómodo como la especificación anterior. Así que nos ceñiremos a la versión 12.
+
+## Diseño
+
+Ni siquiera voy a maquetar: Una fuente bonita, un header con mi nombre y mis redes sociales, una lista de posts con titulo, foto y fecha que puedas clickar. Y una ruta dinámica con el post en si. Cuanto mas sencillo, mejor.
+
+## Estilos
+
+En mi opinión, **si puedes NO escribir CSS, no lo hagas**. No quiero decir que no uses CSS, simplemente que la peor opción posible es esa en la que escribes código CSS directamente en un archivo .css. No pienso que CSS sea malo, simplemente que es muy difícil crear abstracciones bien, y cualquier modulo o librería lo va a hacer mejor que tu improvisando.
+
+He probado de todo. **CSS modules** mantiene tus estilos lejos de tus componentes y la experiencia de desarrollo se vuelve lenta y aburrida. **Styled components** acaba siendo un batiburrillo de estilos y la compilación de los mismos introduce un montón de overhead en tu aplicación. **Chakra UI** está muy bien y durante 2022 lo he usado en casi todo lo que he montado, pero lo estoy desechando porque su threeshaking simplemente no me funciona y hace que mis bundles incluyan un montón de javascript que no necesito.
+
+Chakra es en sí un sistema de diseño: **Desde que lo instalas ya te propone y casi impone como se ve y se usa tu aplicación**. Es un poco **bootstrap** (pero sin ser una autentica basura). Si bien lo puedes tunear a tu gusto, esto implica pelearte con la librería y eso siempre es síntoma de que no es el uso para el que ha sido diseñada. En [cristinadevaux.com](https://cristinadevaux.com) he tenido que pelear con **Chakra** para que la web se viese como **Cristina** quería, y creo que hubiese sido mucho más rápido y efectivo si hubiese optado por otra solución para mis estilos.
+
+![Tailwind CSS](/images/tailwind-css.svg)
+
+Así que últimamente he intentado familiarizarme con **Tailwind**. Es un poco **bootstrap** también, pero he de decir que **sorprendentemente tailwind simplemente funciona**. Respecto a **Chakra**, si bien echo de menos las primitivas ya estilados y funcionales, puedes obtener una experiencia similar añadiendo un *headless ui* como [radix](https://www.radix-ui.com/). Pero manteniendo a lave un control mucho mas granular de lo que metes en tu bundle y lo que no, lo cual es genial sobre todo si te interesa que tu web sea rápida (spoiler: **Si**).
+
+Mi experiencia hasta ahora con Tailwind está siendo una delicia: Conforme lo usas te vas volviendo más rápido y es tremendamente cómodo escribir estilos con el. Puedes escribir CSS sin tener que romperte la cabeza con abstracciones, y para mi eso es la vida. Así que **Tailwind**.
+
+## Contenido
+
+Lo lógico sería pensar en un CMS: **Contentful**, **Sanity** o algo así. Pero agregar esa capa de complejidad cuando lo único que quiero es escribir posts yo sin mayor pretensión me parece estúpido. Así que creo que la opción minimalista es la óptima aquí: Escribir los posts directamente como paginas de Next, utilizando [markdown](https://markdown.es/).
+
+Pero aun mejor. Con [MDX](https://mdxjs.com/) puedes escribir componentes React directamente en markdown, así que todo queda en casa: Código y contenido. Y con next, puedo servir un archivo MDX como si de una página se tratase. Así que si necesito escribir un post, puedo saltar directamente a Vs Code y empezar a escribir markdown. Este lenguaje de marcado es un poco como tailwind: **Cuanto más lo escribes más cómodo te sientes con el**. Y ahora mismo la verdad es que escribo enlaces, negritas, cursivas o código en **MD** más rápido que en cualquier editor de texto enriquecido. Por otro lado, con esta opción tengo:
+
+- Todo el poder de git en cuanto al contenido de los posts.
+
+- Control total sobre la generación de las páginas estáticas. Si quiero cambiar un post o publicarlo, solo necesito hacer un commit.
+
+- Autohosting de imágenes, simplemente sirviéndolas desde la carpeta public de mi proyecto Next. También puedo hacer uso del componente Image de next para optimizarlas, aunque de momento no voy a hacerlo. Es más sencillo, más rápido de servir e implementar y mas barato que cualquier otra opción.
+
+- Puedo añadir un componente React directamente al post, lo cual puede ser muy interesante en el futuro para mostrar cosas. En un CMS sería mucho más complicado.
+
+- A diferencia de un CMS, es gratis para siempre.
+
+El único problema era el tema del corrector ortográfico, pero he conseguido hacer andar [esta maravilla](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) para tener corrector integrado para **mdx** en **Vs Code**, por lo que la opción de **MDX** es con la que me quedo aquí. Tampoco tengo cosas como comentarios o autenticación, pero de primaras no vamos a disponer de ello.
+
+![MDX](/images/mdx.svg)
+
+
+Con todas las decisiones tomadas, podemos saltar a la implementación:
+
+# Implementación
+
+Empezamos en la terminal arrancando un nuevo proyecto en Next:
+
+``` 
+npx create-next-app@latest
+
+✔ What is your project named? … fran-bosquet
+✔ Would you like to use TypeScript with this project? … No / Yes
+✔ Would you like to use ESLint with this project? … No / Yes
+Creating a new Next.js app in /home/frbosquet/projects/fran-bosquet.
+
+Using npm.
+
+Installing dependencies:
+- react
+- react-dom
+- next
+- @next/font
+- typescript
+- @types/react
+- @types/node
+- @types/react-dom
+- eslint
+- eslint-config-next
+
+
+added 253 packages, and audited 254 packages in 9s
+
+87 packages are looking for funding
+  run `npm fund` for details
+
+4 high severity vulnerabilities
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+
+Initializing project with template: default
+
+Initialized a git repository.
+
+Success! Created fran-bosquet at /home/frbosquet/projects/fran-bosquet
+```
+
+Y listo, ya tenemos el proyecto creado. Vamos a probar que funciona con npm run dev
