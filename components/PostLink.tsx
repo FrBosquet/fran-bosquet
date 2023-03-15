@@ -15,12 +15,12 @@ export const PostLink = ({ post }: Props) => {
 			<Image alt={`imagen de ${post.image.author}`} src={`/images/${post.image.src}`} fill style={{ objectFit: 'cover' }} />
 		</div>
 		<div className='flex justify-between flex-col flex-1 h-28'>
-			<h2 className='text-2xl text-orange-400 flex-1'>{post.title}</h2>
+			<h2 className='text-lg text-orange-400 flex-1 sm:text-2xl'>{post.title}</h2>
 			<div className='flex justify-between '>
 				<div className='gap-2 flex-1 hidden sm:flex'>
 					{post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
 				</div>
-				<span className='text-violet-100'>
+				<span className='text-violet-100 text-sm sm:text-md'>
 					{dateFormatter.format(new Date(post.date))}
 				</span>
 			</div>
