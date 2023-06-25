@@ -1,5 +1,6 @@
 'use client'
 import { PostHeader } from 'components/PostHeader';
+import { YoutubeEmbed } from 'components/YoutubeEmbed';
 import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { HTMLAttributes } from 'react';
 
@@ -21,7 +22,8 @@ const mdxComponents = {
   li: (props: HTMLAttributes<HTMLLIElement>) => <li className="ml-4 list-item list-disc">{props.children}</li>,
   a: (props: HTMLAttributes<HTMLAnchorElement>) => <a {...props} target="_blank" className="text-orange-400 visited:text-violet-300">{props.children}</a>,
   em: (props: HTMLAttributes<HTMLElement>) => <em {...props} className="font-ligh text-gray-400">{props.children}</em>,
-  PostHeader
+  PostHeader,
+  YoutubeEmbed
 }
 
 export function MdxContent({ source }: MdxContentProps) {
