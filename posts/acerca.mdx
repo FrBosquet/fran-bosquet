@@ -1,18 +1,17 @@
-import { PostHeader } from 'components/PostHeader'
-
-export const meta = {
-	title: 'Acerca',
-	date: (new Date('3-06-2017')).toISOString(),
-	tags: ['personal'],
-	image: {
-		src: 'fran-bosquet-2017.jpg',
-		author: 'Fran Bosquet',
-		authorUrl: 'https://www.franbosquet.com'
-	},
-	published: true
+---
+title: Acerca
+date: 3-06-2017
+published: true
+tags: 
+ - personal
+image: {
+	src: 'fran-bosquet-2017.jpg',
+	author: 'Fran Bosquet',
+	authorUrl: 'https://www.franbosquet.com'
 }
+---
 
-<PostHeader {...meta} />
+import { PostHeader } from 'components/PostHeader'
 
 > ### Anotación de 2023
 > 

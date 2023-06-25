@@ -1,19 +1,17 @@
-import { PostHeader } from 'components/PostHeader'
-import { YoutubeEmbed } from 'components/YoutubeEmbed'
-
-export const meta = {
-	title: 'Dell XPS 15: Mi portatil para IronHack',
-	date: (new Date('6-08-2017')).toISOString(),
-	tags: ['personal'],
-	image: {
-		src: 'xps-15.jpg',
-		author: 'Fran Bosquet',
-		authorUrl: 'https://www.franbosquet.com'
-	},
-	published: true
+---
+title: 'Dell XPS 15: Mi portatil para IronHack'
+date: 6-08-2017
+tags:
+  - personal
+image: {
+	src: 'xps-15.jpg',
+	author: 'Fran Bosquet',
+	authorUrl: 'https://www.franbosquet.com'
 }
+published: true
+---
 
-<PostHeader {...meta} />
+import { YoutubeEmbed } from 'components/YoutubeEmbed'
 
 > ### Anotación de 2023
 >

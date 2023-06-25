@@ -1,19 +1,18 @@
-import { PostHeader } from 'components/PostHeader'
-import { YoutubeEmbed } from 'components/YoutubeEmbed'
-
-export const meta = {
-	title: 'Ironhack, día 0: El día previo y #OSWeekends',
-	date: (new Date('6-11-2017')).toISOString(),
-		tags: ['personal', 'ironhack'],
-	image: {
-		src: 'ironhack.png',
-		author: 'Fran Bosquet',
-		authorUrl: 'https://www.franbosquet.com'
-	},
-	published: true
+---
+title: 'Ironhack, día 0: El día previo y #OSWeekends'
+date: 6-11-2017
+tags: 
+- personal
+- ironhack
+image: {
+	src: 'ironhack.png',
+	author: 'Fran Bosquet',
+	authorUrl: 'https://www.franbosquet.com'
 }
+published: true
+---
 
-<PostHeader {...meta} />
+import { YoutubeEmbed } from 'components/YoutubeEmbed'
 
 Quiero escribir esta microentrada para dejar constancia de que hoy es mi última noche como muggle: ¡Mañana empiezo en IronHack! La ilusión es muchísima después de tantos meses esperando este momento y estoy a tope de energías para empezar mañana al máximo.
 

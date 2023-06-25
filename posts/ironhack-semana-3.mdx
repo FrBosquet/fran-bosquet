@@ -1,19 +1,18 @@
-import { PostHeader } from 'components/PostHeader'
-import { YoutubeEmbed } from 'components/YoutubeEmbed'
-
-export const meta = {
-	title: 'Ironhack, semana 3: IronGunZ, el videojuego',
-	date: (new Date('7-02-2017')).toISOString(),
-	tags: ['personal', 'ironhack'],
-	image: {
-		src: 'irongunzsplash.png',
-		author: 'Fran Bosquet',
-		authorUrl: 'https://www.franbosquet.com'
-	},
-	published: true
+---
+title: 'Ironhack, semana 3: IronGunZ, el videojuego'
+date: 7-02-2017
+tags:
+- personal
+- ironhack
+image: {
+	src: 'irongunzsplash.png',
+	author: 'Fran Bosquet',
+	authorUrl: 'https://www.franbosquet.com'
 }
+published: true
+---
 
-<PostHeader {...meta} />
+import { YoutubeEmbed } from 'components/YoutubeEmbed'
 
 Como dije al final de la última entrada, la tercera semana del bootcamp está dedicada al desarrollo de un proyecto personal en forma de videojuego. En mi caso, he desarrollado IronGunz, un juego de acción en vista cenital para dos jugadores basado en Hotline Miami. Esta ha sido mi primera semana de dedicación completa a IronHack, sin exámenes de por medio. Pero no por ello ha sido menos dura que las anteriores. Arrancamos:
 
