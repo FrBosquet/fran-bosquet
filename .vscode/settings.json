@@ -1,6 +1,7 @@
 {
 	"cSpell.language": "en,es,es-ES",
 	"cSpell.words": [
+		"bootcamp",
 		"Contentful",
 		"conversor",
 		"fran",
@@ -12,6 +13,12 @@
 		"Retrosuply",
 		"revisitar",
 		"sincericidio",
+		"Taxfix",
 		"Youtube"
+	],
+	"cSpell.enableFiletypes": [
+		"!json",
+		"!typescript",
+		"mdx"
 	]
 }

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import { Post } from './types';
 
@@ -11,15 +12,20 @@ const ignore = [
 ]
 
 export const getPosts = async (): Promise<Post[]> => {
-	const pn = path.join(__dirname, '../../../pages/posts')
+	const pn = path.join('posts')
 	const fileNames = fs.readdirSync(pn)
 
-	const posts = await Promise.all(fileNames.filter(name => !ignore.includes(name)).map(async name => {
-		const { meta } = await import('/pages/posts/' + name) as unknown as { meta: Post }
+	const posts: Post[] = await Promise.all(fileNames.filter(name => !ignore.includes(name)).map(async name => {
+		const filename = path.join(pn, name)
+		const raw = fs.readFileSync(filename);
+		const serilized = await serialize(raw, {
+			parseFrontmatter: true,
+		})
 
-		return { ...meta, slug: name.replace('.mdx', '') }
+		const meta = serilized.frontmatter as Post
+
+		return { ...meta, slug: name.replace('.mdx', '') } as Post
 	}))
-
 
 	return posts
 		.filter(post => post.published)
