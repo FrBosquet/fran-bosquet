@@ -1,4 +1,5 @@
 import { PostHeader } from "components/PostHeader";
+import { BackIcon } from "components/icons";
 import { getPost, getPostSlugs } from "lib/posts";
 import { Post } from "lib/types";
 import { Metadata } from "next";
@@ -14,10 +15,17 @@ export default async function Page({ params: { slug } }: Props) {
   const post = await getPost(slug)
   const meta = post.frontmatter as Post
 
-  return <section className='flex flex-col gap-4 py-6'>
-    <PostHeader {...meta} />
-    <MdxContent source={post} />
-  </section>
+  return <>
+    <section className='flex flex-col gap-4 py-6 relative'>
+      <aside className="sticky top-0 h-0 hidden md:block">
+        <a href="/" className="-left-20 p-8 text-orange-500 hover:text-violet-400 hover:-left-24 absolute transition-all">
+          <BackIcon className="w-6 h-6 transition-all" />
+        </a>
+      </aside>
+      <PostHeader {...meta} />
+      <MdxContent source={post} />
+    </section>
+  </>
 }
 
 export async function generateStaticParams() {
