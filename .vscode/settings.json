@@ -19,6 +19,7 @@
 	"cSpell.enableFiletypes": [
 		"!json",
 		"!typescript",
+		"!typescriptreact",
 		"mdx"
 	]
 }

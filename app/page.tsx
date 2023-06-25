@@ -1,5 +1,5 @@
 import { PostLink } from "components/PostLink"
-import { getPosts } from "lib/getPosts"
+import { getPosts } from "lib/posts"
 
 export default async function Page() {
   const posts = await getPosts()

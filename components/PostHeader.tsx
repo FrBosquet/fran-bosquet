@@ -1,4 +1,3 @@
-import Head from "next/head"
 import Image from "next/image"
 import { dateFormatter } from "../lib/dateFormatter"
 import { Post } from "../lib/types"
@@ -8,9 +7,6 @@ type Props = Post
 
 export const PostHeader = ({ title, date, tags, image }: Props) => {
 	return <>
-		<Head>
-			<title>{title}</title>
-		</Head>
 		<header className="border-b-2 border-gray-500 pb-2 mb-4">
 			<h1 className="text-4xl md:text-5xl bg-gradient-to-r from-orange-500 to-orange-200 text-transparent  py-2 bg-clip-text">{title}</h1>
 			<span className="text-sm text-violet-300">{dateFormatter.format(new Date(date))}</span>
