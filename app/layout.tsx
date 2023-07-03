@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { GithubIcon, InstagramIcon, TwitterIcon } from "components/icons";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -33,6 +34,7 @@ export default function Layout({ children }: {
             </header>
             <article className='container mx-auto px-4 pb-4 max-w-2xl'>
               {children}
+              <Analytics />
             </article>
           </section>
         </main>
