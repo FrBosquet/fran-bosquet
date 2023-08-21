@@ -8,7 +8,7 @@ import '../styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Fran Bosquet',
-  description: 'Blog de Fran Bosquet',
+  description: 'Blog de Fran Bosquet: Programación web, desarrollo de software, tecnología. Mi viaje como desarrollador web a partir de Ironhack.',
   viewport: 'width=device-width, initial-scale=1',
   icons: '/favicon.ico'
 }
