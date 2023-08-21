@@ -17,7 +17,7 @@ const mdxComponents = {
     <img className="w-auto mb-1" alt={props.alt} src={props.src} />
     <p className="font-thin">{props.alt}</p>
   </div>,
-  blockquote: (props: HTMLAttributes<HTMLQuoteElement>) => <blockquote className="p-3 bg-gray-800 rounded-lg mb-4 shadow-md">{props.children}</blockquote>,
+  blockquote: (props: HTMLAttributes<HTMLQuoteElement>) => <blockquote className="p-3 bg-gray-800 rounded-lg mb-4 shadow-md text-lg italic text-slate-400">{props.children}</blockquote>,
   ul: (props: HTMLAttributes<HTMLUListElement>) => <ul className="mb-4">{props.children}</ul>,
   li: (props: HTMLAttributes<HTMLLIElement>) => <li className="ml-4 list-item list-disc">{props.children}</li>,
   a: (props: HTMLAttributes<HTMLAnchorElement>) => <a {...props} target="_blank" className="text-orange-400 visited:text-violet-300">{props.children}</a>,

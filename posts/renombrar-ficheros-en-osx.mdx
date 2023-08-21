@@ -1,0 +1,159 @@
+---
+title: 'Cuidado con renombrar ficheros de tu proyecto en OSX'
+date: 8-21-2023
+tags:
+- git
+- next
+- osx
+- vercel
+image: {
+	src: 'build-failed.webp',
+	author: 'Fran Bosquet',
+	authorUrl: 'https://franbosquet.com',
+}
+published: true
+---
+
+Durante este mes de agosto estoy trabajando en [expentrac](https://expentrac.vercel.app), una app para controlar cuanto dinero se me va cada mes en dos categorías de riesgo: Pagos a plazos y suscripciones. Y es que soy un poco desastre con el dinero y me cuesta mucho controlarme a la hora de darme caprichos.
+
+> Y al final termino pagando ropa a plazos y suscrito a Crunchyroll, XBox Game Pass y Audible, servicios que luego no uso.
+
+Así que a primeros de mes y aprovechando que agosto lo paso lejos de Madrid (y por tanto, lejos de las mil distracciones que tengo en casa), decidí ponerme manos a la obra y crear una app que me ayudara a visibilizar y mis gastos y de ese modo controlarlos. Hasta el momento me ha servido para darme cuenta de que estaba pagando por dos suscripciones de google drive, una de ellas que no usaba. Así como una a un servicio premium de la app de entrenamiento de Adidas, que llevaba meses sin usar. Por lo que ya he ahorrado unos 15€ al mes con la app.
+
+## ¿Cómo está hecho expentrac?
+
+Como todo lo que hago últimamente, decidí utilizar [Next 13](https://nextjs.org/) y alojarlo en [Vercel](https://vercel.com/), utilizando [Auth.js](https://authjs.dev/) junto con el SSO de google para la autenticación.
+
+Para dar estilos a la aplicación, decidí utilizar [Tailwind CSS](https://tailwindcss.com/), pero utilizando [radix ui](https://radix-ui.com/) como _headless ui_, y sobre ello [shadcn ui](https://shadcn-ui.vercel.app/) como base para el sistema de diseño. Si bien la ergonomía no es ideal, y el próximo proyecto lo montaré sobre otra base (probablemente [next ui](https://nextui.org/) o _Radix Ui Themes_), la colección de componentes de [Shadcn](https://twitter.com/shadcn) me ha servido para montar interfaces rápidamente y con un UX impecable.
+
+Finalmente, he aprovechado este proyecto para reconciliarme con [Prisma](https://www.prisma.io/), que junto con _Vercel postgres_ y _TypeScript_ me están proporcionando una experiencia de desarrollo de la capa de persistencia de datos (la BBDD, vamos) rápida, segura y super agradable.
+
+Cuando termine el proyecto en unas semanas, me gustaría hacer un postmortem para explayarme sobre este stack, que me está dando muchas alegrías. Si eres un desarrollador React, te recomiendo que le eches un vistazo a estos paquetes, ya que te pueden ayudar a acelerar tus proyectos enormemente.
+
+> Si eres un lector antiguo del blog, sabras que probablemente, ese post nunca llegue
+
+## ¿Qué tiene que ver esto con el título del post?
+
+Ayer me encontré con una pequeña sorpresa al intentar mezclar la rama en la que estoy trabajando ahora mismo a `main`. La build funcionaba perfectamente en mi Mac, pero en el servidor fallaba con un error bastante extraño: Los imports eran incapaces de encontrar determinados archivos.
+
+![import error](/images/import-error.webp)
+
+Después de volverme bastante loco durante una hora, descubrí que el problema viene de que los nombres de los archivos en macOS no distinguen entre mayúsculas y minúsculas. Esto es así porque el sistema de archivos de macOS, HFS+, no es sensible al caso. De este modo, no puedes tener dos archivos `foo.md` y `FOO.md` en la misma carpeta, ya que para OSX son el mismo archivo.
+
+Git, por otro lado, sí distingue entre mayúsculas y minúsculas. Esto se debe a que Git se creó originalmente para ser el sistema de control de versiones del kernel de Linux, que sí distingue entre mayúsculas y minúsculas. Pero como el sistema operativo no lo hace,_en OSX Git por defecto no tiene en cuenta el casing de los archivos cuando modificas el nombre de archivo cambiando solo el casing_.
+
+Hablando en plata, en OSX, por defecto, git no considera este renombre un cambio:
+
+`foo.md -> FOO.md`
+
+Pero si que considera un cambio:
+
+`foo.md -> FOO_file.md`
+
+En mi caso, se me ocurrió la brillante idea de cambiar mi sistema de nombrado de archivo. Normalmente sigo el dogma de:
+
+- Un archivo, un componentes
+- Named export, nunca default
+- El nombre del archivo es el nombre del componente
+
+Con este proyecto he llegado a la conclusión de que este dogma no es tan bueno como pensaba, ya que acabo con un montón de archivos que exportan cosas que tienen cosas en común El proceso mental fué como sigue: al principio tenía carpetas por dominio, por ejemplo `loan`, tal que así:
+
+```
+loan
+├── LoanForm.tsx
+├── LoanAdd.tsx
+├── LoanEdit.tsx
+├── LoanContext.tsx
+...
+```
+
+Me dí cuenta de que el propio nombre de la carpeta ya me estaba dando contexto sobre a qué dominio pertenecían los componentes, por lo que decidí cambiar el sistema de nombrado de archivos a algo más parecido a esto:
+
+```
+loan
+├── Form.tsx
+├── Add.tsx
+├── Edit.tsx
+├── Context.tsx
+...
+```
+
+Y comitee ese cambio. Hasta aquí sin problemas. Sin embargo, mas adelante me dí cuenta de que dentro de cada uno de esos archivos, ya no estaba exportando solo un componente con el mismo nombre del archivo. En `Context.tsx` por ejemplo, estaba exportando un _react context_ llamado `LoanContext`, un provider llamado `LoanProvider` y un _hook_ llamado `useLoans`. Por tanto, ¿Qué sentido tenía ya que el nombre del archivo comenzara en mayúsculas si no se correspondía con el componente exportado? Así que ejecuté el paso prohibido:
+
+```
+loan
+├── form.tsx
+├── add.tsx
+├── edit.tsx
+├── context.tsx
+...
+```
+
+Y aquí es donde la build comenzó a fallar en el servidor de Vercel, pero seguí funcionando localmente. Y es que, por los motivos explicados, el archivo `add.tsx` seguía siendo `Add.tsx` en el servidor linux que ejecuta la build en Vercel, pero no en mi Mac.
+
+Por lo tanto, si trabajas en un repositorio Git en macOS (u otro OS que use un sistema de archivos insensible, como APFS, HFS+, etc) pero despliegas en un entorno Linux, es posible que te encuentres con problemas si te dedicas a renombrar el casing de los archivos. Si bien es algo que no se suele hacer (es la primera vez que me pasa en los seis años que llevo trasteando mac-linux), es util tenerlo en mente y no perder la cabeza como yo ayer.
+
+También es buena cosa fijarse en qué leches metes en cada commit, y comprobar el CI en cuanto falle. Vercel por ejemplo manda un email si el build de tu rama falla tras hacer push. Si hubiera comprobado que git no estaba considerando el rename de los archivos, o las builds cuando falló la primera, hubiese detectado el problema mucho antes.
+
+## ¿Cómo solucionarlo?
+
+Renombrar los archivos manualmente en git. Al igual que puedes renombrar un archivo en tu sistema utilizando `mv <archivo> <nuevo-nombre>`, puedes utilizar el comando `git mv <archivo> <nuevo-nombre>`. En mi caso por ejemplo, para renombrar `add.tsx` a `Add.tsx`:
+
+```
+git mv Add.tsx add.tsx
+```
+
+Sin embargo, el archivo yá se llamaba `add.tsx` en el sistema de archivos, por tanto el comando `git mv` da un error _bad source_ ya que el archivo no existe. Para solucionarlo, hay que renombrar el archivo la nombre original (o cualquier otro nombre temporal) con `mv` y luego renombrarlo al nombre correcto con `git mv`:
+
+```bash
+mv add.tsx Add.tsx
+git mv Add.tsx add.tsx
+```
+
+De este modo, git ya identifica el cambio y podemos hacer commit:
+
+```bash
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        renamed:    Add.tsx -> add.tsx
+```
+
+Alternativamente, podemos ahorrarnos el escribir todo esto y utilizar el flag `-f` de `git mv` para forzar el renombrado. Aun cuando el archivo `Add.tsx` no exista en el sistema de archivos, este comando indicará a git que debe realizar dicho renombrado:
+
+```bash
+git mv -f Add.tsx add.tsx
+```
+
+### ¿Demasiado trabajo?
+
+Copilot mediante, he creado este pequeño archivo para renombrar aquellos archivos que me estaban dando problemas:
+
+```bash
+files=("delete.tsx" "detail.tsx" "edit.tsx" "edit.tsx")
+
+for file in "${files[@]}"; do
+  first_letter=$(echo "${file:0:1}" | tr '[:lower:]' '[:upper:]')
+  rest=$(echo "${file:1}")
+
+  capitalized="${first_letter}${rest}"
+  git mv -f "$capitalized" "$file"
+done
+```
+
+De este modo me he quitado el muerto de encima en un solo comando.
+
+## Conclusiones
+
+Como todo en esta vida menos la muerte, el problema tenía solución. Lamentablemente, no existe un modo de hacer que git sea sensible al casing de los archivos en OSX. Puede que encuentres por ahí que puedes sobrescribir la configuración de git para ignorar el casing:
+
+```bash
+git config core.ignorecase false
+```
+
+Pero esto no soluciona el problema ya que esa configuración está ahí para igualar el valor del SO: Seguirá sin detectar estos renombrado y te generará otros problemas.
+
+Mi consejo: Utiliza un sistema de nombrado y colocación de archivos coherente desde el inicio de tu proyecto. En este caso la moraleja es si usas carpetas por dominio, no iguales el nombre de archivo al del componente. Y comprueba siempre si tus cambios están siendo capturados por git, sobre todo cuando estos se refieran a cambios en el sistema de archivos y no en el contenido de los archivos en si.
+
+Por lo demás, la beta de [Expentrac](https://expentrac.vercel.app) es visitable, pero el SSO está en modo beta así que no podréis loguearos. Si quieres probarlo, puedes mandarme un [MD por X](https://twitter.com/fran_bosquet) y añadiré vuestro gmail como usuario de prueba para que le eches un ojo
+
+Gracias por llegar hasta aquí ¡Feliz desarrollo!
