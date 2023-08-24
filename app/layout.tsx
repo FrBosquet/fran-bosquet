@@ -1,7 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
-import { GithubIcon, InstagramIcon, TwitterIcon } from "components/icons";
+import { Header } from "components/Header";
 import { Metadata } from "next";
-import Link from "next/link";
 import React from "react";
 import { poppins } from "styles/fonts";
 import '../styles/globals.css';
@@ -18,21 +17,11 @@ export default function Layout({ children }: {
 }) {
   return (
     <html lang="es">
-      <body>
+      <body className="bg-fixed bg-gradient-to-b from-gray-900 to-gray-800 text-gray-200">
         <main className={`${poppins.variable} font-sans`}>
-          <section className="bg-fixed bg-gradient-to-b from-gray-800 to-gray-700 min-h-screen text-gray-200">
-            <header className='p-4 flex items-center gap-2 container mx-auto'>
-              <Link href="/">
-                <h1 className='text-2xl'>Fran<span className='text-violet-400'>Bosquet</span></h1>
-              </Link>
-              <p className='text-gray-500 text-sm hidden md:block'>Mi blog personal</p>
-              <menu className='flex-1 flex items-center gap-2 justify-end'>
-                <a href="https://github.com/FrBosquet" target="_blank" rel="noreferrer"><GithubIcon className="w-5 hover:text-violet-400 transition-all" /></a>
-                <a href="https://twitter.com/FrBosquet" target="_blank" rel="noreferrer"><TwitterIcon className="w-5 hover:text-violet-400 transition-all" /></a>
-                <a href="https://instagram.com/frbosquet" target="_blank" rel="noreferrer"><InstagramIcon className="w-5 hover:text-violet-400 transition-all" /></a>
-              </menu>
-            </header>
-            <article className='container mx-auto px-4 pb-4 max-w-2xl'>
+          <section className="min-h-screen  mx-auto max-w-[1280px]">
+            <Header />
+            <article className='mx-auto p-4 lg:px-8 pb-4'>
               {children}
               <Analytics />
             </article>

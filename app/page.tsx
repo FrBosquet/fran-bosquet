@@ -4,7 +4,7 @@ import { getPosts } from "lib/posts"
 export default async function Page() {
   const posts = await getPosts()
 
-  return <section className='flex flex-col gap-4 py-6'>
+  return <section className='grid gap-4 lg:gap-8 xl:gap-12 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
     {posts.map(post => {
       return <PostLink post={post} key={post.slug} />
     })}
