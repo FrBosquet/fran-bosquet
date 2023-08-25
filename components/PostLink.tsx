@@ -32,7 +32,7 @@ export const PostLink = ({ post, featured }: Props) => {
 		</div>
 		<div className='flex justify-between flex-col flex-1 h-full gap-2'>
 
-			<Link as="h2" href={`/post/${post.slug}`} data-featured={isFeatured} className='font-mono
+			<Link href={`/posts/${post.slug}`} data-featured={isFeatured} className='font-mono
 			text-teal-200
 			text-lg sm:text-2xl
 			lg:data-[featured=true]:text-4xl
