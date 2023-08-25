@@ -6,15 +6,18 @@ import { Tag } from "./Tag"
 
 type Props = {
 	post: Post
+	featured?: boolean
 }
 
-export const PostLink = ({ post }: Props) => {
+export const PostLink = ({ post, featured }: Props) => {
+	const isFeatured = featured || post.featured
+
 	return <Link href={`/posts/${post.slug}`
-	} data-featured={post.featured} className="w-full gap-6 flex group transition-all border-b border-white/30
+	} data-featured={isFeatured} className="w-full gap-6 flex group transition-all border-b border-white/30
 	lg:data-[featured=true]:col-span-2
 	xl:data-[featured=true]:col-span-3
 	" >
-		<div data-featured={post.featured} className='aspect-[1/2] w-28 relative overflow-hidden
+		<div data-featured={isFeatured} className='aspect-[1/2] w-28 relative overflow-hidden
 		transition-all
 		filter
 		group-hover:brightness-125
@@ -30,7 +33,7 @@ export const PostLink = ({ post }: Props) => {
 		</div>
 		<div className='flex justify-between flex-col flex-1 h-full gap-2'>
 
-			<h2 data-featured={post.featured} className='text-lg text-teal-200 sm:text-2xl
+			<h2 data-featured={isFeatured} className='text-lg text-teal-200 sm:text-2xl
 			lg:data-[featured=true]:text-4xl
 			transition-all
 			group-hover:text-white
