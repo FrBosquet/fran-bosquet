@@ -33,7 +33,9 @@ export const PostLink = ({ post, featured }: Props) => {
 		</div>
 		<div className='flex justify-between flex-col flex-1 h-full gap-2'>
 
-			<h2 data-featured={isFeatured} className='text-lg text-teal-200 sm:text-2xl
+			<h2 data-featured={isFeatured} className='font-mono
+			text-teal-200
+			text-lg sm:text-2xl
 			lg:data-[featured=true]:text-4xl
 			transition-all
 			group-hover:text-white
