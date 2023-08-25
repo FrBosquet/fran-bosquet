@@ -2,17 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* clean up these */
+
 .author {
-	padding-bottom: 0.25rem;
-	color: var(--lt-color-gray-600);
+  padding-bottom: 0.25rem;
+  color: var(--lt-color-gray-600);
 }
 
 .author a {
-	font-size: small;
-	color: var(--lt-color-gray-500);
-	transition: 150ms;
+  font-size: small;
+  color: var(--lt-color-gray-500);
+  transition: 150ms;
 }
 
 .author a:hover {
-	color: rgb(167 139 250 / 1);
+  color: rgb(167 139 250 / 1);
+}
+
+body {
+  background: url('/images/nightsky.webp');
+  background-attachment: fixed;
+  background-size: cover;
 }

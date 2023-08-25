@@ -1,17 +1,20 @@
 import Link from "next/link"
 import { GithubIcon, InstagramIcon, TwitterIcon } from "./icons"
+import { Social } from "./Social"
 
 export const Header = () => {
-  return <header className='p-4 md:p-6 lg:p-8 flex items-center gap-2 relative'>
+  return <header className='
+    realtive flex items-center gap-2
+    lg:flex-col lg:justify-center
+    p-4 md:p-6 lg:p-8
+    lg:h-80
+    bg-gradient-to-b from-gray-900/10 to-gray-900 filter
+    '>
 
     <Link href="/">
-      <h1 className='text-2xl md:text-4xl lg:text-5xl'>Fran<span className='text-teal-400'>Bosquet</span></h1>
+      <h1 className='text-2xl md:text-4xl lg:text-7xl'>Fran<span className='text-teal-400'>Bosquet</span></h1>
     </Link>
     <p className='text-gray-500 text-sm hidden md:block'>Mi blog personal</p>
-    <menu className='flex-1 flex items-center gap-2 justify-end'>
-      <a href="https://github.com/FrBosquet" target="_blank" rel="noreferrer"><GithubIcon className="w-5 lg:w-6 hover:text-teal-400 transition-all" /></a>
-      <a href="https://twitter.com/FrBosquet" target="_blank" rel="noreferrer"><TwitterIcon className="w-5 lg:w-6 hover:text-teal-400 transition-all" /></a>
-      <a href="https://instagram.com/frbosquet" target="_blank" rel="noreferrer"><InstagramIcon className="w-5 lg:w-6 hover:text-teal-400 transition-all" /></a>
-    </menu>
+    <Social />
   </header>
 }
