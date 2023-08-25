@@ -17,8 +17,8 @@ export default function Layout({ children }: {
 }) {
   return (
     <html lang="es">
-      <body className="text-gray-200">
-        <main className={`${poppins.variable} font-sans`}>
+      <body>
+        <main className={`${poppins.variable} font-sans text-gray-200`}>
           <section className="min-h-screen flex flex-col">
             <Header />
             <article className='flex-1 bg-gradient-to-b from-gray-900 to-gray-800'>
