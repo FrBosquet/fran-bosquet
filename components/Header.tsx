@@ -8,7 +8,9 @@ export const Header = () => {
     lg:flex-col lg:justify-center
     p-4 md:p-6 lg:p-8
     lg:h-80
-    bg-gradient-to-b from-gray-900/10 to-gray-900 filter
+    bg-gradient-to-b 
+    from-gray-800 to-gray-900
+    lg:from-gray-900/10 lg:to-gray-900
     '>
 
     <Link href="/">

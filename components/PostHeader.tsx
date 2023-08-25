@@ -15,8 +15,8 @@ export const PostHeader = ({ title, date, tags, image }: Props) => {
 			</div>
 			{image ? <><div className="w-full h-60 relative rounded-lg overflow-hidden my-2 shadow-lg">
 				<Image alt="splash" src={`/images/${image.src}`} fill style={{ objectFit: 'cover' }}></Image>
-			</div> <section className="author">
-					<div>Foto de <a href={image.authorUrl}>{image.author}</a> {image.sourceUrl ? <>en <a href={image.sourceUrl}>{image.source}</a></> : null}</div>
+			</div> <section className="text-slate-600 pb-1 text-xs">
+					<div>Foto de <a className="text-slate-500 transition hover:text-teal-300" href={image.authorUrl}>{image.author}</a> {image.sourceUrl ? <>en <a className="text-slate-500 transition hover:text-teal-300" href={image.sourceUrl}>{image.source}</a></> : null}</div>
 				</section></> : null}
 		</header>
 	</>

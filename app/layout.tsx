@@ -19,7 +19,7 @@ export default function Layout({ children }: {
     <html lang="es">
       <body className="text-gray-200">
         <main className={`${poppins.variable} font-sans`}>
-          <section className="min-h-screen  mx-auto max-w-[1280px] ">
+          <section className="min-h-screen">
             <Header />
             <article className='mx-auto p-4 lg:px-8 pb-4 bg-gradient-to-b from-gray-900 to-gray-800'>
               {children}
