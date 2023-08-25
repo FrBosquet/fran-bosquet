@@ -26,7 +26,7 @@ export const getPostSlugs = (): string[] => {
 	return fileNames.map(name => name.replace('.mdx', ''))
 }
 
-export const getPosts = async (): Promise<Post[]> => {
+export const getPosts = async (tag?: string): Promise<Post[]> => {
 	const fileNames = getPostsFileNames()
 
 	const posts: Post[] = await Promise.all(fileNames.filter(name => !ignore.includes(name)).map(async name => {
@@ -42,7 +42,7 @@ export const getPosts = async (): Promise<Post[]> => {
 	}))
 
 	return posts
-		.filter(post => post.published)
+		.filter(post => post.published && (!tag || post.tags?.includes(tag)))
 		.sort((a, b) => new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1)
 }
 

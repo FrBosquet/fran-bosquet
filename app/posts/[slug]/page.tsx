@@ -4,6 +4,7 @@ import { getPost, getPostSlugs } from "lib/posts";
 import { Post } from "lib/types";
 import { Metadata } from "next";
 import { MdxContent } from "./MdxContent";
+import Link from "next/link";
 
 type Props = {
   params: {
@@ -15,17 +16,16 @@ export default async function Page({ params: { slug } }: Props) {
   const post = await getPost(slug)
   const meta = post.frontmatter as Post
 
-  return <>
-    <section className='flex flex-col gap-4 py-6 relative'>
-      <aside className="sticky top-0 h-0 hidden md:block">
-        <a href="/" className="-left-20 p-8 text-orange-500 hover:text-violet-400 hover:-left-24 absolute transition-all">
-          <BackIcon className="w-6 h-6 transition-all" />
-        </a>
-      </aside>
-      <PostHeader {...meta} />
-      <MdxContent source={post} />
-    </section>
-  </>
+  return <section className='flex flex-col gap-4 py-6 relative container max-w-[700px] mx-auto'>
+    <aside className="sticky top-0 h-0 hidden md:block">
+      <Link href="/" className="-left-20 p-8 text-white hover:text-teal-400 hover:-left-24 absolute transition-all">
+        <BackIcon className="w-6 h-6 transition-all" />
+      </Link>
+    </aside>
+    <PostHeader {...meta} />
+    <MdxContent source={post} />
+  </section>
+
 }
 
 export async function generateStaticParams() {
