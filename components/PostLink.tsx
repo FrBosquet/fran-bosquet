@@ -12,8 +12,7 @@ type Props = {
 export const PostLink = ({ post, featured }: Props) => {
 	const isFeatured = featured || post.featured
 
-	return <Link href={`/posts/${post.slug}`
-	} data-featured={isFeatured} className="w-full gap-6 flex group transition-all border-b border-white/30
+	return <article data-featured={isFeatured} className="w-full gap-6 flex group transition-all border-b border-white/30
 	lg:data-[featured=true]:col-span-2
 	xl:data-[featured=true]:col-span-3
 	" >
@@ -33,13 +32,13 @@ export const PostLink = ({ post, featured }: Props) => {
 		</div>
 		<div className='flex justify-between flex-col flex-1 h-full gap-2'>
 
-			<h2 data-featured={isFeatured} className='font-mono
+			<Link as="h2" href={`/post/${post.slug}`} data-featured={isFeatured} className='font-mono
 			text-teal-200
 			text-lg sm:text-2xl
 			lg:data-[featured=true]:text-4xl
 			transition-all
 			group-hover:text-white
-			'>{post.title}</h2>
+			'>{post.title}</Link>
 
 			<div className='flex-1 gap-2 hidden sm:flex py-2'>
 				{post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
@@ -51,5 +50,5 @@ export const PostLink = ({ post, featured }: Props) => {
 
 
 		</div>
-	</Link>
+	</article>
 }
