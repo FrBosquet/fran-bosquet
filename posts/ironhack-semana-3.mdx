@@ -5,7 +5,7 @@ tags:
 - personal
 - ironhack
 image: {
-	src: 'irongunzsplash.png',
+	src: 'irongunzsplash.webp',
 	author: 'Fran Bosquet',
 	authorUrl: 'https://www.franbosquet.com'
 }
@@ -30,7 +30,7 @@ El domingo previo a este lunes ya pasé unas cuantas horas en IronHack planifica
 
 Que me lio. El lunes me planté allí bien temprano, como a mi me gusta. Dediqué la primera hora a planificar mis tareas para la semana. He sido muy ambicioso con este proyecto y, desde el primer momento, me plantee hacerlo todo por mi mismo: Sin frameworks ni librerías JS, gráficos pintados a mano con **GIMP** y música en **Fruity Loops**. Quería hacer algo muy personal y muy potente. Me encanta el desarrollo de videojuegos, así que la motivación me estaba rebosando por la orejas y quería petarlo bien fuerte.
 
-![Diagrama de clases para la lógica de IronGunZ](/images/uml.png)
+![Diagrama de clases para la lógica de IronGunZ](/images/uml.webp)
 
 > ### Anotación de 2023
 >
@@ -44,7 +44,7 @@ Por otro lado, hice un tablero de trello en el que anoté todas las tareas que p
 
 Las semanas de proyecto tenemos una rutina muy marcada: A las 9 de la mañana katas, el resto del día proyecto. Las katas son simplemente ejercicios de programación en CodeWars planteados a modo de entrenamiento para entrevistas de trabajo. Proponen un ejercicio concreto, te dan una hora y media y van anotando quien acaba y en cuanto tiempo. No puedo evitar que, con estas cosas, me salga la vena competitiva, así que he disfrutado mucho con estos ejercicios: Entregandolos cuanto antes y utilizando el menor numero de lineas. Un ejemplo:
 
-![Dos códigos distintos que hacen lo mismo](/images/kata.png)
+![Dos códigos distintos que hacen lo mismo](/images/kata.webp)
 
 (Obviamente esta no es una kata de IronHack, no voy a destripar el curso a los futuros alumnos que sé que me leen). En la captura anterior, ambos códigos cumplen la misma función, pero obviamente el mio (el de abajo) es mas compacto y conciso (e ilegible, si no estas acostrumbrado a JS).
 
@@ -84,11 +84,11 @@ Tras la kata, cogí mis diagramas UML de clases y empecé a codificar mi modelo 
 
 Como ya tenía algo tangible, decidí empezar a representar en el DOM. Tuve la gran suerte de que mi compañera Sara (@fierydancing117) se sentó a mi lado y me enseño la genial [Piskel](https://www.piskelapp.com/). Piskel es un editor online de sprites, muy sencillo, potente y gratuito. Gracias a el he podido dibujar mis gráficos utilizando la tablet y el ordenador indistintamente, guardandolos en la nube, animando gifs, etc. sin perder mucho tiempo. Si lo hubiese hecho con GIMP el resultado habría sido mucho, mucho peor ¡Gracias Sara!
 
-![Piskel app, editor de sprites online](/images/piskel.png)
+![Piskel app, editor de sprites online](/images/piskel.webp)
 
 Para el final del día, ya podía generar aleatoriamente un escenario, llenarlo de cajas y columnas y representarlo en el navegador. Una buena decisión de diseño fue crear un fichero de configuración en el que fui declarando variables globales. De este modo, podía cambiar en una linea cosas como cuantas cajas y columnas generar o que tamaño tenía el tablero.
 
-![Fichero de configuración con variables globales disponibles en todo el programa](/images/configjs.png)
+![Fichero de configuración con variables globales disponibles en todo el programa](/images/configjs.webp)
 
 > ### Anotación de 2023
 >
@@ -112,7 +112,7 @@ Cuando empecé a trabajar en IronGunZ decidí limpiar un poco el código del dí
 >
 > A estas alturas, aun no tenía demasiada idea acerca de qué iba React realmente.
 
-![DOM.js mi generador de elementos HTML](/images/domjs.png)
+![DOM.js mi generador de elementos HTML](/images/domjs.webp)
 
 ## IronPizzas
 
@@ -124,7 +124,7 @@ IronHack es como una familia (no nos gusta la palabra secta) y como tal, cuida a
 >
 > Por otro lado, bastante ridículo este parrado overreacting por unas telepizzas, parezco de un pueblo remoto del monte
 
-![Brutales IronPizzas en IronHack](/images/telepizza.jpg)
+![Brutales IronPizzas en IronHack](/images/telepizza.webp)
 
 El objetivo era juntarnos con el bootcamp de UX y socializar un poco con ellos. Por una barbacoa del telepi lo que sea, así que eso hicimos. Intenté moderar la ingesta porque la tarde se podía hacer muy cuesta arriba. Otros compañeros enfocaron el problema de manera alternativa y casi explotan :D
 
@@ -150,7 +150,7 @@ Pero lo bueno de eso es que de ahí solo podía ir hacia arriba. Y así hizo. Mi
 
 Lo segundo, implementar el sistema de colisiones con el escenario, de modo que el jugador no pudiese salirse del mismo ni atravesar cajas y columnas. El algoritmo no es muy bueno, pero estaba en racha y una vez fue funcional lo dejé estar. A día de hoy, sigue pendiente de refactorizar.
 
-![IronHacker in the mirror](/images/reflejo.jpg)
+![IronHacker in the mirror](/images/reflejo.webp)
 
 A continuación, el algoritmo de encaramiento de los jugadores. Trigonometría básica. Y con la gestión de modificación del DOM implementada, representado en el escenario sin problemas. Es importantísimo crear tus herramientas básicas al principio, de modo que cuando entras en racha empieces a desarrollar a un ritmo muy alto sin pararte a crear funcionalidades auxiliares. En este sentido, miro a la mañana del martes y veo que no fue ni mucho menos una mañana perdida. Por el contrario fue, quizás, una de las mas productivas de la semana.
 
@@ -194,7 +194,7 @@ Me puse a implementarlo y en media hora ya era funcional. Como decía, gracias a
 
 Aquí ya estaba yo muy arriba y me daba igual ocho que ochenta. Implementé un sistema de personajes y armas, en el que cada uno tiene unas caracteristicas distintivas y condicionan el estilo de juego. Varian la precisión, el daño, la cadencia de fuego, la envergadura del jugador, la vida... En un futuro me gustaría cambiar también la velocidad de movimiento y añadir habilidades especiales a cada jugador.
 
-![Tiroteo en IronGunz, notese el aspecto 16bits y el ambiente cyberpunk](/images/irongunz.png)
+![Tiroteo en IronGunz, notese el aspecto 16bits y el ambiente cyberpunk](/images/irongunz.webp)
 
 ## Audio
 
@@ -250,15 +250,15 @@ Me gustaría continuar con el desarrollo del juego y lo mantendré como side pro
 
 ## La presentación
 
-![Día de las presentaciones del primer proyecto en IronHack](/images/presentacionjuego.jpg)
+![Día de las presentaciones del primer proyecto en IronHack](/images/presentacionjuego.webp)
 
 A las una nos fuimos a comer a un japones con Lluis Arevalo (@LluisArevalo, desarrollador en IronHack), Miguel Moracho (@XenoxkWorld, Nuestro TA de huelva), Pablo G. Onieva (@PabloGOnieva, Growth Hacker en Ironhack) y mis compañeros Mikel, Mónica y Sara. Volvimos sobre las 16:30 y le dimos una última vuelta antes de empezar. A las 14:55 nos dieron el orden de exposición y sobre las 15:00 comenzamos. Mi turno llegó sobre las 16:30. Por suerte, mi chica llego a tiempo de verme y eso me hizo crecerme aun mas. La exposición fue razonablemente bien, con algún problemilla propio del directo, pero muy contento por el resultado.
 
-![Recibiendo aplausos con mi peor pose](/images/posehorrible.jpg)
+![Recibiendo aplausos con mi peor pose](/images/posehorrible.webp)
 
 Terminamos algo después y los profesores se retiraron a deliberar. Tuve ocasión de saludar a mi buddy Mikel Garcia (@Gartzia6), y revisar mi código con el. Me dio unos cuantos tips (bueno, mas bien un rapapolvo :D ) sobre mi forma de programar y estoy deseando poner en practica sus consejos a partir de mañana lunes. Tras esto, procedieron a anunciar los 5 proyectos que competirán por redes sociales para ser votados como el ganador de esta edición.
 
-![Seleccionados para competir por el premio al mejor juego](/images/ganadoresjuego.png)
+![Seleccionados para competir por el premio al mejor juego](/images/ganadoresjuego.webp)
 
 Pues sí: Allí estaba yo. Creo que el puntito competitivo es sano y, personalmente, lo disfruto mucho. Estoy muy contento de haberme colocado entre los cinco mejores primeros proyectos de este bootcamp. Estoy ademas muy orgulloso de mis compañeros. Hay gente entre esos cinco que no habían programado ni el reproductor de vídeo hasta hace dos meses, y a base de puro trabajo han sacado proyectos interesantísimos. Otros compañeros también se han partido la espalda y creo que todos deben estar muy orgulosos de lo que han hecho esta semana. Ha sido puro IronHack.
 
@@ -268,7 +268,7 @@ Tras esto, IronBeers de rigor, networking, cervecitas con los compañeros, etc. 
 
 El sábado quedé con varios compañeros para comer y pasar un rato al margen de IronHack. Nuestra compi Ana nos invito a su casa y Mónica nos hizo una deliciosa comida venezolana Al final se apuntaron los TAs y pasamos un rato genial echando unas risas y tomando unas cervezas.
 
-![IronHackers de sabadeo](/images/casaana.png)
+![IronHackers de sabadeo](/images/casaana.webp)
 
 Hoy de domingo, día en pareja y de descanso para coger fuerzas. Mañana empezamos Node y ahí ya no tengo ninguna ventaja competitiva mas que mi experiencia programando. Lo que si que tengo son muchísimas ganas de seguir creciendo en esta aventura.
 
