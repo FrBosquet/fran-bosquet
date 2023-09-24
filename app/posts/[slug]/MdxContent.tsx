@@ -3,6 +3,7 @@ import { PostHeader } from 'components/PostHeader';
 import { YoutubeEmbed } from 'components/YoutubeEmbed';
 import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { HTMLAttributes } from 'react';
+import { Tweet } from 'react-tweet';
 
 type MdxContentProps = {
   source: MDXRemoteSerializeResult
@@ -32,7 +33,8 @@ const mdxComponents = {
   em: (props: HTMLAttributes<HTMLElement>) => <em {...props} className="font-ligh text-gray-400">{props.children}</em>,
   code,
   PostHeader,
-  YoutubeEmbed
+  YoutubeEmbed,
+  Tweet
 }
 
 export function MdxContent({ source }: MdxContentProps) {
