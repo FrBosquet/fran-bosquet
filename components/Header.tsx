@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { GithubIcon, InstagramIcon, TwitterIcon } from "./icons"
 import { Social } from "./Social"
 
 export const Header = () => {

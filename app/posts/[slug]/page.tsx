@@ -3,8 +3,8 @@ import { BackIcon } from "components/icons";
 import { getPost, getPostSlugs } from "lib/posts";
 import { Post } from "lib/types";
 import { Metadata } from "next";
-import { MdxContent } from "./MdxContent";
 import Link from "next/link";
+import { MdxContent } from "./MdxContent";
 
 type Props = {
   params: {
@@ -25,7 +25,6 @@ export default async function Page({ params: { slug } }: Props) {
     <PostHeader {...meta} />
     <MdxContent source={post} />
   </section>
-
 }
 
 export async function generateStaticParams() {
