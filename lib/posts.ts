@@ -12,7 +12,7 @@ const ignore = [
 	'index.tsx',
 ]
 
-const POSTS_DIRECTORY = path.join(process.cwd(), 'posts')
+const POSTS_DIRECTORY = path.join(process.cwd(), 'app/posts/_content')
 
 export const getPostsFileNames = (): string[] => {
 	const fileNames = fs.readdirSync(POSTS_DIRECTORY)
