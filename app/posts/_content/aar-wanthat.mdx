@@ -7,7 +7,7 @@ tags:
 - firebase
 - AAR
 image: {
-  src: 'wanthatUi.png',
+  src: 'wanthatUi.webp',
   author: 'Fran Bosquet',
 	authorUrl: 'https://www.franbosquet.com',
 }
@@ -33,7 +33,7 @@ La idea era exponer lo que había hecho, lo que había aprendido y mis conclusio
 
 # AAR: Wanthat.io, el no reinventar la rueda y threejs journey
 
-![Wanthat.io](/images/wanthat.png)
+![Wanthat.io](/images/wanthat.webp)
 
 Como ahora quiero volver a darle vida al blog, creo que una buena manera es recuperar ese contenido que quedó un poco desamparado en twitter. Y de paso para traducirlo, ya que lo hice en Ingles en su momento y habrá gente que no lo lleve muy allá. Compartir mi opinión a día de hoy sobre las decisiones que tome durante aquel desarrollo.
 
@@ -41,19 +41,19 @@ Es una oportunidad para adoptar el nuevo modulo [react-tweet](https://vercel.com
 
 ## Introducción
 
-<Tweet id="1485215044178690053"/>
+<Tweet id="1485215044178690053" />
 
->¡Cómo publiqué una WebApp para conseguir [#threejsJourney](https://twitter.com/hashtag/threejsJourney)! Hilo🧵
+> ¡Cómo publiqué una WebApp para conseguir [#threejsJourney](https://twitter.com/hashtag/threejsJourney)! Hilo🧵
 
-<Tweet id="1485215045684445189"/>
+<Tweet id="1485215045684445189" />
 
 > Hace un mes mi novia me hizo el mejor regalo de Navidad posible: [#threejsJourney](https://twitter.com/hashtag/threejsJourney). Es un curso de programación para aprender a usar #threejs
 
-<Tweet id="1485215047236345860"/>
+<Tweet id="1485215047236345860" />
 
 > [#threejs](https://twitter.com/hashtag/threejs) es una librería JS que permite renderizar gráficos 3D en el navegador sin necesidad de lidiar con la api WEB GL de bajo nivel. El curso lo imparte [@bruno_simon](https://twitter.com/hashtag/@bruno_simon) y es sencillamente ¡IMPRESIONANTE!
 
-<Tweet id="1485215048800911362"/>
+<Tweet id="1485215048800911362" />
 
 > Three me llamó la atención porque hace algunos años solía jugar con Unity. Y echo mucho de menos trastear con gráficos 3d. Pero no C# ni Unity en sí, para nada. Así que un día decidí investigar qué podía hacer realmente con el navegador en ese sentido
 
@@ -63,17 +63,17 @@ Pero por otro lado, [Unity](https://unity.com/es) fue lo que me hizo recuperar l
 
 Por todo ello siempre le guardaré cariño a **Unity**, pero no lo volveré a tocar si puedo evitarlo.
 
-<Tweet id="1485215050369482755"/>
+<Tweet id="1485215050369482755" />
 
 > Y me quedé impresionado. El límite lo pone realmente tu tarjeta gráfica, así que hasta cierto punto tienes las manos libres para desarrollar juegos o experiencias 3D interactivas. Con shaders programables, transformaciones de malla en tiempo real, post-procesado... Todo en el navegador. Increíble
 
 Si no sabes de que va, mira los ejemplos en su [web](https://threejs.org/). Flipa con [esta web de canon](https://camera-webgi.vercel.app/) o esta de [Lamborghini](https://www.lamborghini.com/en-en/3d)
 
-<Tweet id="1485215051887874049"/>
+<Tweet id="1485215051887874049" />
 
 > Así que me puse a ello. La documentación no es muy amigable para los perezosos. Y yo soy perezoso. Así que busqué tutoriales paso a paso para empezar con esto. Encontré algunos en Youtube, algunos baratos en Coursera... Pero la impresión que obtuve de ellos fue muy pobre
 
-<Tweet id="1485215053469130754"/>
+<Tweet id="1485215053469130754" />
 
 > Hasta que me topé con el Mercedes-Benz de los cursos ThreeJs: threejs-journey.com. Mucho contenido, un profesor que realmente domina la biblioteca, un buen formato, una web atractiva... Esto era lo que buscaba. El problema: 95USD
 
@@ -83,21 +83,21 @@ Así que en la siguiente parte describo la pirueta moral y tecnológica que hube
 
 ## Motivación para hacer Wanthat
 
-<Tweet id="1485215055339831299"/>
+<Tweet id="1485215055339831299" />
 
 > No me malinterpreten: no tengo ningún problema con el precio. De hecho, me parece barato. El problema lo tengo yo con los cursos: Los compro, no los termino...
 
-<Tweet id="1485215056933568517"/>
+<Tweet id="1485215056933568517" />
 
 > Así que de un tiempo a esta parte intento no comprar cursos. Es triste, pero me conozco y si no estoy 100% enganchada acabo dejándolos. Y últimamente entre trabajo, proyectos paralelos y aficiones no tengo mucho tiempo libre que digamos
 
 Poco antes de esto utilicé el presupuesto de formación de **Taxfix** (la empresa en la que trabajo) para comprar [Advanced React & Graphql](https://advancedreact.com/). El curso estaba muy bien, como todo lo que hace [Wes Bos](https://twitter.com/wesbos), pero por falta de tiempo y al perder interés en el tema (reconozcámoslo de una vez: [GraphQL](https://graphql.org/) es un coñazo) lo acabé abandonando. Desde ese momento le cogí algo de "miedo" a comprar cursos, ya que al igual que todo lo demás los cojo con muchas ganas pero voy perdiendo el interés con el tiempo.
 
-<Tweet id="1485215058477170691"/>
+<Tweet id="1485215058477170691" />
 
 > Así que la única forma de conseguir el curso sin remordimientos de conciencia era que me lo regalaran. ¿De quién? Pues de la persona más cercana a mí, con la que pudiese hablar de ello lo suficiente como para que decidiera regalármelo por Navidad: ¡Mi novia Cristina! 🥰🥰🥰🥰
 
-<Tweet id="1485215060037414917"/>
+<Tweet id="1485215060037414917" />
 
 > Todo esto empezó en septiembre. Al principio le conté que existía el curso, que pensaba comprarlo, etc. Pero desde entonces a Navidad iba a ser difícil que se acordara y probablemente acabaría regalándome otra cosa.... Necesitaba un plan
 
@@ -107,19 +107,19 @@ Toda la historia suena fatal, pero he de mencionar que normalmente nos hacíamos
 
 Con Cristina me casé este 2023, por cierto 💑
 
-<Tweet id="1485215061551591427"/>
+<Tweet id="1485215061551591427" />
 
 > Como desarrollador, la solución estaba clara: necesitaba una aplicación. Una lista de deseos que los usuarios pudieran consultar para tener una idea clara de qué regalar a un amigo. Así me daría exactamente el regalo que quería
 
-<Tweet id="1485215063065739265"/>
+<Tweet id="1485215063065739265" />
 
 > Y al mismo tiempo tendría una herramienta para no agobiarme tanto a la hora de hacer un regalo. ¡Soy un desastre cuando se trata de hacer regalos!
 
-<Tweet id="1485215064600809473"/>
+<Tweet id="1485215064600809473" />
 
 > Y, de hecho, ya había hecho una aplicación así: **Whantit** fue mi proyecto final en [@IronhackMAD](https://twitter.com/hashtag/@IronhackMAD). Era básicamente eso: una lista social de deseos. Puedes consultar el repositorio de hace 5 años aquí [github.com/FrBosquet/wantit](github.com/FrBosquet/wantit)
 
-<Tweet id="1485215066307846144"/>
+<Tweet id="1485215066307846144" />
 
 > Pero por aquel entonces estaba empezando en el desarrollo web, la hice en Angular 4 y Express y tenía un montón de funcionalidades innecesarias (una base de datos de marcas y productos, por ejemplo). Más allá de la idea, poco partido se le podía sacar
 
@@ -127,11 +127,11 @@ Puedes leer [la entrada que escribí en su momento sobre **Whantit**](https://fr
 
 ## Las piedras en el camino para desarrollar una aplicación, edición Fran
 
-<Tweet id="1485215067830423553"/>
+<Tweet id="1485215067830423553" />
 
 > Así que decidí empezar de cero: Una aplicación web moderna y atractiva que pudieran usar mis amigos, con un stack con el que me sintiera cómodo y que pudiera desarrollar rápidamente (antes de navidades, para poder conseguir ThreeJs Journey).
 
-<Tweet id="1485215069311057921"/>
+<Tweet id="1485215069311057921" />
 
 > El problema era este último: Soy lentísimo con mis proyectos paralelos. Y una de las razones es que tengo cierta manía a las librerías y frameworks
 
@@ -139,19 +139,19 @@ Desde que terminé [Ironhack](https://www.ironhack.com/es/en) y conseguí mis **
 
 Así que en el momento de afrontar **Wanthat** hice un poco de introspección buscando detectar por qué no era capaz de terminar nada. Llegué a la conclusión de que el problema era que me entretenía demasiado desarrollando tecnologías y no con el proyecto en sí: Me podía tirar una semana haciendo un select para mis formularios, o intentando desplegar funciones _lambda_ en **Amazon**. Para cuando tenía que juntarlo todo y hacer algo útil, ya había perdido el interés.
 
-<Tweet id="1485215070871293960"/>
+<Tweet id="1485215070871293960" />
 
 > Me gusta saber cómo funcionan las cosas y, en particular, cómo se hacen en #JS y #CSS. Si puedo recorrer un array con JS nativo, ¿por qué instalar Lodash?
 
-<Tweet id="1485215072431620099"/>
+<Tweet id="1485215072431620099" />
 
 > ¿Por qué poner una dependencia superpesada y aprender nuevas abstracciones? ¿Por qué consultar otra documentación? ¿Por qué no hacerlo de forma nativa? #useThePlatform
 
-<Tweet id="1485215073962450944"/>
+<Tweet id="1485215073962450944" />
 
 > Así que a lo largo de los años he desarrollado una gran aversión por cosas como Bootstrap, jQuery, Tailwind, Ramda, Material UI... todas esas cosas extravagantes que la gente instala porque son demasiado perezosos para aprender JS o CSS correctamente.
 
-<Tweet id="1485215075522732036"/>
+<Tweet id="1485215075522732036" />
 
 > Lo cual es muy hipócrita por mi parte, ya que podríamos meter en ese saco abstracciones aún mayores como #react, #express o #apollo, de las que soy un devoto usuario
 
@@ -163,11 +163,11 @@ También había leído por ahí sobre los inconvenientes de atiborrar de librer�
 
 Visto en retrospectiva esta vision dogmática de las dependencias me impidió completar proyectos que me hubiesen hecho mucha ilusión, como el mencionado **Irongunz Online** o **Spencer**.
 
-<Tweet id="1485215077083099136"/>
+<Tweet id="1485215077083099136" />
 
 > Tampoco he sido nunca muy fan de BaaS, así que siempre que planeo un proyecto acabo desplegando un servidor en Heroku. O una VM corriendo en digital ocean, con Nginx rompiéndose con cada cambio 😱.
 
-<Tweet id="1485215078622371842"/>
+<Tweet id="1485215078622371842" />
 
 > Esto significa que cada vez que empiezo un proyecto acabo invirtiendo MUCHOS meses y nunca lo termino. El último es Spencer, una aplicación para gestionar mis gastos. Llevo trabajando en ella más de un año y medio y ni siquiera estoy cerca de terminarla.
 
@@ -177,7 +177,7 @@ De nuevo, esta manía probablemente venía de IronHack donde la base de datos qu
 
 ## Construyendo una app en tiempo record (Personal, pero record)
 
-<Tweet id="1485215080232927234"/>
+<Tweet id="1485215080232927234" />
 
 > Consciente de esta limitación, decidí cambiar un poco mi mentalidad. Sólo tenía 2 meses para hacerlo. Normalmente empiezo a configurar webpack desde cero para mis aplicaciones React. En lugar de perder medio día en eso, empecé con **CRA** con la plantilla **TS** COMO HACE LA GENTE NORMAL
 
@@ -187,23 +187,23 @@ Por **CRA** aquí me refiero a [Create React App](https://create-react-app.dev/)
 
 Desde que escribí este post, **CRA** ha sido _deprecado_ por el equipo de **React**, que ya ni siquiera es parte de [Meta](https://www.meta.com/es/) (**Facebook**). Ahora las **SPAs** de **React** se crean con [Vite](https://vitejs.dev/), pero lo normal hoy en día es hacer [MPAs](https://www.makingscience.es/blog/single-page-app-vs-multi-page-app-cual-elegir-para-tu-web/) (aplicaciones multi página) usando [NextJs](https://nextjs.org/) como la que estas leyendo ahora, y así lo recomienda la documentación de **React**. Pero en su momento **CRA** era la herramienta de facto para crear apps en **React**. Si estas leyendo esto y no eres técnico, entiendo que en este momento te he perdido totalmente. Otro día hare un post para aclarar todo este jaleo de servidores, capas de persistencia, **React**, **SPAs**, **MPAs**, **SSR**, **SSG**, etc.
 
-<Tweet id="1485215081768042506"/>
+<Tweet id="1485215081768042506" />
 
 > Para la base de datos, en vez de montar un Postgres en un Docker y un servidor Apollo o Express, me dije: ¡vamos con Firebase como hacen los niños guays! 🚀
 
-<Tweet id="1485215230439440384"/>
+<Tweet id="1485215230439440384" />
 
-> En un periquete tenía resuelta la autenticación con Single Sign On. Un par de líneas más y ya estaba almacenando usuarios en Firestore. En otro minuto tenía funciones corriendo en la nube. Y en dos comandos estaba alojando la web y desplegando con un CLI_
+> En un periquete tenía resuelta la autenticación con Single Sign On. Un par de líneas más y ya estaba almacenando usuarios en Firestore. En otro minuto tenía funciones corriendo en la nube. Y en dos comandos estaba alojando la web y desplegando con un CLI\_
 
 Antes de esto había trasteado **Firebase** un poco en [RedRadix](https://www.redradix.com/) y en [Taxfix](https://taxfix.com), y tenía curiosidad sobre todo por lo fácil que me había parecido crear una base de datos documental y conectar aplicaciones a ella. Pero la sorpresa vino cuando ademas ví que podía crear funciones de servidor, autenticar a mis usuarios con su cuenta de **GMail**, alojar la aplicación, comprar un dominio... todo en un mismo servicio. Y gratis hasta cierto punto.
 
 El hilo entero iba sobre eso mismo: Cómo había etiquetado en base a mis prejuicios y de oídas lo que era **Firebase** u otros servicios o librerías, y como me había perdido una herramienta que me hubiese ahorrado muchísimo tiempo en mis proyectos paralelos. Esto terminó de abrirme los ojos y, a partir de ese momento, decidí meterme de lleno en la búsqueda de servicios y librerías que me pudieran arreglar cada una de las papeletas que me iban surgiendo en el proyecto.
 
-<Tweet id="1485216817618505735"/>
+<Tweet id="1485216817618505735" />
 
 > Cubierto en backend, la aplicación se veía fea como el infierno. Y los módulos CSS son un dolor de usar para mí. Así que antes de perder más tiempo en display:flex's empecé a comprobar qué librerías de componentes tenemos disponibles. Y al final me decidí por [@chakra_ui](https://twitter.com/hashtag/@chakra_ui)
 
-<Tweet id="1485216821708042240"/>
+<Tweet id="1485216821708042240" />
 
 > Y en cuatro imports ya parecía una verdadera WebApp. Con modo oscuro y responsive casi desde el primer momento. Sin perder tarde y media en un sistema modal. Y con un muy buen aspecto visual. Gracias [@thesegunadebayo](https://twitter.com/hashtag/@thesegunadebayo) por esta obra de arte
 
@@ -211,7 +211,7 @@ Siguiendo con lo de antes, en lugar de perder 4 semanas en diseñar un sistema d
 
 [Segun Adebayo](https://twitter.com/thesegunadebayo) es el creador de Chakra
 
-<Tweet id="1485216823926833154"/>
+<Tweet id="1485216823926833154" />
 
 > ¿Animaciones? [@framer](https://twitter.com/hashtag/@framer) motion. ¿Formularios? #Formik. ¿Internacionalización? #i18next. Suelo incluso escribir mis propios selectores de fechas. ¿Aquí? #react-day-picker. ¿Búsqueda en firestore? @Algolia. ¿Scrapping? #cheerio-js y #axios
 
@@ -225,21 +225,21 @@ Básicamente: Cada vez que creas un documento en **Firestore**, se despacha un w
 
 Si bien quizás todas estas no fuesen las mejores opciones, me tomé el tiempo de probarlas y me solucionaron la necesidad que tenía en ese momento. Redundando sobre el tema del hilo: No hace falta reinventar la rueda, hay mucho software libre que te puede ayudar a desarrollar tu idea y no hay que tener reservas a la hora de probarlo.
 
-<Tweet id="1485216828016189449"/>
+<Tweet id="1485216828016189449" />
 
 > 0 ruedas reinventadas. Dedicando dos o tres tardes a la semana, monté el esqueleto en un mes. Y a principios de diciembre ya tenía una versión funcional de la aplicación. Cristina y yo creamos nuestros usuarios y primeros deseos y yo seguí trabajando en la aplicación.
 
-<Tweet id="1485216832369872899"/>
+<Tweet id="1485216832369872899" />
 
 > La aplicación scrapea en tiempo real los enlaces deseados. Así, si intentas añadir algo de amazon, intenta extraer la información de amazon: título, precio, foto, descripción.
 
 El scrapper fue lo más complicado de hacer y hay muchas dominios con los que no funciona o lo hace de manera inconsistente. Pero cuando funciona es muy satisfactorio ya que te rellena automáticamente el formulario con la información del producto que quieres. Para esto me apoyé en el protocolo [OpenGraph](https://ogp.me/). Como en muchas páginas esto no funciona, cree scrapers específicos para marketplaces mas o menos relevantes como **Zalando** o **Asos**. Utilicé para ello cheerio creando scrappers adhoc que se disparaban según el dominio de la URL.
 
-<Tweet id="1485216836199276546"/>
+<Tweet id="1485216836199276546" />
 
 > Si buscas a tus amigos, @algolia se encarga de buscar en tiempo real en una base de datos firestore replicada con el correo electrónico indexado, el nombre para mostrar y @.
 
-<Tweet id="1485216838078414854"/>
+<Tweet id="1485216838078414854" />
 
 > Si un amigo recibe un regalo o compra algo que le ibas a regalar, firebase te informa mediante notificaciones push
 
@@ -247,7 +247,7 @@ El scrapper fue lo más complicado de hacer y hay muchas dominios con los que no
 
 Esto es un añadido muy chulo pero realmente no aporta demasiado a **Wanthat**, ya que rara vez vais a coincidir usando la app. Si en tu caso estas haciendo un chat o una app colaborativa, es una característica muy interesante que ofrece **Firestore** que deberías tener en cuenta.
 
-<Tweet id="1485216839630303232"/>
+<Tweet id="1485216839630303232" />
 
 > Si el scrapper no encuentra una foto, puedes subir una tú mismo. Alojada en firebase, por supuesto (ya sé lo que es vendor lock, no vengas a decirme lo estúpido que soy por poner todos los huevos en la misma cesta. Ya lo sé)
 
@@ -257,7 +257,7 @@ Tiempo después quise migrar la base de datos de **Wanthat** a una relacional y 
 
 No me arrepiento de haberlo hecho así, ya que me permitió desarrollar la app muy rápido y sin tener que preocuparme de nada mas que de la lógica de negocio. Pero hay una lección aprendida en ello.
 
-<Tweet id="1485216841324769285"/>
+<Tweet id="1485216841324769285" />
 
 > Así que encontré la respuesta a "¿Por qué no hacerlo de forma nativa?": PORQUE LLEVA 10 VECES MÁS TIEMPO, IDIOTA. Me tomó mucho tiempo entenderlo, no soy tan inteligente como vosotros. Y tampoco uso librerías que me ayuden a entenderlo 🤣.
 
@@ -267,31 +267,31 @@ Conozco a muchos desarrolladores que considerarían esto una perogrullada, o que
 
 ## Final feliz
 
-<Tweet id="1485216842968879107"/>
+<Tweet id="1485216842968879107" />
 
 > Llegó Nochebuena y se produjo el milagro de la Navidad asistido por ordenador: Cristina me regaló [#threejsJourney](https://twitter.com/hashtag/threejsJourney) 🎉
 
-<Tweet id="1485216844546023430"/>
+<Tweet id="1485216844546023430" />
 
 > Me emocioné por tener el curso más genial del universo. Ya he terminado el primer módulo y os aseguro que vale cada céntimo
 
-<Tweet id="1485216846278234112"/>
+<Tweet id="1485216846278234112" />
 
 > Pero también emocionado por haber sido capaz de crear algo con mis manos, y que ese algo cumpla su propósito. Normalmente creo muchas cosas pero ninguna acaba funcionando del todo. Y eso es frustrante.
 
-<Tweet id="1485216848006238208"/>
+<Tweet id="1485216848006238208" />
 
 > Después, Cristina también recibió un par de regalos míos que había añadido a la plataforma. ¡Y le encantaron! Un par de amigos se apuntaron y también la están utilizando. Y yo seguí limpiando el backlog y añadiendo características que faltaban
 
-<Tweet id="1485216849629429761"/>
+<Tweet id="1485216849629429761" />
 
 > He creado el manifiesto para instalar la aplicación como una PWA en móviles.
 
-<Tweet id="1485216851177222152"/>
+<Tweet id="1485216851177222152" />
 
 > He creado una extensión para Chrome que te permite ir directamente a la pantalla de creación de deseos utilizando la URL de la pestaña actual chrome.google.com/webstore/detai...
 
-<Tweet id="1485216852930355203"/>
+<Tweet id="1485216852930355203" />
 
 > He comprado el dominio wanthat.io
 
@@ -299,7 +299,7 @@ Esta parte del proyecto me gustó mucho ya que aprendí a hacer esas tres featur
 
 La extensión está [aquí](https://chrome.google.com/webstore/detail/wanthat-extension/gbhjofemlbopjleeciljhjknbeibopbe?hl=es). A día de hoy se ha roto la UI por alguna actualización de chrome, pero sigue funcionando.
 
-<Tweet id="1485216854578712577"/>
+<Tweet id="1485216854578712577" />
 
 > Y esa fue mi última tarea antes del hito 1.0.0. Misión cumplida. Deseo concedido. Logro desbloqueado: mi primer producto publicado en internet 🎉.
 
@@ -307,23 +307,23 @@ Después de **Wanthat** he sacado adelante otro proyecto de cierto calado, la we
 
 Lanzar una 1.0 en un proyecto en solitario es una sensación rarísima, ya que internamente se siente como un triunfo enorme (aunque tenga 0 repercusión) pero **externamente es un tio con gafas, encorvado sobre el teclado, haciendo un push a master** 🤣.
 
-<Tweet id="1485216856269111300"/>
+<Tweet id="1485216856269111300" />
 
 > He disfrutado mucho desarrollando con esta filosofía de no reinventar la rueda. He aprendido mucho sobre desarrollo trabajando con librerías que son casi estándar. Y ahora tengo muchas más herramientas para materializar mis ideas y hacerlo RÁPIDO
 
-<Tweet id="1485216857879687174"/>
+<Tweet id="1485216857879687174" />
 
 > Así que si sigues mi consejo: No seas cabezón. Mantén una actitud curiosa y no prejuzgues sin probar las cosas. Probablemente te estés perdiendo muchas cosas buenas. Es tan buen consejo para la vida como a la hora de instalar paquetes NPM
 
-<Tweet id="1485216859528048644"/>
+<Tweet id="1485216859528048644" />
 
 > Y si quieres probar wanthat.io, obviamente es gratis. Sólo necesitas una cuenta de Gmail (añadiré más métodos de inicio de sesión y registro). Tus comentarios son muy valiosos para que pueda seguir mejorándolo, así que no tengas reparo en enviarme un DM si encuentras un error. 🙏.
 
 Nunca añadí métodos de login adicionales. De hecho aparqué el proyecto después de sacarlo, ya que empecé la mencionada web de **Cristina de Vaux**, y la unica mejora que hice en **Wanthat** fue mejorar los scrapers cuando dejaron de funcionar en **Amazon**. En un momento dado quise rehacer la capa de persistencia de datos como mencioné antes y eliminar la necesidad de **Algolia**. Pero resulto ser una tarea titánica y lo dejé de lado. Hace un año también se me ocurrió intentar rehacer la aplicación en [t3.gg](https://create.t3.gg/) ya que por aquel entonces consumía mucho contenido de [Theo Brownee](https://www.youtube.com/c/theobrowne1017) y tenía curiosidad. Pero igualmente la tarea se me iba de las manos y lo dejé a los pocos días.
 
-Así qeu hasta allí llegó **Wanthat**. 
+Así qeu hasta allí llegó **Wanthat**.
 
-<Tweet id="1485216861390266374"/>
+<Tweet id="1485216861390266374" />
 
 > ¡Gracias por leer hasta aquí! Me voy a continuar con [#threejsJourney](https://twitter.com/hashtag/threejsJourney)
 
@@ -335,7 +335,7 @@ Por otro lado, me gustaría hacer un pequeño análisis de las principales tecno
 
 ### Firebase
 
-![Firebase](/images/firebase.png)
+![Firebase](/images/firebase.webp)
 
 **Firebase** me pareció la leche en este proyecto, las bases de datos son bastante peculiares y la facilidad de uso es increíble. Básicamente son JSONs a los que te suscribes en tiempo real. Cuando yo empecé a programar en **Flash** hace 20 años esto era exactamente con lo que soñaba: Hay datos, llamas a una función y se guardan en un servidor. Abres tu aplicación y están ahí como los dejaste.
 
@@ -353,11 +353,11 @@ Si te quieres dedicar profesionalmente a devops, **Google Cloud**, **Azure** o *
 
 ### Chakra UI
 
-![Logo de Chakra](/images/chakra.png)
+![Logo de Chakra](/images/chakra.webp)
 
 Para mi Chakra fue una revelación: Me permitió tener una UI que parecía moderna y profesional sin saber diseñar y sin invertir ni un minuto en [Framer](framer.com) o [Figma](https://www.figma.com/). Esto fue para mi como la segunda venida de Jesucristo: Mis proyectos hasta este punto se morían intentando hacer UIs resultonas, por ejemplo **Spencer**:
 
-![Ui Spencer](/images/spencer.png)
+![Ui Spencer](/images/spencer.webp)
 _Ui de Spencer en framer. Me tire semanas trabajando en esto, cuando fuí a implementar el código estaba ya harto del proyecto_
 
 El problema de Chakra, y por lo que deje de usarlo es:
@@ -384,7 +384,7 @@ Si llego al punto de necesitar una librería de formularios, pues supongo que es
 
 # Y qué pasa con threejsJourney?
 
-![Logo de Three Js Journey](/images/3journey.png)
+![Logo de Three Js Journey](/images/3journey.webp)
 _Qué bonico es el logo copón_
 
 Pues el curso es genial, pero tal y como comentaba en uno de los primeros Tweets:

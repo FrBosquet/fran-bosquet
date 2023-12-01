@@ -4,17 +4,36 @@ import { YoutubeEmbed } from 'components/YoutubeEmbed';
 import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { HTMLAttributes } from 'react';
 import { Tweet } from 'react-tweet';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 type MdxContentProps = {
   source: MDXRemoteSerializeResult
 };
 
 const code = (props: HTMLAttributes<HTMLElement>) => {
-  const { children } = props;
+  const { children, className } = props
+
+  if (!children) return null
 
   const isBlock = (children as string).includes('\n');
 
-  return <code {...props} className={"bg-gray-900 text-green-300 p-1 rounded-md".concat(isBlock ? 'w-full p-6 block overflow-x-scroll' : '')}>{props.children}</code>
+  if (!isBlock) return <code {...props} className="bg-gray-900 text-teal-200 p-1 rounded-md">{children}</code>
+
+  const meta = className?.replace('language-', '')
+
+  const [language, filename] = meta?.split('@') ?? []
+
+  return <article className='overflow-hidden rounded-xl bg-zinc-950 border border-teal-50/25 shadow-xl'>
+    {
+      filename
+        ? <header className='text-xs text-zinc-500 p-2'>{filename}</header>
+        : null
+    }
+    <SyntaxHighlighter wrapLongLines language={language} style={dracula} customStyle={{ borderRadius: 0, margin: 0 }}>
+      {children as string}
+    </SyntaxHighlighter>
+  </article>
 }
 
 const mdxComponents = {
