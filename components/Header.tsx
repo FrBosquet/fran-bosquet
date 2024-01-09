@@ -3,7 +3,7 @@ import { Social } from "./Social"
 
 export const Header = () => {
   return <header className='
-    realtive flex items-center gap-2
+    relative flex items-center gap-2
     lg:flex-col lg:justify-center
     p-4 md:p-6 lg:p-8
     lg:h-80
