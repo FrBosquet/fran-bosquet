@@ -30,7 +30,7 @@ export const PostLink = ({ post, featured }: Props) => {
 				style={{ objectFit: 'cover' }}
 			/>
 		</div>
-		<div className='flex justify-between flex-col flex-1 h-full gap-2'>
+		<div className='flex justify-between flex-col flex-1 h-full py-4 lg:pt-8 gap-2'>
 
 			<Link href={`/posts/${post.slug}`} data-featured={isFeatured} className='font-mono
 			text-teal-200
@@ -40,11 +40,13 @@ export const PostLink = ({ post, featured }: Props) => {
 			group-hover:text-white
 			'>{post.title}</Link>
 
-			<div className='flex-1 gap-2 hidden sm:flex py-2'>
+			{post.subtitle ? <p className='text-teal-100/60 text-sm lg:text-base flex-1 pb-2 pr-2'>{post.subtitle}</p> : null}
+
+			<div className='flex-1 items-end gap-2 hidden sm:flex pt-4'>
 				{post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
 			</div>
 
-			<span className='text-teal-100/60 text-xs lg:text-sm py-4'>
+			<span className='text-teal-100/60 text-xs lg:text-sm'>
 				{dateFormatter.format(new Date(post.date))}
 			</span>
 

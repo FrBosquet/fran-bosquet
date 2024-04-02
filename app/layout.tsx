@@ -1,8 +1,8 @@
 import { Analytics } from "@vercel/analytics/react";
 import { Header } from "components/Header";
 import { Metadata } from "next";
+import { Poppins } from "next/font/google";
 import React from "react";
-import { poppins } from "styles/fonts";
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   viewport: 'width=device-width, initial-scale=1',
   icons: '/favicon.ico'
 }
+
+const poppins = Poppins({
+  weight: ['100', '300', '700'],
+  variable: '--font-poppins',
+  subsets: ["latin"]
+});
 
 export default function Layout({ children }: {
   children: React.ReactNode

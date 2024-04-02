@@ -42,7 +42,13 @@ export const getPosts = async (tag?: string): Promise<Post[]> => {
 	}))
 
 	return posts
-		.filter(post => post.published && (!tag || post.tags?.includes(tag)))
+		.filter(post => {
+			const date = new Date(post.date)
+
+			if (date > new Date()) return false
+
+			return post.published && (!tag || post.tags?.includes(tag))
+		})
 		.sort((a, b) => new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1)
 }
 
