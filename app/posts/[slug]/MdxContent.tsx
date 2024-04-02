@@ -3,9 +3,9 @@ import { PostHeader } from 'components/PostHeader';
 import { YoutubeEmbed } from 'components/YoutubeEmbed';
 import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { HTMLAttributes } from 'react';
-import { Tweet } from 'react-tweet';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { Tweet } from 'react-tweet';
 
 type MdxContentProps = {
   source: MDXRemoteSerializeResult
@@ -43,8 +43,8 @@ const mdxComponents = {
   p: (props: HTMLAttributes<HTMLParagraphElement>) => <p className='text-lg font-ligth pb-3 leading-8 tracking-[0.1rem]'>{props.children}</p>,
   img: (props: any) => <img className="w-auto mb-1" alt={props.alt} src={props.src} />,
   blockquote: (props: HTMLAttributes<HTMLQuoteElement>) => <blockquote className="p-3 bg-gray-950 rounded-lg mb-4 shadow-md text-lg text-slate-100 leading-8 tracking-wide">{props.children}</blockquote>,
-  ul: (props: HTMLAttributes<HTMLUListElement>) => <ul className="mb-4">{props.children}</ul>,
-  li: (props: HTMLAttributes<HTMLLIElement>) => <li className="ml-4 list-item list-disc">{props.children}</li>,
+  ul: (props: HTMLAttributes<HTMLUListElement>) => <ul className="text-lg mb-4">{props.children}</ul>,
+  li: (props: HTMLAttributes<HTMLLIElement>) => <li className="text-lg ml-4 list-item list-disc py-2">{props.children}</li>,
   a: (props: HTMLAttributes<HTMLAnchorElement>) => <a {...props} target="_blank" className="text-orange-400 visited:text-teal-300">{props.children}</a>,
   em: (props: HTMLAttributes<HTMLElement>) => <em {...props} className="font-ligh text-gray-400">{props.children}</em>,
   code,
