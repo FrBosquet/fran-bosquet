@@ -12,8 +12,8 @@ export const Header = () => {
     lg:from-gray-900/10 lg:to-gray-900
     '>
 
-    <Link href="/">
-      <h1 className='text-2xl md:text-4xl lg:text-7xl'>Fran<span className='text-teal-400'>Bosquet</span></h1>
+    <Link href="/" title="inicio de la web">
+      <p className='text-2xl md:text-4xl lg:text-7xl'>Fran<span className='text-teal-400'>Bosquet</span></p>
     </Link>
     <p className='text-gray-500 text-sm hidden md:block'>Mi blog personal</p>
     <Social />

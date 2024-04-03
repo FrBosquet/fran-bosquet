@@ -26,7 +26,7 @@ export const getPostSlugs = (): string[] => {
 	return fileNames.map(name => name.replace('.mdx', ''))
 }
 
-export const getPosts = async (tag?: string): Promise<Post[]> => {
+export const getPosts = async (keyword?: string): Promise<Post[]> => {
 	const fileNames = getPostsFileNames()
 
 	const posts: Post[] = await Promise.all(fileNames.filter(name => !ignore.includes(name)).map(async name => {
@@ -47,7 +47,7 @@ export const getPosts = async (tag?: string): Promise<Post[]> => {
 
 			if (date > new Date()) return false
 
-			return post.published && (!tag || post.tags?.includes(tag))
+			return post.published && (!keyword || post.keywords?.includes(keyword))
 		})
 		.sort((a, b) => new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1)
 }
@@ -61,3 +61,11 @@ export const getPost = async (slug: string): Promise<MDXRemoteSerializeResult> =
 
 	return serilized
 }
+
+export const baseKeywords = [
+	'programación',
+	'tecnología',
+	'desarrollo',
+	'bootcamp',
+	'carrera'
+]

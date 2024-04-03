@@ -1,6 +1,6 @@
 import { PostHeader } from "components/PostHeader";
 import { BackIcon } from "components/icons";
-import { getPost, getPostSlugs } from "lib/posts";
+import { baseKeywords, getPost, getPostSlugs } from "lib/posts";
 import { Post } from "lib/types";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -18,7 +18,7 @@ export default async function Page({ params: { slug } }: Props) {
 
   return <section className='flex flex-col gap-4 py-6 relative container max-w-[700px] mx-auto'>
     <aside className="sticky top-0 h-0 hidden md:block">
-      <Link href="/" className="-left-20 p-8 text-white hover:text-teal-400 hover:-left-24 absolute transition-all">
+      <Link href="/" title="Volver" className="-left-20 p-8 text-white hover:text-teal-400 hover:-left-24 absolute transition-all">
         <BackIcon className="w-6 h-6 transition-all" />
       </Link>
     </aside>
@@ -39,6 +39,7 @@ export async function generateMetadata(
   const post = await getPost(params.slug)
 
   return {
-    title: post.frontmatter.title as string,
+    title: `${post.frontmatter.title as string} | Fran Bosquet`,
+    keywords: [...baseKeywords, ...post.frontmatter.keywords as string[]],
   }
 }

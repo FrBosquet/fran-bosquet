@@ -3,7 +3,7 @@ export type Post = {
 	subtitle?: string
 	slug: string
 	date: string
-	tags: string[]
+	keywords: string[]
 	published: boolean
 	featured?: boolean
 	image: {

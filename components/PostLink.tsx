@@ -34,7 +34,7 @@ export const PostLink = ({ post }: Props) => {
 			{post.subtitle ? <p className='text-teal-100/60 text-sm lg:text-base flex-1 pb-2 pr-2'>{post.subtitle}</p> : null}
 
 			<div className='flex-1 items-end gap-2 hidden sm:flex pt-4'>
-				{post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
+				{post.keywords.map(keyword => <Tag key={keyword}>{keyword}</Tag>)}
 			</div>
 
 			<span className='text-orange-300/60 text-xs lg:text-sm'>

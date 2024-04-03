@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
 import { Header } from "components/Header";
+import { baseKeywords } from "lib/posts";
 import { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import React from "react";
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
   title: 'Fran Bosquet',
   description: 'Blog de Fran Bosquet: Programación web, desarrollo de software, tecnología. Mi viaje como desarrollador web a partir de Ironhack.',
   viewport: 'width=device-width, initial-scale=1',
-  icons: '/favicon.ico'
+  icons: '/favicon.ico',
+  keywords: baseKeywords
 }
 
 const poppins = Poppins({
