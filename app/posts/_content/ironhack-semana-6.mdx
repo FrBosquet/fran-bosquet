@@ -2,7 +2,7 @@
 published: true
 title: 'IronHack semana 6: Poetry Generator'
 date: 7-23-2017
-tags:
+keywords:
 - personal
 - ironhack
 image: {
@@ -16,7 +16,7 @@ image: {
 
 # Poetry generator
 
-Como conté hace siete dias, durante la sexta semana de IronHack se forman grupos de dos alumnos para desarrollar un proyecto conjunto. La temática es libre, pero debe utilizarse lo aprendido en las semanas 4 y 5. Es decir: Una aplicación con *node*, *mongo* y *express*. Para llevar a cabo tamaña empresa, el destino me quiso reunir con el gran Fer Rodri. El no tiene un perfil técnico y tampoco contaba con una idea, así que tomé las riendas del grupo desde un primer momento.
+Como conté hace siete dias, durante la sexta semana de IronHack se forman grupos de dos alumnos para desarrollar un proyecto conjunto. La temática es libre, pero debe utilizarse lo aprendido en las semanas 4 y 5. Es decir: Una aplicación con _node_, _mongo_ y _express_. Para llevar a cabo tamaña empresa, el destino me quiso reunir con el gran Fer Rodri. El no tiene un perfil técnico y tampoco contaba con una idea, así que tomé las riendas del grupo desde un primer momento.
 
 La experiencia de dirigir un equipo, aunque sea uno pequeño, me ha gustado bastante. Dado que Fer cuenta con bastante menos bagaje técnico (básicamente, por experiencia), decidí enfocarlo así:
 
@@ -32,19 +32,19 @@ Y así ha sido. El lunes se encontró con algún problema a la hora de implement
 
 Con esa mecánica, fui encomendado tareas a Fer e integrando lo que me iba dando, mientras yo implementaba otras funcionalidades. En ocasiones recurrimos al pair programming. Básicamente, cuando la tarea a realizar requería tocar muchos archivos y corríamos el peligro de tocar el mismo código los dos, con los consecuentes problemas a la hora de hacer el git merge. Dicha circunstancia, unida a que técnicamente la idea la tenía muy clara y que el proyecto era relativamente sencillo propició que para el jueves a media tarde tuviésemos nuestro MVP y el viernes a primera hora una versión desplegada en Heroku sin ningún bug (que yo sepa).
 
-> A nivel personal, ha sido una semana fantástica. Me he encontrado cada vez mas cómodo con *express* y he adquirido bastante soltura a la hora de autenticar y manejar sesiones con *passport*
+> A nivel personal, ha sido una semana fantástica. Me he encontrado cada vez mas cómodo con _express_ y he adquirido bastante soltura a la hora de autenticar y manejar sesiones con _passport_
 
-A nivel personal, ha sido una semana fantástica. Me he encontrado cada vez mas cómodo con express y he adquirido bastante soltura a la hora de autenticar y manejar sesiones con passport. Toda la frustración de las dos últimas semanas la he limpiado a base de practicar y cogerle el truco a este ecosistema. Por otro lado, tomamos la decisión en un principio de implementar las vistas con *Jade*, en detrimento de *EJS*. Este último lenguaje de marcado para plantillas es el que hemos aprendido en clase, por lo que esta semana nos ha servido para complementarlo con una segunda opción. Una ademas bastante más interesante, en mi opinión.
+A nivel personal, ha sido una semana fantástica. Me he encontrado cada vez mas cómodo con express y he adquirido bastante soltura a la hora de autenticar y manejar sesiones con passport. Toda la frustración de las dos últimas semanas la he limpiado a base de practicar y cogerle el truco a este ecosistema. Por otro lado, tomamos la decisión en un principio de implementar las vistas con _Jade_, en detrimento de _EJS_. Este último lenguaje de marcado para plantillas es el que hemos aprendido en clase, por lo que esta semana nos ha servido para complementarlo con una segunda opción. Una ademas bastante más interesante, en mi opinión.
 
 ## Generador de poesia
 
-Pero vamos al lío. Nuestro proyecto se titula Poetry Generator. Generador de poesía, en la lengua de Shakespeare. Como su nombre indica, el objetivo era crear una aplicación capaz de componer versos de poesía en base al contenido almacenado en una base de datos. Se basa en un minúsculo proyecto que desarrolle a principio de curso por diversión (este) que a su vez se basaba en un experimento que hice con Java en 2013 (ese no está disponible online). La idea es proponer una estructura de poesía tipo *verbo-sujeto-adjetivo-...* e ir sustituyendo cada uno de ellos por una palabra que encaje en la estructura. Para definir dichas estructuras diseñamos **PQL**, o *poetry query languaje*:
+Pero vamos al lío. Nuestro proyecto se titula Poetry Generator. Generador de poesía, en la lengua de Shakespeare. Como su nombre indica, el objetivo era crear una aplicación capaz de componer versos de poesía en base al contenido almacenado en una base de datos. Se basa en un minúsculo proyecto que desarrolle a principio de curso por diversión (este) que a su vez se basaba en un experimento que hice con Java en 2013 (ese no está disponible online). La idea es proponer una estructura de poesía tipo _verbo-sujeto-adjetivo-..._ e ir sustituyendo cada uno de ellos por una palabra que encaje en la estructura. Para definir dichas estructuras diseñamos **PQL**, o _poetry query languaje_:
 
 ![PQL en toda su gloría](/images/pql.webp)
 
 PQL permite definir el número de veces que se repite una expresión, si es una expresión a recuperar de la base de datos o una frase literal y si esta ha de rimar. Con este lenguaje de estructuras listo, tan solo hubimos de llenar la base de datos con pequeñas expresiones pre-escritas para empezar a darle vida al invento. Además, diseñamos un algoritmo capaz de detectar qué expresiones rimaban entre sí. Si bien este no es perfecto, en ocasiones el programa sorprende con alguna rima más o menos elaborada.
 
-La infraestructura de base de datos la solventamos con *mongoose*, creando modelos para palabras y estructuras. Además, implementamos perfiles de usuario, para que este pueda agregar sus propias palabras y guardar las frases que más le gusten. Si bien no llega a tener un perfil social, la aplicación permite compartir los versos favoritos del usuario en Twitter y otros usuarios pueden verlos sin tener que registrarse o acceder a través de Facebook.
+La infraestructura de base de datos la solventamos con _mongoose_, creando modelos para palabras y estructuras. Además, implementamos perfiles de usuario, para que este pueda agregar sus propias palabras y guardar las frases que más le gusten. Si bien no llega a tener un perfil social, la aplicación permite compartir los versos favoritos del usuario en Twitter y otros usuarios pueden verlos sin tener que registrarse o acceder a través de Facebook.
 
 ## La guinda del pastel
 

@@ -1,7 +1,7 @@
 ---
 title: 'Ironhack, semana 3: IronGunZ, el videojuego'
 date: 7-02-2017
-tags:
+keywords:
 - personal
 - ironhack
 image: {
@@ -18,13 +18,13 @@ Como dije al final de la última entrada, la tercera semana del bootcamp está d
 
 El domingo previo a este lunes ya pasé unas cuantas horas en IronHack planificando mi juego: Haciendo diagramas y esquemas de lo que quería conseguir. El objetivo era clonar la estética y la mecánica de disparo de Hotline Miami. Y, sobre todo, la sensación de control de este juego, una de las mas placenteras que he probado. No en vano, es uno de mis juegos favoritos de todos los tiempos:
 
-<YoutubeEmbed id="https://youtu.be/KIZYjrx4LbM" title="Hotline Miami"/>
+<YoutubeEmbed id="https://youtu.be/KIZYjrx4LbM" title="Hotline Miami" />
 
-*By the way*, estamos en plenas rebajas de **Steam** hasta el 5 de Julio, así que si te ha picado la curiosidad, tienes Hotline Miami y HM2: Wrong Number con un 75% de descuento y te los puedes llevar ambos por menos de 5€. ¡A por ellos!
+_By the way_, estamos en plenas rebajas de **Steam** hasta el 5 de Julio, así que si te ha picado la curiosidad, tienes Hotline Miami y HM2: Wrong Number con un 75% de descuento y te los puedes llevar ambos por menos de 5€. ¡A por ellos!
 
 > ### Anotación de 2023
 >
-> La oferta, por lo que sea, ya ha caducado. En cualquier caso, son juegazos increibles. Yo los volví a comprar en Switch unos años despues. Tengo una [reseña del segundo en Steam](https://steamcommunity.com/id/frbosquet/recommended/274170/) (de una epoca en la que me dió por escribir ahí) 
+> La oferta, por lo que sea, ya ha caducado. En cualquier caso, son juegazos increibles. Yo los volví a comprar en Switch unos años despues. Tengo una [reseña del segundo en Steam](https://steamcommunity.com/id/frbosquet/recommended/274170/) (de una epoca en la que me dió por escribir ahí)
 
 ## Planificación
 
@@ -130,13 +130,13 @@ El objetivo era juntarnos con el bootcamp de UX y socializar un poco con ellos. 
 
 ## Inputs y dibujado
 
-Por la tarde intente recuperar el ritmo. Con todo el trabajo de la mañana ya tenía encapsuladas en funciones las instrucciones para dibujar cosas en mi DOM: Crear DIVs con posicionamiento absoluto, usar *transforms* para situarlos y organizar todo por capas encapsulando en mas DIVs. Pese al bajón que me dio, el trabajo del martes por la mañana ha sido crucial para poder gestionar mi dibujado de una forma muy cómoda y sencilla.
+Por la tarde intente recuperar el ritmo. Con todo el trabajo de la mañana ya tenía encapsuladas en funciones las instrucciones para dibujar cosas en mi DOM: Crear DIVs con posicionamiento absoluto, usar _transforms_ para situarlos y organizar todo por capas encapsulando en mas DIVs. Pese al bajón que me dio, el trabajo del martes por la mañana ha sido crucial para poder gestionar mi dibujado de una forma muy cómoda y sencilla.
 
-El segundo problema del día fue diseñar mi interacción con el teclado. Tras darle un par de vueltas, decidí crear un objeto dentro de mi clase principal denominado *keyboard*. Con dos listener, capturaba la pulsación y la salida de todas las teclas, cambiando la *key* del objeto llamada como el *keycode* de la pulsación a true o false según el evento. De este modo, tenía una captura de estado del teclado en todo momento. Esta fue otra tarea que me tomo mucho tiempo pero que a la postre a resultado crucial para pode manejar el input de forma cómoda.
+El segundo problema del día fue diseñar mi interacción con el teclado. Tras darle un par de vueltas, decidí crear un objeto dentro de mi clase principal denominado _keyboard_. Con dos listener, capturaba la pulsación y la salida de todas las teclas, cambiando la _key_ del objeto llamada como el _keycode_ de la pulsación a true o false según el evento. De este modo, tenía una captura de estado del teclado en todo momento. Esta fue otra tarea que me tomo mucho tiempo pero que a la postre a resultado crucial para pode manejar el input de forma cómoda.
 
 > ### Anotación de 2023
 >
-> Este es otro buen ejemplo de buena idea qué se me ocurrio. Es una reimplementacion de un *isKeyDown* que tenemos en muchos engines de videojuegos. Mi juego funcionaba mucho mejor que los demas porque ellos desacomplaron las interacciones del jugador con el renderizado.
+> Este es otro buen ejemplo de buena idea qué se me ocurrio. Es una reimplementacion de un _isKeyDown_ que tenemos en muchos engines de videojuegos. Mi juego funcionaba mucho mejor que los demas porque ellos desacomplaron las interacciones del jugador con el renderizado.
 
 ## Final del día
 
@@ -156,7 +156,7 @@ A continuación, el algoritmo de encaramiento de los jugadores. Trigonometría b
 
 ## La tarde
 
-Ya tenía escenario, jugadores, colisiones. Llegaba lo importante: ¡Que volasen las balas! No tardé demasiado en implementar la creación de las mismas y el vuelo vino solo, dado que heredaban de la clase *posicionable* que mencioné antes, solo tenía que hacer un *update* y moverlas en cada frame.
+Ya tenía escenario, jugadores, colisiones. Llegaba lo importante: ¡Que volasen las balas! No tardé demasiado en implementar la creación de las mismas y el vuelo vino solo, dado que heredaban de la clase _posicionable_ que mencioné antes, solo tenía que hacer un _update_ y moverlas en cada frame.
 
 Para colisionar con el escenario, reutilicé parte de las funciones a las que hacia llamada para colisionar al jugador. Como las balas van mucho mas rápido, cree una comprobación por pasos en la que se comprueban las 10 posiciones intermedias entre la posición de origen y fin en un solo frame. De este modo, logré capturar el punto de impacto con una precisión de unos pocos pixeles. Para colisionar con los jugadores, simplemente comprobé la distancia entre bala y jugador, frame a frame, desencadenando una acción cuando esta bajaba por debajo de un limite.
 
@@ -168,7 +168,7 @@ Con el objetivo de que presentásemos el proyecto el viernes por la tarde, el mi
 
 ## Arquitectura de callback(estado)
 
-Como dije, mi modelo y mi vista viven vidas paralelas. Mi vista tiene una función render que se alimenta de un estado, que no es mas que un objeto en el que se describe la posición de los jugadores, de las balas y de los efectos. Esta función se pasa como *callback* a la función *update* del juego. Cada vez que se calcula un frame, se llama al callback pasandole el estado actual y este se encarga de pintar en el DOM. El sistema es capaz de crear las balas o efectos en el DOM si no existen, y eliminarlos cuando dejan de hacerlo. Estoy muy contento de como he logrado gestionar la comunicación entre una y otra parte de la aplicación.
+Como dije, mi modelo y mi vista viven vidas paralelas. Mi vista tiene una función render que se alimenta de un estado, que no es mas que un objeto en el que se describe la posición de los jugadores, de las balas y de los efectos. Esta función se pasa como _callback_ a la función _update_ del juego. Cada vez que se calcula un frame, se llama al callback pasandole el estado actual y este se encarga de pintar en el DOM. El sistema es capaz de crear las balas o efectos en el DOM si no existen, y eliminarlos cuando dejan de hacerlo. Estoy muy contento de como he logrado gestionar la comunicación entre una y otra parte de la aplicación.
 
 > ### Anotación de 2023
 >
@@ -176,7 +176,7 @@ Como dije, mi modelo y mi vista viven vidas paralelas. Mi vista tiene una funci�
 
 Al final del día implementé el sistema de daños. Las balas, al colisionar con un jugador, generan un efecto de sangre y añaden parte de su velocidad al jugador, haciendo el efecto de que los hacen retroceder y aumentando la kinestesia del juego. Ademas, restan su potencia a la vida del jugador, pudiendo determinar cuando uno u otro ha muerto.
 
-A estas alturas ya me habían dado las 21:30, así que mas contento que unas castañuelas por haber alcanzado un *sweet-spot* en el desarrollo, me marché a casa a descansar.
+A estas alturas ya me habían dado las 21:30, así que mas contento que unas castañuelas por haber alcanzado un _sweet-spot_ en el desarrollo, me marché a casa a descansar.
 
 # Día 4: Dándole cariño al juego
 
@@ -212,7 +212,7 @@ Llegó el viernes, día de presentación. La hora limite para entregar el juego 
 
 Rápidamente me dí cuenta de que aquello era mas complejo de lo que había calculado y que se me estaba yendo la mañana. Lo peor es que no había diferenciado la rama y en mi estado actual, hasta que no terminase el menú que me diese acceso al juego, no tendría nada que enseñar. Me dio un pequeño ataque de ansiedad y me bloquee. Y se bloqueo Atom (consejo, no tengáis abierto dos instancias del mismo archivo, se vuelve loco).
 
-Pero lo mas grande IronHack es el compañerismo y camaradería que se crea y, gracias a mi compañera Mónica Calderaro, logré tranquilizarme, sacar al harcoder que llevo dentro y hacer funcional mi proyecto. Deje de usar **Refract** y empecé a codificar a pelo el HTML haciendo *getDocumentById* para asignar los *listeners* a los botones. Logré hacer una intro muy resultona y sincronizada con la música. Logré hacer un selector de personajes. Logre implementar una UI in-game, que aun lo tenía pendiente, logre que cada arma sonara y se viera diferente. Y lo mas importante, logré que mi presentación + menu dieran paso a mi juego. Ya estaba. **A las 12:30 IronGunz Beta 1.0 ya era real**.Ensucié muchísimo mi código durante este día, pero siempre habrá tiempo refactorizar. Mergee mi rama develop con master, active GitHub pages y me puse a refinar mis slides para la presentación.
+Pero lo mas grande IronHack es el compañerismo y camaradería que se crea y, gracias a mi compañera Mónica Calderaro, logré tranquilizarme, sacar al harcoder que llevo dentro y hacer funcional mi proyecto. Deje de usar **Refract** y empecé a codificar a pelo el HTML haciendo _getDocumentById_ para asignar los _listeners_ a los botones. Logré hacer una intro muy resultona y sincronizada con la música. Logré hacer un selector de personajes. Logre implementar una UI in-game, que aun lo tenía pendiente, logre que cada arma sonara y se viera diferente. Y lo mas importante, logré que mi presentación + menu dieran paso a mi juego. Ya estaba. **A las 12:30 IronGunz Beta 1.0 ya era real**.Ensucié muchísimo mi código durante este día, pero siempre habrá tiempo refactorizar. Mergee mi rama develop con master, active GitHub pages y me puse a refinar mis slides para la presentación.
 
 > ### Anotación de 2023
 >
@@ -279,5 +279,5 @@ Hoy de domingo, día en pareja y de descanso para coger fuerzas. Mañana empezam
 > Está fue sin ninguna duda mi mejor semana. Técnicamente iba bastante bien para implementar la idea que tenía y pude disfrutar mucho prácticamente desde el primer momento.
 >
 > El juego salió muy divertido y me lo celebraron mucho tanto dentro como fuera de Ironhack. Ganó el premio al mejor de esta promoción (aunque al final fue un concurso de popularidad que supongo que gané porque tenía mucha presencia en redes sociales con el blog, forocoches y twitter) y se estuvo mostrando como ejemplo de primer proyecto durante algunas promociones. Semanas despues, cuando iba como antiguo alumno, la gente me preguntaba por el juego y salian muy buenas conversaciones de aquello.
-> 
-> Recuerdo con mucho cariño esa semana, me lo pasé genial trabajando en este proyecto. 
+>
+> Recuerdo con mucho cariño esa semana, me lo pasé genial trabajando en este proyecto.
