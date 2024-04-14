@@ -10,7 +10,14 @@ export const metadata: Metadata = {
   title: 'Fran Bosquet | Blog de programación',
   description: baseDescription,
   viewport: 'width=device-width, initial-scale=1',
-  icons: '/favicon.ico'
+  icons: '/favicon.ico',
+  metadataBase: new URL('https://franbosquet.com'),
+  alternates: {
+    canonical: '/'
+  },
+  authors: { name: 'Fran Bosquet', url: 'https://franbosquet.com' },
+  publisher: 'Fran Bosquet',
+  robots: 'index, follow',
 }
 
 const poppins = Poppins({

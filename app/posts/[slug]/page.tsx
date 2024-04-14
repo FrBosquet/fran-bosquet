@@ -40,7 +40,7 @@ export async function generateMetadata(
 
   return {
     title: `${post.frontmatter.title as string} | Fran Bosquet`,
-    keywords: post.frontmatter.keywords as string[],
     description: post.frontmatter.description as string || baseDescription,
+    robots: 'index, follow',
   }
 }

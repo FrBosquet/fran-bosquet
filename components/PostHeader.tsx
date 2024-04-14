@@ -5,11 +5,11 @@ import { Tag } from "./Tag"
 
 type Props = Post
 
-export const PostHeader = ({ title, date, keywords, image, subtitle }: Props) => {
+export const PostHeader = ({ title, date, keywords, image, description }: Props) => {
 	return <>
 		<header className="border-b-2 border-gray-500 pb-2 mb-4">
 			<h1 className="text-4xl md:text-5xl bg-gradient-to-r from-teal-100 to-orange-200 text-transparent py-2 bg-clip-text font-mono">{title}</h1>
-			{subtitle ? <p className="text-sm uppercase text-teal-200 py-4">{subtitle}</p> : null}
+			{description ? <p className="text-sm uppercase text-teal-200 py-4">{description}</p> : null}
 			{image ? <><div className="w-full h-60 relative rounded-lg overflow-hidden my-2 shadow-lg">
 				<Image title="splash" alt="splash" src={`/images/${image.src}`} fill style={{ objectFit: 'cover' }}></Image>
 			</div> <section className="text-slate-600 pb-1 text-xs">

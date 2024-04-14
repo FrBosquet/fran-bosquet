@@ -29,7 +29,7 @@ export const PostLink = ({ post }: Props) => {
 			text-lg sm:text-2xl
 			transition-all
 			group-hover:text-white
-			'>{post.title}</Link>
+			'><h2>{post.title}</h2></Link>
 
 			{post.description ? <p className='text-teal-100/60 text-sm lg:text-base flex-1 pb-2 pr-2'>{post.description}</p> : null}
 
