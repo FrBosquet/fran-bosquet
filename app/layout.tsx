@@ -7,7 +7,7 @@ import React from "react";
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Fran Bosquet',
+  title: 'Fran Bosquet | Blog de programación',
   description: 'Blog de Fran Bosquet: Programación web, desarrollo de software, tecnología. Mi viaje como desarrollador web a partir de Ironhack.',
   viewport: 'width=device-width, initial-scale=1',
   icons: '/favicon.ico',
