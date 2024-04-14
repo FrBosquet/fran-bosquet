@@ -1,6 +1,6 @@
 import { PostHeader } from "components/PostHeader";
 import { BackIcon } from "components/icons";
-import { baseKeywords, getPost, getPostSlugs } from "lib/posts";
+import { baseDescription, baseKeywords, getPost, getPostSlugs } from "lib/posts";
 import { Post } from "lib/types";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -41,6 +41,6 @@ export async function generateMetadata(
   return {
     title: `${post.frontmatter.title as string} | Fran Bosquet`,
     keywords: [...baseKeywords, ...post.frontmatter.keywords as string[]],
-    description: post.frontmatter.description as string,
+    description: post.frontmatter.description as string || baseDescription,
   }
 }

@@ -71,3 +71,5 @@ export const baseKeywords = [
 	'bootcamp',
 	'carrera'
 ]
+
+export const baseDescription = 'Blog de programación web, tecnología, bootcamps y desarrollo de carrera. Tips para desarrollo de aplicaciones fullstack con Typescript, Next, Tailwind y otras tecnologías.'
