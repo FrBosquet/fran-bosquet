@@ -64,12 +64,4 @@ export const getPost = async (slug: string): Promise<MDXRemoteSerializeResult> =
 	return serilized
 }
 
-export const baseKeywords = [
-	'programación',
-	'tecnología',
-	'desarrollo',
-	'bootcamp',
-	'carrera'
-]
-
 export const baseDescription = 'Blog de programación web, tecnología, bootcamps y desarrollo de carrera. Tips para desarrollo de aplicaciones fullstack con Typescript, Next, Tailwind y otras tecnologías.'
