@@ -1,6 +1,6 @@
 export type Post = {
 	title: string
-	subtitle?: string
+	description?: string
 	slug: string
 	date: string
 	keywords: string[]

@@ -31,7 +31,7 @@ export const PostLink = ({ post }: Props) => {
 			group-hover:text-white
 			'>{post.title}</Link>
 
-			{post.subtitle ? <p className='text-teal-100/60 text-sm lg:text-base flex-1 pb-2 pr-2'>{post.subtitle}</p> : null}
+			{post.description ? <p className='text-teal-100/60 text-sm lg:text-base flex-1 pb-2 pr-2'>{post.description}</p> : null}
 
 			<div className='flex-1 items-end gap-2 hidden sm:flex pt-4'>
 				{post.keywords.map(keyword => <Tag key={keyword}>{keyword}</Tag>)}
