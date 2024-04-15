@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   icons: '/favicon.ico',
   metadataBase: new URL('https://franbosquet.com'),
   alternates: {
-    canonical: '/'
+    canonical: '/',
+    languages: {
+      'en-US': 'https://en.franbosquet.com'
+    }
   },
   authors: { name: 'Fran Bosquet', url: 'https://franbosquet.com' },
   publisher: 'Fran Bosquet',
