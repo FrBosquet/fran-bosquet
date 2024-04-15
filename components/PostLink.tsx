@@ -1,5 +1,4 @@
 import { Lang } from "lib/posts"
-import { getIntlUrl } from "lib/url"
 import Image from "next/image"
 import Link from "next/link"
 import { dateFormatter } from "../lib/dateFormatter"
@@ -29,7 +28,7 @@ export const PostLink = ({ post, lang }: Props) => {
 			/>
 		</div>
 		<div className='flex justify-between flex-col flex-1 h-full py-4 lg:pt-6 gap-2'>
-			<Link href={getIntlUrl(`posts/${post.slug}`, lang)} className='title font-mono
+			<Link href={`${lang === 'en' ? '/en' : ''}/posts/${post.slug}`} className='title font-mono
 			text-teal-200
 			text-lg sm:text-2xl
 			transition-all
