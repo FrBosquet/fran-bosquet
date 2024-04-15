@@ -13,29 +13,29 @@ const ignore = [
 	'index.tsx',
 ]
 
-enum Lang {
+export enum Lang {
 	ES = 'es',
 	EN = 'en',
 }
 const POSTS_DIRECTORY = path.join(process.cwd(), 'posts')
 
-export const getPostsFileNames = (lang = Lang.ES): string[] => {
+export const getPostsFileNames = (lang: Lang): string[] => {
 	const fileNames = fs.readdirSync(path.join(POSTS_DIRECTORY, lang))
 
 	return fileNames.filter(name => !ignore.includes(name))
 }
 
-export const getPostSlugs = (): string[] => {
-	const fileNames = getPostsFileNames()
+export const getPostSlugs = (lang: Lang): string[] => {
+	const fileNames = getPostsFileNames(lang)
 
 	return fileNames.map(name => name.replace('.mdx', ''))
 }
 
-export const getPosts = async (lang = Lang.ES, keyword?: string): Promise<Post[]> => {
-	const fileNames = getPostsFileNames()
+export const getPosts = async (lang?: Lang, keyword?: string): Promise<Post[]> => {
+	const fileNames = getPostsFileNames(lang ?? Lang.ES)
 
 	const posts: Post[] = await Promise.all(fileNames.filter(name => !ignore.includes(name)).map(async name => {
-		const filename = path.join(POSTS_DIRECTORY, lang, name)
+		const filename = path.join(POSTS_DIRECTORY, lang ?? Lang.ES, name)
 		const raw = fs.readFileSync(filename);
 		const serilized = await serialize(raw, {
 			parseFrontmatter: true,

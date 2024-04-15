@@ -13,18 +13,18 @@ type Props = {
 }
 
 export default async function Page({ params: { slug } }: Props) {
-  const post = await getPost(slug, Lang.ES)
+  const post = await getPost(slug, Lang.EN)
   const meta = post.frontmatter as Post
 
-  return <PostContent>
-    <PostBacklink href="/" />
+  return <PostContent >
+    <PostBacklink href="/en" />
     <PostHeader {...meta} />
     <MdxContent source={post} />
   </PostContent>
 }
 
 export async function generateStaticParams() {
-  const filenames = getPostSlugs(Lang.ES)
+  const filenames = getPostSlugs(Lang.EN)
 
   return filenames.map(slug => ({ slug }))
 }
@@ -32,7 +32,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(
   { params }: Props,
 ): Promise<Metadata> {
-  const post = await getPost(params.slug, Lang.ES)
+  const post = await getPost(params.slug, Lang.EN)
 
   return {
     title: `${post.frontmatter.title as string} | Fran Bosquet`,

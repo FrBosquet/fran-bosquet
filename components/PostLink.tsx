@@ -1,3 +1,4 @@
+import { Lang } from "lib/posts"
 import Image from "next/image"
 import Link from "next/link"
 import { dateFormatter } from "../lib/dateFormatter"
@@ -5,10 +6,11 @@ import { Post } from "../lib/types"
 import { Tag } from "./Tag"
 
 type Props = {
-	post: Post
+	post: Post,
+	lang?: Lang
 }
 
-export const PostLink = ({ post }: Props) => {
+export const PostLink = ({ post, lang }: Props) => {
 	return <article className="w-full gap-6 flex group transition-all border-b border-white/30" >
 		<div className='aspect-[1/2] w-28 relative overflow-hidden
 		transition-all
@@ -24,7 +26,7 @@ export const PostLink = ({ post }: Props) => {
 			/>
 		</div>
 		<div className='flex justify-between flex-col flex-1 h-full py-4 lg:pt-6 gap-2'>
-			<Link href={`/posts/${post.slug}`} className='title font-mono
+			<Link href={`${lang ? `${lang}/` : ''}posts/${post.slug}`} className='title font-mono
 			text-teal-200
 			text-lg sm:text-2xl
 			transition-all
