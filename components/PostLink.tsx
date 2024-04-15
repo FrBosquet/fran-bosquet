@@ -12,6 +12,8 @@ type Props = {
 }
 
 export const PostLink = ({ post, lang }: Props) => {
+
+
 	return <article className="w-full gap-6 flex group transition-all border-b border-white/30" >
 		<div className='aspect-[1/2] w-28 relative overflow-hidden
 		transition-all
