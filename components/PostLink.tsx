@@ -1,4 +1,5 @@
 import { Lang } from "lib/posts"
+import { getIntlUrl } from "lib/url"
 import Image from "next/image"
 import Link from "next/link"
 import { dateFormatter } from "../lib/dateFormatter"
@@ -7,7 +8,7 @@ import { Tag } from "./Tag"
 
 type Props = {
 	post: Post,
-	lang?: Lang
+	lang: Lang
 }
 
 export const PostLink = ({ post, lang }: Props) => {
@@ -26,7 +27,7 @@ export const PostLink = ({ post, lang }: Props) => {
 			/>
 		</div>
 		<div className='flex justify-between flex-col flex-1 h-full py-4 lg:pt-6 gap-2'>
-			<Link href={`${lang ? `${lang}/` : ''}posts/${post.slug}`} className='title font-mono
+			<Link href={getIntlUrl(`posts/${post.slug}`, lang)} className='title font-mono
 			text-teal-200
 			text-lg sm:text-2xl
 			transition-all
@@ -36,7 +37,7 @@ export const PostLink = ({ post, lang }: Props) => {
 			{post.description ? <p className='text-teal-100/60 text-sm lg:text-base flex-1 pb-2 pr-2'>{post.description}</p> : null}
 
 			<div className='flex-1 items-end gap-2 hidden sm:flex pt-4'>
-				{post.keywords.map(keyword => <Tag key={keyword}>{keyword}</Tag>)}
+				{post.keywords.map(keyword => <Tag lang={lang} key={keyword}>{keyword}</Tag>)}
 			</div>
 
 			<span className='text-orange-300/60 text-xs lg:text-sm'>

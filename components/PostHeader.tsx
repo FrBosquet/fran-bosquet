@@ -1,11 +1,12 @@
+import { Lang } from "lib/posts"
 import Image from "next/image"
 import { dateFormatter } from "../lib/dateFormatter"
 import { Post } from "../lib/types"
 import { Tag } from "./Tag"
 
-type Props = Post
+type Props = Post & { lang: Lang }
 
-export const PostHeader = ({ title, date, keywords, image, description }: Props) => {
+export const PostHeader = ({ title, date, keywords, image, description, lang }: Props) => {
 	return <>
 		<header className="border-b-2 border-gray-500 pb-2 mb-4">
 			<h1 className="text-4xl md:text-5xl bg-gradient-to-r from-teal-100 to-orange-200 text-transparent py-2 bg-clip-text font-mono">{title}</h1>
@@ -17,7 +18,7 @@ export const PostHeader = ({ title, date, keywords, image, description }: Props)
 				</section></> : null}
 			<div className="flex justify-between items-end">
 				<div className="py-2 flex gap-2">
-					{keywords.map(keyword => <Tag key={keyword}>{keyword}</Tag>)}
+					{keywords.map(keyword => <Tag lang={lang} key={keyword}>{keyword}</Tag>)}
 				</div>
 				<span className="text-sm text-orange-300">{dateFormatter.format(new Date(date))}</span>
 			</div>

@@ -7,16 +7,18 @@ const nextConfig = {
   },
   rewrites: async () => {
     return {
-      beforeFiles: {
-        source: '/:path',
-        has: [
-          {
-            type: 'host',
-            value: 'en.franbosquet.com'
-          }
-        ],
-        destination: '/en/:path'
-      }
+      beforeFiles: [
+        {
+          source: '/:path',
+          has: [
+            {
+              type: 'host',
+              value: 'en.franbosquet.com'
+            }
+          ],
+          destination: '/en/:path'
+        }
+      ]
     }
   }
 }

@@ -18,7 +18,7 @@ export default async function Page({ params: { slug } }: Props) {
 
   return <PostContent >
     <PostBacklink href="/en" />
-    <PostHeader {...meta} />
+    <PostHeader lang={Lang.EN} {...meta} />
     <MdxContent source={post} />
   </PostContent>
 }
