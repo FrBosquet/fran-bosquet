@@ -1,0 +1,103 @@
+---
+title: Seo en Next con App Router
+description: ¿Qué es el SEO? ¿Por qué el de esta web es desastroso? investigo el asunto con SEO-Meta y empiezo a poner remedio en este post para conseguir el ansiado tráfico orgánico.
+date: 04-15-2024
+published: true
+keywords: 
+ - seo
+ - blog
+image: {
+	src: 'seo.webp',
+	author: 'NisonCo PR and SEO',
+	authorUrl: 'https://unsplash.com/es/@nisoncoprseo',
+	source: 'Unsplash',
+	sourceUrl: 'https://unsplash.com/es/fotos/un-bloque-de-madera-que-dice-seo-en-el-yIRdUr6hIvQ'
+}
+---
+
+https://unsplash.com/es/fotos/un-bloque-de-madera-que-dice-seo-en-el-yIRdUr6hIvQ
+
+Como he comentado en alguna ocasión, hace un tiempo me hice cargo de la web del negocio de mi mujer, [cristinadevaux.com](https://www.cristinadevaux.com). Se dedica a la fotografía social, especialmente bodas, y la web (junto a las redes sociales y el boca a boca) es una herramienta fundamental con la que capta nuevos clientes.
+
+Durante el tiempo en el que llevamos con la web hemos detectado que el tráfico y la captación de clientes han estado muy lejos de lo que esperábamos. Básicamente todo el tráfico que llega a la web, según hemos sabido por [Google Analytics](https://analytics.google.com/), viene redirigido de **Instagram**, **Whatsapp** u otras plataformas, rara vez del buscador. Por lo que estamos fallando a la hora de posicionar la página en el buscador. A este posicionar-la-página se le llama SEO y contrariamente a lo que yo pensaba, ni es sencillo, ni es automático, ni es un arte menor.
+
+## Los buscadores no son inteligentes, pero si muy trabajadores
+
+> Disclaimer: Mucho de lo que voy a contar aquí es mi interpretación de lo que he leído y experimentado. Por lo que respecta al SEO, soy un Junior trainee en su primer día. Así que coge con pinzas cada cosa que leas en esta entrada
+
+**SEO** son las siglas de _Search Engine Optimization_, u optimización para motores de búsqueda. La idea es que alguien que esté buscando fotografía social en un buscador (que casi siempre es [Google](https://google.com)) pueda encontrar tu web y acceder a ella. La dificultad radica en que **los buscadores no son inteligentes ni saben discernir qué contenido interesa más a cada búsqueda**. Por contra, se nutren de una serie de parámetros qué tu configuras en tu web para determinar la idoneidad de una web para una búsqueda determinada. Así que depende de tú pericia a la hora de hacer esta configuración el ser bien posicionado, y no tanto de la calidad de tu contenido. De ahí que blogs bien conocidos que redactan autentica basura estén tan bien posicionados y que páginas muy interesantes (como este blog) no aparezcan en búsquedas.
+
+> Es importante hacer una distinción. Es fácil, sin optimizar el SEO, aparecer en Google si buscas tu propio nombre. Si buscas Cristina de Vaux en Google aparece como primer resultado. Lo complicado, y lo que queremos lograr, es que al buscar "Fotógrafo de bodas Madrid" aparezca en la primera página. Lo mismo para esta web, lo que interesa es aparecer cuando alguien busca "Tutorial Next", no cuando busca "Fran Bosquet".
+
+Cuando montas una web con un generador como **Wordpress**, **Wix**, **Shopify**, etc. esta meta información que necesita el buscador se genera automáticamente. Por contra, si implementas tu web manualmente **es tu responsabilidad configurar tu página para que pueda ser leída por el buscador**. En el caso de [cristinadevaux.com](https://www.cristinadevaux.com) yo no me preocupé de estudiar este tema demasiado y como resultado el rendimiento en búsquedas ha venido siendo muy pobre. Es por ello que recientemente hemos contratado a la empresa [FULLSEO](https://fullseo.net) para que nos ayude a mejorar el posicionamiento de la web. Hemos estado trabajando con ellos los últimos cuatro meses y hemos mejorado bastante el posicionamiento de la web. En el proceso, he aprendido mucho sobre SEO.
+
+![FullSeo, la empresa que nos está ayudando a posicionar CristinaDeVaux.com](/images/fullseo.webp)
+_FullSeo, la empresa que nos está ayudando a posicionar CristinaDeVaux.com_
+
+En el caso de esta web en la anterior instancia del blog, construido en **Wordpress**, el SEO se realizaba automáticamente y el tráfico orgánico existía. Con esta nueva versión, construida en **Next**, no estoy proveyendo prácticamente ninguna información a buscadores. Precisamente porque cuando la construí no tenía conocimiento ni interés sobre el tema. Mi plan era compartir las entradas en **Twitter** para mis 300 seguidores. Así que si bien la web aparece rápidamente si buscas por _Fran Bosquet_, difícilmente aparece si buscas términos como **Ironhack**, **bootcamp**, **Next** u otros términos tratados en este blog.
+
+Como el tema me parece interesante y bastante util para desarrolladores indie como yo, ya provechando que me he puesto un poco al día con el tema, me he propuesto escribir una serie de posts documentando estoy dándole remedio a este asunto en franbosquet.com.
+
+## Detectando problemas con SEO Meta
+
+(Como referencia, puedes mirar el estado del repositorio desde [este commit](https://github.com/FrBosquet/fran-bosquet/tree/021261e437e4ea18ac166f5989f5790f1ea1a9a4), ya que voy a ir arreglando cosas mientras escribo este post)
+
+[SEO META in 1 CLICK](https://chromewebstore.google.com/detail/seo-meta-in-1-click/bjogjfinolnhfhkbipphpdlldadpnmhc?hl=es) no tiene nada especial. Es simplemente una extension de **Chrome** que permite comprobar los parámetros más relevantes para el SEO de una web. Me gusta esta herramienta porque permite hacer un análisis instantáneo sin tener que cambiar de pestaña. Pero tienes un montón de webs y herramientas que te permiten hacer lo mismo. Busca en Google _SEO analysis tools_ y sírvete tú misma/o.
+
+### Primer test
+
+Corriendo la app en local podemos hacer una prueba y ver que pinta tiene nuestro SEO:
+
+![Resultado del primer test de SEO Meta](/images/seometa1.webp)
+_Resultado del primer test de SEO Meta_
+
+Ya podemos ir viendo en la primera pestaña que, quitando la descripción y el lenguaje, todo mal. Vamos a ir arreglando punto por punto, tanto para la _home_ como para cada uno de los _posts_. Como referencia, recordar que el blog está construido en **Next versión 13**, utilizando el [App Router](https://nextjs.org/docs/app). Si quieres replicar algo de lo que implemente aquí, recuerda que en versiones anteriores de Next (o cualquier otro framework) tendrás que investigar cómo se hace.
+
+### El campo `title`
+
+El _title_ define… pues eso, el título de la página. Es importante ya que define cómo se va a ver tú pagina en el **SERP** (_search engine result page_, el enlace a tú página en los buscadores), o el título en la pestaña del navegador:
+
+![Aspecto del SERP antes de acometer ningún cambio](/images/serp1.webp)
+
+Pero también afecta a cómo posiciona **Google** (u otro buscador, pero en adelante hablaremos de google cuando nos refiramos a motores de búsqueda). Puedes leer más sobre qué hace el tag title en el blog de [Semrush](https://www.semrush.com/blog/title-tag/?kw=&cmp=ES_SRCH_DSA_Blog_EN&label=dsa_pagefeed&Network=g&Device=c&utm_content=676270860646&kwid=aud-2175346367685:dsa-2185834090056&cmpid=18347529021&agpid=153587537279&BU=Core&extid=105117326089&adpos=&gad_source=1&gclid=CjwKCAjw_LOwBhBFEiwAmSEQAY09Z8Wkjai5Lb4oh17Yi1mX5aYvV3FY-PBe61jA6XUpgABW4u87EBoCarEQAvD_BwE), web muy interesante por cierto. **El error en nuestro caso es que el título es muy corto**, ya que se recomienda apuntar entre 30 y 60 caracteres. Además, si queremos posicionar el blog como uno de desarrollo, sería interesante incluir las palabras Blog y Programación en el título.
+
+El objetivo por tanto sería incluir dentro del tag `head` de nuestro **DOM** un tag tal qué:
+
+```html
+<title>Blog de programación | Fran Bosquet</title>
+```
+
+Para conseguir esto, podemos modificar el objeto metadata que exportamos en el _layout_ principal de la aplicación:
+
+```tsx@app/layout.tsx
+	export const metadata: Metadata = {
+		title: 'Blog de programación | Fran Bosquet', // <- Esto
+		description: 'Blog de Fran Bosquet: Programación web, desarrollo de software, tecnología. Mi viaje como desarrollador web a partir de Ironhack.',
+		viewport: 'width=device-width, initial-scale=1',
+		icons: '/favicon.ico'
+	}
+```
+
+**Next** se encarga de convertir esa clave en el tag `title` dentro del `head` de nuestra página. En el artículo de **Semrush** tienes mil recomendaciones sobre como optimizar este tag. El mío no es ideal pero tampoco me quiero volver loco. Con este cambio ya pasamos la validación de **SeoMeta**:
+
+![Titúlo actualizado en SEO Meta](/images/seometa2.webp)
+
+Aun nos queda verificar qué pinta tiene el título en cada uno de los post. Si entramos en, por ejemplo, [franbosquet.com/posts/anadir-syntax-highlights](https://franbosquet.com/posts/anadir-syntax-highlights) y comprobamos con **SeoMeta**:
+
+![Titúlo post con SeoMeta](/images/seometa3.webp)
+
+Tiene buena pinta, pero falta consistencia respecto a lo que tenemos en la _home_. Así que vamos a modificar la función que genera los metadatos para cada uno de los posts. En este caso es una función en lugar de un objeto como en la _home_ porque necesita generarse dinámicamente en función del post que estemos visitando:
+
+```tsx@app/posts/page.tsx
+	export async function generateMetadata(
+		{ params }: Props,
+	): Promise<Metadata> {
+		const post = await getPost(params.slug)
+
+		return {
+			title: `${post.frontmatter.title as string} | Fran Bosquet`,
+		}
+	}
+```
+
+Y así ya tendremos el nombre del web en el título de cada posts. No es necesario y quizás no sea una buena práctica pero creo que queda mejor con esa adición.
