@@ -7,7 +7,7 @@ import React from "react";
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Fran Bosquet | Blog de programación',
+  title: 'Blog de programación | Fran Bosquet',
   description: baseDescription,
   viewport: 'width=device-width, initial-scale=1',
   icons: '/favicon.ico',
