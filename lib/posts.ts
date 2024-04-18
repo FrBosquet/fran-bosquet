@@ -69,4 +69,6 @@ export const getPost = cache(async (slug: string, lang = Lang.ES): Promise<MDXRe
 	return serilized
 })
 
-export const baseDescription = 'Blog de programación web, tecnología, bootcamps y desarrollo de carrera. Tips para desarrollo de aplicaciones fullstack con Typescript, Next, Tailwind y otras tecnologías.'
+export const baseDescription = 'Blog de programación web, tecnología y desarrollo de carrera. Tips para desarrollo de aplicaciones fullstack con Typescript, Next, Tailwind y otras tecnologías.'
+
+export const engDescription = 'Web dev, technology and career development blog. Tips for fullstack application development with Typescript, Next, Tailwind and other technologies.'

@@ -1,7 +1,7 @@
+import { getDateString } from "lib/dateFormatter"
 import { Lang } from "lib/posts"
 import Image from "next/image"
 import Link from "next/link"
-import { dateFormatter } from "../lib/dateFormatter"
 import { Post } from "../lib/types"
 import { Tag } from "./Tag"
 
@@ -42,7 +42,7 @@ export const PostLink = ({ post, lang }: Props) => {
 			</div>
 
 			<span className='text-orange-300/60 text-xs lg:text-sm'>
-				{dateFormatter.format(new Date(post.date))}
+				{getDateString(post.date, lang)}
 			</span>
 
 

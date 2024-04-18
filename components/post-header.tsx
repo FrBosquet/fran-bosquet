@@ -1,6 +1,6 @@
 import { Lang } from "lib/posts"
 import Image from "next/image"
-import { dateFormatter } from "../lib/dateFormatter"
+import { getDateString } from "../lib/dateFormatter"
 import { Post } from "../lib/types"
 import { Tag } from "./Tag"
 
@@ -20,7 +20,7 @@ export const PostHeader = ({ title, date, keywords, image, description, lang }: 
 				<div className="py-2 flex gap-2">
 					{keywords.map(keyword => <Tag lang={lang} key={keyword}>{keyword}</Tag>)}
 				</div>
-				<span className="text-sm text-orange-300">{dateFormatter.format(new Date(date))}</span>
+				<span className="text-sm text-orange-300">{getDateString(date, lang)}</span>
 			</div>
 		</header>
 	</>

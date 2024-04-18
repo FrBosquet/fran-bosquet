@@ -1,5 +1,5 @@
 'use client'
-import { PostHeader } from 'components/PostHeader';
+import { PostHeader } from 'components/post-header';
 import { YoutubeEmbed } from 'components/YoutubeEmbed';
 import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { HTMLAttributes } from 'react';

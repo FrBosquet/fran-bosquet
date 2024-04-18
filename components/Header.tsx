@@ -1,7 +1,8 @@
 import Link from "next/link"
+import { ReactNode } from "react"
 import { Social } from "./Social"
 
-export const Header = () => {
+export const Header = ({ children }: { children: ReactNode }) => {
   return <header className='
     realtive flex items-center gap-2
     lg:flex-col lg:justify-center
@@ -15,7 +16,7 @@ export const Header = () => {
     <Link href="/" title="inicio de la web">
       <p className='text-2xl md:text-4xl lg:text-7xl'>Fran<span className='text-teal-400'>Bosquet</span></p>
     </Link>
-    <p className='text-gray-500 text-sm hidden md:block'>Mi blog personal</p>
+    <p className='text-gray-500 text-sm hidden md:block'>{children}</p>
     <Social />
   </header>
 }

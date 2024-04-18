@@ -1,7 +1,7 @@
 import { MdxContent } from "components/MdxContent";
-import { PostHeader } from "components/PostHeader";
 import { PostBacklink } from "components/post-backlink";
 import { PostContent } from "components/post-content";
+import { PostHeader } from "components/post-header";
 import { Lang, baseDescription, getPost, getPostSlugs } from "lib/posts";
 import { Post } from "lib/types";
 import { Metadata } from "next";

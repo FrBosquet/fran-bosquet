@@ -4,7 +4,7 @@ import { baseDescription } from "lib/posts";
 import { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import React from "react";
-import '../styles/globals.css';
+import 'styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Blog de programación | Fran Bosquet',
@@ -33,11 +33,11 @@ export default function Layout({ children }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
+    <html lang="es-ES">
       <body>
         <main className={`${poppins.variable} font-sans text-gray-200`}>
           <section className="min-h-screen flex flex-col">
-            <Header />
+            <Header>Mi blog personal</Header>
             <article className='flex-1 bg-gradient-to-b from-gray-900 to-gray-800'>
               <div className='
                 max-w-7xl mx-auto
