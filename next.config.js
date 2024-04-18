@@ -5,6 +5,22 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
+  rewrites: async () => {
+    return {
+      beforeFiles: [
+        {
+          source: '/:path',
+          has: [
+            {
+              type: 'host',
+              value: 'en.franbosquet.com'
+            }
+          ],
+          destination: '/en/:path'
+        }
+      ]
+    }
+  }
 }
 
 const withMDX = require('@next/mdx')()

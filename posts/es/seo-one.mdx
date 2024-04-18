@@ -1,0 +1,347 @@
+---
+title: Seo en Next con App Router
+description: ¿Qué es el SEO? ¿Por qué el de esta web es desastroso? investigo el asunto con SEO-Meta y empiezo a poner remedio en este post para conseguir el ansiado tráfico orgánico.
+date: 04-22-2024
+published: true
+keywords: 
+ - seo
+ - blog
+image: {
+	src: 'seo.webp',
+	author: 'NisonCo PR and SEO',
+	authorUrl: 'https://unsplash.com/es/@nisoncoprseo',
+	source: 'Unsplash',
+	sourceUrl: 'https://unsplash.com/es/fotos/un-bloque-de-madera-que-dice-seo-en-el-yIRdUr6hIvQ'
+}
+---
+
+https://unsplash.com/es/fotos/un-bloque-de-madera-que-dice-seo-en-el-yIRdUr6hIvQ
+
+Como he comentado en alguna ocasión, hace un tiempo me hice cargo de la web del negocio de mi mujer, [cristinadevaux.com](https://www.cristinadevaux.com). Se dedica a la fotografía social, especialmente bodas, y la web (junto a las redes sociales y el boca a boca) es una herramienta fundamental con la que capta nuevos clientes.
+
+Durante el tiempo en el que llevamos con la web hemos detectado que el tráfico y la captación de clientes han estado muy lejos de lo que esperábamos. Básicamente todo el tráfico que llega a la web, según hemos sabido por [Google Analytics](https://analytics.google.com/), viene redirigido de **Instagram**, **Whatsapp** u otras plataformas, rara vez del buscador. Por lo que estamos fallando a la hora de posicionar la página en el buscador. A este posicionar-la-página se le llama SEO y contrariamente a lo que yo pensaba, ni es sencillo, ni es automático, ni es un arte menor.
+
+## Los buscadores no son inteligentes, pero si muy trabajadores
+
+> Disclaimer: Mucho de lo que voy a contar aquí es mi interpretación de lo que he leído y experimentado. Por lo que respecta al SEO, soy un Junior trainee en su primer día. Así que coge con pinzas cada cosa que leas en esta entrada
+
+**SEO** son las siglas de _Search Engine Optimization_, u optimización para motores de búsqueda. La idea es que alguien que esté buscando fotografía social en un buscador (que casi siempre es [Google](https://google.com)) pueda encontrar tu web y acceder a ella. La dificultad radica en que **los buscadores no son inteligentes ni saben discernir qué contenido interesa más a cada búsqueda**. Por contra, se nutren de una serie de parámetros qué tu configuras en tu web para determinar la idoneidad de una web para una búsqueda determinada. Así que depende de tú pericia a la hora de hacer esta configuración el ser bien posicionado, y no tanto de la calidad de tu contenido. De ahí que blogs bien conocidos que redactan autentica basura estén tan bien posicionados y que páginas muy interesantes (como este blog) no aparezcan en búsquedas.
+
+> Es importante hacer una distinción. Es fácil, sin optimizar el SEO, aparecer en Google si buscas tu propio nombre. Si buscas Cristina de Vaux en Google aparece como primer resultado. Lo complicado, y lo que queremos lograr, es que al buscar "Fotógrafo de bodas Madrid" aparezca en la primera página. Lo mismo para esta web, lo que interesa es aparecer cuando alguien busca "Tutorial Next", no cuando busca "Fran Bosquet".
+
+Cuando montas una web con un generador como **Wordpress**, **Wix**, **Shopify**, etc. esta meta información que necesita el buscador se genera automáticamente. Por contra, si implementas tu web manualmente **es tu responsabilidad configurar tu página para que pueda ser leída por el buscador**. En el caso de [cristinadevaux.com](https://www.cristinadevaux.com) yo no me preocupé de estudiar este tema demasiado y como resultado el rendimiento en búsquedas ha venido siendo muy pobre. Es por ello que recientemente hemos contratado a la empresa [FULLSEO](https://fullseo.net) para que nos ayude a mejorar el posicionamiento de la web. Hemos estado trabajando con ellos los últimos cuatro meses y hemos mejorado bastante el posicionamiento de la web. En el proceso, he aprendido mucho sobre SEO.
+
+![FullSeo, la empresa que nos está ayudando a posicionar CristinaDeVaux.com](/images/fullseo.webp)
+_FullSeo, la empresa que nos está ayudando a posicionar CristinaDeVaux.com_
+
+En el caso de esta web en la anterior instancia del blog, construido en **Wordpress**, el SEO se realizaba automáticamente y el tráfico orgánico existía. Con esta nueva versión, construida en **Next**, no estoy proveyendo prácticamente ninguna información a buscadores. Precisamente porque cuando la construí no tenía conocimiento ni interés sobre el tema. Mi plan era compartir las entradas en **Twitter** para mis 300 seguidores. Así que si bien la web aparece rápidamente si buscas por _Fran Bosquet_, difícilmente aparece si buscas términos como **Ironhack**, **bootcamp**, **Next** u otros términos tratados en este blog.
+
+Como el tema me parece interesante y bastante util para desarrolladores indie como yo, ya provechando que me he puesto un poco al día con el tema, me he propuesto escribir una serie de posts documentando estoy dándole remedio a este asunto en franbosquet.com.
+
+## Detectando problemas con SEO Meta
+
+(Como referencia, puedes mirar el estado del repositorio desde [este commit](https://github.com/FrBosquet/fran-bosquet/tree/021261e437e4ea18ac166f5989f5790f1ea1a9a4), ya que voy a ir arreglando cosas mientras escribo este post)
+
+[SEO META in 1 CLICK](https://chromewebstore.google.com/detail/seo-meta-in-1-click/bjogjfinolnhfhkbipphpdlldadpnmhc?hl=es) no tiene nada especial. Es simplemente una extension de **Chrome** que permite comprobar los parámetros más relevantes para el SEO de una web. Me gusta esta herramienta porque permite hacer un análisis instantáneo sin tener que cambiar de pestaña. Pero tienes un montón de webs y herramientas que te permiten hacer lo mismo. Busca en Google _SEO analysis tools_ y sírvete tú misma/o.
+
+### Primer test
+
+Corriendo la app en local podemos hacer una prueba y ver que pinta tiene nuestro SEO:
+
+![Resultado del primer test de SEO Meta](/images/seometa1.webp)
+_Resultado del primer test de SEO Meta_
+
+Ya podemos ir viendo en la primera pestaña que, quitando la descripción y el lenguaje, todo mal. Vamos a ir arreglando punto por punto, tanto para la _home_ como para cada uno de los _posts_. Como referencia, recordar que el blog está construido en **Next versión 13**, utilizando el [App Router](https://nextjs.org/docs/app). Si quieres replicar algo de lo que implemente aquí, recuerda que en versiones anteriores de Next (o cualquier otro framework) tendrás que investigar cómo se hace.
+
+### El campo `title`
+
+El _title_ define… pues eso, el título de la página. Es importante ya que define cómo se va a ver tú pagina en el **SERP** (_search engine result page_, el enlace a tú página en los buscadores), o el título en la pestaña del navegador:
+
+![Aspecto del SERP antes de acometer ningún cambio](/images/serp1.webp)
+
+Pero también afecta a cómo posiciona **Google** (u otro buscador, pero en adelante hablaremos de google cuando nos refiramos a motores de búsqueda). Puedes leer más sobre qué hace el tag title en el blog de [Semrush](https://www.semrush.com/blog/title-tag/?kw=&cmp=ES_SRCH_DSA_Blog_EN&label=dsa_pagefeed&Network=g&Device=c&utm_content=676270860646&kwid=aud-2175346367685:dsa-2185834090056&cmpid=18347529021&agpid=153587537279&BU=Core&extid=105117326089&adpos=&gad_source=1&gclid=CjwKCAjw_LOwBhBFEiwAmSEQAY09Z8Wkjai5Lb4oh17Yi1mX5aYvV3FY-PBe61jA6XUpgABW4u87EBoCarEQAvD_BwE), web muy interesante por cierto. **El error en nuestro caso es que el título es muy corto**, ya que se recomienda apuntar entre 30 y 60 caracteres. Además, si queremos posicionar el blog como uno de desarrollo, sería interesante incluir las palabras Blog y Programación en el título.
+
+El objetivo por tanto sería incluir dentro del tag `head` de nuestro **DOM** un tag tal qué:
+
+```html
+<title>Blog de programación | Fran Bosquet</title>
+```
+
+Para conseguir esto, podemos modificar el objeto metadata que exportamos en el _layout_ principal de la aplicación:
+
+```tsx@app/layout.tsx
+	export const metadata: Metadata = {
+		title: 'Blog de programación | Fran Bosquet', // <- Esto
+		description: 'Blog de Fran Bosquet: Programación web, desarrollo de software, tecnología. Mi viaje como desarrollador web a partir de Ironhack.',
+		viewport: 'width=device-width, initial-scale=1',
+		icons: '/favicon.ico'
+	}
+```
+
+**Next** se encarga de convertir esa clave en el tag `title` dentro del `head` de nuestra página. En el artículo de **Semrush** tienes mil recomendaciones sobre como optimizar este tag. El mío no es ideal pero tampoco me quiero volver loco. Con este cambio ya pasamos la validación de **SeoMeta**:
+
+![Titúlo actualizado en SEO Meta](/images/seometa2.webp)
+
+Aun nos queda verificar qué pinta tiene el título en cada uno de los post. Si entramos en, por ejemplo, [franbosquet.com/posts/anadir-syntax-highlights](https://franbosquet.com/posts/anadir-syntax-highlights) y comprobamos con **SeoMeta**:
+
+![Titúlo post con SeoMeta](/images/seometa3.webp)
+
+Tiene buena pinta, pero falta consistencia respecto a lo que tenemos en la _home_. Así que vamos a modificar la función que genera los metadatos para cada uno de los posts. En este caso es una función en lugar de un objeto como en la _home_ porque necesita generarse dinámicamente en función del post que estemos visitando:
+
+```tsx@app/posts/page.tsx
+	export async function generateMetadata(
+		{ params }: Props,
+	): Promise<Metadata> {
+		const post = await getPost(params.slug)
+
+		return {
+			title: `${post.frontmatter.title as string} | Fran Bosquet`,
+		}
+	}
+```
+
+Y así ya tendremos el nombre del web en el título de cada posts. No es necesario y quizás no sea una buena práctica pero creo que queda mejor con esa adición.
+
+### El metacampo `description`
+
+El segundo aspecto en el que nos vamos a enfocar es la descripción. Esta provee a los motores (y a usuarios en **SERP**) de un resumen de lo que nos encontramos en la página. Según [Semrush](https://www.semrush.com/blog/meta-description/):
+
+> Your meta descriptions should be unique, descriptive, and relevant to the page.
+
+Lo que hemos tenido hasta este momento:
+
+> Blog de Fran Bosquet: Programación web, desarrollo de software, tecnología. Mi viaje como desarrollador web a partir de Ironhack.
+
+Que adolece de varios problemas. Por un lado, ya tenemos en el título el nombre y que es un blog. Es absurdo utilizar **Blog de Fran Bosquet** para describir el blog de un tipo llamado Fran Bosquet. Por otro lado, esto ya no gira tanto en torno a desarrollo web, _career swap_ y Ironhack. Más bien a tips de programación en **Typescript** u **Next** y desarrollo de carrera en la industria del software. El objetivo es añadir un campo `meta` en el `head` con el atributo `type="description"`, con un contenido tipo:
+
+```html
+<meta
+  name="description"
+  content="Blog de programación web, tecnología y desarrollo de carrera. Tips para desarrollo de aplicaciones fullstack con Typescript, Next, Tailwind y otras tecnologías."
+/>
+```
+
+Para cambiarlo en **Next**, puedes editar el objeto metadata en tu `layout.tsx` al igual que hicimos para cambiar el `title`:
+
+```tsx@app/layout.tsx
+	export const metadata: Metadata = {
+		title: 'Fran Bosquet | Blog de programación',
+		description: 'Blog de programación web, tecnología, bootcamps y desarrollo de carrera. Tips para desarrollo de aplicaciones fullstack con Typescript, Next, Tailwind y otras tecnologías.',
+		viewport: 'width=device-width, initial-scale=1',
+		icons: '/favicon.ico',
+	}
+```
+
+Para la descripción de los _posts_ necesitamos ampliar la metainformación que damos en cada uno. En el _frontmatter_ de cada post (la sección en la que defines la metadata de cada una de las entradas) voy a añadir un nuevo campo `description` donde incluiré un resumen del contenido de cada post:
+
+```mdx@posts/primer-dia-datadog.mdx
+---
+title: 'Mi primer día en Datadog'
+description: 'Qué he aprendido en mis primeros 7 años en la industria y cómo he llegado hasta una de las empresas más punteras en el mundo de la monitorización de datos.'
+```
+
+Actualizo el tipo del post para que **TypeScript** sepa que ahora puede esperar ese campo. Lo mantengo opcional (usando `?`) porque no voy a añadirlo a todos los _posts_:
+
+```tsx@lib/types.ts
+	export type Post = {
+		title: string
+		description?: string
+		slug: string
+		...
+	}
+```
+
+Y en el `generateMetadata` de la página del _post_, utilizo esa description para proveer de información a **Next**:
+
+```tsx@app/posts/[slug]/page.tsx
+export async function generateMetadata(
+	{ params }: Props,
+): Promise<Metadata> {
+	const post = await getPost(params.slug)
+
+	return {
+		title: `${post.frontmatter.title as string} | Fran Bosquet`,
+		description: post.frontmatter.description,
+	}
+}
+```
+
+Con esto ya tendremos una descripción única de cada post en el **SERP**, por lo que podremos ayudar a posicionar directamente la entrada en los buscadores (dado que el motor dispondrá de esa información para determinar su relevancia) y a atraer más visitas desde allí (dado que el usuario también va a tener más información en el resultado de búsqueda que le puede animar a hacer click).
+
+Aprovecho ademas para meter una mejora visual. Hasta ahora no teníamos una descripción de los post en la home:
+
+![Posts antes de añadir descripción](/images/before-descriptions.webp)
+
+![Posts despues de añadir descripción](/images/after-descriptions.webp)
+
+Que creo que lo deja todo mucho mas equilibrado y recojidito.
+
+### El metacampo `keywords`
+
+De nuevo [Semrush](https://www.semrush.com/blog/meta-keywords/?kw=&cmp=ES_SRCH_DSA_Blog_EN&label=dsa_pagefeed&Network=g&Device=c&utm_content=676270860652&kwid=dsa-2185834090056&cmpid=18347529021&agpid=153587537279&BU=Core&extid=105117325204&adpos=&gad_source=1&gclid=CjwKCAjw5v2wBhBrEiwAXDDoJQMm4chQL-OlXGKmlePtaygaxhF2alRpVjVSUHf-i2T7wieOnXdBdRoCXVAQAvD_BwE) vierte un poco de luz sobre el gran misterio del SEO, esta vez con un **Hot take** bastante drástico: El meta campo keywords puede dañar tu SEO, está en desuso y no deberías usarlo. **Google** puede interpreta tu página como _spam_ si se lo encuentra y recomiendan omitirlo. Me ha sorprendido bastante pero les doí crédito, así que no voy a incluirlo.
+
+### El enlace canónico
+
+Conocemos cómo _URL_ canónica a la principal de una página. Varias _URLs_ pueden dirigir a la misma página, por ejemplo al usar query params:
+
+> https://www.franbosquet.com
+>
+> https://www.franbosquet.com?filter=none
+
+Ambas son la misma página, pero **Google** las indexaría como resultados diferentes. Para evitar esto, **el motor nos exige indicar cual es “la buena”**, la que debe aparecer en los resultados de búsqueda. Si no lo hacemos, simplemente no nos indexará. Puedes leer más sobre _URLs_ canónicas en nuestra web de referencia, [Semrush](https://es.semrush.com/blog/guia-url-canonicas/). Lo que queremos lograr es incluir un enlace en el `head` de la página tal que:
+
+```html
+<link rel="canonical" href="https://franbosquet.com/" />
+```
+
+Para hacerlo en **Next 13** y superior, podemos seguir estos pasos:
+
+- Primero indicamos un `medadataBase` en nuestro objeto metadata, dentro del layout de la página. Este campo indica una URL base sobre la que compondremos las demás. No es obligatorio pero simplifica el proceso.
+
+- Después, añadiremos un objeto `alternates` que indica al buscador otras versiones de la página.
+
+- Dentro de este `alternates`, añadimos la URL canónica de la página.
+
+Quedando en nuestro caso:
+
+```tsx@app/layout
+export const metadata: Metadata = {
+  ...,
+  metadataBase: new URL('https://franbosquet.com'),
+  alternates: {
+    canonical: '/'
+  }
+}
+```
+
+Ya que estamos definiendo los `alternates`, es interesante saber que podemos también especificar versiones de la página en otros idiomas. Voy a aprovechar este momento para crear una versión en ingles, que vivirá en `/en`. En este [commit de aquí](https://github.com/FrBosquet/fran-bosquet/commit/0967a869bad3e45feb6a0d88f01f50789d3ad153) refactorizo el repo para que sea capaz de gestionar varias carpetas de contenido independientemente, una para cada lenguaje. De paso he utilizado el traductor [DeepL](https://www.deepl.com/es/translator) para traducir el `about` de la página. En este [otro commit](https://gitkraken.dev/link/dnNjb2RlOi8vZWFtb2Rpby5naXRsZW5zL2xpbmsvci83MTQxOTEzMDRlMjY4MzUxN2JjYTNmNmRiYzViNWM0ZDJhN2RjNTdiL2MvMWU3NDgzNTM2NDIzZTMxMDlmYTU2YTc1NTEwNjRhM2NjNTFlMzU5Zj91cmw9Z2l0JTQwZ2l0aHViLmNvbSUzQUZyQm9zcXVldCUyRmZyYW4tYm9zcXVldC5naXQ%3D?origin=gitlens) actualizo temas de _locale_ en fechas y meta campos. Actualizamos los `alternates` para que indiquen al buscador la versión en inglés del sitio:
+
+```tsx@app/layout
+alternates: {
+	canonical: '/',
+	languajes: {
+		'en-US': '/en'
+	}
+}
+```
+
+Y ya que estaba en harina, he creado el subdominio [en.franbosquet.com](https://en.franbosquet.com) y he configurado **Next** para que redireccione las llamadas a ese subdominio a [franbosquet.com/en](https://www.franbosquet.com) siguiendo [esta documentación](https://vercel.com/guides/can-i-redirect-from-a-subdomain-to-a-subpath). Con lo que **¡podemos dar por inaugurado oficialmente franbosquet.com en ingles!** You are welcome!
+
+Recuerda que tienes que añadir la etiqueta canónica en cada uno de los posts:
+
+```tsx@app/posts/[slug]/page.tsx
+export async function generateMetadata(
+	{ params }: Props,
+): Promise<Metadata> {
+	const post = await getPost(params.slug)
+
+	return {
+		title: `${post.frontmatter.title as string} | Fran Bosquet`,
+		description: post.frontmatter.description,
+		alternates: {
+			canonical: `/posts/${params.slug}`,
+		}
+	}
+}
+```
+
+Coma ya definimos el `metadataBase` en el layout, **Next** se encargará de añadir la URL base a cada una de las URL canónicas de los posts. Como esto está quedando densísimo, en una entrada corta desarrollaré un sistema para enlazar los posts en diferentes idiomas.
+
+### La meta etiqueta `robots`
+
+No confundir con el archivo `robots.txt`, que discutiremos en otro post. El _tag_ `robots` indica a **Google** como ha de indexar cada una de las páginas. Puede que queramos que una página se indexe, pero que no se sigan los enlaces. Podemos conseguir esto usando el meta tag `robots`. Queremos incluir esta etiqueta en nuestro html:
+
+```html
+<meta name="robots" content="index, follow" />
+```
+
+Para hacerlo en **Next** podemos añadir un campo `robots` en nuestro objeto `metadata`:
+
+```tsx@app/layout
+export const metadata: Metadata = {
+	...,
+  robots: 'index, follow',
+}
+```
+
+Con ese `index, follow` le estamos diciendo a google que indexe las paginas y además siga los enlaces. Esta configuración nos sirve de base, así que se propaga automáticamente a los posts también, así que no necesitamos hacer nada en `app/posts/[slug]/page.tsx`.
+
+### Tag author
+
+No he podido encontrar si este tag genera algún impacto en SEO, pero tampoco he visto que penalice en modo alguno. Si he [leido por ahí que pueden favorecer](https://webmasters.stackexchange.com/questions/136881/is-the-meta-name-author-tag-actually-good-for-seo) a la hora de construir autoridad alrededor de tu nombre. Esto puede ser util en el futuro, así que vamos a añadirlo. En el `head` de la página debe figurar:
+
+```html
+<meta name="author" content="Fran Bosquet" />
+```
+
+Que en **Next** se traduce en:
+
+```tsx@app/layout
+export const metadata: Metadata = {
+	...,
+	  authors: { name: 'Fran Bosquet', url: 'https://franbosquet.com' },
+  publisher: 'Fran Bosquet',
+}
+```
+
+### Un poco de estructura semántica
+
+En este punto volvemos a revisar el resumen de **Seo-Meta** y vemos como está la página:
+
+![Resultado de SEO Meta tras cambiar la meta información](/images/seometa4.webp)
+_Resultado de SEO Meta tras cambiar la meta información_
+
+Pinta bien, pero hay un detalle preocupante: ¡No tenemos ninguna estructura en la home! Si te fijas en la parte inferior, no tenemos ni una sola etiqueta `h1`, `h2`, etc. **Google** utiliza los encabezados para entender mejor el contenido de una página y su estructura. Vamos a solucionarlo añadiendo una etiqueta `h1` que encabece la lista de post, pero la voy a ocultar con **Tailwind** para que no me rompa visualmente la pagina:
+
+```tsx@app/pages/index.tsx
+export default async function Page() {
+  const posts = await getPosts()
+
+  return <>
+    <h1 className="hidden">Posts:</h1>
+    <PostGrid>
+      {posts.map((post) => {
+        return <PostLink post={post} key={post.slug} lang={Lang.ES} />
+      })}
+    </PostGrid>
+  </>
+}
+```
+
+Y en el componente **PostLink**, voy a añadir una etiqueta `h2` en cada enlace:
+
+```tsx@components/post-link.tsx
+export const PostLink = ({ post, lang }: Props) => {
+	return <article className="w-full gap-6 flex group transition-all border-b border-white/30" >
+		...
+		<div className='flex justify-between flex-col flex-1 h-full py-4 lg:pt-6 gap-2'>
+			<Link href={`${lang === 'en' ? '/en' : ''}/posts/${post.slug}`} className='...'><h2>{post.title}</h2></Link>
+			...
+		</div>
+	</article>
+}
+```
+
+Y ahora podemos ver que ya tenemos una estructura de encabezados:
+
+![Estructura de la home en SEO-Meta](/images/seometa5.webp)
+_Estructura de la home en SEO-Meta_
+
+También podemos usar la segunda pestaña de **SEO-Meta** para ver la estructura de la página:
+
+![Jerarquía de encabezados en SEO-Meta para la home](/images/seometa5.webp)
+_Jerarquía de encabezados en SEO-Meta para la home_
+
+En las páginas de los post esto ya está arreglado con los encabezados que trae nuestro _markdown_ al pasarlo a HTML, por lo que no tenemos nada que corregir, la página ya consta de una estructura de encabezados de por sí.
+
+## Conclusión
+
+En este post hemos visto como el posicionarse en un buscador no es ni de lejos algo automático, sino que tenemos que implementar decenas de pequeños mecanismos para habilitar que los motores de búsqueda puedan entender nuestra web y ofrecerla a quien le pueda resultar relevante.
+
+Hemos visto como estos pequeños ajustes son sencillos de hacer con Next 13/14 y la extension de SEO-Meta. También hemos visto que el blog de **Semrush** es un recurso muy completo para aprender sobre SEO. En próximos post me gustaría repasar la **Google search console**, **Lighthouse**, **Open Graph** y otros conceptos para seguir mejorando el **SEO** del blog. También echaremos un ojo al impacto que estos cambios van teniendo en el rendimiento de la página. Como referencia, este es el gráfico de visitas durante el último mes:
+
+![Gráfico de visitas durante el último mes](/images/visitas_abril_24.webp)
+
+Volveremos a este gráfico en unas semanas a ver como el tema del SEO va afectando a estos números tan vergonzosos.
+
+¡Un saludo y gracias por leerme!

@@ -1,0 +1,49 @@
+---
+title: 'Refresh: Nuevo (y barato) look para el blog'
+description: 'Reboot del blog en NextJS y MDX, hosteado en Vercel'
+date: 6-22-2023
+keywords:
+- blog
+- next
+- mdx
+image: {
+	src: 'reboot.webp',
+	author: 'Retrosuply',
+	authorUrl: 'https://unsplash.com/@retrosupply?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+	source: 'Unsplash',
+	sourceUrl: 'https://unsplash.com/es/fotos/jLwVAUtLOAQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
+}
+published: true
+---
+
+Si has entrado en el blog anteriormente, habrás notado un cambio notable en el diseño. Esto se debe a que he decidido cambiar de proveedor de hosting por un lado, y de tecnología por otro: Cuando cree esta pagina a primeros de 2017 no estaba ni cerca de saber como desarrollar y publicar un blog en internet. Hasta ese momento había tenido un par de blogs en blogger y solo había tenido que preocuparme de escribir los posts. En esta ocasión quise hacer algo sólido, con empaque y bien posicionado con un dominio propio, así que desde el principio descarté plataformas de blogging como blogger o medium.
+
+## El viejo blog
+
+Tras varias búsquedas web averigüe que mi mejor opción era contratar un paquete de dominio + hosting + WordPress y allí me tire. Encontré un post en el que explicaban como hacerlo con [Raiola networks](https://raiolanetworks.es/?), así que ese ha sido el proveedor que he usado hasta ahora sin mayor problema. El servicio consistía en un WordPress ya instalado al que yo solo tuve que cambiarle el tema, instalar los plugins que mencionaban en el post y empezar a escribir. Todo muy sencillo y sin complicaciones.
+
+Así de fácil pude empezar a escribir posts con optimización y hosting de imágenes, optimización de SEO, analíticas, spell checking... todo lo que el ecosistema de WordPress te permite hacer de manera fácil y rápida. Esto funcionó fenomenal durante **IronHack**, que fue la época fuerte del blog, y posteriormente mi primer año trabajando para [Redradix](https://www.redradix.com/). Pero rápidamente la herramienta se volvió en mi contra por varias razones:
+
+- Primero, **es un cañón matamoscas**: Tiene demasiadas opciones, es muy lento, constantemente recibo emails para actualizar este o aquel plugin, la interfaz de administración es compleja y cada vez que entraba me perdía. Total, que al final entrar a escribir post me empezó a dar una pereza terrible.
+
+- Segundo, conforme iba aprendiendo más sobre desarrollo web, me daba cuenta de que no podía implementar nada de lo que aprendía en el blog: Mi path iba hacía react/node y tenía un blog en WordPress/PHP. Esto hizo que el proyecto perdiese interés para mí. En Junio de 2018 quise aplicar lo que había aprendido hasta ese momento e implementar un blog en React yo mismo desde 0, al tiempo que lo documentaba. Pero sobre compliqué el diseño de la solución sobremanera: Monté un _SPA_ en _React_ con _webpack_ desde cero, sin _CRA_, implementando mi propio sistema de iconos desde 0, implementando un _CMS_ in-house con _GraphQL_. Y lo más loco, implementando mi propio formato de texto enriquecido. Porque ¿por qué usar un estándar que funciona como es _markdown_ si puedes diseñar uno peor, con su propio parser, interprete y conversor en componentes _React_? Documentar todo en el blog era una buena idea porque me permitía crear contenido mientras iba creando la nueva plataforma, pero se me hizo bola el proyecto y lo acabé abandonando.
+
+- Y tercero, **el dinero**: Mantener el hosting me ha venido costando casi 8 euros al mes durante estos 5 años. No es mucho, pero es un gasto que llegado el momento en el que **SI** que puedo desarrollar y hostear yo mismo un blog ya no tiene mucho sentido. El año pasado monté varias páginas web que están en producción, hosteadas en Vercel, que funcionan perfectamente y son muy cómodas de mantener.
+
+Así que he decidido hacer un pequeño esfuerzo y hacer un reboot del blog en _NextJS_ utilizando _MDX_.
+
+## El nuevo blog
+
+Como una gran cantidad de desarrolladores web a día de hoy, opté por usar mi herramienta de confianza: [NextJs](https://nextjs.org/). En todo el año que ha pasado desde que lanzaron la versión 13, aun no me he familiarizado con el sistema de **/app** en lugar de **/pages** para el _file based routing_. Así que he decidido usar la versión 12 y hacerlo en _/pages_ y ya aprovechar en una futuro cercano para hacer una migración en un proyecto sencillo con la que familiarizarme con el nuevo sistema y los cambios tan fuertes que está teniendo React y Vercel en 2023.
+
+Por otro lado, he utilizado [MDX](https://mdxjs.com/) para poder escribir los posts directamente en markdown y ademas poder usar componentes de React si echo en falta alguna funcionalidad. Por ejemplo, mostrar videos de Youtube. Esto me permite usar el propio repo como CMS y no necesitar un sistema externo como [Contentful](https://www.contentful.com/) o [Sanity.io](https://www.sanity.io/) ni una base de datos para guardar posts.
+
+Finalmente, para dar estilos he optado por [Tailwind](https://tailwindcss.com/), que desde que lo probé se ha convertido en la opción menos traumática para mi.
+
+Y poco más: He intentado mantener la complejidad al mínimo para que este proyecto no se me hiciese bola también. El mayor curro ha sido migrar todos los posts que tenía en WordPress a MDX, que solo con eso estuve ya a punto de tirar la toalla. No he implementando analíticas, no he optimizado el SEO, el sistema de comentarios de los posts ha desaparecido, no hay sistema de búsqueda ni filtrado... Es un desastre y el posicionamiento y las visitas que seguía recibiendo el blog se van a resentir muchísimo. Pero es un proyecto que me apetecía mucho hacer y creo que puede ser divertido utilizar las nuevas características de Vercel, NextJS y React para implementarlas yo mismo.
+
+Y, sobre todo, **dejar de pagar 8 euros al mes**.
+
+Si lees este post es que he logrado mi objetivo y lo de Raiola es cosa del pasado para mí. Puedes ver el código fuente integro del blog, así como el historial de commits, en [el repo de GitHub](https://github.com/FrBosquet/fran-bosquet). Si esto muere aquí, pues hasta dentro de 5 años que vuelva a hacer un reboot. Si no, intentaré contar cosas aquí como siempre fue la intención cuando cree el blog.
+
+Un saludo y gracias por leerme.
