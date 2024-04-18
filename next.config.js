@@ -6,18 +6,20 @@ const nextConfig = {
     mdxRs: true,
   },
   async rewrites() {
-    return [
-      {
-        source: '/:path',
-        destination: '/en/:path',
-        has: [
-          {
-            type: 'host',
-            value: 'en.franbosquet.com'
-          }
-        ]
-      }
-    ]
+    return {
+      beforeFiles: [
+        {
+          source: '/:path*',
+          destination: '/en/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'en.franbosquet.com'
+            }
+          ]
+        }
+      ]
+    }
   }
 }
 
