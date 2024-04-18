@@ -18,4 +18,12 @@ do
   then
       mogrify -resize 700x "${file%.*}.webp"
   fi
+
+  base=$(basename "$file")
+  placeholderPath=$(dirname "$0")/placeholder/${base}
+  
+  if [ ! -f "$placeholderPath" ]; then
+    echo "Creating placeholder for $file"
+    convert "${file%.*}.webp" -blur 0x8 -quality 10 "$placeholderPath"
+  fi 
 done

@@ -38,5 +38,8 @@ export async function generateMetadata(
     title: `${post.frontmatter.title as string} | Fran Bosquet`,
     description: post.frontmatter.description as string || baseDescription,
     robots: 'index, follow',
+    alternates: {
+      canonical: `/posts/${params.slug}`,
+    }
   }
 }

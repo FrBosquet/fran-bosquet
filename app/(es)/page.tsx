@@ -1,5 +1,5 @@
-import { PostLink } from "components/PostLink"
 import { PostGrid } from "components/post-grid"
+import { PostLink } from "components/post-link"
 import { Lang, getPosts } from "lib/posts"
 
 export default async function Page() {

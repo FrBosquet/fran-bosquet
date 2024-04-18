@@ -1,4 +1,4 @@
-import { PostLink } from "components/PostLink"
+import { PostLink } from "components/post-link"
 import { Lang, getPosts } from "lib/posts"
 import Link from "next/link"
 
