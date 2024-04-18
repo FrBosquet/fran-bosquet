@@ -5,21 +5,19 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
-  rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/:path',
-          has: [
-            {
-              type: 'host',
-              value: 'en.franbosquet.com'
-            }
-          ],
-          destination: '/en/:path'
-        }
-      ]
-    }
+  async rewrites() {
+    return [
+      {
+        source: '/:path',
+        destination: '/en/:path',
+        has: [
+          {
+            type: 'host',
+            value: 'en.franbosquet.com'
+          }
+        ]
+      }
+    ]
   }
 }
 
