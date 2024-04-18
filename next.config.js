@@ -5,7 +5,7 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
-  rewrites: async () => {
+  rewrites() {
     return {
       beforeFiles: [
         {
