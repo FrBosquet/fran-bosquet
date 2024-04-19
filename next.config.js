@@ -9,8 +9,18 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
-          source: '/:path*',
-          destination: '/en/:path*',
+          source: '/:path',
+          destination: '/en/:path',
+          has: [
+            {
+              type: 'host',
+              value: 'en.franbosquet.com'
+            }
+          ]
+        },
+        {
+          source: '/posts/:path',
+          destination: '/en/posts/:path',
           has: [
             {
               type: 'host',
