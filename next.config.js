@@ -9,8 +9,8 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
-          source: '/:path',
-          destination: '/en/:path',
+          source: '/',
+          destination: '/en',
           has: [
             {
               type: 'host',
