@@ -1,4 +1,4 @@
-import { MdxContent } from "components/MdxContent";
+import { MdxContent } from "components/mdx-content";
 import { PostBacklink } from "components/post-backlink";
 import { PostContent } from "components/post-content";
 import { PostHeader } from "components/post-header";
