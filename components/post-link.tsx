@@ -23,6 +23,9 @@ export const PostLink = ({ post, lang }: Props) => {
 				src={`/images/${post.image.src}`}
 				fill
 				style={{ objectFit: 'cover' }}
+				placeholder="blur"
+				blurDataURL={`/images/placeholder/${post.image.src}`}
+				className="bg-zinc-950"
 			/>
 		</div>
 		<div className='flex justify-between flex-col flex-1 h-full py-4 lg:pt-6 gap-2'>

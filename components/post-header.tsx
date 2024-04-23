@@ -12,7 +12,14 @@ export const PostHeader = ({ title, date, keywords, image, description, lang }: 
 			<h1 className="text-4xl md:text-5xl bg-gradient-to-r from-teal-100 to-orange-200 text-transparent py-2 bg-clip-text font-mono">{title}</h1>
 			{description ? <p className="text-sm uppercase text-teal-200 py-4">{description}</p> : null}
 			{image ? <><div className="w-full h-60 relative rounded-lg overflow-hidden my-2 shadow-lg">
-				<Image title="splash" alt="splash" src={`/images/${image.src}`} fill style={{ objectFit: 'cover' }}></Image>
+				<Image
+					title="splash"
+					alt="splash"
+					src={`/images/${image.src}`}
+					placeholder="blur"
+					blurDataURL={`/images/placeholder/${image.src}`}
+					fill
+					style={{ objectFit: 'cover' }} />
 			</div> <section className="text-slate-600 pb-1 text-xs">
 					<div>Foto de <a className="text-slate-500 transition hover:text-teal-300" title={image.author} href={image.authorUrl || image.sourceUrl}>{image.author}</a> {image.sourceUrl ? <>en <a title={image.source} className="text-slate-500 transition hover:text-teal-300" href={image.sourceUrl}>{image.source}</a></> : null}</div>
 				</section></> : null}
