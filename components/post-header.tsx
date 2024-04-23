@@ -15,9 +15,9 @@ export const PostHeader = ({ title, date, keywords, image, description, lang }: 
 				<Image
 					title="splash"
 					alt="splash"
-					src={`/images/${image.src}`}
+					src={`/images/${image.src}.webp`}
 					placeholder="blur"
-					blurDataURL={`/images/placeholder/${image.src}`}
+					blurDataURL={`/images/placeholder/${image.src}.webp`}
 					fill
 					style={{ objectFit: 'cover' }} />
 			</div> <section className="text-slate-600 pb-1 text-xs">

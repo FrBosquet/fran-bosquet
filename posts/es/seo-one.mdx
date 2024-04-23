@@ -7,7 +7,7 @@ keywords:
  - seo
  - blog
 image: {
-	src: 'seo.webp',
+	src: 'seo',
 	author: 'NisonCo PR and SEO',
 	authorUrl: 'https://unsplash.com/es/@nisoncoprseo',
 	source: 'Unsplash',
@@ -29,7 +29,7 @@ Durante el tiempo en el que llevamos con la web hemos detectado que el tráfico 
 
 Cuando montas una web con un generador como **Wordpress**, **Wix**, **Shopify**, etc. esta meta información que necesita el buscador se genera automáticamente. Por contra, si implementas tu web manualmente **es tu responsabilidad configurar tu página para que pueda ser leída por el buscador**. En el caso de [cristinadevaux.com](https://www.cristinadevaux.com) yo no me preocupé de estudiar este tema demasiado y como resultado el rendimiento en búsquedas ha venido siendo muy pobre. Es por ello que recientemente hemos contratado a la empresa [FULLSEO](https://fullseo.net) para que nos ayude a mejorar el posicionamiento de la web. Hemos estado trabajando con ellos los últimos cuatro meses y hemos mejorado bastante el posicionamiento de la web. En el proceso, he aprendido mucho sobre SEO.
 
-![FullSeo, la empresa que nos está ayudando a posicionar CristinaDeVaux.com](/images/fullseo.webp)
+![FullSeo, la empresa que nos está ayudando a posicionar CristinaDeVaux.com](fullseo)
 _FullSeo, la empresa que nos está ayudando a posicionar CristinaDeVaux.com_
 
 En el caso de esta web en la anterior instancia del blog, construido en **Wordpress**, el SEO se realizaba automáticamente y el tráfico orgánico existía. Con esta nueva versión, construida en **Next**, no estoy proveyendo prácticamente ninguna información a buscadores. Precisamente porque cuando la construí no tenía conocimiento ni interés sobre el tema. Mi plan era compartir las entradas en **Twitter** para mis 300 seguidores. Así que si bien la web aparece rápidamente si buscas por _Fran Bosquet_, difícilmente aparece si buscas términos como **Ironhack**, **bootcamp**, **Next** u otros términos tratados en este blog.
@@ -46,7 +46,7 @@ Como el tema me parece interesante y bastante util para desarrolladores indie co
 
 Corriendo la app en local podemos hacer una prueba y ver que pinta tiene nuestro SEO:
 
-![Resultado del primer test de SEO Meta](/images/seometa1.webp)
+![Resultado del primer test de SEO Meta](seometa1)
 _Resultado del primer test de SEO Meta_
 
 Ya podemos ir viendo en la primera pestaña que, quitando la descripción y el lenguaje, todo mal. Vamos a ir arreglando punto por punto, tanto para la _home_ como para cada uno de los _posts_. Como referencia, recordar que el blog está construido en **Next versión 13**, utilizando el [App Router](https://nextjs.org/docs/app). Si quieres replicar algo de lo que implemente aquí, recuerda que en versiones anteriores de Next (o cualquier otro framework) tendrás que investigar cómo se hace.
@@ -55,7 +55,7 @@ Ya podemos ir viendo en la primera pestaña que, quitando la descripción y el l
 
 El _title_ define… pues eso, el título de la página. Es importante ya que define cómo se va a ver tú pagina en el **SERP** (_search engine result page_, el enlace a tú página en los buscadores), o el título en la pestaña del navegador:
 
-![Aspecto del SERP antes de acometer ningún cambio](/images/serp1.webp)
+![Aspecto del SERP antes de acometer ningún cambio](serp1)
 
 Pero también afecta a cómo posiciona **Google** (u otro buscador, pero en adelante hablaremos de google cuando nos refiramos a motores de búsqueda). Puedes leer más sobre qué hace el tag title en el blog de [Semrush](https://www.semrush.com/blog/title-tag/?kw=&cmp=ES_SRCH_DSA_Blog_EN&label=dsa_pagefeed&Network=g&Device=c&utm_content=676270860646&kwid=aud-2175346367685:dsa-2185834090056&cmpid=18347529021&agpid=153587537279&BU=Core&extid=105117326089&adpos=&gad_source=1&gclid=CjwKCAjw_LOwBhBFEiwAmSEQAY09Z8Wkjai5Lb4oh17Yi1mX5aYvV3FY-PBe61jA6XUpgABW4u87EBoCarEQAvD_BwE), web muy interesante por cierto. **El error en nuestro caso es que el título es muy corto**, ya que se recomienda apuntar entre 30 y 60 caracteres. Además, si queremos posicionar el blog como uno de desarrollo, sería interesante incluir las palabras Blog y Programación en el título.
 
@@ -78,11 +78,11 @@ Para conseguir esto, podemos modificar el objeto metadata que exportamos en el _
 
 **Next** se encarga de convertir esa clave en el tag `title` dentro del `head` de nuestra página. En el artículo de **Semrush** tienes mil recomendaciones sobre como optimizar este tag. El mío no es ideal pero tampoco me quiero volver loco. Con este cambio ya pasamos la validación de **SeoMeta**:
 
-![Titúlo actualizado en SEO Meta](/images/seometa2.webp)
+![Titúlo actualizado en SEO Meta](seometa2)
 
 Aun nos queda verificar qué pinta tiene el título en cada uno de los post. Si entramos en, por ejemplo, [franbosquet.com/posts/anadir-syntax-highlights](https://franbosquet.com/posts/anadir-syntax-highlights) y comprobamos con **SeoMeta**:
 
-![Titúlo post con SeoMeta](/images/seometa3.webp)
+![Titúlo post con SeoMeta](seometa3)
 
 Tiene buena pinta, pero falta consistencia respecto a lo que tenemos en la _home_. Así que vamos a modificar la función que genera los metadatos para cada uno de los posts. En este caso es una función en lugar de un objeto como en la _home_ porque necesita generarse dinámicamente en función del post que estemos visitando:
 
@@ -168,9 +168,9 @@ Con esto ya tendremos una descripción única de cada post en el **SERP**, por l
 
 Aprovecho ademas para meter una mejora visual. Hasta ahora no teníamos una descripción de los post en la home:
 
-![Posts antes de añadir descripción](/images/before-descriptions.webp)
+![Posts antes de añadir descripción](before-descriptions)
 
-![Posts despues de añadir descripción](/images/after-descriptions.webp)
+![Posts despues de añadir descripción](after-descriptions)
 
 Que creo que lo deja todo mucho mas equilibrado y recojidito.
 
@@ -286,7 +286,7 @@ export const metadata: Metadata = {
 
 En este punto volvemos a revisar el resumen de **Seo-Meta** y vemos como está la página:
 
-![Resultado de SEO Meta tras cambiar la meta información](/images/seometa4.webp)
+![Resultado de SEO Meta tras cambiar la meta información](seometa4)
 _Resultado de SEO Meta tras cambiar la meta información_
 
 Pinta bien, pero hay un detalle preocupante: ¡No tenemos ninguna estructura en la home! Si te fijas en la parte inferior, no tenemos ni una sola etiqueta `h1`, `h2`, etc. **Google** utiliza los encabezados para entender mejor el contenido de una página y su estructura. Vamos a solucionarlo añadiendo una etiqueta `h1` que encabece la lista de post, pero la voy a ocultar con **Tailwind** para que no me rompa visualmente la pagina:
@@ -322,12 +322,12 @@ export const PostLink = ({ post, lang }: Props) => {
 
 Y ahora podemos ver que ya tenemos una estructura de encabezados:
 
-![Estructura de la home en SEO-Meta](/images/seometa5.webp)
+![Estructura de la home en SEO-Meta](seometa5)
 _Estructura de la home en SEO-Meta_
 
 También podemos usar la segunda pestaña de **SEO-Meta** para ver la estructura de la página:
 
-![Jerarquía de encabezados en SEO-Meta para la home](/images/seometa6.webp)
+![Jerarquía de encabezados en SEO-Meta para la home](seometa6)
 _Jerarquía de encabezados en SEO-Meta para la home_
 
 En las páginas de los post esto ya está arreglado con los encabezados que trae nuestro _markdown_ al pasarlo a HTML, por lo que no tenemos nada que corregir, la página ya consta de una estructura de encabezados de por sí.
@@ -338,7 +338,7 @@ En este post hemos visto como el posicionarse en un buscador no es ni de lejos a
 
 Hemos visto como estos pequeños ajustes son sencillos de hacer con Next 13/14 y la extension de SEO-Meta. También hemos visto que el blog de **Semrush** es un recurso muy completo para aprender sobre SEO. En próximos post me gustaría repasar la **Google search console**, **Lighthouse**, **Open Graph** y otros conceptos para seguir mejorando el **SEO** del blog. También echaremos un ojo al impacto que estos cambios van teniendo en el rendimiento de la página. Como referencia, este es el gráfico de visitas durante el último mes:
 
-![Gráfico de visitas durante el último mes](/images/visitas_abril_24.webp)
+![Gráfico de visitas durante el último mes](visitas_abril_24)
 
 Volveremos a este gráfico en unas semanas a ver como el tema del SEO va afectando a estos números tan vergonzosos.
 

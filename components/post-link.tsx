@@ -20,11 +20,11 @@ export const PostLink = ({ post, lang }: Props) => {
 		'>
 			<Image
 				alt={`imagen de ${post.image.author}`}
-				src={`/images/${post.image.src}`}
+				src={`/images/${post.image.src}.webp`}
 				fill
 				style={{ objectFit: 'cover' }}
 				placeholder="blur"
-				blurDataURL={`/images/placeholder/${post.image.src}`}
+				blurDataURL={`/images/placeholder/${post.image.src}.webp`}
 				className="bg-zinc-950"
 			/>
 		</div>
