@@ -24,6 +24,6 @@ do
   
   if [ ! -f "$placeholderPath" ]; then
     echo "Creating placeholder for $file"
-    convert "${file%.*}.webp" -blur 0x8 -quality 10 "$placeholderPath"
+    convert "${file%.*}.webp" -blur 0x8 -quality 10 -resize 10x "$placeholderPath"
   fi 
 done
