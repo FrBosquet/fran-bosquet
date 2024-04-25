@@ -1,5 +1,5 @@
 import { BackIcon } from "components/icons";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 type Props = {
   href: string

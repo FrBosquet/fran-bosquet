@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Header } from "components/Header";
 import { baseDescription } from "lib/posts";
 import { Metadata } from "next";
+import { ViewTransitions } from "next-view-transitions";
 import { Poppins } from "next/font/google";
 import React from "react";
 import 'styles/globals.css';
@@ -33,24 +34,25 @@ export default function Layout({ children }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="es-ES">
-      <body>
-        <main className={`${poppins.variable} font-sans text-gray-200`}>
-          <section className="min-h-screen flex flex-col">
-            <Header>Mi blog personal</Header>
-            <article className='flex-1 bg-gradient-to-b from-gray-900 to-gray-800'>
-              <div className='
+    <ViewTransitions>
+      <html lang="es-ES">
+        <body>
+          <main className={`${poppins.variable} font-sans text-gray-200`}>
+            <section className="min-h-screen flex flex-col">
+              <Header>Mi blog personal</Header>
+              <article className='flex-1 bg-gradient-to-b from-gray-900 to-gray-800'>
+                <div className='
                 max-w-7xl mx-auto
                 p-4 lg:px-8 pb-4
-              '>
-                {children}
-              </div>
-              <Analytics />
-            </article>
-          </section>
-        </main>
-      </body>
-    </html>
-
+                '>
+                  {children}
+                </div>
+                <Analytics />
+              </article>
+            </section>
+          </main>
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }
