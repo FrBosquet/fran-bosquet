@@ -25,19 +25,164 @@ He estado dándole una vuelta a como uso las imágenes en este blog. Hasta el mo
 
 Bueno, otro no, tendré que hacerlo yo. Pero puedo automatizar con un script la parte tediosa de optimizar las imagenes y no volver a pensar en ello. A saber:
 
-- Convertir las imágenes a formato **webp**
+- Convertir las imágenes a formato [webp](https://es.wikipedia.org/wiki/WebP), un formato sin pérdida de calidad y que reduce el tamaño de las imágenes considerablemente y que está desarrollando Google precisamente para su uso en web.
 
-- Redimensionar las imágenes al máximo tamaño que se van a mostrar. Esto no es estrictamente necesario, pero si recomendable para mantener el repositorio ligero.
+- Redimensionar las imágenes al máximo tamaño que se van a mostrar. Esto no es necesario ya que **Next** se encarga de hacerlo automáticamente, pero ya que estamos prefiero tener imágenes de pocos Kbs antes que de Mbs.
 
 - Introducir la ruta de la imagen en el markdown.
 
-- Crear placeholders: Versiones de bajar resolución, baja calidad y bajo tamaño.
+- Crear _placeholders_: Versiones de baja resolución, baja calidad y bajo tamaño para mostrar durante la carga.
 
-Por otro lado, tenemos el component Image de **Next** que hasta ahora estaba obviando por una serie de cuestiones. Vamos a introducirlo también para hacer un uso incluso mas eficiente de nuestras imágenes.
+Por otro lado, tenemos el component Image de **Next** que hasta ahora estaba obviando por pura vagancia. Vamos a introducirlo también para hacer un uso incluso más eficiente de nuestras imágenes.
 
 ## El proceso que venía haciendo hasta ahora
 
+Como he comentado en alguna ocasión, utilizo una maquina Windows con WSL2 corriendo Ubuntu para desarrollar:
+
+![Mi juguete](computer)
+
+WSL es básicamente una máquina virtual altamente integrada en el sistema, por lo que tengo una terminal Linux en la que puedo instalar y correr cualquier cosa que correría en un Ubuntu, como por ejemplo servicios Node como Next. Los puertos que exponen esos servicios se exponen a la máquina anfitrión, por lo que puedo acceder a ellos desde el navegador de Windows. Esta maravilla de la tecnología permite tener en windows una experiencia de desarrollo casi 1:1 con la que tendría en un sistema Linux o Mac, sin tener que renunciar a mi máquina Windows.
+
+Al igual que expone los puertos, también comparte el sistema de archivos, por lo que puedo acceder a los archivos de mi proyecto desde Windows o desde Ubuntu. Esto es importante porque los archivos estáticos (imágenes) las descargo o las genero desde el sistema anfitrión y necesito copiarlas al sistema Linux. En primeras versiones de WSL esto era un autentico suplicio. Por suerte a día de hoy puedes abrir el sistema de archivos de WSL desde el explorador de Windows y copiar y pegar archivos sin problemas. Incluso arrastrando desde tu navegador a el explorador de archivos de VsCode (Que se conecta al entorno de desarrollo de WSL) puedes copiar archivos.
+
+Así que mi proceso hasta ahora era:
+
+- Copiar la imagen que quisiera usar en el blog a la carpeta de imágenes de mi proyecto, en este caso `/public/images`. Next expone como estático todo lo que pongas en la carpeta `/public` por lo que puedo acceder a las imágenes desde cualquier parte de mi aplicación simplemente referenciando a `/images/nombre-de-la-imagen.extension-de-la-imagen`.
+
+- Utilizar un conversor a webp para convertir la imagen a ese formato. En mi caso utilizaba [cwebp](https://developers.google.com/speed/webp/docs/cwebp) que es la herramienta de Google para convertir imágenes a webp.
+
+```bash
+cwebp nombre-de-la-imagen.extension-de-la-imagen -o nombre-de-la-imagen.webp
+```
+
+- Utilizar la imagen en el Markdown:
+
+```markdown
+![Texto alternativo](/images/nombre-de-la-imagen.webp)
+```
+
+Lo cual tampoco es un gran drama, pero si que es un proceso que se me hacía tedioso y que me producía pereza cada vez que tenía que añadir una imagen. Por otro lado, esta el tema del tamaño de las imágenes. Next se encarga de sobredimensionarlas al vuelo si usas el componente `Image`, pero para ello tienes que especificar el tamaño final de la imagen con un `width` y un `height`.
+
+Ademas, si empiezas a acumular imágenes de 6000x4000px en tu proyecto el tamaño de tu proyecto se dispara, lo cual no es un gran problema en este proyecto pero empieza a decelerar todo y no se si puede incluso disparar los costes de uso en Vercel si el proyecto empieza a tener visitas.
+
+Por último, he notado últimamente que las imágenes tardan un poco en cargar en la home. Esto produce un efecto muy feo ya que dejan el hueco vacio y se van mostrando conforme se descargan. El componente `Image` de Next tiene una propiedad `placeholder` que permite mostrar una versión de baja resolución de la imagen mientras se descarga la versión final. Esto es muy útil para mejorar la experiencia de usuario ya que le mostraremos un esbozo de lo que estamos descargando.
+
+Pero dichos placeholders hay que generarlos también, por lo que otra tarea más que añadir a la lista de tediosos procesos que tengo que hacer cada vez que añado una imagen.
+
+Así que aquí he trazado la linea. Voy a automatizar todo este proceso con un script que haga todo esto por mi.
+
 ## El script optimizador
+
+Vamos a usar `sh` para crear este script. Nos va a permitir navegar nuestro sistema de archivos y usar aplicaciones de terminal de una manera mas sencilla que un script de Node. Vamos punto por punto:
+
+### Copiar las imagenes a la máquina Linux
+
+Esto obviamente no lo podemos autoátizar, simplemente es arrastrar y soltar. Pero hay una pequeña molestia que si que nos podemos quitar. Al copiar y pegar un archivo de Windows al subsistema Linux, este último crea un archivo `:Zone.Identifier` para almacenar metainformación. ¿Cual? Ejemplo:
+
+```
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://photos.google.com/
+HostUrl=about:internet
+```
+
+¿Por qué? No lo sé ¿Se puede evitar? No he encontrado como. Así que lo que me toca hacer es borrar ese archivo cada vez que copio una nueva imagen. Vamos a automatizar este proceso en el script:
+
+```bash@public/images/process-images.sh
+#!/bin/sh
+
+rm -f "$(dirname "$0")"/*.Identifier
+```
+
+`rm -f` fuerza la eliminación del archivo, `"$(dirname "$0")"` hace referencia a la carpeta donde se encuentra el script y `*.Identifier` captura todos los archivos que terminen en `.Identifier`. Con esto ya nos hemos librado de esos molestos metadatos
+
+### Transformar las imágenes a webp
+
+Lo normal es que las imagenes que copio, dependiendo del origen, sean `jpg` o `png`. Por ello necesito analizar la carpeta en busca de todos los archivos que no sean yá `.webp` para procesarlos:
+
+```bash@public/images/process-images.sh
+...
+
+for file in $(find "$(dirname "$0")" -type f ! -name "*.webp" ! -name "*.sh")
+do
+    cwebp -q 80 "$file" -o "${file%.*}.webp"
+
+    rm "$file"
+done
+```
+
+El bucle `for` recorre todos los archivos capturados por `find "$(dirname "$0")" -type f ! -name "*.webp" ! -name "*.sh"`:
+
+- `find "$(dirname "$0")"` busca en la carpeta donde se encuentra el script.
+
+- `-type f` captura solo archivos.
+
+- `! -name "*.webp"` excluye los archivos que terminen en `.webp`, así no procesaremos los que ya esten en ese formato.
+
+- `! -name "*.sh"` excluye el propio script, ya que obviamente no es una imagen que quiera convertir.
+
+Una vez que tenemos como valor de `$file` la ruta de la imagen, vamos a convertirla a webp con `cwebp -q 80 "$file" -o "${file%.*}.webp"`.
+
+- `cwebp` es el comando que convierte las imágenes a webp. En Ubuntu puedes instalarlo con `sudo apt install webp`. Si utilizas otra distribución o sistema operativo, puedes buscar como hacerlo, suele ser muy sencillo.
+
+- `-q 80` es la calidad de la imagen.
+
+- `"$file"` es la referencia a la ruta de la imagen que queremos convertir, que obtuvimos en el bucle `for`.
+
+- `-o "${file%.*}.webp"` es la ruta de salida de la imagen (`-o` de `--output`). `${file%.*}` es una forma de obtener el nombre del archivo sin la extensión. Por ejemplo, si `$file` es `/ruta/a/imagen.jpg`, `${file%.*}` será `/ruta/a/imagen`, a la cual añadimos `.webp` para obtener la ruta de salida.
+
+Finalmente, eliminamos la imagen original con `rm "$file"`, ya que una vez transformada en `webp` no necesitamos conservarla.
+
+#### Redimendionar las imágenes
+
+Lo siguiente es hacer un segundo bucle, ahora ya sobre los archivos `.webp` que hemos generado, y verificar si queremos redimensionarlos. En esta web, en escritorio, el ancho máximo al que mostramos las imagenes es de 700px. Para llevar a cabo este cometido, voy a usar la suite de herramientas de [ImageMagick](https://imagemagick.org/index.php):
+
+```bash@public/images/process-images.sh
+for file in $(find "$(dirname "$0")" -type f -name "*.webp")
+do
+  width=$(identify -format "%w" "${file%.*}.webp")
+
+  # If the width is larger than 700px, resize the image
+  if [ $width -gt 700 ]
+  then
+      mogrify -resize 700x "${file%.*}.webp"
+  fi
+```
+
+- `for file in $(find "$(dirname "$0")" -type f -name "*.webp")` similar al bucle anterior, pero ahora capturamos solo los archivos `.webp`.
+
+- con `width=$(identify -format "%w" "${file%.*}.webp")` obtenemos el ancho de la imagen utilizando la utilidad `identify` de **ImageMagick**. con `-format "%w"` le decimos que lo que queremos es el ancho, y con `"${file%.*}.webp"` indicamos la ruta de la imagen. Guardamos el resultado una variable `$width`.
+
+- `if [ $width -gt 700 ]` comprobamos si el ancho de la imagen es mayor a 700px. `$width` es la variable que definimos anteriormente, con el ancho de la imagen. `-gt` es un operador de comparación que significa "mayor que".
+
+- Si se da el caso de que la imagen es mayor a 700px, redimensionamos la imagen con `mogrify -resize 700x "${file%.*}.webp"`. `mogrify` es otra utilidad de **ImageMagick** que permite modificar imágenes. Con `-resize 700x` le decimos que queremos redimensionar la imagen a un ancho de 700px, el alto lo dejamos implicito y se mantendra la misma relación de aspecto. Y con `"${file%.*}.webp"` le indicamos la ruta de la imagen.
+
+Y con esas pocas lineas, hemos redimensionado todas las imágenes que superen los 700px de ancho. Las que no lo hicieran, no se han tocado.
+
+#### Generar los placeholders
+
+Por último, vamos a generar los placeholders. Estos van a ser versiones de poca resolución y poca calidad que vamos a utilizar para mostrar mientras se descargan las imágenes finales. Tenemos que crear imágnes que recuerden a las finales, pero que ocupen unos poco bytes, para que podamos cargarlas casi instantaneamente en condición de red:
+
+```bash@public/images/process-images.sh
+  base=$(basename "$file")
+  placeholderPath=$(dirname "$0")/placeholder/${base}
+
+  if [ ! -f "$placeholderPath" ]; then
+    convert "${file%.*}.webp" -blur 0x8 -quality 10 -resize 10x "$placeholderPath"
+  fi
+```
+
+- Con `base=$(basename "$file")` obtenemos el nombre del archivo sin la ruta usando `basename` y lo guardamos en la variable `$base`.
+
+- `placeholderPath=$(dirname "$0")/placeholder/${base}` es la ruta donde vamos a guardar el placeholder. `$(dirname "$0")` es la carpeta donde se encuentra el script, `/placeholder/` es una carpeta que tenemos que crear dentro de la carpeta `images` y `$base` es el nombre del archivo que definimos antes.
+
+- `if [ ! -f "$placeholderPath" ]; then` comprobamos si el placeholder no existe. Con esto evitamos estar creando constantemente los mismos placeholders. Solo lo haremos con aquellos que nos falten. Esto es lo mismo que hacíamos para redimensionar las imagenes a 700px de ancho.
+
+- `convert "${file%.*}.webp" -blur 0x8 -quality 10 -resize 10x "$placeholderPath"` es la orden que genera el placeholder. `convert` es otra utilidad de **ImageMagick** que permite convertir imagenes. La diferencia con `mogrify` es que este modifica el original, mientras que convert crea una copia. `"${file%.*}.webp"` es la ruta de la imagen original, `-blur 0x8` desenfoca la imagen en un area de 8 pixeles, `-quality 10` indica una calidad baja (10 sobre 100), `-resize 10x` la redimensiona a 10px de ancho y `$placeholderPath` es la ruta de salida que definimos antes.
+
+Y con solo esa linea, hemos creado los placeholders. Da un gusto tremendo ver funcionar el script, modificando y creando imágenes al vuelo. Para crear el script simplemente he ido pidiendole a copilot lo que necesitaba hacer: Buscar todas las imagenes no webp, ignorar el propio script, comprobar el ancho, etc. Y el me iba dando el código en `bash`. Si como a mí el scripting de shell siempre te ha resultado esquivo, te recomiendo que le des una oportunidad a `copilot`.
+
+#### Correr el script en modo observador
 
 ## Optimizando las imágenes en Next.js
 
