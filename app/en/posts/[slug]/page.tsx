@@ -1,9 +1,7 @@
-import { MdxContent } from "components/mdx-content";
 import { PostBacklink } from "components/post-backlink";
 import { PostContent } from "components/post-content";
 import { PostHeader } from "components/post-header";
 import { Lang, engDescription, getPost, getPostSlugs } from "lib/posts";
-import { Post } from "lib/types";
 import { Metadata } from "next";
 
 type Props = {
@@ -13,13 +11,12 @@ type Props = {
 }
 
 export default async function Page({ params: { slug } }: Props) {
-  const post = await getPost(slug, Lang.EN)
-  const meta = post.frontmatter as Post
+  const { frontmatter, content } = await getPost(slug, Lang.EN)
 
   return <PostContent >
     <PostBacklink href="/en" />
-    <PostHeader lang={Lang.EN} {...meta} />
-    <MdxContent source={post} />
+    <PostHeader lang={Lang.EN} {...frontmatter} />
+    {content}
   </PostContent>
 }
 

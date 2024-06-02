@@ -5,7 +5,7 @@ type Props = {
 }
 
 export const PostContent = ({ children }: Props) => {
-  return <section className='flex flex-col gap-1 py-6 relative container max-w-[700px] mx-auto'>
+  return <section className='container relative mx-auto flex max-w-[700px] flex-col gap-1 py-6'>
     {children}
   </section>
 }
