@@ -57,7 +57,9 @@ export const getPosts = async (
 
       const date = new Date(post.date)
 
-      if (date > new Date()) return false
+      const isDev = process.env.NODE_ENV === 'development'
+
+      if (date > new Date() && !isDev) return false
 
       return post.published && (!keyword || post.keywords?.includes(keyword))
     })

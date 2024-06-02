@@ -74,7 +74,7 @@ export const mdxComponents = {
     const hasCaption = caption !== undefined
 
     return (
-      <figure className="m-auto mb-1">
+      <figure className="m-auto mb-1 flex flex-col items-center">
         <Image
           alt={alt}
           blurDataURL={`/images/placeholder/${props.src}.webp`}
@@ -85,7 +85,7 @@ export const mdxComponents = {
           width={width}
         />
         {hasCaption ? (
-          <figcaption className="text-center text-xs text-slate-300">
+          <figcaption className="mt-2 text-center text-sm text-slate-400">
             {caption || alt}
           </figcaption>
         ) : null}

@@ -1,19 +1,18 @@
 ---
 title: Optimizando imagenes para la web
 description: Next nos ofrece una serie de mecanismos para optimizar las imágenes que utilizamos en nuestras aplicaciones web. Vamos a ver cómo.
-date: 4-23-2024
+date: 6-03-2024
 published: true
-keywords: 
- - next
- - webp
- - seo
-image: {
-		src: 'images',
-		author: 'Héctor J. Rivas',
-		authorUrl: 'https://unsplash.com/es/@hjrc33',
-		source: 'Unsplash',
-		sourceUrl: 'https://unsplash.com/es/fotos/lote-de-carteles-emblematicos-QNc9tTNHRyI'
-}
+keywords:
+  - next
+  - webp
+  - images
+image:
+  src: 'images'
+  author: 'Héctor J. Rivas'
+  authorUrl: 'https://unsplash.com/es/@hjrc33'
+  source: 'Unsplash'
+  sourceUrl: 'https://unsplash.com/es/fotos/lote-de-carteles-emblematicos-QNc9tTNHRyI'
 ---
 
 He estado dándole una vuelta a como uso las imágenes en este blog. Hasta el momento el proceso estaba resultando traumático. Me dí cuenta de esto en un momento en el que me vi en la tesitura de añadir una nueva imagen y sentí una pereza infinita. Lo cual me llevo a reflexionar:
@@ -138,7 +137,7 @@ Finalmente, eliminamos la imagen original con `rm "$file"`, ya que una vez trans
 Lo siguiente es hacer un segundo bucle, ahora ya sobre los archivos `.webp` que hemos generado, y verificar si queremos redimensionarlos. En esta web, en escritorio, el ancho máximo al que mostramos las imagenes es de 700px. Para llevar a cabo este cometido, voy a usar la suite de herramientas de [ImageMagick](https://imagemagick.org/index.php):
 
 ```bash@public/images/process-images.sh
-for file in $(find "$(dirname "$0")" -type f -name "*.webp")
+for file in "$(dirname "$0")"/*.webp
 do
   width=$(identify -format "%w" "${file%.*}.webp")
 
@@ -149,7 +148,7 @@ do
   fi
 ```
 
-- `for file in $(find "$(dirname "$0")" -type f -name "*.webp")` similar al bucle anterior, pero ahora capturamos solo los archivos `.webp`.
+- `for file in "$(dirname "$0")"/*.webp` es similar al bucle anterior, pero ahora capturamos solo los archivos `.webp` que hemos generado anteriormente y, ademas, al no usar find no recorreremos ninguna carpeta interna (Esto es importante dado que posteriormente vamos a crear una carpeta para placeholders).
 
 - con `width=$(identify -format "%w" "${file%.*}.webp")` obtenemos el ancho de la imagen utilizando la utilidad `identify` de **ImageMagick**. con `-format "%w"` le decimos que lo que queremos es el ancho, y con `"${file%.*}.webp"` indicamos la ruta de la imagen. Guardamos el resultado una variable `$width`.
 
@@ -180,10 +179,287 @@ Por último, vamos a generar los placeholders. Estos van a ser versiones de poca
 
 - `convert "${file%.*}.webp" -blur 0x8 -quality 10 -resize 10x "$placeholderPath"` es la orden que genera el placeholder. `convert` es otra utilidad de **ImageMagick** que permite convertir imagenes. La diferencia con `mogrify` es que este modifica el original, mientras que convert crea una copia. `"${file%.*}.webp"` es la ruta de la imagen original, `-blur 0x8` desenfoca la imagen en un area de 8 pixeles, `-quality 10` indica una calidad baja (10 sobre 100), `-resize 10x` la redimensiona a 10px de ancho y `$placeholderPath` es la ruta de salida que definimos antes.
 
-Y con solo esa linea, hemos creado los placeholders. Da un gusto tremendo ver funcionar el script, modificando y creando imágenes al vuelo. Para crear el script simplemente he ido pidiendole a copilot lo que necesitaba hacer: Buscar todas las imagenes no webp, ignorar el propio script, comprobar el ancho, etc. Y el me iba dando el código en `bash`. Si como a mí el scripting de shell siempre te ha resultado esquivo, te recomiendo que le des una oportunidad a `copilot`.
+Y con solo esa linea, hemos creado los placeholders.
 
-#### Correr el script en modo observadore
+#### Guardar las dimensiones de las imagenes
+
+Una vez tenemos la imagen redimensionada, necesito almacenar su tamaño para poder dimensionarla correctamente. Si tan solo mandamos la url del recurso al navegador, este no va a saber cual es el tamaño de la imagen hasta que no la haya descargado, por lo que vamos a sufrir casi seguro de [layout shifts](https://www.semrush.com/blog/cumulative-layout-shift/?kw=&cmp=ES_SRCH_DSA_Blog_EN&label=dsa_pagefeed&Network=g&Device=c&kwid=aud-2090387876853:dsa-2185834088336&cmpid=18347529021&agpid=153587537679&BU=Core&extid=137165264856&adpos=). Por lo que necesito almacenar esta información para poder indicar desde el lado del servidor cuanto espacio vamos a necesitar.
+
+Ya hemos visto como obtener el tamaño de la imagen con `identify`, ahora necesitamos almacenar esa información en un archivo `json` que podamos leer desde el servidor al generar la página. Para empezar, vamos a crear un archivo `.json` con una apertura de llaves en el inicio de nuestro script:
+
+```bash@public/images/process-images.sh
+echo "{" > "$(dirname "$0")/image_sizes.json"
+```
+
+Usando `>` estamos indicando que queremos sobreescribir el archivo si ya existe.
+
+A continuación, dentro del segundo bucle donde recorremos las imagenes y las redimensionamos, vamos a usar `identify` tal y como hicimos antes para obtener el ancho y alto del archivo ya redimensionado:
+
+```bash@public/images/process-images.sh
+  # Read the height and width of the resized image
+  width=$(identify -format "%w" "${file%.*}.webp")
+  height=$(identify -format "%h" "${file%.*}.webp")
+```
+
+Y vamos a añadir esa información en formato `json` al archivo que hemos creado:
+
+```bash@public/images/process-images.sh
+    # Append the image size to the image_sizes.json file
+  echo "\"${base%.*}\": {\"width\": $width, \"height\": $height}," >> "$(dirname "$0")/image_sizes.json"
+```
+
+Con `${base%.*}` eliminamos la extensión del nombre del archivo y lo usamos como clave en el objeto `json`. A continuación, añadimos el ancho y el alto de la imagen al archivo que hemos creado usando `>>` en lugar de `>`, de modo que en lugar de sobrescribir, añadimos una nueva linea.
+
+Una vez fuera del bucle, tenemos que tener en cuenta que el formato json no admite `coma de cola`: No podemos añadir una coma al final del último elemento de un objeto. Por lo que vamos a eliminar la coma de la última linea con `sed`:
+
+```bash@public/images/process-images.sh
+sed -i '$ s/,$//' "$(dirname "$0")/image_sizes.json"
+```
+
+Y finalmente cerramos el objeto `json` con una llave de cierre:
+
+```bash@public/images/process-images.sh
+echo "}" >> "$(dirname "$0")/image_sizes.json"
+```
+
+#### El script
+
+Y así queda nuestro script terminado
+
+```bash@public/images/process-images.sh
+rm -f "$(dirname "$0")"/*.Identifier
+
+# Clean up a file name image_sizes.json
+echo "{" > "$(dirname "$0")/image_sizes.json"
+
+# Loop through all files in the current directory
+for file in $(find "$(dirname "$0")" -type f ! -name "*.webp" ! -name "*.sh" ! -name "*.json")
+do
+  # Use cwebp to convert the file to webp format
+  cwebp -q 80 "$file" -o "${file%.*}.webp"
+
+  # Delete the original file
+  rm "$file"
+done
+
+# Loop through all webp files in the current directory
+for file in "$(dirname "$0")"/*.webp
+do
+width=$(identify -format "%w" "${file%.*}.webp")
+
+# If the width is larger than 700px, resize the image
+if [ $width -gt 700 ]
+then
+    mogrify -resize 700x "${file%.*}.webp"
+fi
+
+base=$(basename "$file")
+
+# Read the height and width of the resized image
+width=$(identify -format "%w" "${file%.*}.webp")
+height=$(identify -format "%h" "${file%.*}.webp")
+
+# Append the image size to the image_sizes.json file
+echo "\"${base%.*}\": {\"width\": $width, \"height\": $height}," >> "$(dirname "$0")/image_sizes.json"
+
+# Create a placeholder image
+placeholderPath=$(dirname "$0")/placeholder/${base}
+
+if [ ! -f "$placeholderPath" ]; then
+  echo "Creating placeholder for $file"
+  convert "${file%.*}.webp" -blur 0x8 -quality 10 -resize 10x "$placeholderPath"
+fi
+done
+
+# Remove the last comma from the image_sizes.json file and close the JSON object
+sed -i '$ s/,$//' "$(dirname "$0")/image_sizes.json"
+echo "}" >> "$(dirname "$0")/image_sizes.json"
+```
+
+Da un gusto tremendo ver funcionar el script, modificando y creando imágenes al vuelo. Si bien conocer cada uno de los comandos requiere de mucha experiencia y la sintaxis de **bash** es bastante extraña si vienes de un lenguaje inspirado en **C** (como lo es javascript), puedes valerte de una IA para ayudarte a desarrollarlo. En mi caso, para crear el script simplemente he ido pidiéndole a **copilot** lo que necesitaba hacer: Buscar todas las imagenes no **.webp**, ignorar el propio script, comprobar el ancho, etc. Y el me iba dando el código en `bash`. El resultado no es lo más profesional, pero si como a mí el scripting de shell siempre te ha resultado esquivo, te recomiendo que le des una oportunidad a esta u otra IA para ayudarte a poner en marcha. Con un poco de práctica puedes crear scripts, guardarlos en tu carpeta bin y automatizar tareas de terminal muy fácilmente en cualquier sistema Unix.
+
+Otra opción es crear un script con `Typescript` y ejecutarlo con `ts-node`. Esto te permite tener un script más legible (para un desarrollador web al menos) y con la posibilidad de usar `import` para usar librerías que uses en tu proyecto. Esto es muy util por ejemplo para realizar migraciones de base de datos. En una entrada futura te enseñaré como hacerlo.
 
 ## Optimizando las imágenes en Next.js
 
+La segunda parte de esta entrada la dedicaremos a usar apropiadamente las herramientas que Next nos provee en relación a las imágenes. Hasta ahora he estado esquivando el componente `Image` de Next puesto que requiere especificar el tamaño de la imagén y nadie tiene tiempo de tener un trabajo a tiempo completo, mantener un blog y medir las imágenes a la vez. Pero ahora que hemos automátizado el proceso, vamos a ver como podemos hacer uso de este componente para mostrar nuestras imágenes con lazy loading, placeholders y el tamaño correcto:
+
+En nuestro archivo `mdx-content.tsx` es donde especificamos cómo transformamos el contenido markdown en elementos/componentes. Para las imágenes, estamos haciendo esto:
+
+```tsx@components/mdx-content.tsx
+const mdxComponents = {
+  ...
+    img: (props: any) => <img className="w-auto mb-1 m-auto" title={props.alt} alt={props.alt} src={props.src} />,
+  ...
+}
+```
+
+Cuando definimos una imagén en markdown, lo hacemos de la siguiente manera:
+
+```markdown
+![Texto alternativo](/images/nombre-de-la-imagen.webp)
+```
+
+En las props recibimos `Texto alternativo` como `props.alt` y `/images/nombre-de-la-imagen.webp` como `props.src`. Vamos a sustituir el componente `img` por el componente `Image` de Next:
+
+```tsx@components/mdx-content.tsx
+img: (props: any) => <Image
+  className="w-auto mb-1 m-auto"
+  alt={props.alt}
+  src={props.src}
+/>,
+```
+
+Para facilitar el uso de imagenes y dado que todas se almacenan en la misma carpeta, vamos a asumir que la ruta solo especifica el nombre de la imagen sin extensión ni ruta:
+
+```tsx@components/mdx-content.tsx
+img: (props: any) => <Image
+  className="w-auto mb-1 m-auto"
+  alt={props.alt}
+  src={`/images/${props.src}.webp`}
+/>,
+```
+
+_Importante_: Este cambio me va a requerir refactorizar TODOS los posts. Por suerte para mí, no tengo muchos 😂.
+
+Como `src` ahora es solo el nombre del archivo, coincide con la clave del objeto `json` que creamos en el script. Por lo que podemos usar esa información para obtener el tamaño de la imagen y pasárselo al componente `Image`:
+
+```tsx@components/mdx-content.tsx
+import imageSizes from '../public/images/image_sizes.json'
+
+...
+
+img: (props: any) => {
+  const { width, height } = imageSizes[props.src as keyof typeof imageSizes]
+
+  return <Image
+    className="w-auto mb-1 m-auto"
+    alt={props.alt}
+    src={`/images/${props.src}.webp`}
+    width={width}
+    height={height}
+  />
+},
+```
+
+`keyof typeof` nos permite indicarle a Typescript que esté tranquilo, que `src` es una clave existente en el objeto imageSizes. De este modo estamos trasladando el error al tiempo de ejecución, lo cual no es necesariamente una buena práctica. Pero en este caso se justifica por el hecho de que si la clave no existe, es porque la hemos escrito mál. Si usamos una clave nó valida, esa linea romperá ocn una excepción en tiempo de construcción, por lo que no corremos riesgo de mandar imagenes inexistentes al navegador y de hecho, con esto hemos mejorado nuestro flujo de trabajo: Si una imagen no existe, el script de `build` va a romper y con ello impedirá que la pagina rota se despliegue.
+
+Vamos a indicarle a **Next** que no queremos cargar la imagen hasta que no esté cerca de entrar en el viewport. Con esto evitamos cargar todas las imágenes al principio y solo las cargamos cuando estamos cerca de mostrarlas. Para ello, vamos a añadir la propiedad `loading="lazy"` al componente `Image`:
+
+```tsx@components/mdx-content.tsx
+img: (props: any) => {
+  const { width, height } = imageSizes[props.src as keyof typeof imageSizes]
+
+  return <Image
+    className="w-auto mb-1 m-auto"
+    alt={props.alt}
+    src={`/images/${props.src}.webp`}
+    width={width}
+    height={height}
+    loading="lazy"
+  />
+},
+```
+
+Puedes ir a un post con muchas imágenes (Por ejemplo [este](/posts/primer-dia-datadog)), abrir el inspector de elementos, pestaña _network_, filtrar por imagenes: Podrás ver cómo las imagenes solo se van descargando conforme vas haciendo scroll y te acercas a que sean visibles:
+
+![Cargando imagenes a demanda](image_loading)
+
+Por último, vamos a añadir el placeholder. Para ello, vamos a setear la propiedad `placeholder` a `blur` en el componente `Image`, y vamos especificar la ruta a la imagen que generamos anteriormente:
+
+```tsx@components/mdx-content.tsx
+    return <Image
+      className="mb-1 m-auto"
+      alt={props.alt}
+      src={`/images/${props.src}.webp`}
+      width={width}
+      height={height}
+      loading='lazy'
+      placeholder='blur'
+      blurDataURL={`/images/placeholder/${props.src}.webp`}
+    />
+```
+
+Por último, voy a solucionar el tema de los pies de foto. Hasta ahora he venido poniendo un texto en cursiva debajo de la imagen. A parte de no quedar muy allá:
+
+![Pie de foto](imagefoot)
+
+Tiene el problema de que no es accesible. Las personas con problemas de visión no van a poder saber que hay un pie de foto. Por lo que vamos a añadir un `figcaption` a la imagen para dejar claro desde el punto de vista semántico y no solo visual, que se trata de un pié de foto:
+
+```tsx@components/mdx-content.tsx
+    return <figure>
+      <Image
+        ...
+      />
+      <figcaption className='text-xs text-center text-slate-300'>{props.alt}</figcaption>
+    </figure>
+  }
+```
+
+Comparando lo anterior con lo nuevo:
+
+![Pie de foto](figcaption)
+
+Luce mejor, pero tenemos dos problemas:
+
+- Como se ve en el ejemplo, no siempre el alt y el pie de foto coinciden
+
+- Si lo dejo así, voy a asumir que todas las imagenes van a tener pie de foto, y esto no es así en este blog. Por lo que me obligaría a actualizar todos los posts. De nuevo, no son muchos pero no me apetece revisarlos todos.
+
+Por lo que vamos a implementar un sistema que permita añadir el pie de foto desde el markdown sin demasiada complicación. Las reglas serian:
+
+- Si nos encontramos una `@` en el texto alternativo, la foto tendrá pie de foto. De este modo nos aseguramos de no romper la compatibilidad con los posts anteriores.
+
+- Si nos encontramos la `@`, el texto que la precede será el `akt` y el vaya detrás de ella será el pie de foto.
+
+- Si nos encontramos la `@` pero no hay texto detrás, el `alt` y el pie de foto serán el mismo.
+
+Modifico una vez más el componente para añadir la lógica descrita:
+
+```tsx@components/mdx-content.tsx
+  img: (props: any) => {
+    const { width, height } = imageSizes[props.src as keyof typeof imageSizes]
+    const [alt, caption] = props.alt.split('@')
+
+    const hasCaption = caption !== undefined
+
+    return <figure>
+      <Image
+        ...
+      />
+      {hasCaption
+        ? <figcaption className='text-xs text-center text-slate-300'>{
+          caption || alt
+        }</figcaption>
+        : null
+      }
+    </figure>
+  }
+```
+
+Y ahora puedo modificar el markdown de esto:
+
+```markdown
+![Imagen de Muzzy](muzzy)
+_Elige uno y arranca tu carrera como web-developer_
+```
+
+A esto:
+
+```markdown
+![Imagen de Muzzy@Elige uno y arranca tu carrera como web-developer](muzzy)
+```
+
+Y disfrutar de esos lindos y semánticos pies de foto:
+
+> OJO! remark por defecto envuelve todos los elementos en un parrafo, así que con este cambio estamos metiendo un figure dentro de p, lo cual es semanticamente incorrecto y nos da errores de hydration al mandar la página al cliente.
+> He tenido que echar un par de horas investigando el asunto y no quiero explicarlo aquí ya que el post se ha vuelto ya demasiado largo. TLDR: Puedes usar un plugin de remark para evitar este comportamiento con imagenes, lo cual limpia el problema de raiz. Tengo [este commit](https://github.com/FrBosquet/fran-bosquet/commit/df13951de3ced8b251398f629fd33c0e50785552) en el que implemento esta solución y actualizo next-mdx-remote para usar RSC, aprovechando que he migrado a Next 14.
+> Por la misma razón, tampoco me he extendido en como he utilizado chokidar para monitorizar la carpeta images y correr el script automáticamente cada vez que añado una imagen, o como he actualizado el linter para facilitarme el trabajo.
+
 ## Conclusión
+
+Hemos aprendido a automatizar una tarea muy tediosa como es preparar las imágenes para usarlas en la web. Hemos simplificado la interfaz en MDX para que usarlas sea los más sencillo y accesible posible. Hemos mejorado la experiencia de usuario con lazy loading y placeholders. Y finalmente hemos mejorado la accesibilidad de las imágenes añadiendo pies de foto semánticos.
+
+En el camino hemos aprendido a usar algunas herramientas de terminal muy interesantes y hemos mejorado nuestro entendimiento de Next.
+
+Si has llegado hasta aquí después de semejante ladrillo, te doy las gracias por tu tiempo y espero que te hayas llevado algo de provecho. Hasta la próxima!

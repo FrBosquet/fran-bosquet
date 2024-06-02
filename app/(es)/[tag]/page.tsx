@@ -1,16 +1,28 @@
-import { PostLink } from "components/post-link"
-import { Lang, getPosts } from "lib/posts"
-import Link from "next/link"
+import { PostLink } from 'components/post-link'
+import { Lang, getPosts } from 'lib/posts'
+import Link from 'next/link'
 
-export default async function Page({ params: { tag } }: { params: { tag: string } }) {
+export default async function Page({
+  params: { tag }
+}: {
+  params: { tag: string }
+}) {
   const posts = await getPosts(Lang.ES, tag)
 
-  return <>
-    <h1 className='text-xl pb-6'>Post que contienen el tag <pre className="inline text-teal-300 hover:text-orange-400">{tag}<Link href='/'>(x)</Link></pre></h1>
-    <section className='grid gap-4 lg:gap-8 xl:gap-12 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
-      {posts.map((post) => {
-        return <PostLink post={post} key={post.slug} lang={Lang.ES} />
-      })}
-    </section>
-  </>
+  return (
+    <>
+      <h1 className="pb-6 text-xl">
+        Post que contienen el tag{' '}
+        <pre className="inline text-teal-300 hover:text-orange-400">
+          {tag}
+          <Link href="/">(x)</Link>
+        </pre>
+      </h1>
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 xl:grid-cols-3 xl:gap-12">
+        {posts.map((post) => {
+          return <PostLink key={post.slug} lang={Lang.ES} post={post} />
+        })}
+      </section>
+    </>
+  )
 }

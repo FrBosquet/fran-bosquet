@@ -1,52 +1,65 @@
-import { getDateString } from "lib/dateFormatter"
-import { Lang } from "lib/posts"
-import Image from "next/image"
-import Link from "next/link"
-import { Post } from "../lib/types"
-import { Tag } from "./Tag"
+import { getDateString } from 'lib/dateFormatter'
+import { Lang } from 'lib/posts'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Post } from '../lib/types'
+import { Tag } from './Tag'
 
 type Props = {
-	post: Post,
-	lang: Lang
+  post: Post
+  lang: Lang
 }
 
 export const PostLink = ({ post, lang }: Props) => {
-	return <article className="w-full gap-6 flex group transition-all border-b border-white/30" >
-		<div className='aspect-[1/2] w-28 relative overflow-hidden
+  return (
+    <article className="group flex w-full gap-6 border-b border-white/30 transition-all">
+      <div
+        className="relative aspect-[1/2] w-28
+		overflow-hidden
 		transition-all
-		filter
-		group-hover:brightness-125
-		image
-		'>
-			<Image
-				alt={`imagen de ${post.image.author}`}
-				src={`/images/${post.image.src}.webp`}
-				fill
-				style={{ objectFit: 'cover' }}
-				placeholder="blur"
-				blurDataURL={`/images/placeholder/${post.image.src}.webp`}
-				className="bg-zinc-950"
-			/>
-		</div>
-		<div className='flex justify-between flex-col flex-1 h-full py-4 lg:pt-6 gap-2'>
-			<Link href={`${lang === 'en' ? '/en' : ''}/posts/${post.slug}`} className='title font-mono
-			text-teal-200
-			text-lg sm:text-2xl
-			transition-all
-			group-hover:text-white
-			'><h2>{post.title}</h2></Link>
+		group-hover:brightness-125"
+      >
+        <Image
+          fill
+          alt={`imagen de ${post.image.author}`}
+          blurDataURL={`/images/placeholder/${post.image.src}.webp`}
+          className="bg-zinc-950"
+          placeholder="blur"
+          src={`/images/${post.image.src}.webp`}
+          style={{ objectFit: 'cover' }}
+        />
+      </div>
+      <div className="flex h-full flex-1 flex-col justify-between gap-2 py-4 lg:pt-6">
+        <Link
+          className="font-mono
+              text-lg
+              text-teal-200 transition-all
+              group-hover:text-white
+              sm:text-2xl
+			"
+          href={`${lang === 'en' ? '/en' : ''}/posts/${post.slug}`}
+        >
+          <h2>{post.title}</h2>
+        </Link>
 
-			{post.description ? <p className='text-teal-100/60 text-sm lg:text-base flex-1 pb-2 pr-2'>{post.description}</p> : null}
+        {post.description ? (
+          <p className="flex-1 pb-2 pr-2 text-sm text-teal-100/60 lg:text-base">
+            {post.description}
+          </p>
+        ) : null}
 
-			<div className='flex-1 items-end gap-2 hidden sm:flex pt-4'>
-				{post.keywords.map(keyword => <Tag lang={lang} key={keyword}>{keyword}</Tag>)}
-			</div>
+        <div className="hidden flex-1 items-end gap-2 pt-4 sm:flex">
+          {post.keywords.map((keyword) => (
+            <Tag key={keyword} lang={lang}>
+              {keyword}
+            </Tag>
+          ))}
+        </div>
 
-			<span className='text-orange-300/60 text-xs lg:text-sm'>
-				{getDateString(post.date, lang)}
-			</span>
-
-
-		</div>
-	</article>
+        <span className="text-xs text-orange-300/60 lg:text-sm">
+          {getDateString(post.date, lang)}
+        </span>
+      </div>
+    </article>
+  )
 }
