@@ -63,37 +63,41 @@ export const mdxComponents = {
     <h3 className="mb-1 text-xl text-orange-100 ">{props.children}</h3>
   ),
   p: (props: HTMLAttributes<HTMLParagraphElement>) => (
-    <p className="pb-3 text-sm font-medium leading-7 tracking-wide md:text-lg md:leading-10 md:tracking-normal">
+    <p className="pb-3 text-sm font-medium leading-7 tracking-wide md:text-lg md:leading-8 md:tracking-normal">
       {props.children}
     </p>
   ),
   img: (props: any) => {
-    const { width, height } = imageSizes[props.src as keyof typeof imageSizes]
-    const [alt, caption] = props.alt.split('@')
+    try {
+      const { width, height } = imageSizes[props.src as keyof typeof imageSizes]
+      const [alt, caption] = props.alt.split('@')
 
-    const hasCaption = caption !== undefined
+      const hasCaption = caption !== undefined
 
-    return (
-      <figure className="m-auto mb-1 flex flex-col items-center">
-        <Image
-          alt={alt}
-          blurDataURL={`/images/placeholder/${props.src}.webp`}
-          height={height}
-          loading="lazy"
-          placeholder="blur"
-          src={`/images/${props.src}.webp`}
-          width={width}
-        />
-        {hasCaption ? (
-          <figcaption className="mt-2 text-center text-sm text-slate-400">
-            {caption || alt}
-          </figcaption>
-        ) : null}
-      </figure>
-    )
+      return (
+        <figure className="m-auto mb-1 flex flex-col items-center">
+          <Image
+            alt={alt}
+            blurDataURL={`/images/placeholder/${props.src}.webp`}
+            height={height}
+            loading="lazy"
+            placeholder="blur"
+            src={`/images/${props.src}.webp`}
+            width={width}
+          />
+          {hasCaption ? (
+            <figcaption className="mt-2 text-center text-sm text-slate-400">
+              {caption || alt}
+            </figcaption>
+          ) : null}
+        </figure>
+      )
+    } catch (e: unknown) {
+      throw new Error(`Error loading image ${props.src}:${e}`)
+    }
   },
   blockquote: (props: HTMLAttributes<HTMLQuoteElement>) => (
-    <blockquote className="mb-4 rounded-lg bg-gray-950 p-3 text-sm leading-8 tracking-wide text-slate-100 shadow-md md:text-lg">
+    <blockquote className="mb-4 rounded-lg bg-gray-950 p-3 text-sm leading-4 tracking-wide text-slate-100 shadow-md md:text-lg">
       {props.children}
     </blockquote>
   ),
@@ -101,7 +105,7 @@ export const mdxComponents = {
     <ul className="mb-4 text-lg">{props.children}</ul>
   ),
   li: (props: HTMLAttributes<HTMLLIElement>) => (
-    <li className="ml-4 list-item list-disc py-2 text-sm md:text-lg">
+    <li className="ml-8 list-item list-disc text-sm md:text-lg">
       {props.children}
     </li>
   ),

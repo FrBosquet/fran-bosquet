@@ -452,9 +452,13 @@ A esto:
 
 Y disfrutar de esos lindos y semánticos pies de foto:
 
-> OJO! remark por defecto envuelve todos los elementos en un parrafo, así que con este cambio estamos metiendo un figure dentro de p, lo cual es semanticamente incorrecto y nos da errores de hydration al mandar la página al cliente.
+![Pie de foto](figcaption_fixed)
+
+> **OJO!** remark por defecto envuelve todos los elementos en un párrafo, así que con este cambio estamos metiendo un figure dentro de p, lo cual es semánticamente incorrecto y nos da errores de hydration al mandar la página al cliente.
+>
 > He tenido que echar un par de horas investigando el asunto y no quiero explicarlo aquí ya que el post se ha vuelto ya demasiado largo. TLDR: Puedes usar un plugin de remark para evitar este comportamiento con imagenes, lo cual limpia el problema de raiz. Tengo [este commit](https://github.com/FrBosquet/fran-bosquet/commit/df13951de3ced8b251398f629fd33c0e50785552) en el que implemento esta solución y actualizo next-mdx-remote para usar RSC, aprovechando que he migrado a Next 14.
-> Por la misma razón, tampoco me he extendido en como he utilizado chokidar para monitorizar la carpeta images y correr el script automáticamente cada vez que añado una imagen, o como he actualizado el linter para facilitarme el trabajo.
+>
+> Por la misma razón, tampoco me he extendido en como he utilizado chokidar para monitorizar la carpeta images y correr el script automáticamente cada vez que añado una imagen, o como he actualizado el linter para facilitarme el trabajo. Si tienes interés, puedes checkear la PR en Github y ver todo lo que se ha quedado fuera de este post.
 
 ## Conclusión
 
