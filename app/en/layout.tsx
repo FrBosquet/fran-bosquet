@@ -1,15 +1,19 @@
 import { Analytics } from '@vercel/analytics/react'
 import { Header } from 'components/Header'
 import { engDescription } from 'lib/posts'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import { Poppins } from 'next/font/google'
 import React from 'react'
 import 'styles/globals.css'
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1
+}
+
 export const metadata: Metadata = {
   title: 'Coding blog | Fran Bosquet',
   description: engDescription,
-  viewport: 'width=device-width, initial-scale=1',
   icons: '/favicon.ico',
   metadataBase: new URL('https://franbosquet.com'),
   alternates: {
