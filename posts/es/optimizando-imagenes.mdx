@@ -1,12 +1,13 @@
 ---
-title: Optimizando imagenes para la web
+title: Optimizando imágenes para la web
 description: Next nos ofrece una serie de mecanismos para optimizar las imágenes que utilizamos en nuestras aplicaciones web. Vamos a ver cómo.
 date: 6-03-2024
 published: true
 keywords:
   - next
   - webp
-  - images
+  - cumulative layout shift
+  - scripting
 image:
   src: 'images'
   author: 'Héctor J. Rivas'
@@ -15,40 +16,46 @@ image:
   sourceUrl: 'https://unsplash.com/es/fotos/lote-de-carteles-emblematicos-QNc9tTNHRyI'
 ---
 
-He estado dándole una vuelta a como uso las imágenes en este blog. Hasta el momento el proceso estaba resultando traumático. Me dí cuenta de esto en un momento en el que me vi en la tesitura de añadir una nueva imagen y sentí una pereza infinita. Lo cual me llevo a reflexionar:
+He estado dándole una vuelta a **como uso las imágenes en este blog**. Hasta el momento el proceso venía resultando bastante traumático. Me dí cuenta de esto en un momento en el que me vi en la tesitura de añadir una nueva imagen y sentí una pereza infinita. Lo cual me llevo a reflexionar:
 
 <YoutubeEmbed
   embedId="GU3M4ndorVI?start=18&end=25"
   title="Es que eso no puede hacerlo otro"
 />
 
-Bueno, otro no, tendré que hacerlo yo. Pero puedo automatizar con un script la parte tediosa de optimizar las imagenes y no volver a pensar en ello. A saber:
+Bueno, otro no, tendré que hacerlo yo. Pero puedo automatizar con un script la parte tediosa de optimizar las imágenes y no volver a pensar en ello. Los pasos que tenía que hacer hasta ahora cada vez que quería añadir una nueva imagen:
 
-- Convertir las imágenes a formato [webp](https://es.wikipedia.org/wiki/WebP), un formato sin pérdida de calidad y que reduce el tamaño de las imágenes considerablemente y que está desarrollando Google precisamente para su uso en web.
+- Convertirla a formato [webp](https://es.wikipedia.org/wiki/WebP), un formato sin pérdida de calidad, que reduce el tamaño de las imágenes considerablemente y que está desarrollando Google precisamente para su uso en webs.
 
-- Redimensionar las imágenes al máximo tamaño que se van a mostrar. Esto no es necesario ya que **Next** se encarga de hacerlo automáticamente, pero ya que estamos prefiero tener imágenes de pocos Kbs antes que de Mbs.
+- Redimensionarla al máximo tamaño que se va a mostrar, en el caso de esta web a 700px de ancho. Con el objetivo de tener la mejor calidad posible mandando la menor cantidad de datos.
 
-- Introducir la ruta de la imagen en el markdown.
+- Finalmente, introducir la ruta de la imagen en el _markdown_, incluyendo la carpeta y la extensión, que siempre son la misma (**images** y **.webp** respectivamente).
 
-- Crear _placeholders_: Versiones de baja resolución, baja calidad y bajo tamaño para mostrar durante la carga.
+Por otro lado, con el _aproach_ actual a parte de frustración vengo echando en falta dos funcionalidades que el component Image de Next nos da gratis:
 
-Por otro lado, tenemos el component Image de **Next** que hasta ahora estaba obviando por pura vagancia. Vamos a introducirlo también para hacer un uso incluso más eficiente de nuestras imágenes.
+- Por un lado, el _lazy loading_: No descargar la imagen hasta que no este próxima a aparecer en la página a causa del scroll que haga el usuario. Hasta ahora todas las imágenes se cargaban al acceder a la página, generando una carga en el dispositivo y en la red innecesaria.
+
+- Mientras las imágenes no se han descargado, mostrar una versión de la misma en baja resolución y calidad a modo de _placeholder_. Esto cumple dos funciones: Por un lado indicar visualmente que la imagen se esta cargando si por circunstancias de la red esta descarga toma el suficiente tiempo como para que el usuario vea el placeholder. Y ocupar el espacio que la imagen final vaya a ocupar, antes de que esta se descargue. De modo que evitamos que el contenido se vea desplazado por esta al descargarse provocando el denominado _layout shift_
+
+Para esto último vamos a necesitar saber de antemano cual es el tamaño de la imagen y además haber generado el placeholder con antelación. Como vamos a automatizar la gestión de las imágenes, aprovecharemos también para afrontar estas dos tareas con el _script_ que vamos a escribir.
 
 ## El proceso que venía haciendo hasta ahora
 
-Como he comentado en alguna ocasión, utilizo una maquina Windows con WSL2 corriendo Ubuntu para desarrollar:
+Como he comentado en alguna ocasión, utilizo una **maquina Windows con WSL2 corriendo Ubuntu** para desarrollar:
 
-![Mi juguete](computer)
+![Setup de ordenador@Mi estación de trabajo](computer)
 
-WSL es básicamente una máquina virtual altamente integrada en el sistema, por lo que tengo una terminal Linux en la que puedo instalar y correr cualquier cosa que correría en un Ubuntu, como por ejemplo servicios Node como Next. Los puertos que exponen esos servicios se exponen a la máquina anfitrión, por lo que puedo acceder a ellos desde el navegador de Windows. Esta maravilla de la tecnología permite tener en windows una experiencia de desarrollo casi 1:1 con la que tendría en un sistema Linux o Mac, sin tener que renunciar a mi máquina Windows.
+**WSL** es básicamente una máquina virtual altamente integrada en el sistema que permite asimilar un subsistema **Linux** dentro de un sistema operativo **Windows**. Gracias a esta tecnología tienes acceso a una terminal en la que puedes instalar y correr cualquier cosa que correría en un **Ubuntu**, **Debian**, **Arch**, etc, pero dentro de tu sistema operativo de **Microsoft**. Utilizando tu IDE, tu terminal o tu explorador de archivos nativo a traves de túneles que, en la versión actual, son prácticamente imperceptibles para el usuario.
 
-Al igual que expone los puertos, también comparte el sistema de archivos, por lo que puedo acceder a los archivos de mi proyecto desde Windows o desde Ubuntu. Esto es importante porque los archivos estáticos (imágenes) las descargo o las genero desde el sistema anfitrión y necesito copiarlas al sistema Linux. En primeras versiones de WSL esto era un autentico suplicio. Por suerte a día de hoy puedes abrir el sistema de archivos de WSL desde el explorador de Windows y copiar y pegar archivos sin problemas. Incluso arrastrando desde tu navegador a el explorador de archivos de VsCode (Que se conecta al entorno de desarrollo de WSL) puedes copiar archivos.
+Esta maravilla de la tecnología me permite **tener en Windows una experiencia de desarrollo casi 1:1 con la que tengo en un sistema Linux o Mac**, pudiendo aprovechar el PC Gaming que principalmente uso para jugar (Única tarea en la que el sistema de microsoft aun es muy superior a **OSX**, **Debian**, **Ubuntu**, etc.) para trabajar en mis proyectos de desarrollo en un entorno idéntico al que uso en el trabajo (terminal Unix).
 
-Así que mi proceso hasta ahora era:
+**WSL** expone los puertos de los servicios que estés corriendo, asi que puedes correr una aplicación web y visitarla desde tu navegador. Puedes instalar aplicaciones gráficas como **GIMP** usando snap y utilizarlas desde el escritorio sin problemas. Puedes navegar el sistema de carpetas y gestionar los archivos desde el _explorer_ de **Windows**. Esto último es importante para el tema que nos ocupa, dado que los archivos estáticos (imágenes) los descargo o las genero desde el sistema anfitrión y necesito copiarlas al subsistema **Linux**. En primeras versiones de **WSL** esto era un autentico suplicio. A día de hoy puedes abrir el sistema de archivos de **WSL** desde el explorador de Windows como si de una partición se tratara y copiar y pegar archivos sin problemas. Incluso arrastrando desde tu navegador a el explorador de archivos de **VsCode** (Que se conecta al entorno de desarrollo de **WSL**) puedes copiar archivos.
 
-- Copiar la imagen que quisiera usar en el blog a la carpeta de imágenes de mi proyecto, en este caso `/public/images`. Next expone como estático todo lo que pongas en la carpeta `/public` por lo que puedo acceder a las imágenes desde cualquier parte de mi aplicación simplemente referenciando a `/images/nombre-de-la-imagen.extension-de-la-imagen`.
+Volviendo al que era mi proceso hasta ahora, este consistía en:
 
-- Utilizar un conversor a webp para convertir la imagen a ese formato. En mi caso utilizaba [cwebp](https://developers.google.com/speed/webp/docs/cwebp) que es la herramienta de Google para convertir imágenes a webp.
+- Copiar la imagen que quisiera usar en el blog a la carpeta de imágenes de mi proyecto, en este caso `/public/images`. **Next** expone como archivos estáticos todo lo que pongas en la carpeta `/public` por lo que puedo acceder a las imágenes desde cualquier parte de mi aplicación simplemente referenciando a `/images/nombre-de-la-imagen.extension-de-la-imagen`.
+
+- Utilizar un conversor a webp para convertir la imagen a ese formato. En mi caso utilizaba [cwebp](https://developers.google.com/speed/webp/docs/cwebp) que es la herramienta de Google para convertir imágenes a webp. Desde la terminal:
 
 ```bash
 cwebp nombre-de-la-imagen.extension-de-la-imagen -o nombre-de-la-imagen.webp
@@ -60,32 +67,30 @@ cwebp nombre-de-la-imagen.extension-de-la-imagen -o nombre-de-la-imagen.webp
 ![Texto alternativo](/images/nombre-de-la-imagen.webp)
 ```
 
-Lo cual tampoco es un gran drama, pero si que es un proceso que se me hacía tedioso y que me producía pereza cada vez que tenía que añadir una imagen. Por otro lado, esta el tema del tamaño de las imágenes. Next se encarga de sobredimensionarlas al vuelo si usas el componente `Image`, pero para ello tienes que especificar el tamaño final de la imagen con un `width` y un `height`.
+Lo cual es un proceso que me producía pereza cada vez que tenía que añadir una imagen. Copiar un archivo, ejecutar un comando y escribir una ruta completa puede parecer poca cosa pero cuando estas escribiendo puede romperte totalmente el ritmo hacerlo cada pocos minutos. Por otro lado, esta el tema del tamaño de las imágenes. Next se encarga de sobredimensionarlas al vuelo si usas el componente `Image`, pero para ello tienes que especificar el tamaño final de la imagen con un `width` y un `height`.
 
-Ademas, si empiezas a acumular imágenes de 6000x4000px en tu proyecto el tamaño de tu proyecto se dispara, lo cual no es un gran problema en este proyecto pero empieza a decelerar todo y no se si puede incluso disparar los costes de uso en Vercel si el proyecto empieza a tener visitas.
+Si no lo haces, puedes usar la propiedad `fill` y especificar el tamaño en el contenedor con **CSS**, pero en mi caso me encontraba con la problemática de que tengo imágenes que llenan la columna (700px de ancho o mas) y otras que no y que quería que quedaran centradas. Esto último no se puede hacer con `fill` y, ademas, pierdes la optimización que hace Next de las imágenes puesto que no sabe a qué tamaño debe dimensionarlas.
 
-Por último, he notado últimamente que las imágenes tardan un poco en cargar en la home. Esto produce un efecto muy feo ya que dejan el hueco vacio y se van mostrando conforme se descargan. El componente `Image` de Next tiene una propiedad `placeholder` que permite mostrar una versión de baja resolución de la imagen mientras se descarga la versión final. Esto es muy útil para mejorar la experiencia de usuario ya que le mostraremos un esbozo de lo que estamos descargando.
+Total, que en un principio opté por no calentarme la cabeza y usar el elemento `img` nativo de **HTML**, ya que este descarga la imagen y por defecto la muestra a su resolución nativa. Pero esto me causaba un tercer problema: El espacio no se ocupa hasta que la imagen se descarga, por lo que el _layout_ de la página se va modificando conforme se completa la transferencia de los _assets_: básicamente, tu página da "saltos" y esto queda horroroso. Esto es lo que conocemos como _layout shift_
 
-Pero dichos placeholders hay que generarlos también, por lo que otra tarea más que añadir a la lista de tediosos procesos que tengo que hacer cada vez que añado una imagen.
-
-Así que aquí he trazado la linea. Voy a automatizar todo este proceso con un script que haga todo esto por mi.
+Haber convivido con esta pésima experiencia de desarrollo que ademas me daba un resultado suboptimo durante tantos meses me ha terminado armando de valor para ponerme el mandil de _scripter_ y arreglar la problemática de las imágenes en este blog de una vez por todas.
 
 ## El script optimizador
 
-Vamos a usar `sh` para crear este script. Nos va a permitir navegar nuestro sistema de archivos y usar aplicaciones de terminal de una manera mas sencilla que un script de Node. Vamos punto por punto:
+Vamos a usar `zsh` para crear este _script_. Nos va a permitir navegar nuestro sistema de archivos y usar aplicaciones de terminal para automatizar tareas. Podríamos optar por otro lenguaje y entorno de ejecución, por ejemplo **Typescript** en **Node**. Pero me parece interesante practicar con la terminal, dado que siempre vas a tener _shell_ disponible en un sistema **Linux** y quien sabe cuando vas a tener que conectarte con _ssh_ a un contenedor **docker** para automatizar una tarea. Así que vamos a hacer el esfuerzo y a aprender un par de cosas con este _post_. Punto por punto:
 
-### Copiar las imagenes a la máquina Linux
+### Copiar las imágenes a la máquina Linux
 
-Esto obviamente no lo podemos autoátizar, simplemente es arrastrar y soltar. Pero hay una pequeña molestia que si que nos podemos quitar. Al copiar y pegar un archivo de Windows al subsistema Linux, este último crea un archivo `:Zone.Identifier` para almacenar metainformación. ¿Cual? Ejemplo:
+Esto obviamente no lo podemos automátizar, simplemente es arrastrar y soltar la imagen que quiera. Pero hay una pequeña molestia que si que nos podemos quitar. Al copiar y pegar un archivo de **Windows** al subsistema **Linux**, este último crea un archivo `:Zone.Identifier` para almacenar meta información. ¿Cual? Por ejemplo:
 
-```
+```@imagen:Zone.Identifier
 [ZoneTransfer]
 ZoneId=3
 ReferrerUrl=https://photos.google.com/
 HostUrl=about:internet
 ```
 
-¿Por qué? No lo sé ¿Se puede evitar? No he encontrado como. Así que lo que me toca hacer es borrar ese archivo cada vez que copio una nueva imagen. Vamos a automatizar este proceso en el script:
+¿Por qué? No lo sé ¿Se puede evitar? No he encontrado como. Así que lo que me tocaba hacer era borrar ese archivo cada vez que copiaba una nueva imagen al repositorio. Vamos a automatizar este proceso en el script:
 
 ```bash@public/images/process-images.sh
 #!/bin/sh
@@ -93,11 +98,13 @@ HostUrl=about:internet
 rm -f "$(dirname "$0")"/*.Identifier
 ```
 
-`rm -f` fuerza la eliminación del archivo, `"$(dirname "$0")"` hace referencia a la carpeta donde se encuentra el script y `*.Identifier` captura todos los archivos que terminen en `.Identifier`. Con esto ya nos hemos librado de esos molestos metadatos
+`#!/bin/sh` indica al sistema cómo debe ejecutar este archivo. Esto es muy interesante ya que podemos, por ejemplo, copiar el _script_ a la carpeta `usr/bin` y usarlo en cualquier lugar de nuestro sistema simplemente invocando su nombre. Es una manera genial de generar pequeñas aplicaciones para personalizar tu sistema.
+
+`rm -f` fuerza la eliminación de archivos, `"$(dirname "$0")"` hace referencia a la carpeta donde se encuentra el script e `*.Identifier` captura todos los archivos que terminen en `.Identifier`. Con esto ya nos hemos librado de esos molestos y no solicitados metadatos.
 
 ### Transformar las imágenes a webp
 
-Lo normal es que las imagenes que copio, dependiendo del origen, sean `jpg` o `png`. Por ello necesito analizar la carpeta en busca de todos los archivos que no sean yá `.webp` para procesarlos:
+Lo normal es que las imágenes que copio, dependiendo del origen, sean `jpg` o `png`. Por ello necesito analizar la carpeta en busca de todos los archivos que no sean yá `.webp` para procesarlos:
 
 ```bash@public/images/process-images.sh
 ...
@@ -116,13 +123,13 @@ El bucle `for` recorre todos los archivos capturados por `find "$(dirname "$0")"
 
 - `-type f` captura solo archivos.
 
-- `! -name "*.webp"` excluye los archivos que terminen en `.webp`, así no procesaremos los que ya esten en ese formato.
+- `! -name "*.webp"` excluye los archivos que terminen en `.webp`, así no procesaremos los que ya estén en ese formato.
 
 - `! -name "*.sh"` excluye el propio script, ya que obviamente no es una imagen que quiera convertir.
 
 Una vez que tenemos como valor de `$file` la ruta de la imagen, vamos a convertirla a webp con `cwebp -q 80 "$file" -o "${file%.*}.webp"`.
 
-- `cwebp` es el comando que convierte las imágenes a webp. En Ubuntu puedes instalarlo con `sudo apt install webp`. Si utilizas otra distribución o sistema operativo, puedes buscar como hacerlo, suele ser muy sencillo.
+- `cwebp` es el comando que convierte las imágenes a webp. En **Ubuntu** puedes instalarlo con `sudo apt install webp`. Si utilizas otra distribución o sistema operativo, puedes buscar como hacerlo, suele ser muy sencillo.
 
 - `-q 80` es la calidad de la imagen.
 
@@ -134,7 +141,7 @@ Finalmente, eliminamos la imagen original con `rm "$file"`, ya que una vez trans
 
 #### Redimendionar las imágenes
 
-Lo siguiente es hacer un segundo bucle, ahora ya sobre los archivos `.webp` que hemos generado, y verificar si queremos redimensionarlos. En esta web, en escritorio, el ancho máximo al que mostramos las imagenes es de 700px. Para llevar a cabo este cometido, voy a usar la suite de herramientas de [ImageMagick](https://imagemagick.org/index.php):
+Lo siguiente es hacer un segundo bucle, ahora ya sobre los archivos `.webp` que hemos generado, y verificar si queremos redimensionarlos. En esta web, en escritorio, el ancho máximo al que mostramos las imágenes es de 700px. Para llevar a cabo este cometido, voy a usar la _suite_ de herramientas de [ImageMagick](https://imagemagick.org/index.php):
 
 ```bash@public/images/process-images.sh
 for file in "$(dirname "$0")"/*.webp
@@ -148,7 +155,7 @@ do
   fi
 ```
 
-- `for file in "$(dirname "$0")"/*.webp` es similar al bucle anterior, pero ahora capturamos solo los archivos `.webp` que hemos generado anteriormente y, ademas, al no usar find no recorreremos ninguna carpeta interna (Esto es importante dado que posteriormente vamos a crear una carpeta para placeholders).
+- `for file in "$(dirname "$0")"/*.webp` es similar al bucle anterior, pero ahora capturamos solo los archivos `.webp` que hemos generado anteriormente y, ademas, al no usar `find` no recorreremos ninguna carpeta interna (Esto es importante dado que posteriormente vamos a crear una carpeta para _placeholders_ y no querremos recorrer su contenido).
 
 - con `width=$(identify -format "%w" "${file%.*}.webp")` obtenemos el ancho de la imagen utilizando la utilidad `identify` de **ImageMagick**. con `-format "%w"` le decimos que lo que queremos es el ancho, y con `"${file%.*}.webp"` indicamos la ruta de la imagen. Guardamos el resultado una variable `$width`.
 
@@ -160,7 +167,7 @@ Y con esas pocas lineas, hemos redimensionado todas las imágenes que superen lo
 
 #### Generar los placeholders
 
-Por último, vamos a generar los placeholders. Estos van a ser versiones de poca resolución y poca calidad que vamos a utilizar para mostrar mientras se descargan las imágenes finales. Tenemos que crear imágnes que recuerden a las finales, pero que ocupen unos poco bytes, para que podamos cargarlas casi instantaneamente en condición de red:
+A continuación generaremos los _placeholders_. Estos van a ser versiones de poca resolución y poca calidad que vamos a utilizar para mostrar mientras se descargan las imágenes finales. Tenemos que crear imágnes que recuerden a las finales, pero que ocupen unos poco bytes, para que podamos cargarlas casi instantaneamente incluso en condiciones de red poco favorables:
 
 ```bash@public/images/process-images.sh
   base=$(basename "$file")
@@ -177,18 +184,18 @@ Por último, vamos a generar los placeholders. Estos van a ser versiones de poca
 
 - `if [ ! -f "$placeholderPath" ]; then` comprobamos si el placeholder no existe. Con esto evitamos estar creando constantemente los mismos placeholders. Solo lo haremos con aquellos que nos falten. Esto es lo mismo que hacíamos para redimensionar las imagenes a 700px de ancho.
 
-- `convert "${file%.*}.webp" -blur 0x8 -quality 10 -resize 10x "$placeholderPath"` es la orden que genera el placeholder. `convert` es otra utilidad de **ImageMagick** que permite convertir imagenes. La diferencia con `mogrify` es que este modifica el original, mientras que convert crea una copia. `"${file%.*}.webp"` es la ruta de la imagen original, `-blur 0x8` desenfoca la imagen en un area de 8 pixeles, `-quality 10` indica una calidad baja (10 sobre 100), `-resize 10x` la redimensiona a 10px de ancho y `$placeholderPath` es la ruta de salida que definimos antes.
+- `convert "${file%.*}.webp" -blur 0x8 -quality 10 -resize 10x "$placeholderPath"` es la orden que genera el placeholder. `convert` es otra utilidad de **ImageMagick** que permite convertir imagenes. La diferencia con `mogrify` es que este modifica el original, mientras que `convert` crea una copia. `"${file%.*}.webp"` es la ruta de la imagen original, `-blur 0x8` desenfoca la imagen en un area de 8 pixeles, `-quality 10` indica una calidad baja (10 sobre 100), `-resize 10x` la redimensiona a 10px de ancho y `$placeholderPath` es la ruta de salida que definimos antes.
 
 Y con solo esa linea, hemos creado los placeholders.
 
 #### Guardar las dimensiones de las imagenes
 
-Una vez tenemos la imagen redimensionada, necesito almacenar su tamaño para poder dimensionarla correctamente. Si tan solo mandamos la url del recurso al navegador, este no va a saber cual es el tamaño de la imagen hasta que no la haya descargado, por lo que vamos a sufrir casi seguro de [layout shifts](https://www.semrush.com/blog/cumulative-layout-shift/?kw=&cmp=ES_SRCH_DSA_Blog_EN&label=dsa_pagefeed&Network=g&Device=c&kwid=aud-2090387876853:dsa-2185834088336&cmpid=18347529021&agpid=153587537679&BU=Core&extid=137165264856&adpos=). Por lo que necesito almacenar esta información para poder indicar desde el lado del servidor cuanto espacio vamos a necesitar.
+Una vez tenemos la imagen redimensionada, necesito almacenar su tamaño para poder indicarle después al navegador cuanto espacio ocupará la misma. Si tan solo mandamos la _url_ del recurso al navegador, este no va a saber cual es el tamaño de la imagen hasta que no la haya descargado, por lo que vamos a sufrir seguro de [cumulative layout shifts](https://www.semrush.com/blog/cumulative-layout-shift/?kw=&cmp=ES_SRCH_DSA_Blog_EN&label=dsa_pagefeed&Network=g&Device=c&kwid=aud-2090387876853:dsa-2185834088336&cmpid=18347529021&agpid=153587537679&BU=Core&extid=137165264856&adpos=). David Walsh publicó hace poco [un artículo](https://davidwalsh.name/fixing-cumulative-layout-shift-problems-on-davidwalshblog) (curiosamente en tercera persona) sobre como sufría de este problema en su popular blog, como lo detectó y como lo solucionó. _TLDR_: Lo solucionó **WordPress** por el. Aquí no hay **Wordpress** que valga. En todo caso, **YO soy el WordPress**. Por lo que necesito almacenar las dimensiones de imagen para poder indicar al navegador desde el lado del servidor cuanto espacio vamos a necesitar para cada una de ellas.
 
 Ya hemos visto como obtener el tamaño de la imagen con `identify`, ahora necesitamos almacenar esa información en un archivo `json` que podamos leer desde el servidor al generar la página. Para empezar, vamos a crear un archivo `.json` con una apertura de llaves en el inicio de nuestro script:
 
 ```bash@public/images/process-images.sh
-echo "{" > "$(dirname "$0")/image_sizes.json"
+echo "{" > "$(dirname "$0")/temp_image_sizes.json"
 ```
 
 Usando `>` estamos indicando que queremos sobreescribir el archivo si ya existe.
@@ -205,7 +212,7 @@ Y vamos a añadir esa información en formato `json` al archivo que hemos creado
 
 ```bash@public/images/process-images.sh
     # Append the image size to the image_sizes.json file
-  echo "\"${base%.*}\": {\"width\": $width, \"height\": $height}," >> "$(dirname "$0")/image_sizes.json"
+  echo "\"${base%.*}\": {\"width\": $width, \"height\": $height}," >> "$(dirname "$0")/temp_image_sizes.json"
 ```
 
 Con `${base%.*}` eliminamos la extensión del nombre del archivo y lo usamos como clave en el objeto `json`. A continuación, añadimos el ancho y el alto de la imagen al archivo que hemos creado usando `>>` en lugar de `>`, de modo que en lugar de sobrescribir, añadimos una nueva linea.
@@ -213,78 +220,92 @@ Con `${base%.*}` eliminamos la extensión del nombre del archivo y lo usamos com
 Una vez fuera del bucle, tenemos que tener en cuenta que el formato json no admite `coma de cola`: No podemos añadir una coma al final del último elemento de un objeto. Por lo que vamos a eliminar la coma de la última linea con `sed`:
 
 ```bash@public/images/process-images.sh
-sed -i '$ s/,$//' "$(dirname "$0")/image_sizes.json"
+sed -i '$ s/,$//' "$(dirname "$0")/temp_image_sizes.json"
 ```
 
-Y finalmente cerramos el objeto `json` con una llave de cierre:
+Y finalmente cerramos el objeto JSON con una llave de cierre, copiamos su contenido a un archivo definitivo y eliminamos el archivo temporal:
 
 ```bash@public/images/process-images.sh
-echo "}" >> "$(dirname "$0")/image_sizes.json"
+echo "}" >> "$(dirname "$0")/temp_image_sizes.json"
+cat "$(dirname "$0")/temp_image_sizes.json" > "$(dirname "$0")/image_sizes.json"
+rm "$(dirname "$0")/temp_image_sizes.json"pnpm run dev
 ```
+
+> He usado un archivo temporal por un motivo muy sencillo: **Webpack** va a estar escuchando cambios en el archivo JSON definitivo y a recargar la página cada vez que los encuentre. La idea es escribir cada linea del _JSON_ conforme vayamos analizando imagen por imagen. Si escribiésemos directamente en el _JSON_ que usamos al generar la web, **Webpack** detectaría un cambio en un archivo importado y regeneraría con un archivo _JSON_ incompleto (Sin llave de cierre, por lo que fallaría el parseo como **JSON**), rompiendo el render de la página. Todo ello tantas veces como imágenes tengamos, cada vez que corriese el script. En resumen: Que añadir una imagen nueva al repositorio rompería el servidor de desarrollo.
+>
+> Por ese motivo utilizo un _JSON_ temporal y, solo cuando está completo, copio su contenido al definitivo, asegurando que Webpack siempre léa un _JSON_ bien formado :thumbsup: Si te preguntas por qué el temporal no rompe el servidor, ningún archivo de la aplicación importa ese temporal, por lo que para **Webpack** ese archivo no existe.
 
 #### El script
 
-Y así queda nuestro script terminado
+Y así queda nuestro script terminado:
 
 ```bash@public/images/process-images.sh
+#!/bin/sh
 rm -f "$(dirname "$0")"/*.Identifier
 
 # Clean up a file name image_sizes.json
-echo "{" > "$(dirname "$0")/image_sizes.json"
+echo "{" > "$(dirname "$0")/temp_image_sizes.json"
 
 # Loop through all files in the current directory
 for file in $(find "$(dirname "$0")" -type f ! -name "*.webp" ! -name "*.sh" ! -name "*.json")
 do
-  # Use cwebp to convert the file to webp format
-  cwebp -q 80 "$file" -o "${file%.*}.webp"
+    # Use cwebp to convert the file to webp format
+    cwebp -q 80 "$file" -o "${file%.*}.webp"
 
-  # Delete the original file
-  rm "$file"
+    # Delete the original file
+    rm "$file"
 done
 
 # Loop through all webp files in the current directory
 for file in "$(dirname "$0")"/*.webp
 do
-width=$(identify -format "%w" "${file%.*}.webp")
+  width=$(identify -format "%w" "${file%.*}.webp")
 
-# If the width is larger than 700px, resize the image
-if [ $width -gt 700 ]
-then
-    mogrify -resize 700x "${file%.*}.webp"
-fi
+  # If the width is larger than 700px, resize the image
+  if [ $width -gt 700 ]
+  then
+      mogrify -resize 700x "${file%.*}.webp"
+  fi
 
-base=$(basename "$file")
+  base=$(basename "$file")
 
-# Read the height and width of the resized image
-width=$(identify -format "%w" "${file%.*}.webp")
-height=$(identify -format "%h" "${file%.*}.webp")
+  # Read the height and width of the resized image
+  width=$(identify -format "%w" "${file%.*}.webp")
+  height=$(identify -format "%h" "${file%.*}.webp")
 
-# Append the image size to the image_sizes.json file
-echo "\"${base%.*}\": {\"width\": $width, \"height\": $height}," >> "$(dirname "$0")/image_sizes.json"
+  # Append the image size to the image_sizes.json file
+  echo "\"${base%.*}\": {\"width\": $width, \"height\": $height}," >> "$(dirname "$0")/temp_image_sizes.json"
 
-# Create a placeholder image
-placeholderPath=$(dirname "$0")/placeholder/${base}
+  # Create a placeholder image
+  placeholderPath=$(dirname "$0")/placeholder/${base}
 
-if [ ! -f "$placeholderPath" ]; then
-  echo "Creating placeholder for $file"
-  convert "${file%.*}.webp" -blur 0x8 -quality 10 -resize 10x "$placeholderPath"
-fi
+  if [ ! -f "$placeholderPath" ]; then
+    echo "Creating placeholder for $file"
+    convert "${file%.*}.webp" -blur 0x8 -quality 10 -resize 10x "$placeholderPath"
+  fi
 done
 
 # Remove the last comma from the image_sizes.json file and close the JSON object
-sed -i '$ s/,$//' "$(dirname "$0")/image_sizes.json"
-echo "}" >> "$(dirname "$0")/image_sizes.json"
+sed -i '$ s/,$//' "$(dirname "$0")/temp_image_sizes.json"
+echo "}" >> "$(dirname "$0")/temp_image_sizes.json"
+
+cat "$(dirname "$0")/temp_image_sizes.json" > "$(dirname "$0")/image_sizes.json"
+rm "$(dirname "$0")/temp_image_sizes.json"pnpm run dev
 ```
 
-Da un gusto tremendo ver funcionar el script, modificando y creando imágenes al vuelo. Si bien conocer cada uno de los comandos requiere de mucha experiencia y la sintaxis de **bash** es bastante extraña si vienes de un lenguaje inspirado en **C** (como lo es javascript), puedes valerte de una IA para ayudarte a desarrollarlo. En mi caso, para crear el script simplemente he ido pidiéndole a **copilot** lo que necesitaba hacer: Buscar todas las imagenes no **.webp**, ignorar el propio script, comprobar el ancho, etc. Y el me iba dando el código en `bash`. El resultado no es lo más profesional, pero si como a mí el scripting de shell siempre te ha resultado esquivo, te recomiendo que le des una oportunidad a esta u otra IA para ayudarte a poner en marcha. Con un poco de práctica puedes crear scripts, guardarlos en tu carpeta bin y automatizar tareas de terminal muy fácilmente en cualquier sistema Unix.
+Da un gusto tremendo verlo funcionar, modificando y creando imágenes al vuelo, convirtiendo una tarea tediosa en unos pocos milisegundos de computación. Si bien conocer cada uno de los comandos requiere de mucha experiencia y la sintaxis de **bash** es bastante extraña si vienes de un lenguaje inspirado en **C** (como lo es **javascript**), puedes valerte de una IA para ayudarte a desarrollar este tipo de utilidades.
 
-Otra opción es crear un script con `Typescript` y ejecutarlo con `ts-node`. Esto te permite tener un script más legible (para un desarrollador web al menos) y con la posibilidad de usar `import` para usar librerías que uses en tu proyecto. Esto es muy util por ejemplo para realizar migraciones de base de datos. En una entrada futura te enseñaré como hacerlo.
+En mi caso para crear el script simplemente he ido pidiéndole a **Copilot** lo que necesitaba hacer en cada momento: Buscar todas las imágenes no **.webp**, ignorar el propio _script_, comprobar el ancho, etc. Y el me iba dando el código en `bash`. El resultado no es precisamente el que hubiese escrito un ingeniero de sistemas, pero eso no es razón para no aprovechar las posibilidades de tu maquina. Si como a mí el scripting de shell siempre te ha resultado esquivo, te recomiendo que le des una oportunidad a esta u otra IA que te ayude a ponerte en marcha. Con un poco ensayo y error puedes crear scripts para automatizar tareas pesadas, guardarlos en tu carpeta `/usr/local/bin` y extender muy fácilmente tu sistema **Unix** para que haga exactamente lo que necesitas.
+
+Otra opción es crear un script con `Typescript` y ejecutarlo con `ts-node`. Esto te permite tener un _script_ más legible (para un desarrollador web al menos) y con la gran ventaja de poder usar `import` para usar librerías que uses en tu proyecto. Esto es muy util por ejemplo para realizar migraciones de base de datos. En una entrada futura te enseñaré como hacerlo.
 
 ## Optimizando las imágenes en Next.js
 
-La segunda parte de esta entrada la dedicaremos a usar apropiadamente las herramientas que Next nos provee en relación a las imágenes. Hasta ahora he estado esquivando el componente `Image` de Next puesto que requiere especificar el tamaño de la imagén y nadie tiene tiempo de tener un trabajo a tiempo completo, mantener un blog y medir las imágenes a la vez. Pero ahora que hemos automátizado el proceso, vamos a ver como podemos hacer uso de este componente para mostrar nuestras imágenes con lazy loading, placeholders y el tamaño correcto:
+La segunda parte de esta entrada la dedicaremos a usar apropiadamente las herramientas que **Next** nos provee en relación a las imágenes. Hasta ahora he estado esquivando el componente `Image` puesto que requiere especificar el tamaño de la imagen y ¿Quien tiene tiempo de mantener un trabajo a tiempo completo, mantener un blog y medir las imágenes a la vez?
 
-En nuestro archivo `mdx-content.tsx` es donde especificamos cómo transformamos el contenido markdown en elementos/componentes. Para las imágenes, estamos haciendo esto:
+Pero ahora que hemos automatizado el proceso, vamos a ver como podemos hacer uso de este componente para mostrar nuestras imágenes con _lazy loading_, _placeholders_ y el tamaño correcto antes y después de la carga evitando así el temido `cumulative layout shift`.
+
+En nuestro archivo `mdx-content.tsx` es donde especificamos cómo transformamos el contenido markdown en elementos html, definiendo componentes. Para las imágenes veníamos haciendo esto:
 
 ```tsx@components/mdx-content.tsx
 const mdxComponents = {
@@ -294,7 +315,7 @@ const mdxComponents = {
 }
 ```
 
-Cuando definimos una imagén en markdown, lo hacemos de la siguiente manera:
+Cuando definimos una imagen en markdown, lo hacemos de la siguiente manera:
 
 ```markdown
 ![Texto alternativo](/images/nombre-de-la-imagen.webp)
@@ -310,7 +331,9 @@ img: (props: any) => <Image
 />,
 ```
 
-Para facilitar el uso de imagenes y dado que todas se almacenan en la misma carpeta, vamos a asumir que la ruta solo especifica el nombre de la imagen sin extensión ni ruta:
+### Simplificando al máximo la definición del src
+
+Para facilitar el uso de imágenes y dado que todas se almacenan en la misma carpeta, vamos a asumir que la ruta solo especifica el nombre de la imagen, sin extensión ni ruta, y vamos a componer nosotros mismos la ruta del recurso:
 
 ```tsx@components/mdx-content.tsx
 img: (props: any) => <Image
@@ -320,12 +343,16 @@ img: (props: any) => <Image
 />,
 ```
 
-_Importante_: Este cambio me va a requerir refactorizar TODOS los posts. Por suerte para mí, no tengo muchos 😂.
+De este modo, mientras escribo el post no tengo que añadir ni la carpeta ni la extensión, solo el nombre de la imagen.
 
-Como `src` ahora es solo el nombre del archivo, coincide con la clave del objeto `json` que creamos en el script. Por lo que podemos usar esa información para obtener el tamaño de la imagen y pasárselo al componente `Image`:
+> **Importante**: Este cambio me va a requerir refactorizar TODOS los posts. Por suerte para mí, no tengo muchos 😂.
+
+### Especificar las dimensiones
+
+Como `src` ahora es solo el nombre del archivo, coincide con la clave del objeto `json` que creamos en el _script_. Por lo que podemos usar esa información para obtener el tamaño de la imagen y pasárselo al componente `Image`:
 
 ```tsx@components/mdx-content.tsx
-import imageSizes from '../public/images/image_sizes.json'
+import imageSizes from 'public/images/image_sizes.json'
 
 ...
 
@@ -342,7 +369,9 @@ img: (props: any) => {
 },
 ```
 
-`keyof typeof` nos permite indicarle a Typescript que esté tranquilo, que `src` es una clave existente en el objeto imageSizes. De este modo estamos trasladando el error al tiempo de ejecución, lo cual no es necesariamente una buena práctica. Pero en este caso se justifica por el hecho de que si la clave no existe, es porque la hemos escrito mál. Si usamos una clave nó valida, esa linea romperá ocn una excepción en tiempo de construcción, por lo que no corremos riesgo de mandar imagenes inexistentes al navegador y de hecho, con esto hemos mejorado nuestro flujo de trabajo: Si una imagen no existe, el script de `build` va a romper y con ello impedirá que la pagina rota se despliegue.
+`keyof typeof` nos permite indicarle a **Typescript** que esté tranquilo, que `src` es una clave existente en el objeto `imageSizes`. De este modo estamos trasladando el error al tiempo de ejecución, lo cual no es necesariamente una buena práctica. Pero en este caso específico se justifica por el hecho de que si la clave no existe es porque la hemos escrito mál. Y dado que este es un componente que se ejecuta en el servidor, el tiempo de ejecución es, de hecho, también el tiempo de compilación. Si usamos una clave nó valida, esa linea romperá con una excepción, por lo que no corremos riesgo de mandar imágenes inexistentes al navegador. De hecho, con esto hemos mejorado nuestro flujo de trabajo: Si una imagen no existe, el script de `build` va a romper y con ello impedirá que una versión rota de la página se despliegue.
+
+### Lazy loading
 
 Vamos a indicarle a **Next** que no queremos cargar la imagen hasta que no esté cerca de entrar en el viewport. Con esto evitamos cargar todas las imágenes al principio y solo las cargamos cuando estamos cerca de mostrarlas. Para ello, vamos a añadir la propiedad `loading="lazy"` al componente `Image`:
 
@@ -365,7 +394,9 @@ Puedes ir a un post con muchas imágenes (Por ejemplo [este](/posts/primer-dia-d
 
 ![Cargando imagenes a demanda](image_loading)
 
-Por último, vamos a añadir el placeholder. Para ello, vamos a setear la propiedad `placeholder` a `blur` en el componente `Image`, y vamos especificar la ruta a la imagen que generamos anteriormente:
+### Placeholder
+
+A continuación vamos a añadir el _placeholder_. Para ello, vamos a setear la propiedad `placeholder` a `blur` en el componente `Image`, y vamos especificar la ruta a la imagen que generamos anteriormente:
 
 ```tsx@components/mdx-content.tsx
     return <Image
@@ -380,11 +411,15 @@ Por último, vamos a añadir el placeholder. Para ello, vamos a setear la propie
     />
 ```
 
+Como hemos especificado dimensiones, si bien el placeholder tiene solo 10px de ancho, en el navegador se estirará a las dimensiones indicadas, evitando el `layout shift` y mostrando efectivamente un imagen en baja resolución mientras se carga la definitiva.
+
+### Pies de foto
+
 Por último, voy a solucionar el tema de los pies de foto. Hasta ahora he venido poniendo un texto en cursiva debajo de la imagen. A parte de no quedar muy allá:
 
 ![Pie de foto](imagefoot)
 
-Tiene el problema de que no es accesible. Las personas con problemas de visión no van a poder saber que hay un pie de foto. Por lo que vamos a añadir un `figcaption` a la imagen para dejar claro desde el punto de vista semántico y no solo visual, que se trata de un pié de foto:
+Tiene el problema de que no es accesible. Las personas con problemas de visión no van a poder saber que ahí hay un pie de foto. Por lo que vamos a añadir un `figcaption` a la imagen para dejar claro desde el punto de vista semántico, y no solo visual, que se trata de un pié de foto:
 
 ```tsx@components/mdx-content.tsx
     return <figure>
@@ -402,11 +437,11 @@ Comparando lo anterior con lo nuevo:
 
 Luce mejor, pero tenemos dos problemas:
 
-- Como se ve en el ejemplo, no siempre el alt y el pie de foto coinciden
+- Como se ve en el ejemplo, **no siempre el alt y el pie de foto coinciden**
 
 - Si lo dejo así, voy a asumir que todas las imagenes van a tener pie de foto, y esto no es así en este blog. Por lo que me obligaría a actualizar todos los posts. De nuevo, no son muchos pero no me apetece revisarlos todos.
 
-Por lo que vamos a implementar un sistema que permita añadir el pie de foto desde el markdown sin demasiada complicación. Las reglas serian:
+Por lo que **vamos a implementar un sistema que permita añadir el pie de foto desde el markdown sin demasiada complicación**. Las reglas serian:
 
 - Si nos encontramos una `@` en el texto alternativo, la foto tendrá pie de foto. De este modo nos aseguramos de no romper la compatibilidad con los posts anteriores.
 

@@ -17,7 +17,9 @@ export const PostLink = ({ post, lang }: Props) => {
         className="relative aspect-[1/2] w-28
 		overflow-hidden
 		transition-all
-		group-hover:brightness-125"
+		image
+    group-hover:brightness-125
+    "
       >
         <Image
           fill
@@ -32,8 +34,9 @@ export const PostLink = ({ post, lang }: Props) => {
       <div className="flex h-full flex-1 flex-col justify-between gap-2 py-4 lg:pt-6">
         <Link
           className="font-mono
-              text-lg
-              text-teal-200 transition-all
+          text-lg
+              text-teal-200
+              transition-all title
               group-hover:text-white
               sm:text-2xl
 			"

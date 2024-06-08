@@ -13,7 +13,7 @@ export const PostBacklink = ({ href }: Props) => {
         href={href}
         title="Volver"
       >
-        <BackIcon className="size-6 transition-all" />
+        <BackIcon className="h-6 w-6 transition-all" />
       </Link>
     </aside>
   )
