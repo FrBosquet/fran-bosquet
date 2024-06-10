@@ -1,11 +1,12 @@
-import { Analytics } from "@vercel/analytics/react";
-import { Header } from "components/Header";
-import { baseDescription } from "lib/posts";
-import { ViewTransitions } from "next-view-transitions";
-import { Poppins } from "next/font/google";
-import { Metadata, Viewport } from "next/types";
-import React from "react";
-import 'styles/globals.css';
+import { Analytics } from '@vercel/analytics/react'
+import { Header } from 'components/Header'
+import { ProgressBar } from 'components/progress-bar'
+import { baseDescription } from 'lib/posts'
+import { ViewTransitions } from 'next-view-transitions'
+import { Poppins } from 'next/font/google'
+import { Metadata, Viewport } from 'next/types'
+import React from 'react'
+import 'styles/globals.css'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -45,13 +46,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <article className="flex-1 bg-gradient-to-b from-gray-900 to-gray-800">
                 <div
                   className="
-                mx-auto max-w-7xl
-                p-4 lg:px-8
-                "
+                  mx-auto max-w-7xl
+                  p-4 lg:px-8
+                  "
                 >
                   {children}
                 </div>
                 <Analytics />
+                <ProgressBar />
               </article>
             </section>
           </main>

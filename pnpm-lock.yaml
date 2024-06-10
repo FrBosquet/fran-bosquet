@@ -50,6 +50,9 @@ dependencies:
   next-mdx-remote:
     specifier: ^5.0.0
     version: 5.0.0(@types/react@18.3.3)(react@18.3.1)
+  next-nprogress-bar:
+    specifier: ^2.3.12
+    version: 2.3.12
   next-view-transitions:
     specifier: ^0.1.1
     version: 0.1.1(next@14.2.3)(react-dom@18.3.1)(react@18.3.1)
@@ -3727,6 +3730,12 @@ packages:
       - supports-color
     dev: false
 
+  /next-nprogress-bar@2.3.12:
+    resolution: {integrity: sha512-BCsmNmssPY4QfYKux7cGYm/JmsM/n9TGMJJDyYPt7ckWyK8l43hMgi7g9d7u/IxCaEAx3pbzfg7Ity0zdlDnGA==}
+    dependencies:
+      nprogress: 0.2.0
+    dev: false
+
   /next-view-transitions@0.1.1(next@14.2.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-1rpXhWF8j0VJwJG52c8WeeAYpr1K7o3ub82lahbSoUwAry54TEm1d3mqBbSLLIMl85c3OewkZjxncTHwYFk+IA==}
     peerDependencies:
@@ -3812,6 +3821,10 @@ packages:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /nprogress@0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
