@@ -369,11 +369,13 @@ img: (props: any) => {
 },
 ```
 
-`keyof typeof` nos permite indicarle a **Typescript** que esté tranquilo, que `src` es una clave existente en el objeto `imageSizes`. De este modo estamos trasladando el error al tiempo de ejecución, lo cual no es necesariamente una buena práctica. Pero en este caso específico se justifica por el hecho de que si la clave no existe es porque la hemos escrito mál. Y dado que este es un componente que se ejecuta en el servidor, el tiempo de ejecución es, de hecho, también el tiempo de compilación. Si usamos una clave nó valida, esa linea romperá con una excepción, por lo que no corremos riesgo de mandar imágenes inexistentes al navegador. De hecho, con esto hemos mejorado nuestro flujo de trabajo: Si una imagen no existe, el script de `build` va a romper y con ello impedirá que una versión rota de la página se despliegue.
+`keyof typeof` nos permite indicarle a **Typescript** que esté tranquilo, que `src` es una clave existente en el objeto `imageSizes`. De este modo estamos trasladando el error al tiempo de ejecución, lo cual no es necesariamente una buena práctica. Pero en este caso específico se justifica por el hecho de que si la clave no existe es porque la hemos escrito mál. Y dado que este es un componente que se ejecuta en el servidor, el tiempo de ejecución es, de hecho, también el tiempo de compilación. Si usamos una clave nó valida, esa linea romperá con una excepción, por lo que no corremos riesgo de mandar imágenes inexistentes al navegador.
+
+> De hecho, con esto hemos mejorado nuestro flujo de trabajo: Si una imagen no existe, el script de `build` va a romper y con ello impedirá que una versión rota de la página se despliegue.
 
 ### Lazy loading
 
-Vamos a indicarle a **Next** que no queremos cargar la imagen hasta que no esté cerca de entrar en el viewport. Con esto evitamos cargar todas las imágenes al principio y solo las cargamos cuando estamos cerca de mostrarlas. Para ello, vamos a añadir la propiedad `loading="lazy"` al componente `Image`:
+Vamos a indicarle a **Next** que no queremos mostrar la imagen hasta que no esté cerca de entrar en el viewport. Con esto evitamos descargar todas las imágenes al principio y solo lo hacemos cuando estamos cerca de mostrarlas. Para ello, vamos a añadir la propiedad `loading="lazy"` al componente `Image`:
 
 ```tsx@components/mdx-content.tsx
 img: (props: any) => {
@@ -390,13 +392,13 @@ img: (props: any) => {
 },
 ```
 
-Puedes ir a un post con muchas imágenes (Por ejemplo [este](/posts/primer-dia-datadog)), abrir el inspector de elementos, pestaña _network_, filtrar por imagenes: Podrás ver cómo las imagenes solo se van descargando conforme vas haciendo scroll y te acercas a que sean visibles:
+Puedes ir a un post con muchas imágenes (Por ejemplo [este](/posts/primer-dia-datadog)), abrir el inspector de elementos, pestaña _network_, filtrar por imágenes: Podrás ver cómo las imagenes solo se van descargando conforme vas haciendo _scroll_ y te acercas a que sean visibles:
 
 ![Cargando imagenes a demanda](image_loading)
 
 ### Placeholder
 
-A continuación vamos a añadir el _placeholder_. Para ello, vamos a setear la propiedad `placeholder` a `blur` en el componente `Image`, y vamos especificar la ruta a la imagen que generamos anteriormente:
+A continuación vamos a añadir el _placeholder_. Para ello, vamos a _setear_ la propiedad `placeholder` a `blur` en el componente `Image`, y vamos especificar la ruta a la imagen que generamos anteriormente:
 
 ```tsx@components/mdx-content.tsx
     return <Image
@@ -411,7 +413,7 @@ A continuación vamos a añadir el _placeholder_. Para ello, vamos a setear la p
     />
 ```
 
-Como hemos especificado dimensiones, si bien el placeholder tiene solo 10px de ancho, en el navegador se estirará a las dimensiones indicadas, evitando el `layout shift` y mostrando efectivamente un imagen en baja resolución mientras se carga la definitiva.
+Como hemos especificado `height` y `width`, si bien el placeholder tiene solo 10px de ancho, en el navegador se estirará a las dimensiones indicadas. Evitamos así el `cumulative layout shift` y mostramos efectivamente un imagen en baja resolución mientras se carga la definitiva.
 
 ### Pies de foto
 
@@ -445,7 +447,7 @@ Por lo que **vamos a implementar un sistema que permita añadir el pie de foto d
 
 - Si nos encontramos una `@` en el texto alternativo, la foto tendrá pie de foto. De este modo nos aseguramos de no romper la compatibilidad con los posts anteriores.
 
-- Si nos encontramos la `@`, el texto que la precede será el `akt` y el vaya detrás de ella será el pie de foto.
+- Si nos encontramos la `@`, el texto que la precede será el `alt` y el que vaya detrás de ella será el pie de foto.
 
 - Si nos encontramos la `@` pero no hay texto detrás, el `alt` y el pie de foto serán el mismo.
 
@@ -489,16 +491,16 @@ Y disfrutar de esos lindos y semánticos pies de foto:
 
 ![Pie de foto](figcaption_fixed)
 
-> **OJO!** remark por defecto envuelve todos los elementos en un párrafo, así que con este cambio estamos metiendo un figure dentro de p, lo cual es semánticamente incorrecto y nos da errores de hydration al mandar la página al cliente.
+> **OJO!** remark por defecto envuelve todos los elementos en un párrafo, así que con este cambio estamos metiendo un **figure** dentro de **p**, lo cual es semánticamente incorrecto y nos da errores de _hydration_ al mandar la página al cliente.
 >
-> He tenido que echar un par de horas investigando el asunto y no quiero explicarlo aquí ya que el post se ha vuelto ya demasiado largo. TLDR: Puedes usar un plugin de remark para evitar este comportamiento con imagenes, lo cual limpia el problema de raiz. Tengo [este commit](https://github.com/FrBosquet/fran-bosquet/commit/df13951de3ced8b251398f629fd33c0e50785552) en el que implemento esta solución y actualizo next-mdx-remote para usar RSC, aprovechando que he migrado a Next 14.
+> He tenido que echar un par de horas investigando el asunto y no quiero explicarlo aquí ya que el post se ha vuelto ya demasiado largo. **TLDR**: Puedes usar un plugin de **Remark** para evitar este comportamiento con imagenes, lo cual limpia el problema de raíz. Tengo [este commit](https://github.com/FrBosquet/fran-bosquet/commit/df13951de3ced8b251398f629fd33c0e50785552) en el que implemento esta solución y actualizo **next-mdx-remote** para usar [**RSC**](https://react.dev/reference/rsc/server-components), aprovechando que he migrado a **Next 14**.
 >
-> Por la misma razón, tampoco me he extendido en como he utilizado chokidar para monitorizar la carpeta images y correr el script automáticamente cada vez que añado una imagen, o como he actualizado el linter para facilitarme el trabajo. Si tienes interés, puedes checkear la PR en Github y ver todo lo que se ha quedado fuera de este post.
+> Por la misma razón, tampoco me he extendido en como he utilizado [chokidar](https://www.npmjs.com/package/chokidar) para monitorizar la carpeta images y correr el _script_ automáticamente cada vez que añado una imagen. O como he actualizado el linter para facilitarme el trabajo. Si tienes interés, puedes _checkear_ la PR en Github y ver todo lo que se ha quedado fuera de este post.
 
 ## Conclusión
 
-Hemos aprendido a automatizar una tarea muy tediosa como es preparar las imágenes para usarlas en la web. Hemos simplificado la interfaz en MDX para que usarlas sea los más sencillo y accesible posible. Hemos mejorado la experiencia de usuario con lazy loading y placeholders. Y finalmente hemos mejorado la accesibilidad de las imágenes añadiendo pies de foto semánticos.
+Hemos aprendido a automatizar una tarea muy tediosa como es preparar las imágenes para usarlas en la web. Hemos simplificado la interfaz en MDX para que usarlas sea los más sencillo posible. Hemos mejorado la experiencia de usuario con _lazy loading_ y _placeholders_. Y finalmente hemos mejorado la accesibilidad de las imágenes añadiendo pies de foto semánticos. Todo ello a la vez que hemos mejorado el **SEO** y los **Core Web Vitals** al mejorar el tamaño de las imagenes y el _layout shift_ y hemos hecho la páginas más accesible para lectores de pantalla.
 
-En el camino hemos aprendido a usar algunas herramientas de terminal muy interesantes y hemos mejorado nuestro entendimiento de Next.
+En el camino hemos aprendido a usar algunas herramientas de terminal muy interesantes y hemos mejorado nuestro entendimiento de **Next**.
 
-Si has llegado hasta aquí después de semejante ladrillo, te doy las gracias por tu tiempo y espero que te hayas llevado algo de provecho. Hasta la próxima!
+Si has llegado hasta aquí después de semejante ladrillo, te doy las gracias por tu tiempo y espero que te hayas llevado algo de provecho. Llevo más de un més trabajando en esta entrada y te prometo que es la última vez que me extiendo tanto. ¡Nos vemos en la próxima entrada!
