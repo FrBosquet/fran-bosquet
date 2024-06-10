@@ -17,15 +17,23 @@ export const PostHeader = ({
 }: Props) => {
   return (
     <header className="mb-4 border-b-2 border-gray-500 pb-2">
-      <h1 className="bg-gradient-to-r from-teal-100 to-orange-200 bg-clip-text py-2 font-mono text-4xl text-transparent md:text-5xl" style={{
-        viewTransitionName: slug
-      }}>
+      <h1
+        className="bg-gradient-to-r from-teal-100 to-orange-200 bg-clip-text py-2 font-mono text-4xl text-transparent md:text-5xl"
+        style={{
+          viewTransitionName: slug
+        }}
+      >
         {title}
       </h1>
       {description ? (
-        <p style={{
-          viewTransitionName: `desc-${slug}`,
-        }} className="py-4 text-sm uppercase text-teal-200">{description}</p>
+        <p
+          className="py-4 text-sm uppercase text-teal-200"
+          style={{
+            viewTransitionName: `desc-${slug}`
+          }}
+        >
+          {description}
+        </p>
       ) : null}
       {image ? (
         <>

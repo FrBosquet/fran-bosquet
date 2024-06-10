@@ -1,9 +1,9 @@
-import { getDateString } from "lib/dateFormatter"
-import { Lang } from "lib/posts"
-import { Link } from "next-view-transitions"
-import Image from "next/image"
-import { Post } from "../lib/types"
-import { Tag } from "./Tag"
+import { getDateString } from 'lib/dateFormatter'
+import { Lang } from 'lib/posts'
+import { Link } from 'next-view-transitions'
+import Image from 'next/image'
+import { Post } from '../lib/types'
+import { Tag } from './Tag'
 
 type Props = {
   post: Post
@@ -47,8 +47,9 @@ export const PostLink = ({ post, lang }: Props) => {
 
         {post.description ? (
           <p
+            className="flex-1 py-4 pb-2 pr-2 text-xs uppercase text-teal-200/60 lg:text-sm"
             style={{ viewTransitionName: `desc-${post.slug}` }}
-            className="flex-1 pb-2 pr-2 py-4 text-xs lg:text-sm uppercase text-teal-200/60">
+          >
             {post.description}
           </p>
         ) : null}
