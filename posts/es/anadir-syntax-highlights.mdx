@@ -3,21 +3,20 @@ title: 'Añadir syntax highlighting a un blog MDX'
 description: 'Mejorando los bloques de código en Next para añadir resaltado de código'
 date: 12-01-2023
 keywords:
-- MDX
-- React
-image: {
-  src: 'codeblocks.webp',
-	author: 'Fotis Fotopoulos',
-	authorUrl: 'https://unsplash.com/es/@ffstop',
-	source: 'Unsplash',
-	sourceUrl: 'https://unsplash.com/es/fotos/teclado-de-computadora-negro-DuHKoV44prg'
-}
+  - MDX
+  - React
+image:
+  src: 'codeblocks'
+  author: 'Fotis Fotopoulos'
+  authorUrl: 'https://unsplash.com/es/@ffstop'
+  source: 'Unsplash'
+  sourceUrl: 'https://unsplash.com/es/fotos/teclado-de-computadora-negro-DuHKoV44prg'
 published: true
 ---
 
 Mientras escribía el penúltimo post hace ya dos meses me dí cuenta que los _snippets_ de código no se veían muy bien qué digamos en mi blog. Tirando de screenshot:
 
-![Snippet por defecto](/images/snippetold.webp)
+![Snippet por defecto](snippetold)
 
 Así es como se vé el tag `code` por defecto. Y tiene sentido, ya que el navegador no sabe ni tiene por qué saber que ese bloque de código es en **typescript**, **rust** o cualquier otro lenguaje. Si bien esto no es un problema grave, no tener resaltado de código hace muy difícil leer el mismo, y la idea es compartir mucho código por aquí.
 
@@ -49,7 +48,7 @@ Puedes usar `npm` o `yarn` si prefieres. Una vez instalado, vamos a hacer que nu
 
 Como lo que quiero es salir del paso, y ademas parece que Light da problemas renderizando **JSX** (que es la mayoría de código que voy a querer compartir en este blog), vamos a optar por **Prism**. En el archivo [MdxContent.tsx](https://github.com/FrBosquet/fran-bosquet/blob/cb9d882570858cf561eb57fc1769e98d202922a8/app/posts/%5Bslug%5D/MdxContent.tsx) es donde se define cómo se va a substituir el _Markdown_ por _HTML_. El viejo _snippet_ de código se veía así:
 
-![Snippet por defecto](/images/snippetold2.webp)
+![Snippet por defecto](snippetold2)
 
 Y se definía así:
 
@@ -89,7 +88,7 @@ const code = (props: HTMLAttributes<HTMLElement>) => {
 
 Con esto ya se ve así:
 
-![Snippet sin estilos](/images/snippetraw.webp)
+![Snippet sin estilos](snippetraw)
 
 No hemos avanzado demasiado, ya que no tenemos estilos. Necesitamos añadir uno de los temas incluidos en Prism para darle color al bloque de código.
 
@@ -108,7 +107,7 @@ const code = (props: HTMLAttributes<HTMLElement>) => {
 
 El resultado ha mejorado algo, pero sigue sin ser lo que queremos:
 
-![Snippet sin lenguaje](/images/snippetnolang.webp)
+![Snippet sin lenguaje](snippetnolang)
 
 El código esta plano y no utiliza distintos colores para objetos, metodos y valores. El problema en este caso viene del hecho de que no hemos especificado un lenguaje: No se resalta igual **shell**, que **typescript** que **css**. Vamos a ver como podemos solucionarlo.
 
@@ -162,7 +161,7 @@ const code = (props: HTMLAttributes<HTMLElement>) => {
 
 Y, ahora sí, tenemos el resultado que queríamos:
 
-![Snippet con highlighting](/images/codehighlight.webp)
+![Snippet con highlighting](codehighlight)
 
 ### Añadiendo un filename
 
@@ -209,7 +208,7 @@ const code = (props: HTMLAttributes<HTMLElement>) => {
 
 Y así queda:
 
-![Bloque de código con filename](/images/codeblockunstyled.webp)
+![Bloque de código con filename](codeblockunstyled)
 
 Bastante pobre en mi opinión, pero nada que no podamos arreglar con un poco de **Tailwind**:
 

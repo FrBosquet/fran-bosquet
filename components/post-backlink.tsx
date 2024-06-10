@@ -6,9 +6,15 @@ type Props = {
 }
 
 export const PostBacklink = ({ href }: Props) => {
-  return <aside className="sticky top-0 h-0 hidden md:block">
-    <Link href={href} title="Volver" className="-left-20 p-8 text-white hover:text-teal-400 hover:-left-24 absolute transition-all">
-      <BackIcon className="w-6 h-6 transition-all" />
-    </Link>
-  </aside>
+  return (
+    <aside className="sticky top-0 hidden h-0 md:block">
+      <Link
+        className="absolute -left-20 p-8 text-white transition-all hover:-left-24 hover:text-teal-400"
+        href={href}
+        title="Volver"
+      >
+        <BackIcon className="h-6 w-6 transition-all" />
+      </Link>
+    </aside>
+  )
 }

@@ -3,15 +3,14 @@ title: 'Cuidado con cambiar el casing de tus ficheros si trabajas en OSX'
 description: 'Si yo he perdido una tarde con esta tontería quizás tu no tengas que hacerlo'
 date: 8-21-2023
 keywords:
-- git
-- next
-- osx
-- vercel
-image: {
-  src: 'build-failed.webp',
-	author: 'Fran Bosquet',
-	authorUrl: 'https://franbosquet.com',
-}
+  - git
+  - next
+  - osx
+  - vercel
+image:
+  src: 'build-failed'
+  author: 'Fran Bosquet'
+  authorUrl: 'https://franbosquet.com'
 published: true
 ---
 
@@ -37,7 +36,7 @@ Cuando termine el proyecto en unas semanas, me gustaría hacer un postmortem par
 
 Ayer me encontré con una pequeña sorpresa al intentar mezclar la rama en la que estoy trabajando ahora mismo a `main`. La build funcionaba perfectamente en mi Mac, pero en el servidor fallaba con un error bastante extraño: Los imports eran incapaces de encontrar determinados archivos.
 
-![import error](/images/import-error.webp)
+![import error](import-error)
 
 Después de volverme bastante loco durante una hora, descubrí que el problema viene de que los nombres de los archivos en macOS no distinguen entre mayúsculas y minúsculas. Esto es así porque el sistema de archivos de macOS, HFS+, no es sensible al caso. De este modo, no puedes tener dos archivos `foo.md` y `FOO.md` en la misma carpeta, ya que para OSX son el mismo archivo.
 
