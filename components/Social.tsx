@@ -1,12 +1,37 @@
-import { GithubIcon, InstagramIcon, TwitterIcon } from "./icons"
+import { GithubIcon, InstagramIcon, TwitterIcon } from './icons'
 
 export const Social = () => {
-  return <menu className='
-    flex-1 flex items-center gap-2 justify-end
-    lg:flex-grow-0  
-  '>
-    <a href="https://github.com/FrBosquet" target="_blank" rel="noreferrer" title="FrBosquet en GitHub"><GithubIcon className="w-5 lg:w-6 hover:text-teal-400 transition-all" /></a>
-    <a href="https://twitter.com/FrBosquet" target="_blank" rel="noreferrer" title="FrBosquet en X"><TwitterIcon className="w-5 lg:w-6 hover:text-teal-400 transition-all" /></a>
-    <a href="https://instagram.com/frbosquet" target="_blank" rel="noreferrer" title="FrBosquet en Instagram"><InstagramIcon className="w-5 lg:w-6 hover:text-teal-400 transition-all" /></a>
-  </menu>
+  return (
+    <menu
+      className="
+    flex flex-1 items-center justify-end gap-2
+    lg:grow-0  
+  "
+    >
+      <a
+        href="https://github.com/FrBosquet"
+        rel="noreferrer"
+        target="_blank"
+        title="FrBosquet en GitHub"
+      >
+        <GithubIcon className="w-5 transition-all hover:text-teal-400 lg:w-6" />
+      </a>
+      <a
+        href="https://twitter.com/FrBosquet"
+        rel="noreferrer"
+        target="_blank"
+        title="FrBosquet en X"
+      >
+        <TwitterIcon className="w-5 transition-all hover:text-teal-400 lg:w-6" />
+      </a>
+      <a
+        href="https://instagram.com/frbosquet"
+        rel="noreferrer"
+        target="_blank"
+        title="FrBosquet en Instagram"
+      >
+        <InstagramIcon className="w-5 transition-all hover:text-teal-400 lg:w-6" />
+      </a>
+    </menu>
+  )
 }

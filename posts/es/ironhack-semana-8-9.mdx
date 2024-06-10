@@ -2,13 +2,12 @@
 title: 'Ironhack, semanas 8 y 9: Want-It y hackshow'
 date: 8-24-2017
 keywords:
-- personal
-- ironhack
-image: {
-	src: 'final.webp',
-	author: 'Fran Bosquet',
-	authorUrl: 'https://www.franbosquet.com'
-}
+  - personal
+  - ironhack
+image:
+  src: 'final'
+  author: 'Fran Bosquet'
+  authorUrl: 'https://www.franbosquet.com'
 published: true
 ---
 
@@ -18,7 +17,7 @@ published: true
 
 El lunes de la octava semana dimos nuestra última clase en IronHack. Según la planificación, debía ser una _guided programming_ (Profesor y alumnos programando al unisono). Pero como os comenté, nuestro Lead Teacher **Marc Pomar** ([@boyander](https://twitter.com/boyander)) se fue de vacaciones el viernes anterior. Por tanto, una de las lecciones más complicadas del curso quedó en manos de los TAs. Debíamos construir un gestor de tareas tipo Trello utilizando el MEAN stack. La verdad es que fue un pequeño desastre, no hubo manera de acabar la aplicación ni sacar nada en claro. Y no nos animo demasiado de cara a comenzar nuestro proyecto final. Entiendo que Marc es insustituible, pero quizás en IronHack deberían tener algo mas de previsión para los bootcamp que caen en verano, que se queda la cosa un poco muerta.
 
-![Cada un programa como puede...](/images/eneryeti.webp)
+![Cada un programa como puede...](eneryeti)
 
 Por contra, a lo largo de los últimos 12 días contamos con refuerzos que han sido muy importantes. El segundo día de proyecto trajeron a un señor con el que no hablé en ningún momento y que no tenía ni idea de MEAN, por lo que empezó regular la cosa según me contaron. Pero a final de semana nos trajeron a la gran **Marta Fonda** ([@MartaFonda](https://twitter.com/MartaFonda)) para echar una mano. Y durante la semana final contamos con el gran **Kiko Verdú** ([@Kikobeats](https://twitter.com/Kikobeats)), que no solo es un desarrollador buenísimo que nos arreglo mas de una papeleta, sino que ademas es un tío genial y nos lo pasamos de muerte con el y su beat boxing de competición. Ambos son buenos ejemplos de los pedazo de profesionales que salen de IronHack.
 
@@ -54,13 +53,13 @@ Ok, es un verdadero drama del siglo XXI y un problema del primer mundo. Pero hab
 
 La primera idea y principal parte de los deseos comunes: Quería conectar a usuarios que desean los mismos productos. A priori parece sencillo, pero no es un reto baladí: ¿Como hacer que los usuarios utilicen la misma nomenclatura? Obviamente debía indexar los productos y hacer que el usuario seleccione de una lista. Sin embargo, eso solo era el principio del reto. Podría escribir una lista yo mismo, pero sería un trabajo inabarcable y esta quedaría muy limitada en cualquier caso. En segundo lugar, podría intentar acceder a alguna API que me diese una lista de productos, pero no encontré nada que se ciñese a mis necesidades ¿Como enfocarlo pues?
 
-![Mi lista de deseos en amazon, sin actualizar desde hace un año ¡Ni siquiera quiero esas cosas ya!](/images/amazon.webp)
+![Mi lista de deseos en amazon, sin actualizar desde hace un año ¡Ni siquiera quiero esas cosas ya!](amazon)
 
 ### Una lista generada por los usuarios
 
 La solución pasó, en este caso, por dejar en manos de los usuarios la generación de esa lista. Aplicando ciertas restricciones. Por ejemplo, un deseo consta de una marca, un producto y una edición del mismo. Así, cuando el usuario intenta seleccionar una marca, solo podrá crearla si esta no se encuentra ya en la base de datos. Y en ese caso, se le sugieren resultados de la wikipedia para que su descripción de la marca sea lo más acertada posible. El sistema está implementado en la primera versión y permite crear marcas, productos y ediciones dentro del flujo de creación de un deseo, produciendo una experiencia de uso muy sencilla y lineal.
 
-![Selector dinámico de marcas y productos en Want-it](/images/wantit.webp)
+![Selector dinámico de marcas y productos en Want-it](wantit)
 
 En un estadio más avanzado de la aplicación, los usuarios deberían poder sugerir y votar modificaciones. De modo que ellos mismos corrijan a sus iguales si estos no han introducido el nombre o el país de una determinada marca. O si han introducido contenido malintencionado, pudiendo la mayoría vetar contenido. E igual con los nombres, números de referencia o características de los productos. Soñando despierto, esta base de datos “autogenerada” se podría ofrecer por medio de una API pública o de pago.
 
@@ -68,7 +67,7 @@ En un estadio más avanzado de la aplicación, los usuarios deberían poder suge
 
 Otro de los planteamientos fundamentales de Want-It pasa por las publicaciones o posts. Estos constan de una foto y un comentario acerca de un deseo, independientemente del estado de este. Así, puedes publicar fotos de cosas que quieres, de cosas que tienes o de cosas que tuviste. Estas publicaciones pueden recibir comentarios de otros usuarios para generar una comunicación. Básicamente, lo que buscaba era replicar la interacción de instagram, pero etiquetando productos en lugar de personas. En este sentido, busqué dar un aspecto de polaroid a las fotos para dar ese feeling a la aplicación.
 
-![Publicaciones tipo polaroid en Want-it](/images/wantit-polaroid.webp)
+![Publicaciones tipo polaroid en Want-it](wantit-polaroid)
 
 A parte de eso, las publicaciones nutren de fotos la base de datos. De modo que los productos muestran sus miniaturas y fotos en base a los aportes de todos los usuarios. Una vez más, la base de datos crece por si misma. En este sentido, el sistema de arbitraje que he comentado anteriormente resulta aun más crucial aquí, para que los graciosos no llenen la aplicación de contenido de mal gusto. O peor, ilegal. Así que no me quiero dormir mucho en los laureles a la hora de implementar esta característica.
 
@@ -76,7 +75,7 @@ A parte de eso, las publicaciones nutren de fotos la base de datos. De modo que 
 
 Como he explicado las imágenes son cruciales para la aplicación. Son el eje que vertebra la interacción entre los usuarios. Por tanto, el hosting de las fotos es una característica fundamental de mi _backend_. En el anterior proyecto realizamos el despliegue en _heroku_. El servicio está muy bien y puedes montar de manera facil y rápida cualquier aplicación que te funcione en local. Pero tiene dos problemas fundamentales.
 
-![Detalle de publicación en Want-it](/images/wantit-dell.webp)
+![Detalle de publicación en Want-it](wantit-dell)
 
 El primero es que tras un periodo de inactividad, el servidor se desconecta. Cuando se vuelve a hacer una petición, heroku lo vuelve a arrancar. La consecuencia es que si la aplicación no se usa, cuando vuelves a visitarla tarda un periodo molestamente largo en responder, entre que arranca y responde a la petición. El segundo problema es que cualquier contenido subido desde la aplicación se borra cada cierto tiempo. Así que si un usuario subió una foto ayer, no estará disponible hoy. Esto, dependiendo de la aplicación, no es admisible. En mi caso desde luego qué no. Así que busqué alternativas a Heroku.
 
@@ -90,7 +89,7 @@ Para el tráfico que tiene, el servidor es rápido, tanto como Heroku. Y no me h
 
 En resumen, Want-It permite expresar qué cosas quieres, tienes o has querido en algún momento. Permite conectar con gente que comparte tus gustos y ver qué cosas quieren tus amigos en caso de que tengas que hacerles un regalo. En el estado actual la funcionalidad es completa pero sin florituras, sobre todo a nivel de comunicación entre usuarios y gestión de deseos. El diseño no está adaptado a móviles, por lo que en estos la experiencia es horrible, Ademas, me temo que soy el único usuario activo :D . En cualquier caso, si continúo desarrollándola (cosa que me encantaría) me gustaría pulir todos estos fallos y añadir miles de caracteristicas que tengo en mente que no me dio tiempo a implementar o que se me han ocurrido durante las vacaciones. Puedes probar Want-It haciendo click en su logo:
 
-![Logo tailwind](/images/wantit-logo.webp)
+![Logo tailwind](wantit-logo)
 
 > ### Anotación de 2023
 >
@@ -106,17 +105,17 @@ Mis apps favoritas
 
 Entre las aplicaciones que más me gustaron están la de **Alejandro de la Fuente**, que planteó una especie de gramola digital integrada con spotify, orientada a hacer peticiones con el móvil al hilo musical de bares. Una pasada. También me encantó la de **Victor Rodriguez** ([@Victor_Kudoku](https://twitter.com/Victor_Kudoku)) y **Mario Martin**, que utilizaron reconocimiento facial con la API de azure para sugerir listas de reproducción de spotify en función del estado de animo. Otra pasada, que podéis consultar aquí. Y aunque no soy el mayor fan de las aplicaciones de ejercicio, **Ana Milojevic** ([@anaamilo](https://twitter.com/anaamilo)) diseñó una maravilla de UI para su aplicación. Lástima que no la subió a Heroku y no se puede ver.
 
-![Exposición de Emotion por Victor y Mario](/images/emotion.webp)
+![Exposición de Emotion por Victor y Mario](emotion)
 
 También me gustaría mencionar la idea de **Claudia Duarte** ([@claudia_dz](https://twitter.com/claudia_dz)) y **Salvatore Costanzo**, un buscador de restaurantes por platos, y no por tipo. Es decir, si quieres una hamburguesa con queso, buscas hamburguesa con queso, no hamburgueserías. Un gran ejemplo del tipo de pensamiento lateral que hace avanzar este mundillo. También me gustaría mencionar a **Daniele Germani** y **Fernando Palma** ([@Palma_21](https://twitter.com/Palma_21)) , que me hicieron la competencia en el mundo de los regalos con una aplicación de cajas sorpresa que ademas era un e-commerce inteligente. Muchas ideas y muy buenas ejecuciones, lástima que solo optasen 5 para presentar en sociedad.
 
-![Ana durante su exposición](/images/ana.webp)
+![Ana durante su exposición](ana)
 
 ## Mikescanner
 
 Pero el auténtico pelotazo era **Mikescanner**. **Mikel Rumayor** me comentó su idea a las pocas semanas de empezar el bootcamp, y llevaba dándole vueltas aun más tiempo. Una aplicación para reunir personas mediante vuelos, independientemente del destino. Una idea brutal. Y lo mejor, que no existe en el mercado. Es tan celoso de su algoritmo que ni siquiera lo tiene subido a GitHub. Mikel ha sido uno de mis mejores amigos durante el bootcamp y es una persona a la que aprecio muchísimo. Quizás por eso no sea totalmente objetivo. Pero creo que su proyecto es la vaina más loca que se ha presentado en IronHack, al menos de entre todas las que yo he visto de varias promociones. Podéis probar su demo aquí.
 
-![Mikel presentando Mikescanner](/images/mikescanner.webp)
+![Mikel presentando Mikescanner](mikescanner)
 
 > ### Anotación de 2023
 >
@@ -132,7 +131,7 @@ Me acompañaron en esa aventura **Mario y Victor**, **Ana**, **Mikel** y **Teres
 
 Para preparar la exposición de la tarde debíamos recortar toda la parte técnica de la exposición, incidir en lo conceptual y alargar la demo. Sobre las 18:00 empezó el evento y me tocó exponer el segundo. Primero lo hizo Tere con su aplicación de paisajes. El público no fié tan abundante como en otros HackShows a los que he asistido, pero la fecha no acompañaba. Mi exposición no fué mal, pero el público no estaba muy entregado y me puse ciertamente nervioso, así que aceleré el ritmo y me sobró bastante tiempo. Tanto Victor y Mario como Ana hicieron muy buenas exposiciones. Finalmente Mikel se saco la **\*** utilizando todos los trucos del manual de las exposiciones: Interactuar con el público, lanzar preguntas al aire, algo de humor, una demo muy bien preparada... Lo clavó.
 
-![Participantes del hackshow Ago'2017](/images/hackshow.webp)
+![Participantes del hackshow Ago'2017](hackshow)
 
 Tras las exposiciones se volvieron a repetir las votaciones, esta vez por parte de todo aquel que asistió al evento. Tras ello el staff nos reunió a los 6 participantes, felicitaron a todo el bootcamp por el gran desempeño, despidieron el curso y anunciaron al ganador: ¡Mikescanner! Al ganador del hackshow se le obsequia con un hacha chulísima, nos echamos un monton de fotos y comenzaron nuestras últimas IronBeers como alumnos. La fiesta se prolongó hasta las 23:00, yo me retiré un poco antes. Fué un día muy intenso y feliz. Una guinda perfecta a esta gran tarta que ha sido IronHack, a falta de la HiringWeek.
 
@@ -172,7 +171,7 @@ Queda pendiente escribir una entrada sobre la HirinWeek. A partir de ahí, me gu
 
 Nos seguimos viendo por el camino.
 
-![Se despide Iron Fran!](/images/final.webp)
+![Se despide Iron Fran!](final)
 
 > Anotación de 2023
 >
