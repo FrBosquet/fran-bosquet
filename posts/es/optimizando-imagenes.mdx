@@ -23,15 +23,15 @@ He estado dándole una vuelta a **como uso las imágenes en este blog**. Hasta e
   title="Es que eso no puede hacerlo otro"
 />
 
-Bueno, otro no, tendré que hacerlo yo. Pero puedo automatizar con un script la parte tediosa de optimizar las imágenes y no volver a pensar en ello. Los pasos que tenía que hacer hasta ahora cada vez que quería añadir una nueva imagen:
+Bueno, otro no, tendré que hacerlo yo. Pero puedo automatizar con un script la parte tediosa de optimizar las imágenes y no volver a pensar en ello. Los pasos que tenía que hacer hasta ahora cada vez que quería añadir una nueva imagen eran:
 
-- Convertirla a formato [webp](https://es.wikipedia.org/wiki/WebP), un formato sin pérdida de calidad, que reduce el tamaño de las imágenes considerablemente y que está desarrollando Google precisamente para su uso en webs.
+- Convertirla a formato [webp](https://es.wikipedia.org/wiki/WebP), un formato sin pérdida de calidad, que reduce el tamaño de las imágenes considerablemente y que está desarrollando **Google** precisamente para su uso en webs.
 
 - Redimensionarla al máximo tamaño que se va a mostrar, en el caso de esta web a 700px de ancho. Con el objetivo de tener la mejor calidad posible mandando la menor cantidad de datos.
 
 - Finalmente, introducir la ruta de la imagen en el _markdown_, incluyendo la carpeta y la extensión, que siempre son la misma (**images** y **.webp** respectivamente).
 
-Por otro lado, con el _aproach_ actual a parte de frustración vengo echando en falta dos funcionalidades que el component Image de Next nos da gratis:
+Por otro lado, con el _aproach_ actual a parte de frustración vengo echando en falta dos funcionalidades que el component [Image](https://nextjs.org/docs/pages/api-reference/components/image) de **Next** nos da gratis:
 
 - Por un lado, el _lazy loading_: No descargar la imagen hasta que no este próxima a aparecer en la página a causa del scroll que haga el usuario. Hasta ahora todas las imágenes se cargaban al acceder a la página, generando una carga en el dispositivo y en la red innecesaria.
 
