@@ -159,7 +159,7 @@ do
 
 - `for file in "$(dirname "$0")"/*.webp` es similar al bucle anterior, pero ahora capturamos solo los archivos `.webp` que hemos generado anteriormente y, ademas, al no usar `find` no recorreremos ninguna carpeta interna (Esto es importante dado que posteriormente vamos a crear una carpeta para _placeholders_ y no querremos recorrer su contenido).
 
-- con `width=$(identify -format "%w" "${file%.*}.webp")` obtenemos el ancho de la imagen utilizando la utilidad `identify` de **ImageMagick**. con `-format "%w"` le decimos que lo que queremos es el ancho, y con `"${file%.*}.webp"` indicamos la ruta de la imagen. Guardamos el resultado una variable `$width`.
+- con `width=$(identify -format "%w" "${file%.*}.webp")` obtenemos el ancho de la imagen utilizando la utilidad `identify` de **ImageMagick**. Comparandoon `-format "%w"` le decimos que lo que queremos es el ancho, y con `"${file%.*}.webp"` indicamos la ruta de la imagen. Guardamos el resultado una variable `$width`.
 
 - `if [ $width -gt 700 ]` comprobamos si el ancho de la imagen es mayor a 700px. `$width` es la variable que definimos anteriormente, con el ancho de la imagen. `-gt` es un operador de comparación que significa "mayor que".
 
@@ -169,7 +169,7 @@ Y con esas pocas lineas, hemos redimensionado todas las imágenes que superen lo
 
 #### Generar los placeholders
 
-A continuación generaremos los _placeholders_. Estos van a ser versiones de poca resolución y poca calidad que vamos a utilizar para mostrar mientras se descargan las imágenes finales. Tenemos que crear imágnes que recuerden a las finales, pero que ocupen unos poco bytes, para que podamos cargarlas casi instantaneamente incluso en condiciones de red poco favorables:
+A continuación generaremos los _placeholders_. Estos van a ser versiones de poca resolución y poca calidad que vamos a utilizar para mostrar mientras se descargan las imágenes finales. Tenemos que crear imágenes que recuerden a las finales, pero que ocupen unos poco bytes, para que podamos cargarlas casi instantaneamente incluso en condiciones de red poco favorables:
 
 ```bash@public/images/process-images.sh
   base=$(basename "$file")
