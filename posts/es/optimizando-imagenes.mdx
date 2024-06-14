@@ -67,13 +67,15 @@ cwebp nombre-de-la-imagen.extension-de-la-imagen -o nombre-de-la-imagen.webp
 ![Texto alternativo](/images/nombre-de-la-imagen.webp)
 ```
 
-Lo cual es un proceso que me producía pereza cada vez que tenía que añadir una imagen. Copiar un archivo, ejecutar un comando y escribir una ruta completa puede parecer poca cosa pero cuando estas escribiendo puede romperte totalmente el ritmo hacerlo cada pocos minutos. Por otro lado, esta el tema del tamaño de las imágenes. Next se encarga de sobredimensionarlas al vuelo si usas el componente `Image`, pero para ello tienes que especificar el tamaño final de la imagen con un `width` y un `height`.
+Lo cual es un proceso que me producía pereza cada vez que tenía que añadir una imagen. Copiar un archivo, ejecutar un comando y escribir una ruta completa puede parecer poca cosa. Pero cuando estás escribiendo un post, hacerlo cada pocos minutos te rompe totalmente el ritmo y acabas o bien no queriendo añadir imágenes, o no queriendo escribir más directamente.
 
-Si no lo haces, puedes usar la propiedad `fill` y especificar el tamaño en el contenedor con **CSS**, pero en mi caso me encontraba con la problemática de que tengo imágenes que llenan la columna (700px de ancho o mas) y otras que no y que quería que quedaran centradas. Esto último no se puede hacer con `fill` y, ademas, pierdes la optimización que hace Next de las imágenes puesto que no sabe a qué tamaño debe dimensionarlas.
+Por otro lado, está el tema del tamaño de las imágenes. Next se encarga de sobredimensionarlas al vuelo si usas el componente `Image`, pero para ello tienes que especificar el tamaño final de la imagen con un `width` y un `height`.
 
-Total, que en un principio opté por no calentarme la cabeza y usar el elemento `img` nativo de **HTML**, ya que este descarga la imagen y por defecto la muestra a su resolución nativa. Pero esto me causaba un tercer problema: El espacio no se ocupa hasta que la imagen se descarga, por lo que el _layout_ de la página se va modificando conforme se completa la transferencia de los _assets_: básicamente, tu página da "saltos" y esto queda horroroso. Esto es lo que conocemos como _layout shift_
+Si no lo haces, puedes usar la propiedad `fill` y especificar el tamaño en el contenedor con **CSS**. En mi caso me encontraba con la problemática de que tengo algunas imágenes que llenan la columna (700px de ancho o mas) y otras que no lo hacen, en cuyo caso quería que quedaran centradas. Esto último no se puede hacer con `fill` ya que el contenedor no se dimensiona en función de la imagén, sino lo contrario. Para más INRI, pierdes la optimización que hace Next de las imágenes puesto que no sabe a qué tamaño debe dimensionarlas.
 
-Haber convivido con esta pésima experiencia de desarrollo que ademas me daba un resultado suboptimo durante tantos meses me ha terminado armando de valor para ponerme el mandil de _scripter_ y arreglar la problemática de las imágenes en este blog de una vez por todas.
+Total, que en un principio opté por no calentarme la cabeza y usar el elemento `img` nativo de **HTML**, ya que este descarga la imagen y por defecto la muestra a su resolución nativa en el navegador. Pero esto me causaba un tercer problema: El espacio no se ocupa hasta que la imagen se descarga, por lo que el _layout_ de la página se va modificando conforme se completa la transferencia de los _assets_: básicamente, el contenido de la página da "saltos" conforme las imágenes se descargan y esto queda horroroso. Y este efecto es efectivamente el famoso _cumulative layout shift_
+
+Haber convivido con esta pésima experiencia de desarrollo tan nefasta, que ademas me daba un resultado final bastante regular, durante tantos meses me ha terminado armando de valor para ponerme el mandil de _scripter_ y arreglar la problemática de las imágenes en este blog de una vez por todas.
 
 ## El script optimizador
 
