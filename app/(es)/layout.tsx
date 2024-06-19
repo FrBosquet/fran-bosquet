@@ -15,14 +15,14 @@ export const metadata: Metadata = {
   title: 'Blog de programación | Fran Bosquet',
   description: baseDescription,
   icons: '/favicon.ico',
-  metadataBase: new URL('https://franbosquet.com'),
+  metadataBase: new URL('https://www.franbosquet.com'),
   alternates: {
     canonical: '/',
     languages: {
-      'en-US': 'https://en.franbosquet.com'
+      'en-US': 'https://www.en.franbosquet.com'
     }
   },
-  authors: { name: 'Fran Bosquet', url: 'https://franbosquet.com' },
+  authors: { name: 'Fran Bosquet', url: 'https://www.franbosquet.com' },
   publisher: 'Fran Bosquet',
   robots: 'index, follow'
 }
