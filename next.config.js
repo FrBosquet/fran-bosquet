@@ -40,7 +40,7 @@ const nextConfig = {
           has: [
             {
               type: 'host',
-              value: 'en.franbosquet.com'
+              value: 'www.en.franbosquet.com'
             }
           ]
         },
@@ -50,7 +50,7 @@ const nextConfig = {
           has: [
             {
               type: 'host',
-              value: 'en.franbosquet.com'
+              value: 'www.en.franbosquet.com'
             }
           ]
         }
