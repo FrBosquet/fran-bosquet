@@ -28,7 +28,7 @@ export const PostLink = ({ post, lang }: Props) => {
           className="bg-zinc-950"
           placeholder="blur"
           src={`/images/${post.image.src}.webp`}
-          style={{ objectFit: 'cover' }}
+          style={{ viewTransitionName: `img-${post.slug}`, objectFit: 'cover' }}
         />
       </div>
       <div className="flex h-full flex-1 flex-col justify-between gap-2 py-4 lg:pt-6">

@@ -45,7 +45,10 @@ export const PostHeader = ({
             height={240}
             placeholder="blur"
             src={`/images/${image.src}.webp`}
-            style={{ objectFit: 'cover' }}
+            style={{
+              objectFit: 'cover',
+              viewTransitionName: `img-${slug}`
+            }}
             title="splash"
             width={700}
           />

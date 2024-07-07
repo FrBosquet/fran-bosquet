@@ -40,7 +40,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <ViewTransitions>
       <html lang="es-ES">
         <body>
-          <main className={`${poppins.variable} font-sans text-gray-200`}>
+          <main
+            className={`${poppins.variable} animate-fadeIn font-sans text-gray-200`}
+          >
             <section className="flex min-h-screen flex-col">
               <Header>Mi blog personal</Header>
               <article className="flex-1 bg-gradient-to-b from-gray-900 to-gray-800">
