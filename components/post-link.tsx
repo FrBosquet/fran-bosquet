@@ -1,7 +1,7 @@
 import { getDateString } from 'lib/dateFormatter'
 import { Lang } from 'lib/posts'
+import { Link } from 'next-view-transitions'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Post } from '../lib/types'
 import { Tag } from './Tag'
 
@@ -28,7 +28,7 @@ export const PostLink = ({ post, lang }: Props) => {
           className="bg-zinc-950"
           placeholder="blur"
           src={`/images/${post.image.src}.webp`}
-          style={{ objectFit: 'cover' }}
+          style={{ viewTransitionName: `img-${post.slug}`, objectFit: 'cover' }}
         />
       </div>
       <div className="flex h-full flex-1 flex-col justify-between gap-2 py-4 lg:pt-6">
@@ -42,11 +42,14 @@ export const PostLink = ({ post, lang }: Props) => {
 			"
           href={`${lang === 'en' ? '/en' : ''}/posts/${post.slug}`}
         >
-          <h2>{post.title}</h2>
+          <h2 style={{ viewTransitionName: post.slug }}>{post.title}</h2>
         </Link>
 
         {post.description ? (
-          <p className="flex-1 pb-2 pr-2 text-sm text-teal-100/60 lg:text-base">
+          <p
+            className="flex-1 py-4 pb-2 pr-2 text-xs uppercase text-teal-200/60 lg:text-sm"
+            style={{ viewTransitionName: `desc-${post.slug}` }}
+          >
             {post.description}
           </p>
         ) : null}

@@ -2,7 +2,7 @@ import { PostBacklink } from 'components/post-backlink'
 import { PostContent } from 'components/post-content'
 import { PostHeader } from 'components/post-header'
 import { Lang, baseDescription, getPost, getPostSlugs } from 'lib/posts'
-import { Metadata } from 'next'
+import { Metadata } from 'next/types'
 
 type Props = {
   params: {
@@ -16,7 +16,7 @@ export default async function Page({ params: { slug } }: Props) {
   return (
     <PostContent>
       <PostBacklink href="/" />
-      <PostHeader lang={Lang.ES} {...frontmatter} />
+      <PostHeader lang={Lang.ES} {...frontmatter} slug={slug} />
       {content}
     </PostContent>
   )

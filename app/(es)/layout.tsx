@@ -1,8 +1,10 @@
 import { Analytics } from '@vercel/analytics/react'
 import { Header } from 'components/Header'
+import { ProgressBar } from 'components/progress-bar'
 import { baseDescription } from 'lib/posts'
-import { Metadata, Viewport } from 'next'
+import { ViewTransitions } from 'next-view-transitions'
 import { Poppins } from 'next/font/google'
+import { Metadata, Viewport } from 'next/types'
 import React from 'react'
 import 'styles/globals.css'
 
@@ -35,25 +37,30 @@ const poppins = Poppins({
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-ES">
-      <body>
-        <main className={`${poppins.variable} font-sans text-gray-200`}>
-          <section className="flex min-h-screen flex-col">
-            <Header>Mi blog personal</Header>
-            <article className="flex-1 bg-gradient-to-b from-gray-900 to-gray-800">
-              <div
-                className="
-                mx-auto max-w-7xl
-                p-4 lg:px-8
-              "
-              >
-                {children}
-              </div>
-              <Analytics />
-            </article>
-          </section>
-        </main>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="es-ES">
+        <body>
+          <main
+            className={`${poppins.variable} animate-fadeIn font-sans text-gray-200`}
+          >
+            <section className="flex min-h-screen flex-col">
+              <Header>Mi blog personal</Header>
+              <article className="flex-1 bg-gradient-to-b from-gray-900 to-gray-800">
+                <div
+                  className="
+                  mx-auto max-w-7xl
+                  p-4 lg:px-8
+                  "
+                >
+                  {children}
+                </div>
+                <Analytics />
+                <ProgressBar />
+              </article>
+            </section>
+          </main>
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }

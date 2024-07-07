@@ -16,7 +16,7 @@ export default async function Page({ params: { slug } }: Props) {
   return (
     <PostContent>
       <PostBacklink href="/en" />
-      <PostHeader lang={Lang.EN} {...frontmatter} />
+      <PostHeader lang={Lang.EN} {...frontmatter} slug={slug} />
       {content}
     </PostContent>
   )

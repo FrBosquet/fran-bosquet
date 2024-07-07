@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin')
+const { transform } = require('typescript')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -8,6 +9,17 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-poppins)']
       }
+    },
+    keyframes: {
+      fadeIn: {
+        '0%': {
+          filter: 'blur(10px)'
+        },
+        '100%': {}
+      }
+    },
+    animation: {
+      fadeIn: 'fadeIn 1s ease-in forwards'
     }
   },
   plugins: [

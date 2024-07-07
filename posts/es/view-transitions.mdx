@@ -1,0 +1,164 @@
+---
+title: 'View transitions en Next.js 14'
+description: 'La nueva API de transiciones está lista en Chrome y por fín alguien se ha tomado la molestia de hacer un wrapper en Next'
+date: 07-08-2024
+keywords:
+  - next
+  - view-transitions
+  - css
+image:
+  src: 'viewtransition'
+  author: 'Google'
+  source: 'Google'
+  sourceUrl: 'https://developer.chrome.com/blog/view-transitions-case-studies?hl=es-419'
+published: true
+---
+
+Las transiciones en React siempre han sido un dolor de cabeza, al menos para mí. Animar en CSS es muy fácil: Un estado de inicio, uno de fin, y el navegador hace el trabajo. Pero cuando quieres hacer una transición la cosa cambia. Necesitas hacer una animación de salida, esperar que termine y luego hacer la animación de entrada del elemento que sustituye. Si estas usando **html**, **css** y **js** simplemente es pesado de hacer. Si estás usando **React**, con su modelo declarativo de composición, resulta una tortura. Como ejemplo: Las transiciones de página [wanthat](whantat.io) las tengo rotas desde hace mas de un año porque actualicé una dependencia y dejaron de funcionar.
+
+En mis años como profesional y aficionado he probado de todo: [react-transition-group](https://reactcommunity.org/react-transition-group/), [react-spring](https://www.react-spring.dev/), [framer-motion](https://www.react-spring.dev/), [react-router](https://reactrouter.com/en/main)... Todas ellas librerías fantásticas. Pero personalmente ninguna me ha hecho click a la hora de animar transiciones de páginas o de listas. O dicho de otra forma: Cualquier transición en la que un elemento desaparece y otro aparece.
+
+<Tweet id="1690511502044971008" />
+
+Si ademas quieres usar transiciones entre componentes de página cuando cambias de URL, y estas usando _server side rendering_ o _static site generation_, la cosa se complica aún más. Hasta el punto que en muchas web apps simplemente no se hace, ya sea por complejidad o por rendimiento. Puedes ir a tu favorita: [Youtube](youtube.com), [X](x.com), [Facebook](facebook.com), [Amazon](amazon.com)... Ninguna anima la transición entre páginas.
+
+En las apps móviles esto está mucho mas evolucionado. Los propios sistemas operativos (**iOS** y **Android**) proveen mecanismos de navegación que permiten a los desarrolladores manejar tan solo la navegación entre páginas, encargándose el SO de animar los cambios. Por ejemplo [con flutter puedes usar su API transtionBuilder](https://docs.flutter.dev/cookbook/animation/page-route-animation) para transicionar entre páginas. En web no teníamos nada parecido. Hasta ahora.
+
+## View transitions API
+
+El 7 de marzo de 2023 Google lanzo la versión 111 de **Chrome**, que llevaba a estable una nueva API, `ViewTransitionAPI`. Está **API** permite realizar nativamente lo siguiente:
+
+- Hacer un _snapshot_ (una fotografía) de la vista actual
+
+- _Renderizar_ por detrás la nueva vista que se quiere mostrar como un pseudo elemento
+
+- Transaccionar automáticamente aquellos elementos que hayamos definido en la vista actual y en la nueva vista mediante un efecto de _crossfade_: Los antiguos elementos conocen su posición en la página y la posición del elemento asociado, así que inician una animación en dicha dirección. El elemento nuevo aparece a medio camino de la animación y se desplaza a su posición final. Dando la sensación que son el mismo elemento, que se ha movido para ocupar su nueva posición.
+
+Refiriéndose en este caso el "nativamente" a que es el propio navegador el que hace el trabajo duro, sin necesidad por parte del desarrollador de reimplementar nada, solo usando la API expuestas en CSS/JS: Especificas el elemento de inicio, el de final, inicias la transición y hasta ahí llega tu trabajo.
+
+<Tweet id="1783544111045263711" />
+
+Puedes leer como hacer una view transition en una página web con JS vanilla en [la web de MDN](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API/Using)
+
+## ¿Y en React?
+
+A priori debería ser sencillo, simplemente _wrapear_ la navegación de tu sitio y definir la propiedad css `view-transition-name` en los elementos que quieres que transicionen entre sí, y el navegador se encargaría de transicionar las propiedades `height`, `width`, `position` y `transform` automáticamente de manera suave.
+
+¿Pero y en **Next.js**? ¿**Astro**? ¿**React-router** o **Remix**? ¿**Angular**? Bien, todos ellos son _frameworks_ y tienen en común que ellos mismos ya sobrescriben el comportamiento de la navegación de tu sitio para implementar el comportamiento de **SPA**. Así que necesitas trastear con sus API internas para poder hacer la llamada a la API de `startViewTransition` cuando desees navegar. Hacerlo tu mismo es complejo, es tedioso y probablemente no escale bien. Por lo que debemos esperar a que los propios _frameworks_ lo implementen, como [Astro hizo con su 3.0 a primeros de año](https://docs.astro.build/en/guides/view-transitions/).
+
+En el caso que nos ocupa, a la espera de que **Vercel** lo integre en **Next.js**, uno de sus desarrolladores ([Shu](https://twitter.com/shuding_)) se ha dignado a hacer un wrapper no oficial que nos permite usar la API de _view transitions_ automáticamente en Next.js. Curiosamente no se ha comentado nada de incluirlo _out of the box_ en **Next 15** (o yo no lo he leído en ningún sitio), pero al menos tenemos una librería que nos permite hacerlo fácilmente desde ya en cualquier app donde usemos _app router_ (Next>13.0).
+
+<Tweet id="1779555180154876401" />
+
+## Implementando next-view-transitions en este blog
+
+Tan sencillo como seguir las instrucciones del repo de [next-view-transitions](https://github.com/shuding/next-view-transitions):
+
+- Primero tenemos que instalar la librería:
+
+```bash
+npm install next-view-transitions
+```
+
+- Después tenemos que envolver nuestra aplicación con el componente `ViewTransition`. Para ello, en el _layout_ principal:
+
+```jsx@app/layout.tsx
+import { ViewTransitions } from 'next-view-transitions'
+
+...
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <ViewTransitions>
+      <html lang="es-ES">
+        <body>
+          ...
+        </body>
+      </html>
+    </ViewTransitions>
+  )
+}
+```
+
+Y luego definir quien va a transicionar hacia quien. En mi caso quiero que cada uno de los links en la página principal transicione su título y descripción hacía los mismos de la página destino. También las imágenes, aunque lo omito en el bloque de código para simplificar el ejemplo. En el elemento link del menu:
+
+```jsx@app/components/post-link.tsx
+
+export const PostLink = ({ post, lang }: Props) => {
+  return (
+    <article className="...">
+      ...
+      <div className="...">
+        <Link
+          className="..."
+          href={`/posts/${post.slug}`}
+        >
+          <h2 style={{ viewTransitionName: post.slug }}>{post.title}</h2>
+        </Link>
+
+        {post.description ? (
+          <p
+            className="..."
+            style={{ viewTransitionName: `desc-${post.slug}` }}
+          >
+            {post.description}
+          </p>
+        ) : null}
+      ...
+      </div>
+    </article>
+  )
+}
+```
+
+Como ves, simplemente añado en los estilos el nombre de la transición. Y defino el otro elemento en el componente _header_:
+
+```jsx@app/components/post-header.tsx
+export const PostHeader = ({
+  title,
+  date,
+  keywords,
+  image,
+  description,
+  lang,
+  slug
+}: Props) => {
+  return (
+    <header className="...">
+      <h1
+        className="..."
+        style={{
+          viewTransitionName: slug
+        }}
+      >
+        {title}
+      </h1>
+      {description ? (
+        <p
+          className="..."
+          style={{
+            viewTransitionName: `desc-${slug}`
+          }}
+        >
+          {description}
+        </p>
+      ) : null}
+      ....
+    </header>
+  )
+}
+```
+
+Y ya está. Simplemente asegurándote de usar un nombre único para cada elemento (en este caso, utilizando el `slug` que es único) el navegador se encargará de hacer la transición automáticamente enter los dos elementos. Funciona tanto entrando en el post como saliendo de el. Incluso navegando hacia atrás. Y como puedes comprobar navegando en esta página, el efecto es muy suave y permite asociar elementos entre páginas de una manera visual e intuitiva y que queda genial.
+
+## Conclusion
+
+Si alguna vez te has tenido que pelear con estados de transición en **React**, probablemente habrás recibido esta nueva API de transiciones con los brazos abiertos. Tener que esperar a que termine la animación de salida de un componente para desmontarlo para mi siempre ha sido un suplicio y creo que ninguna librería ha conseguido clavarlo. `next-view-transitions` nos permite hacer uso de esta nueva API en **Next.js** para, al menos, facilitar las transiciones entre páginas. Y yo lo celebro. X está plagado de ejemplos de hasta donde se puede llegar con lo que hoy tenemos ya disponible:
+
+<Tweet id="1796598498265305279" />
+
+Respecto a la especificación, a día de hoy se encuentra en [draft](https://drafts.csswg.org/css-view-transitions/) por lo que **la implementación de Chrome podría no ser la definitiva**. Los navegadores basados en Chromium (**Edge**, **Brave**, **Opera**...) la implementaron a los pocos días de sacarla **Chrome**, y **Safari** la tiene como experimento tras un flag. Lamentablemente **Firefox** no tiene una implementación todavía, por lo que no todos los usuarios van disfrutar de estas animaciones.
+
+Sin embargo es un paso adelante en la web y espero con ansias que pronto se convierta en un estándar que todos los navegadores implementen. Hasta entonces, disfrutemos en nuestros _chromiums_ del futuro de la web.
+
+Un saludo y gracias por leerme
