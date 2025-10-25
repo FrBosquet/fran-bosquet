@@ -1,0 +1,160 @@
+---
+title: 'Its ridiculous to forget about SEO'
+description: 'Another mini tutorial about seo in Next.js'
+date: 10-25-2025
+keywords:
+  - next
+  - seo
+image:
+  src: 'linkedin-seo'
+  author: 'Fran Bosquet'
+  authorUrl: 'https://www.linkedin.com/in/fran-bosquet/'
+published: true
+---
+
+Welcome back to another week of my classic post on SEO. In my graveyard of abandoned projects, this blog ranks first (at the bottom), but today I've taken some time to fix something that's been bothering me for a few months.
+
+As context: [A few years ago I rebuilt this blog from scratch using Next.js and Typescript](/posts/refresh). Previously it was based on Wordpress. The only beautiful thing about this last one is that it gives you a lot of functionality by default that you don't even care about. To the point of taking it for granted. When migrating to a project done "by hand", much of that functionality was lost. In particular, we stopped sending meta information in the head of the page, which is used to generate things like the **SERP**:
+
+![Appearance of the SERP before making any changes@SERP: Search Enfine Result Page](serp1)
+
+Most of that problem we solved in this [post](/posts/seo-one). But at that time we focused on the results in the search engine, but we completely ignored that other sources might want to preview the page. I'm talking about social networks mainly. And what's been bothering me for months is that on [LinkedIn](https://www.linkedin.com/in/fran-bosquet/), in my profile, *this website is displayed like this*:
+
+![Appearance of franbosquet.com in my LinkedIn profile](linkedin-seo)
+
+It's not that I'm looking for a job, things are going great at Datadog. In fact, I got this job with that _Featured_ on my LinkedIn profile. But it's pretty funny to sell yourself as a _senior frontend engineer_ and have your cover letter be such a fail. So let's fix it.
+
+## Testing
+
+There are many tools to evaluate the metadata of your websites. You can use a website like [OpenGraph.xyz](https://opengraph.xyz/), but it obliges you to have the website deployed to do it. That is: You can't evaluate in localhost, which puts you in a rather suboptimal workflow. Luckily we have alternatives like [Social share preview](https://socialsharepreview.com/), which offers a browser extension for Chrome and Firefox, so you can evaluate your metadata in localhost, in real time.
+
+![Social share preview](social-share-preview)
+
+As you can see, the extension shows the preview of the page on LinkedIn, but also on other social networks like Twitter, Facebook, etc. Let's try to fill in that widget.
+
+## Implementing
+
+We have this implementation in [layout.tsx](https://github.com/FrBosquet/fran-bosquet/blob/2d49e4bc8bc97b76a8223ae3b26bc5257b7f6e5d/app/(es)/layout.tsx#L16-36):
+
+```tsx@/app/layout.tsx
+export const metadata: Metadata = {
+  title: 'Blog de programación | Fran Bosquet',
+  description: baseDescription,
+  icons: '/favicon.ico',
+  metadataBase: new URL('https://www.franbosquet.com'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': 'https://www.en.franbosquet.com'
+    }
+  },
+  authors: { name: 'Fran Bosquet', url: 'https://www.franbosquet.com' },
+  publisher: 'Fran Bosquet',
+  robots: 'index, follow'
+}
+```
+
+As you can see, we are missing a lot of data there. The main thing is that we are not providing a preview image. I'm going to use this image from last year that I like a lot:
+
+![Fran24](fran24)
+
+And I take the opportunity to add all the missing metadata:
+
+```tsx
+export const metadata: Metadata = {
+  ...
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog de programación | Fran Bosquet',
+    description: baseDescription,
+    creator: '@frbosquet',
+    images: ['/images/fran24.webp']
+  },
+  openGraph: {
+    description: baseDescription,
+    type: 'website',
+    locale: 'es_ES',
+    siteName: 'Fran Bosquet',
+    images: [
+      {
+        url: '/images/fran24.webp',
+        width: 700,
+        height: 700,
+        alt: 'Fran Bosquet'
+      }
+    ]
+  }
+}
+```
+
+This sets a base metadata line that applies to the entire website, but in the posts [we are modifying it](https://github.com/FrBosquet/fran-bosquet/blob/df13951de3ced8b251398f629fd33c0e50785552/app/(es)/posts/%5Bslug%5D/page.tsx#L31) for the _SERP_:
+
+```tsx@app/(es)/posts/[slug]/page.tsx
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await getPost(params.slug, Lang.ES)
+
+  return {
+    title: `${post.frontmatter.title as string} | Fran Bosquet`,
+    description: (post.frontmatter.description as string) || baseDescription,
+    robots: 'index, follow',
+    alternates: {
+      canonical: `/posts/${params.slug}`
+    }
+  }
+}
+```
+
+And here we also add what is missing:
+
+```tsx@app/(es)/posts/[slug]/page.tsx
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await getPost(params.slug, Lang.ES)
+
+  return {
+    ...
+    twitter: {
+      card: 'summary_large_image',
+      title: `${post.frontmatter.title as string} | Fran Bosquet`,
+      description: (post.frontmatter.description as string) || baseDescription,
+      creator: '@frbosquet',
+      images: ['/images/${post.frontmatter.image.src}.webp']
+    },
+    openGraph: {
+      description: (post.frontmatter.description as string) || baseDescription,
+      type: 'website',
+      locale: 'es_ES',
+      siteName: 'Fran Bosquet',
+      images: [
+        {
+          url: `/images/${post.frontmatter.image.src}.webp`,
+          width: 700,
+          height: 700,
+          alt: 'Fran Bosquet'
+        }
+      ]
+    }
+  }
+}
+```
+
+And here is the result:
+
+![@Metadata fixed for linked in](linkedin-seo-fix)
+
+Thats for the regular spanish verison of the blog, for the English counterpart (the one you are reading right now) I simply repeated the same in its corresponding route.
+
+> We have seen how we can define static metadata and also how to generate them dynamically for the posts. There are more fields than the ones we defined for this entry. If you are interested in the topic, you can dig into the Next.js documentation about [metadata](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields) or read about the `meta` tag in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta)
+
+### Takeaway
+
+If you have noticed the title of this post, you might have thought that it was ridiculous to have this blog preview on LinkedIn for a couple of years.
+
+The ridiculousness is losing a couple of hours writing this entry just to find out that LinkedIn allows editing the preview aspect through a form. The reading of the metadata only happens when creating the link for the first time, to autocomplete that form:
+
+![@LinkedIn form for editing the featured link](linkedin-edit-link)
+
+So, everything I did today wasn't necessary to fix my profile; I could have simply edited the content. But I learned a couple of things, fixed the links for X, Facebook, and LinkedIn itself, and created a new post after a whole year without publishing anything. Besides, I ended up deleting the link and recreating it this time with [franbosquet.com](https://franbosquet.com) sending the correct metadata, so I did end up using everything we implemented.
+
+![@Me looking at the form after updating the blog metadata](payaso)
+
+Thank you for reading this post! See you next time.
