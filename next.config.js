@@ -25,6 +25,20 @@ const nextConfig = {
             exec('pnpm images')
           })
 
+        // Watch MDX files for changes to trigger HMR
+        chokidar
+          .watch('posts/**/*.mdx', {
+            persistent: true,
+            ignoreInitial: true
+          })
+          .on('change', (path) => {
+            console.log(`MDX file changed: ${path}. Triggering rebuild...`)
+            // Touch the posts page to trigger Next.js rebuild
+            const time = new Date()
+            const pagePath = 'app/(es)/posts/[slug]/page.tsx'
+            fs.utimesSync(pagePath, time, time)
+          })
+
         return nextConfig
       })
     }
