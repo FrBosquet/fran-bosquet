@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: 'Coding blog | Fran Bosquet',
   description: engDescription,
   icons: '/favicon.ico',
-  metadataBase: new URL('https://www.franbosquet.com'),
+  metadataBase: new URL('https://www.en.franbosquet.com'),
   alternates: {
     canonical: '/',
     languages: {
@@ -25,12 +25,12 @@ export const metadata: Metadata = {
       'en-US': 'https://www.en.franbosquet.com'
     }
   },
-  authors: { name: 'Fran Bosquet', url: 'https://www.franbosquet.com' },
+  authors: { name: 'Fran Bosquet', url: 'https://www.en.franbosquet.com' },
   publisher: 'Fran Bosquet',
   robots: 'index, follow',
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog de programación | Fran Bosquet',
+    title: 'Coding blog | Fran Bosquet',
     description: engDescription,
     creator: '@frbosquet',
     images: ['/images/fran24.webp']
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     description: engDescription,
     type: 'website',
-    locale: 'es_ES',
+    locale: 'en_US',
     siteName: 'Fran Bosquet',
     images: [
       {
