@@ -10,20 +10,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const englishPosts = await getPosts(Lang.EN)
 
   // Map Spanish posts to sitemap entries
-  const spanishPostEntries: MetadataRoute.Sitemap = spanishPosts.map((post) => ({
-    url: `${baseUrl}/posts/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly',
-    priority: 0.8
-  }))
+  const spanishPostEntries: MetadataRoute.Sitemap = spanishPosts.map(
+    (post) => ({
+      url: `${baseUrl}/posts/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: 'monthly',
+      priority: 0.8
+    })
+  )
 
   // Map English posts to sitemap entries
-  const englishPostEntries: MetadataRoute.Sitemap = englishPosts.map((post) => ({
-    url: `${enBaseUrl}/posts/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly',
-    priority: 0.8
-  }))
+  const englishPostEntries: MetadataRoute.Sitemap = englishPosts.map(
+    (post) => ({
+      url: `${enBaseUrl}/posts/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: 'monthly',
+      priority: 0.8
+    })
+  )
 
   return [
     {
