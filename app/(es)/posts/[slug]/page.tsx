@@ -39,7 +39,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/posts/${params.slug}`,
       languages: {
         'es-ES': `/posts/${params.slug}`,
-        'en-US': `/en/posts/${params.slug}`
+        ...(post.frontmatter.enSlug && {
+          'en-US': `https://www.en.franbosquet.com/posts/${post.frontmatter.enSlug}`
+        })
       }
     },
     twitter: {
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${post.frontmatter.title as string} | Fran Bosquet`,
       description: (post.frontmatter.description as string) || baseDescription,
       creator: '@frbosquet',
-      images: ['/images/${post.frontmatter.image.src}.webp']
+      images: [`/images/${post.frontmatter.image.src}.webp`]
     },
     openGraph: {
       description: (post.frontmatter.description as string) || baseDescription,

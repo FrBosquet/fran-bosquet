@@ -6,6 +6,8 @@ export type Post = {
   keywords: string[]
   published: boolean
   featured?: boolean
+  enSlug?: string
+  esSlug?: string
   image: {
     src: string
     author: string

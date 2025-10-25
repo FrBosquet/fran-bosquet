@@ -38,8 +38,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: `/posts/${params.slug}`,
       languages: {
-        'es-ES': `/posts/${params.slug}`,
-        'en-US': `/en/posts/${params.slug}`
+        'en-US': `/en/posts/${params.slug}`,
+        ...(post.frontmatter.esSlug && {
+          'es-ES': `https://www.franbosquet.com/posts/${post.frontmatter.esSlug}`
+        })
       }
     },
     twitter: {
@@ -47,12 +49,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${post.frontmatter.title as string} | Fran Bosquet`,
       description: (post.frontmatter.description as string) || engDescription,
       creator: '@frbosquet',
-      images: ['/images/${post.frontmatter.image.src}.webp']
+      images: [`/images/${post.frontmatter.image.src}.webp`]
     },
     openGraph: {
       description: (post.frontmatter.description as string) || engDescription,
       type: 'website',
-      locale: 'es_ES',
+      locale: 'en_US',
       siteName: 'Fran Bosquet',
       images: [
         {
