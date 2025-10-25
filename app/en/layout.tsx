@@ -21,12 +21,34 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
     languages: {
-      'es-ES': 'https://www.franbosquet.com'
+      'es-ES': 'https://www.franbosquet.com',
+      'en-US': 'https://www.en.franbosquet.com'
     }
   },
   authors: { name: 'Fran Bosquet', url: 'https://www.franbosquet.com' },
   publisher: 'Fran Bosquet',
-  robots: 'index, follow'
+  robots: 'index, follow',
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog de programación | Fran Bosquet',
+    description: engDescription,
+    creator: '@frbosquet',
+    images: ['/images/fran24.webp']
+  },
+  openGraph: {
+    description: engDescription,
+    type: 'website',
+    locale: 'es_ES',
+    siteName: 'Fran Bosquet',
+    images: [
+      {
+        url: '/images/fran24.webp',
+        width: 700,
+        height: 700,
+        alt: 'Fran Bosquet'
+      }
+    ]
+  }
 }
 
 const poppins = Poppins({

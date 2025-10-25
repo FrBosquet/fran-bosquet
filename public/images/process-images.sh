@@ -43,9 +43,9 @@ do
 done
 
 # Remove the last comma from the image_sizes.json file and close the JSON object
-sed -i '$ s/,$//' "$(dirname "$0")/temp_image_sizes.json"
+sed -i '' '$ s/,$//' "$(dirname "$0")/temp_image_sizes.json"
 echo "}" >> "$(dirname "$0")/temp_image_sizes.json"
 
 cat "$(dirname "$0")/temp_image_sizes.json" > "$(dirname "$0")/image_sizes.json"
-rm "$(dirname "$0")/temp_image_sizes.json"pnpm run dev
+rm "$(dirname "$0")/temp_image_sizes.json"
 
