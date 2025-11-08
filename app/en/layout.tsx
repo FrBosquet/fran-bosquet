@@ -1,4 +1,5 @@
 import { Analytics } from '@vercel/analytics/react'
+import { Footer } from 'components/footer'
 import { Header } from 'components/Header'
 import { ProgressBar } from 'components/progress-bar'
 import { engDescription } from 'lib/posts'
@@ -74,6 +75,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 >
                   {children}
                 </div>
+                <Footer />
                 <Analytics />
                 <ProgressBar />
               </article>
