@@ -6,7 +6,7 @@ const fs = require('fs')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ['tsx', 'mdx'],
+  pageExtensions: ['tsx', 'ts', 'mdx'],
   experimental: {
     mdxRs: true
   },

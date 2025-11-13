@@ -1,0 +1,1 @@
+This projects uses Nextjs 14 app router
