@@ -1,10 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': 'app://obsidian.md',
+  'Access-Control-Allow-Methods': 'GET, OPTIONS',
+  'Access-Control-Allow-Headers': 'authorization, content-type'
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders
+  })
+}
+
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
 
-  if (!authHeader || authHeader !== 'branfostify') {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!authHeader || authHeader !== process.env.AUTH_SECRET) {
+    return NextResponse.json(
+      { error: 'Unauthorized' },
+      { status: 401, headers: corsHeaders }
+    )
   }
 
   const searchParams = request.nextUrl.searchParams
@@ -14,7 +30,7 @@ export async function GET(request: NextRequest) {
   if (!search) {
     return NextResponse.json(
       { error: 'Search parameter is required' },
-      { status: 400 }
+      { status: 400, headers: corsHeaders }
     )
   }
 
@@ -92,14 +108,19 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({
-      result: 'success',
-      ...results
-    })
+    return NextResponse.json(
+      {
+        result: 'success',
+        ...results
+      },
+      {
+        headers: corsHeaders
+      }
+    )
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to search Spotify' },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     )
   }
 }
