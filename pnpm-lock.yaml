@@ -17,6 +17,9 @@ importers:
       '@next/mdx':
         specifier: ^14.2.3
         version: 14.2.33(@mdx-js/loader@3.1.1)(@mdx-js/react@3.1.1(@types/react@18.3.3)(react@18.3.1))
+      '@perplexity-ai/perplexity_ai':
+        specifier: ^0.16.0
+        version: 0.16.0
       '@sglara/cn':
         specifier: ^1.0.0
         version: 1.0.0
@@ -282,6 +285,9 @@ packages:
   '@nolyfill/is-core-module@1.0.39':
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
+
+  '@perplexity-ai/perplexity_ai@0.16.0':
+    resolution: {integrity: sha512-VF6UHAhYl9MyPtvmsz7QmXCWZTj0RbixdMDYPxIAzqsD42saN/Tsie5qdsjJ+/c5JQiweh9CdBlhl5Qq7ofhLA==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -3123,6 +3129,8 @@ snapshots:
       fastq: 1.19.1
 
   '@nolyfill/is-core-module@1.0.39': {}
+
+  '@perplexity-ai/perplexity_ai@0.16.0': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
