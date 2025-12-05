@@ -1,10 +1,12 @@
 import Perplexity from '@perplexity-ai/perplexity_ai'
 import { NextRequest, NextResponse } from 'next/server'
 
+export const maxDuration = 60
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': 'app://obsidian.md',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'authorization, content-type'
+  'Access-Control-Allow-Headers': 'Authorization, Content-Type'
 }
 
 export async function OPTIONS() {
