@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export const maxDuration = 60
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': 'app://obsidian.md',
+  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Authorization, Content-Type'
 }
