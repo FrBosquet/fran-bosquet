@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': 'app://obsidian.md',
+  'Access-Control-Allow-Origin': 'app://obsidian.md, http://localhost/',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
   'Access-Control-Allow-Headers': 'authorization, content-type'
 }
